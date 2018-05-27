@@ -1,0 +1,83 @@
+                      DIBA OPERATIONAL THEORIES
+
+  Definitions:
+  
+ DCU            Digital Bank Currency Unit.
+ Block Chain    A Cryptograpically Linked Set of Blocks
+ 
+
+   The operational theory of the initial currency allocation:
+   
+   The sum of projected global wealth is allocated into 100 trillion 
+DCU (diba currency unit) in hashes. 
+The 100 trillion DCU will each have 1000 child items in the billion section 
+and the billon DCU will have 1000 child items in the million section ... 
+all the way down to the single DCU.
+The currency itself is represented by a hash and its position in the 
+currency tree. (its parent relations)
+  
+        0.0001              Thousanth  Milli DCU
+        1                   Single     Unit  DCU
+        1,000               Thousand   Kilo  DCU
+        1,000,000           Million    Mega  DCU
+        1,000,000,000       Billion    Giga  DCU
+        1,000,000,000,000   Trillion   Tera  DCU
+        
+  Matching directory structure is created (first two letters used):
+            
+   ./Trillion/Billion/Million/Thousand/Single/Milli
+    
+For example, the first 10 DCU-s would be: 
+    
+  ./currency/Tr_0/Bi_0/Mi_0/Th_0/Si_0 
+                                /Si_1
+                                 ... 
+                                /Si_9 
+                                  
+  The currency hash can represent arbitrary amount within its directory
+domain, limited to that directory domain.
+    
+ The global supply may be distributed on different servers, each responsible
+on maintaining a different part of the tree.
+      
+  DCU Currency value: The mean value calculated on the basis of survival
+related items. Here is an example short list, but detailed discussion
+can be found in a separate document.
+    
+    Baked Bread, Milk, Fruit, Coffee, Eggs, Bacon, Ground Meat,
+    Sugar.
+        
+   The operational theory of the transaction is ...
+   
+  The currency is transferred from address to address. The initial 
+currency owner is NONE, which is a fictitious user created during development.
+Currency itself is acquired from the global pool, and ownership of that 
+currency is assigned to the address. The currency pool item is marked with 
+the owner's address.
+  
+   The operational theory of the DIBA block chain:
+  
+    o The originator node broadcasts the new block to all known (pier) nodes.
+    o Each node checks the block for validity and proof of work.
+    o Each node checks the block for transaction integrity. 
+    o Each node then responds with a vote.
+    o The votes: an OK vote, a REJ(ect) vote, an UKN(own) or an ERR(or) vote.
+    o The node collects N number of votes. (Initially xxx)
+    o The originator accepts the block if the votes converge on OK. (2/3 or 66%)
+    o Node expresses its acceptance of the block. 
+    o Node creates hashes it, and adds it to its own chain.
+
+
+   The operational theory of the DIBA data exchange:
+
+
+   The operational theory of currency transfer:
+   
+   
+   The operational theory of account creation:
+   
+   
+   
+   
+
+

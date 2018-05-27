@@ -1,0 +1,50 @@
+\hypertarget{encrypt_8c}{}\section{tools/encrypt.c File Reference}
+\label{encrypt_8c}\index{tools/encrypt.\+c@{tools/encrypt.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$gcrypt.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}zmalloc.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{encrypt_8c_a9fa017bd489a31c8ffc9576f6c353ce5}{printerr} (int err, char $\ast$\hyperlink{test__base64a_8c_a080015e087ccb9a54619cbffe677aa94}{str})
+\item 
+void \hyperlink{encrypt_8c_a846b0d496bcb8fbfba9800cddcddad44}{printhex} (void $\ast$mem, int len)
+\item 
+int \hyperlink{encrypt_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{encrypt_8c_a11a7310ee9d77476871dbe977e71a7f4}{key} \mbox{[}$\,$\mbox{]} = \char`\"{}This is the key we are using\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{encrypt_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{encrypt_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{encrypt.\+c@{encrypt.\+c}!main@{main}}
+\index{main@{main}!encrypt.\+c@{encrypt.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{encrypt_8c_a9fa017bd489a31c8ffc9576f6c353ce5}\label{encrypt_8c_a9fa017bd489a31c8ffc9576f6c353ce5}} 
+\index{encrypt.\+c@{encrypt.\+c}!printerr@{printerr}}
+\index{printerr@{printerr}!encrypt.\+c@{encrypt.\+c}}
+\subsubsection{\texorpdfstring{printerr()}{printerr()}}
+{\footnotesize\ttfamily void printerr (\begin{DoxyParamCaption}\item[{int}]{err,  }\item[{char $\ast$}]{str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{encrypt_8c_a846b0d496bcb8fbfba9800cddcddad44}\label{encrypt_8c_a846b0d496bcb8fbfba9800cddcddad44}} 
+\index{encrypt.\+c@{encrypt.\+c}!printhex@{printhex}}
+\index{printhex@{printhex}!encrypt.\+c@{encrypt.\+c}}
+\subsubsection{\texorpdfstring{printhex()}{printhex()}}
+{\footnotesize\ttfamily void printhex (\begin{DoxyParamCaption}\item[{void $\ast$}]{mem,  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{encrypt_8c_a11a7310ee9d77476871dbe977e71a7f4}\label{encrypt_8c_a11a7310ee9d77476871dbe977e71a7f4}} 
+\index{encrypt.\+c@{encrypt.\+c}!key@{key}}
+\index{key@{key}!encrypt.\+c@{encrypt.\+c}}
+\subsubsection{\texorpdfstring{key}{key}}
+{\footnotesize\ttfamily char key\mbox{[}$\,$\mbox{]} = \char`\"{}This is the key we are using\char`\"{}}
+

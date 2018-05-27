@@ -1,0 +1,52 @@
+.TH "tools/cmdline.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tools/cmdline.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'cmdline\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBTRUE\fP   (1==1)"
+.br
+.ti -1c
+.RI "#define \fBFALSE\fP   (1==0)"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBparse_commad_line\fP (char **argv, \fBopts\fP *popts_data, char **err_str)"
+.br
+.ti -1c
+.RI "void \fBusage\fP (const char *\fBprogname\fP, const char *desc, \fBopts\fP *\fBopts_data\fP)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define FALSE   (1==0)"
+
+.SS "#define TRUE   (1==1)"
+
+.SH "Function Documentation"
+.PP 
+.SS "int parse_commad_line (char ** argv, \fBopts\fP * popts_data, char ** err_str)"
+
+.SS "void usage (const char * progname, const char * desc, \fBopts\fP * opts_data)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

@@ -1,0 +1,76 @@
+ Digital Bank  (DIBA)
+
+ Crypto currency. Unique as in all the currency is allocated at inception.
+Development is done on a 2048 bit  engine, the real thing will be 4096 bit.
+This is more numbers than atoms in the universe.
+ 
+NOTE
+
+  Items in the 'tools' directory are funtional. (jul 2017)
+  Items in the 'bluepoint' directory are funtional. (aug 2017)
+  Items in the 'transport' directory are funtional. (sep 2017)
+  Items in the 'gui' directory are partially funtional. (oct 2017)
+  Items in the 'blockchain' directory are partially funtional. (oct 2017)
+  
+The rest is under development. See individual subdirs for more README-s.
+ 
+BUILD
+
+ All the files are built on Windows using MSYS and MinGW. The files should
+build on linux and variants with little modification. See INSTALL for more 
+infomation.
+ 
+PREP
+
+ Build the glibcrypt library first. This project will look for the built
+libs and includes in the .lib subdir under the original build directories.
+This allows installation-less build. (for test and experimentation)
+
+Make sure you update references when building new library versions.
+
+STRUCTURE
+
+  The directories are arranged as follows: (partial list)
+  
+   ./diba-NNN/study                         - study cases for now
+   ./diba-NNN/tools                         - dependency
+   ./diba-NNN/transport                     - asymmetric encryption
+   ./diba-NNN/bluepoint                     - encryption code, dependency
+   ./diba-NNN/blockchain                    - blockchain code (partial)
+   ./diba-NNN/gui                           - pygtk user interface (partial)
+   ./diba-NNN/common                        - common code for diba 
+   ../libgcrypt/libgcrypt-1.7.8             - dependency
+   ../libgcrypt/libgpg-error-1.27           - dependency
+  
+    NNN stands for local version, 006 in 2017 oct
+  
+Files:
+
+    md5sum.txt          Checksums, see Makefile 
+    README              This file
+    INSTALL             More info on building
+    
+Directories:
+
+audit                   Files for auditing DIBA (empty oct 2017)
+blockchain              Blockchain lives here
+bluepoint               Encryption routines
+common                  Common files for DIBA
+currency                Currency related files
+customers               Customer list
+data                    ??  (oct 2017)
+docs                    Various documents
+gui                     The Graphical User interface to drive it
+study                   Various studies (rand number / encryption)
+tools                   Supporting routines
+transact                Transation related items (empty oct 2017)
+transport               Asymmetric encryption tools
+
+
+    
+       
+
+
+
+
+

@@ -1,0 +1,80 @@
+\hypertarget{dibakeyinfo_8c}{}\section{transport/dibakeyinfo.c File Reference}
+\label{dibakeyinfo_8c}\index{transport/dibakeyinfo.\+c@{transport/dibakeyinfo.\+c}}
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}gcrypt.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gcry.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}getpass.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gsexp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}base64.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}zmalloc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cmdline.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dibastr.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}misc.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{dibakeyinfo_8c_a88cbe02ba6e3d0c44a66c42c1cfd72ff}{my\+\_\+progress\+\_\+handler} (void $\ast$cb\+\_\+data, const char $\ast$what, int printchar, int current, int total)
+\item 
+int \hyperlink{dibakeyinfo_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{dibakeyinfo_8c_a48a881c3fc90db302a57d77894b51977}{descstr} \mbox{[}$\,$\mbox{]} = \char`\"{}Show various information about a D\+I\+BA key.\char`\"{}
+\item 
+char \hyperlink{dibakeyinfo_8c_a8773c4e2c69c9a51a8b7708c6233d1bf}{usestr} \mbox{[}$\,$\mbox{]}
+\item 
+\hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} \hyperlink{dibakeyinfo_8c_ad75e49d295005b3f5fffec85f24090d3}{opts\+\_\+data} \mbox{[}$\,$\mbox{]}
+\item 
+char $\ast$ \hyperlink{dibakeyinfo_8c_a32dabd618d8f69e8d642daf65f66516f}{mstr} = \char`\"{}No Memory\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{dibakeyinfo_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{dibakeyinfo_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{dibakeyinfo.\+c@{dibakeyinfo.\+c}!main@{main}}
+\index{main@{main}!dibakeyinfo.\+c@{dibakeyinfo.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{dibakeyinfo_8c_a88cbe02ba6e3d0c44a66c42c1cfd72ff}\label{dibakeyinfo_8c_a88cbe02ba6e3d0c44a66c42c1cfd72ff}} 
+\index{dibakeyinfo.\+c@{dibakeyinfo.\+c}!my\+\_\+progress\+\_\+handler@{my\+\_\+progress\+\_\+handler}}
+\index{my\+\_\+progress\+\_\+handler@{my\+\_\+progress\+\_\+handler}!dibakeyinfo.\+c@{dibakeyinfo.\+c}}
+\subsubsection{\texorpdfstring{my\+\_\+progress\+\_\+handler()}{my\_progress\_handler()}}
+{\footnotesize\ttfamily void my\+\_\+progress\+\_\+handler (\begin{DoxyParamCaption}\item[{void $\ast$}]{cb\+\_\+data,  }\item[{const char $\ast$}]{what,  }\item[{int}]{printchar,  }\item[{int}]{current,  }\item[{int}]{total }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{dibakeyinfo_8c_a48a881c3fc90db302a57d77894b51977}\label{dibakeyinfo_8c_a48a881c3fc90db302a57d77894b51977}} 
+\index{dibakeyinfo.\+c@{dibakeyinfo.\+c}!descstr@{descstr}}
+\index{descstr@{descstr}!dibakeyinfo.\+c@{dibakeyinfo.\+c}}
+\subsubsection{\texorpdfstring{descstr}{descstr}}
+{\footnotesize\ttfamily char descstr\mbox{[}$\,$\mbox{]} = \char`\"{}Show various information about a D\+I\+BA key.\char`\"{}}
+
+\mbox{\Hypertarget{dibakeyinfo_8c_a32dabd618d8f69e8d642daf65f66516f}\label{dibakeyinfo_8c_a32dabd618d8f69e8d642daf65f66516f}} 
+\index{dibakeyinfo.\+c@{dibakeyinfo.\+c}!mstr@{mstr}}
+\index{mstr@{mstr}!dibakeyinfo.\+c@{dibakeyinfo.\+c}}
+\subsubsection{\texorpdfstring{mstr}{mstr}}
+{\footnotesize\ttfamily char$\ast$ mstr = \char`\"{}No Memory\char`\"{}}
+
+\mbox{\Hypertarget{dibakeyinfo_8c_ad75e49d295005b3f5fffec85f24090d3}\label{dibakeyinfo_8c_ad75e49d295005b3f5fffec85f24090d3}} 
+\index{dibakeyinfo.\+c@{dibakeyinfo.\+c}!opts\+\_\+data@{opts\+\_\+data}}
+\index{opts\+\_\+data@{opts\+\_\+data}!dibakeyinfo.\+c@{dibakeyinfo.\+c}}
+\subsubsection{\texorpdfstring{opts\+\_\+data}{opts\_data}}
+{\footnotesize\ttfamily \hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} opts\+\_\+data\mbox{[}$\,$\mbox{]}}
+
+\mbox{\Hypertarget{dibakeyinfo_8c_a8773c4e2c69c9a51a8b7708c6233d1bf}\label{dibakeyinfo_8c_a8773c4e2c69c9a51a8b7708c6233d1bf}} 
+\index{dibakeyinfo.\+c@{dibakeyinfo.\+c}!usestr@{usestr}}
+\index{usestr@{usestr}!dibakeyinfo.\+c@{dibakeyinfo.\+c}}
+\subsubsection{\texorpdfstring{usestr}{usestr}}
+{\footnotesize\ttfamily char usestr\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \textcolor{stringliteral}{"dibakeyinfo [options] keyfile\(\backslash\)n"}
+                \textcolor{stringliteral}{"Where keyfile is the basename for .key .pub files. "}
+                \textcolor{stringliteral}{"Individual files may be specified also. Example: file.key or file.pub"}
+\end{DoxyCode}

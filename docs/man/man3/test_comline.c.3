@@ -1,0 +1,66 @@
+.TH "tools/test_comline.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tools/test_comline.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'cmdline\&.h'\fP
+.br
+\fC#include 'zmalloc\&.h'\fP
+.br
+\fC#include 'base64\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBxerr\fP (const char *msg)"
+.br
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBopts\fP \fBopts_data\fP []"
+.br
+.ti -1c
+.RI "char * \fBargv2\fP [] = { 'prog', '\-v', '\-sf', NULL }"
+.br
+.ti -1c
+.RI "char * \fBargv3\fP [] = { 'prog', '\-k', '1024', '\-\-\fBpass\fP', 'Hello', '\-v', NULL }"
+.br
+.ti -1c
+.RI "char * \fBargv4\fP [] = { 'prog', '\-?', NULL }"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char ** argv)"
+
+.SS "void xerr (const char * msg)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "char* argv2[] = { 'prog', '\-v', '\-sf', NULL }"
+
+.SS "char* argv3[] = { 'prog', '\-k', '1024', '\-\-\fBpass\fP', 'Hello', '\-v', NULL }"
+
+.SS "char* argv4[] = { 'prog', '\-?', NULL }"
+
+.SS "\fBopts\fP opts_data[]"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

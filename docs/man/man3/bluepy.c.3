@@ -1,0 +1,82 @@
+.TH "bluepoint/bluepy/bluepy.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+bluepoint/bluepy/bluepy.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <Python\&.h>\fP
+.br
+\fC#include <pygobject\&.h>\fP
+.br
+\fC#include 'bluepy\&.h'\fP
+.br
+\fC#include '\&.\&./bluepoint2\&.h'\fP
+.br
+\fC#include 'bdate\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBOPEN_IMAGE\fP   1"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBinitbluepy\fP (void)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "PyObject * \fBmodule\fP"
+.br
+.ti -1c
+.RI "PyMethodDef \fBbluepy_functions\fP []"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define OPEN_IMAGE   1"
+
+.SH "Function Documentation"
+.PP 
+.SS "initbluepy (void)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "PyMethodDef bluepy_functions[]"
+\fBInitial value:\fP
+.PP
+.nf
+= 
+    {
+    
+    { "version",   (PyCFunction)_version, METH_VARARGS|METH_KEYWORDS, "Bluepy version\&."},
+    { "builddate", (PyCFunction)_bdate,   METH_VARARGS|METH_KEYWORDS, "Bluepy build date\&."},
+    { "encrypt",   (PyCFunction)_encrypt, METH_VARARGS|METH_KEYWORDS, 
+        "Bluepy encryption\&. Pass buffer and pass\&."},
+    { "decrypt",   (PyCFunction)_decrypt, METH_VARARGS|METH_KEYWORDS, 
+        "Bluepy decryption\&. Pass buffer and pass\&."},
+    { "destroy",   (PyCFunction)_destroy, METH_VARARGS|METH_KEYWORDS, 
+        "Bluepy destruction\&. Scramble variable\&. Fill with '0' or number\&. " 
+        "Pass zero to randomize\&."},
+    { "tohex",     (PyCFunction)_tohex,   METH_VARARGS|METH_KEYWORDS, 
+        "Bluepy tohex\&. Convert to hex string\&."},
+    { "fromhex",   (PyCFunction)_fromhex, METH_VARARGS|METH_KEYWORDS, 
+        "Bluepy fromhex\&. Convert from hex string\&."},
+    
+    {  NULL },
+    }
+.fi
+.SS "PyObject* module"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

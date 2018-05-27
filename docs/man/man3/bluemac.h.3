@@ -1,0 +1,221 @@
+.TH "bluepoint/bluemac.h" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+bluepoint/bluemac.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBHECTOR\fP(op)"
+.br
+.ti -1c
+.RI "#define \fBPASSLOOP\fP(op)"
+.br
+.ti -1c
+.RI "#define \fBFWLOOP\fP(op)"
+.br
+.ti -1c
+.RI "#define \fBFWLOOP2\fP(op)"
+.br
+.ti -1c
+.RI "#define \fBBWLOOP\fP(op)"
+.br
+.ti -1c
+.RI "#define \fBBWLOOP2\fP(op)"
+.br
+.ti -1c
+.RI "#define \fBMIXIT\fP(op)"
+.br
+.ti -1c
+.RI "#define \fBMIXITR\fP(op)"
+.br
+.ti -1c
+.RI "#define \fBMIXIT2\fP(op)"
+.br
+.ti -1c
+.RI "#define \fBMIXIT2R\fP(op)"
+.br
+.ti -1c
+.RI "#define \fBMIXIT4\fP(op)"
+.br
+.ti -1c
+.RI "#define \fBTRILOOP\fP(op)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define BWLOOP(op)"
+\fBValue:\fP
+.PP
+.nf
+bb = 0;                                         \
+    for (loop = slen-1; loop >= 0; loop--)          \
+        {                                           \
+        aa = str[loop];                             \
+        aa ^= backward;                             \
+        aa = aa op addend;                          \
+        aa = aa op bb;                              \
+        bb = aa;                                    \
+        str[loop] = aa;                             \
+        }                                           \
+.fi
+.SS "#define BWLOOP2(op)"
+\fBValue:\fP
+.PP
+.nf
+cc = 0;                                         \
+    for (loop = slen-1; loop >= 0; loop--)          \
+        {                                           \
+        bb = cc;                                    \
+        aa = cc = str[loop];                        \
+                                                    \
+        aa = aa op bb;                              \
+        aa = aa op addend;                          \
+        aa ^= backward;                             \
+        str[loop] = aa;                             \
+        }                                           \
+.fi
+.SS "#define FWLOOP(op)"
+\fBValue:\fP
+.PP
+.nf
+bb = 0;                                         \
+    for (loop = 0; loop < slen; loop++)             \
+        {                                           \
+        aa = str[loop];                             \
+        aa ^= forward;                              \
+        aa  += addend;                              \
+        aa  += bb;                                  \
+        aa = ROTATE_CHAR_RIGHT(aa, 3);              \
+        bb = aa;                                    \
+        str[loop] = aa;                             \
+        }                                           \
+.fi
+.SS "#define FWLOOP2(op)"
+\fBValue:\fP
+.PP
+.nf
+cc = 0;                                         \
+    for (loop = 0; loop < slen; loop++)             \
+        {                                           \
+        bb = cc;                                    \
+        cc = aa = str[loop];                        \
+        aa = ROTATE_CHAR_LEFT(aa, 3);               \
+        aa -=  bb;                                  \
+        aa -= addend;                               \
+        aa ^= forward;                              \
+        str[loop] = aa;                             \
+        }
+.fi
+.SS "#define HECTOR(op)"
+\fBValue:\fP
+.PP
+.nf
+loop2 = 0;                                      \
+    for (loop = 0; loop < slen; loop++)             \
+        {                                           \
+        aa = str[loop];                             \
+        aa = aa op hector[loop2];                   \
+        loop2++;                                    \
+        if(loop2 >= sizeof(hector)) {loop2 = 0;}    \
+        str[loop] = aa;                             \
+        }
+.fi
+.SS "#define MIXIT(op)"
+\fBValue:\fP
+.PP
+.nf
+for (loop = 0; loop < slen/2; loop++)           \
+        {                                           \
+        aa = str[loop];                             \
+        bb = str[(slen-1) - loop];                  \
+        aa = aa op bb;                              \
+        str[loop] = aa;                             \
+        }                                           \
+.fi
+.SS "#define MIXIT2(op)"
+\fBValue:\fP
+.PP
+.nf
+for (loop = 0; loop < slen/2; loop++)           \
+        {                                           \
+        aa = str[loop];                             \
+        bb = str[loop + slen/2];                    \
+        aa = aa op bb;                              \
+        str[loop] = aa;                             \
+        }                                           \
+.fi
+.SS "#define MIXIT2R(op)"
+\fBValue:\fP
+.PP
+.nf
+for (loop = slen/2; loop < slen; loop++)        \
+        {                                           \
+        aa = str[loop];                             \
+        bb = str[loop - slen/2];                    \
+        aa = aa op bb;                              \
+        str[loop] = aa;                             \
+        }                                           \
+.fi
+.SS "#define MIXIT4(op)"
+\fBValue:\fP
+.PP
+.nf
+for (loop = 0; loop < slen/4; loop++)           \
+        {                                           \
+        aa = str[loop];                             \
+        bb = str[loop + slen/2];                    \
+        aa = aa op bb;                              \
+        str[loop] = aa;                             \
+        }                                           \
+.fi
+.SS "#define MIXITR(op)"
+\fBValue:\fP
+.PP
+.nf
+loop2 = slen / 2;                               \
+    for (loop = loop2; loop < slen; loop++)         \
+        {                                           \
+        aa = str[loop];                             \
+        bb = str[loop - loop2];                     \
+        aa = aa op bb;                              \
+        str[loop] = aa;                             \
+        }                                           \
+.fi
+.SS "#define PASSLOOP(op)"
+\fBValue:\fP
+.PP
+.nf
+loop2 = 0;                                      \
+    for (loop = 0; loop < slen; loop++)             \
+        {                                           \
+        aa = str[loop];                             \
+        aa = aa op pass[loop2];                     \
+        loop2++;                                    \
+        if(loop2 >= plen) {loop2 = 0;}              \
+        str[loop] = aa;                             \
+        }
+.fi
+.SS "#define TRILOOP(op)"
+\fBValue:\fP
+.PP
+.nf
+for (loop = 0; loop < slen; loop++)             \
+        {                                           \
+        aa = str[loop];                             \
+        if(loop %3 == 0)                            \
+            aa op 3;                                \
+        if(loop %3 == 1)                            \
+            aa op 5;                                \
+        if(loop %3 == 2)                            \
+            aa op 7;                                \
+        str[loop] = aa;                             \
+        }                                           \
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

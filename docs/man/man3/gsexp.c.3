@@ -1,0 +1,65 @@
+.TH "transport/gsexp.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+transport/gsexp.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include 'gcrypt\&.h'\fP
+.br
+\fC#include 'gcry\&.h'\fP
+.br
+\fC#include 'gsexp\&.h'\fP
+.br
+\fC#include 'zmalloc\&.h'\fP
+.br
+\fC#include 'misc\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBsprint_sexp\fP (gcry_sexp_t sexp, int *len, int format)"
+.br
+.ti -1c
+.RI "void \fBprint_sexp\fP (gcry_sexp_t rsa_keypair)"
+.br
+.ti -1c
+.RI "int \fBdecode_sexp\fP (gcry_sexp_t list, const char *findstr)"
+.br
+.ti -1c
+.RI "char * \fBget_sexp_buff\fP (gcry_sexp_t sexp, int *\fBplen\fP)"
+.br
+.ti -1c
+.RI "char * \fBsexp_nth_data\fP (gcry_sexp_t element, int num, int *\fBplen\fP)"
+.br
+.ti -1c
+.RI "char * \fBhash_sexp\fP (gcry_sexp_t pubk, int *olen)"
+.br
+.ti -1c
+.RI "int \fBlist_sexp\fP (gcry_sexp_t list)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int decode_sexp (gcry_sexp_t list, const char * findstr)"
+
+.SS "char* get_sexp_buff (gcry_sexp_t sexp, int * plen)"
+
+.SS "char* hash_sexp (gcry_sexp_t pubk, int * olen)"
+
+.SS "int list_sexp (gcry_sexp_t list)"
+
+.SS "void print_sexp (gcry_sexp_t rsa_keypair)"
+
+.SS "char* sexp_nth_data (gcry_sexp_t element, int num, int * plen)"
+
+.SS "char* sprint_sexp (gcry_sexp_t sexp, int * len, int format)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

@@ -1,0 +1,61 @@
+\hypertarget{dibakeygen_8c}{}\section{transport/dibakeygen.c File Reference}
+\label{dibakeygen_8c}\index{transport/dibakeygen.\+c@{transport/dibakeygen.\+c}}
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}gcrypt.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gcry.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}getpass.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gsexp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}base64.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}zmalloc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cmdline.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dibastr.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}misc.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{dibakeygen_8c_a88cbe02ba6e3d0c44a66c42c1cfd72ff}{my\+\_\+progress\+\_\+handler} (void $\ast$cb\+\_\+data, const char $\ast$what, int printchar, int current, int total)
+\item 
+void \hyperlink{dibakeygen_8c_ad645c4a54c91d8236c6435561cd588cf}{xerr3} (const char $\ast$\hyperlink{test__base64a_8c_a080015e087ccb9a54619cbffe677aa94}{str},...)
+\item 
+int \hyperlink{dibakeygen_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} \hyperlink{dibakeygen_8c_ad75e49d295005b3f5fffec85f24090d3}{opts\+\_\+data} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{dibakeygen_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{dibakeygen_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{dibakeygen.\+c@{dibakeygen.\+c}!main@{main}}
+\index{main@{main}!dibakeygen.\+c@{dibakeygen.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+\begin{DoxyItemize}
+\item Write the encrypted base64 key pair to disk. $\ast$/ 
+\end{DoxyItemize}\mbox{\Hypertarget{dibakeygen_8c_a88cbe02ba6e3d0c44a66c42c1cfd72ff}\label{dibakeygen_8c_a88cbe02ba6e3d0c44a66c42c1cfd72ff}} 
+\index{dibakeygen.\+c@{dibakeygen.\+c}!my\+\_\+progress\+\_\+handler@{my\+\_\+progress\+\_\+handler}}
+\index{my\+\_\+progress\+\_\+handler@{my\+\_\+progress\+\_\+handler}!dibakeygen.\+c@{dibakeygen.\+c}}
+\subsubsection{\texorpdfstring{my\+\_\+progress\+\_\+handler()}{my\_progress\_handler()}}
+{\footnotesize\ttfamily void my\+\_\+progress\+\_\+handler (\begin{DoxyParamCaption}\item[{void $\ast$}]{cb\+\_\+data,  }\item[{const char $\ast$}]{what,  }\item[{int}]{printchar,  }\item[{int}]{current,  }\item[{int}]{total }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{dibakeygen_8c_ad645c4a54c91d8236c6435561cd588cf}\label{dibakeygen_8c_ad645c4a54c91d8236c6435561cd588cf}} 
+\index{dibakeygen.\+c@{dibakeygen.\+c}!xerr3@{xerr3}}
+\index{xerr3@{xerr3}!dibakeygen.\+c@{dibakeygen.\+c}}
+\subsubsection{\texorpdfstring{xerr3()}{xerr3()}}
+{\footnotesize\ttfamily void xerr3 (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{dibakeygen_8c_ad75e49d295005b3f5fffec85f24090d3}\label{dibakeygen_8c_ad75e49d295005b3f5fffec85f24090d3}} 
+\index{dibakeygen.\+c@{dibakeygen.\+c}!opts\+\_\+data@{opts\+\_\+data}}
+\index{opts\+\_\+data@{opts\+\_\+data}!dibakeygen.\+c@{dibakeygen.\+c}}
+\subsubsection{\texorpdfstring{opts\+\_\+data}{opts\_data}}
+{\footnotesize\ttfamily \hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} opts\+\_\+data\mbox{[}$\,$\mbox{]}}
+

@@ -1,0 +1,7 @@
+                                    README
+                                    
+   This is the client / server network interaction for  DIBA. The server
+listens on port xxx, and the client may connect.
+
+   
+                

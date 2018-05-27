@@ -1,0 +1,97 @@
+.TH "transport/algos.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+transport/algos.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <signal\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include 'gcrypt\&.h'\fP
+.br
+\fC#include 'gcry\&.h'\fP
+.br
+\fC#include 'getpass\&.h'\fP
+.br
+\fC#include 'gsexp\&.h'\fP
+.br
+\fC#include 'base64\&.h'\fP
+.br
+\fC#include 'zmalloc\&.h'\fP
+.br
+\fC#include 'cmdline\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBmy_progress_handler\fP (void *cb_data, const char *what, int printchar, int current, int total)"
+.br
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "char \fBusestr\fP []"
+.br
+.ti -1c
+.RI "\fBopts\fP \fBopts_data\fP []"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char ** argv)"
+
+.SS "void my_progress_handler (void * cb_data, const char * what, int printchar, int current, int total)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "\fBopts\fP opts_data[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+                    
+                    'v',   "verbose",  NULL, NULL,  0, 0, &verbose, 
+                    "-v             --verbose               - Verbosity on",
+                    
+                    't',   "test",  NULL,  NULL, 0, 0, &test, 
+                    "-t             --test                  - Test on",
+                    
+                    'f',   "force",  NULL,  NULL, 0, 0, &force, 
+                    "-f             --force                 - force clobbering files",
+                    
+                    'i',   "pinfo",  NULL,  NULL, 0, 0, &pinfo, 
+                    "-i             --pinfo                 - print key info",
+                    
+                    'k',   "pkey",  NULL,  NULL, 0, 0, &ppub, 
+                    "-k             --pkey                  - print private or public key",
+                    
+                    'l',   "plen",  NULL,  NULL, 0, 0, &plen , 
+                    "-l             --plen                  - print key length",
+                                        
+                    'n',   "nocrypt",  NULL,  NULL, 0, 0, &nocrypt, 
+                    "-n             --nocrypt               - do not decrypt key",
+                   
+                    0,     NULL,  NULL,   NULL,   0, 0,  NULL, NULL,
+                    }
+.fi
+.SS "char usestr[]"
+\fBInitial value:\fP
+.PP
+.nf
+= "dibakeyinfo [options] keyfile\n"
+                "Where keyfile is the basename for \&.key \&.pub files\&."
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

@@ -1,0 +1,73 @@
+\hypertarget{base64_8c}{}\section{tools/base64.c File Reference}
+\label{base64_8c}\index{tools/base64.\+c@{tools/base64.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef unsigned int \hyperlink{base64_8c_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{base64_8c_a203d52bd255c8476923fb8e64831e205}{base64\+\_\+calc\+\_\+encodelen} (int len)
+\item 
+int \hyperlink{base64_8c_a265e9198fcba004b9524aa0a414da644}{base64\+\_\+encode} (const unsigned char $\ast$data, int input\+\_\+length, char $\ast$encoded\+\_\+data, int $\ast$output\+\_\+length)
+\item 
+int \hyperlink{base64_8c_abea2603cc0c72825cdd9d561fd246e5e}{base64\+\_\+calc\+\_\+decodelen} (int len)
+\item 
+int \hyperlink{base64_8c_a9f605a57d320a70c753479efec935329}{base64\+\_\+decode} (const char $\ast$data, int input\+\_\+length, unsigned char $\ast$decoded\+\_\+data, int $\ast$output\+\_\+length)
+\item 
+int \hyperlink{base64_8c_a1ad5dfa94f578481b51b050119469e77}{base64\+\_\+limline} (const char $\ast$inp, int inlen, char $\ast$outp, int $\ast$olen, int linelen)
+\item 
+int \hyperlink{base64_8c_a3337123ed049119e5a6e6c2946cdbc98}{base64\+\_\+clean} (const char $\ast$inp, int inlen, char $\ast$outp, int $\ast$olen)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{base64_8c_a435d1572bf3f880d55459d9805097f62}\label{base64_8c_a435d1572bf3f880d55459d9805097f62}} 
+\index{base64.\+c@{base64.\+c}!uint32\+\_\+t@{uint32\+\_\+t}}
+\index{uint32\+\_\+t@{uint32\+\_\+t}!base64.\+c@{base64.\+c}}
+\subsubsection{\texorpdfstring{uint32\+\_\+t}{uint32\_t}}
+{\footnotesize\ttfamily typedef unsigned int \hyperlink{base64_8c_a435d1572bf3f880d55459d9805097f62}{uint32\+\_\+t}}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{base64_8c_abea2603cc0c72825cdd9d561fd246e5e}\label{base64_8c_abea2603cc0c72825cdd9d561fd246e5e}} 
+\index{base64.\+c@{base64.\+c}!base64\+\_\+calc\+\_\+decodelen@{base64\+\_\+calc\+\_\+decodelen}}
+\index{base64\+\_\+calc\+\_\+decodelen@{base64\+\_\+calc\+\_\+decodelen}!base64.\+c@{base64.\+c}}
+\subsubsection{\texorpdfstring{base64\+\_\+calc\+\_\+decodelen()}{base64\_calc\_decodelen()}}
+{\footnotesize\ttfamily int base64\+\_\+calc\+\_\+decodelen (\begin{DoxyParamCaption}\item[{int}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{base64_8c_a203d52bd255c8476923fb8e64831e205}\label{base64_8c_a203d52bd255c8476923fb8e64831e205}} 
+\index{base64.\+c@{base64.\+c}!base64\+\_\+calc\+\_\+encodelen@{base64\+\_\+calc\+\_\+encodelen}}
+\index{base64\+\_\+calc\+\_\+encodelen@{base64\+\_\+calc\+\_\+encodelen}!base64.\+c@{base64.\+c}}
+\subsubsection{\texorpdfstring{base64\+\_\+calc\+\_\+encodelen()}{base64\_calc\_encodelen()}}
+{\footnotesize\ttfamily int base64\+\_\+calc\+\_\+encodelen (\begin{DoxyParamCaption}\item[{int}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{base64_8c_a3337123ed049119e5a6e6c2946cdbc98}\label{base64_8c_a3337123ed049119e5a6e6c2946cdbc98}} 
+\index{base64.\+c@{base64.\+c}!base64\+\_\+clean@{base64\+\_\+clean}}
+\index{base64\+\_\+clean@{base64\+\_\+clean}!base64.\+c@{base64.\+c}}
+\subsubsection{\texorpdfstring{base64\+\_\+clean()}{base64\_clean()}}
+{\footnotesize\ttfamily int base64\+\_\+clean (\begin{DoxyParamCaption}\item[{const char $\ast$}]{inp,  }\item[{int}]{inlen,  }\item[{char $\ast$}]{outp,  }\item[{int $\ast$}]{olen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{base64_8c_a9f605a57d320a70c753479efec935329}\label{base64_8c_a9f605a57d320a70c753479efec935329}} 
+\index{base64.\+c@{base64.\+c}!base64\+\_\+decode@{base64\+\_\+decode}}
+\index{base64\+\_\+decode@{base64\+\_\+decode}!base64.\+c@{base64.\+c}}
+\subsubsection{\texorpdfstring{base64\+\_\+decode()}{base64\_decode()}}
+{\footnotesize\ttfamily int base64\+\_\+decode (\begin{DoxyParamCaption}\item[{const char $\ast$}]{data,  }\item[{int}]{input\+\_\+length,  }\item[{unsigned char $\ast$}]{decoded\+\_\+data,  }\item[{int $\ast$}]{output\+\_\+length }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{base64_8c_a265e9198fcba004b9524aa0a414da644}\label{base64_8c_a265e9198fcba004b9524aa0a414da644}} 
+\index{base64.\+c@{base64.\+c}!base64\+\_\+encode@{base64\+\_\+encode}}
+\index{base64\+\_\+encode@{base64\+\_\+encode}!base64.\+c@{base64.\+c}}
+\subsubsection{\texorpdfstring{base64\+\_\+encode()}{base64\_encode()}}
+{\footnotesize\ttfamily int base64\+\_\+encode (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{data,  }\item[{int}]{input\+\_\+length,  }\item[{char $\ast$}]{encoded\+\_\+data,  }\item[{int $\ast$}]{output\+\_\+length }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{base64_8c_a1ad5dfa94f578481b51b050119469e77}\label{base64_8c_a1ad5dfa94f578481b51b050119469e77}} 
+\index{base64.\+c@{base64.\+c}!base64\+\_\+limline@{base64\+\_\+limline}}
+\index{base64\+\_\+limline@{base64\+\_\+limline}!base64.\+c@{base64.\+c}}
+\subsubsection{\texorpdfstring{base64\+\_\+limline()}{base64\_limline()}}
+{\footnotesize\ttfamily int base64\+\_\+limline (\begin{DoxyParamCaption}\item[{const char $\ast$}]{inp,  }\item[{int}]{inlen,  }\item[{char $\ast$}]{outp,  }\item[{int $\ast$}]{olen,  }\item[{int}]{linelen }\end{DoxyParamCaption})}
+

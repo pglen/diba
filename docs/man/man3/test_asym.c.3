@@ -1,0 +1,84 @@
+.TH "tools/test_asym.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tools/test_asym.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <signal\&.h>\fP
+.br
+\fC#include 'gcrypt\&.h'\fP
+.br
+\fC#include 'gcry\&.h'\fP
+.br
+\fC#include 'zmalloc\&.h'\fP
+.br
+\fC#include 'getpass\&.h'\fP
+.br
+\fC#include 'gsexp\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "char \fBusestr\fP [] = 'test_asym [options] keyfile'"
+.br
+.ti -1c
+.RI "\fBopts\fP \fBopts_data\fP []"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char ** argv)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "\fBopts\fP opts_data[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+                    'i',  "infile",  NULL, infile,  0, 0, NULL, 
+                    "-i <filename>  --infile <filename>     - input file name",
+                    
+                    'o',  "outfile",  NULL, outfile,  0, 0, NULL, 
+                    "-o <filename>  --outfile <filename>    - output file name",
+                   
+                    'p',   "pass",   NULL,  thispass, 0, 0,    NULL, 
+                    "-p             --pass                  - pass in for key (testing only)",
+                    
+                    'k',  "keyfile",  NULL, keyfile,  0, 0, NULL, 
+                    "-k <filename>  --keyfile <filename>    - key file name",
+
+                    'v',   "verbose",  NULL, NULL,  0, 0, &verbose, 
+                    "-v             --verbose               - Verbosity on",
+                    
+                    'd',   "dump",  NULL, NULL,  0, 0, &dump, 
+                    "-d             --dump                  - Dump buffers",
+                    
+                    't',   "test",  NULL,  NULL, 0, 0, &test, 
+                    "-t             --test                  - test on",
+                    
+                    'n',   "nocrypt",  NULL,  NULL, 0, 0, &nocrypt, 
+                    "-n             --nocrypt               - do not decypt private key",
+                   
+                    'x',   "printpub",  NULL,  NULL, 0, 0, &ppub, 
+                    "-x             --printpub              - print public key",
+                    
+                     0,     NULL,  NULL,   NULL,   0, 0,  NULL, NULL,
+                    }
+.fi
+.SS "char usestr[] = 'test_asym [options] keyfile'"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

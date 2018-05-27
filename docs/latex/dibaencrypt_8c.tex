@@ -1,0 +1,66 @@
+\hypertarget{dibaencrypt_8c}{}\section{transport/dibaencrypt.c File Reference}
+\label{dibaencrypt_8c}\index{transport/dibaencrypt.\+c@{transport/dibaencrypt.\+c}}
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}gcrypt.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gcry.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}zmalloc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}getpass.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}base64.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gsexp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cmdline.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dibastr.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bluepoint2.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}misc.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{dibaencrypt_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} \hyperlink{dibaencrypt_8c_ad75e49d295005b3f5fffec85f24090d3}{opts\+\_\+data} \mbox{[}$\,$\mbox{]}
+\item 
+char \hyperlink{dibaencrypt_8c_a48a881c3fc90db302a57d77894b51977}{descstr} \mbox{[}$\,$\mbox{]} = \char`\"{}Encrypt files with Public key\textbackslash{}n\char`\"{}
+\item 
+char \hyperlink{dibaencrypt_8c_a8773c4e2c69c9a51a8b7708c6233d1bf}{usestr} \mbox{[}$\,$\mbox{]} = \char`\"{}asencrypt \mbox{[}options\mbox{]} keyfile\char`\"{}
+\item 
+char $\ast$ \hyperlink{dibaencrypt_8c_a32dabd618d8f69e8d642daf65f66516f}{mstr} = \char`\"{}No Memory\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{dibaencrypt_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{dibaencrypt_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{dibaencrypt.\+c@{dibaencrypt.\+c}!main@{main}}
+\index{main@{main}!dibaencrypt.\+c@{dibaencrypt.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{dibaencrypt_8c_a48a881c3fc90db302a57d77894b51977}\label{dibaencrypt_8c_a48a881c3fc90db302a57d77894b51977}} 
+\index{dibaencrypt.\+c@{dibaencrypt.\+c}!descstr@{descstr}}
+\index{descstr@{descstr}!dibaencrypt.\+c@{dibaencrypt.\+c}}
+\subsubsection{\texorpdfstring{descstr}{descstr}}
+{\footnotesize\ttfamily char descstr\mbox{[}$\,$\mbox{]} = \char`\"{}Encrypt files with Public key\textbackslash{}n\char`\"{}}
+
+\mbox{\Hypertarget{dibaencrypt_8c_a32dabd618d8f69e8d642daf65f66516f}\label{dibaencrypt_8c_a32dabd618d8f69e8d642daf65f66516f}} 
+\index{dibaencrypt.\+c@{dibaencrypt.\+c}!mstr@{mstr}}
+\index{mstr@{mstr}!dibaencrypt.\+c@{dibaencrypt.\+c}}
+\subsubsection{\texorpdfstring{mstr}{mstr}}
+{\footnotesize\ttfamily char$\ast$ mstr = \char`\"{}No Memory\char`\"{}}
+
+\mbox{\Hypertarget{dibaencrypt_8c_ad75e49d295005b3f5fffec85f24090d3}\label{dibaencrypt_8c_ad75e49d295005b3f5fffec85f24090d3}} 
+\index{dibaencrypt.\+c@{dibaencrypt.\+c}!opts\+\_\+data@{opts\+\_\+data}}
+\index{opts\+\_\+data@{opts\+\_\+data}!dibaencrypt.\+c@{dibaencrypt.\+c}}
+\subsubsection{\texorpdfstring{opts\+\_\+data}{opts\_data}}
+{\footnotesize\ttfamily \hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} opts\+\_\+data\mbox{[}$\,$\mbox{]}}
+
+\mbox{\Hypertarget{dibaencrypt_8c_a8773c4e2c69c9a51a8b7708c6233d1bf}\label{dibaencrypt_8c_a8773c4e2c69c9a51a8b7708c6233d1bf}} 
+\index{dibaencrypt.\+c@{dibaencrypt.\+c}!usestr@{usestr}}
+\index{usestr@{usestr}!dibaencrypt.\+c@{dibaencrypt.\+c}}
+\subsubsection{\texorpdfstring{usestr}{usestr}}
+{\footnotesize\ttfamily char usestr\mbox{[}$\,$\mbox{]} = \char`\"{}asencrypt \mbox{[}options\mbox{]} keyfile\char`\"{}}
+

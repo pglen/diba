@@ -1,0 +1,28 @@
+
+Testing zmalloc, silent OK
+
+Testing zmalloc, damage past end
+zmalloc: Memory check failed. (at end) Line: 53 Allocated at 50 (test_zmalloc.c)
+
+Testing zmalloc, damage before beginning
+zmalloc: Memory check failed. (at beginning) Line: 63 Allocated at 60 (test_zmalloc.c)
+
+Tesing attempt to free memory not allocated
+zmalloc: Trying to free unallocated memory at line 63 test_zmalloc.c (0x00000000)
+
+Testing zmalloc, not freed
+zmalloc: Memory leak on test_zmalloc.c at line 74 (0x00000000)
+
+Testing zmalloc, multiple alloc, some freed
+zmalloc: Memory leak on test_zmalloc.c at line 84 (0x00000000)
+
+Testing zmalloc, damage on length indicator
+zmalloc: Damaged length, item allocated at line 96 (test_zmalloc.c) 200 bytes.
+
+Test autofree memory
+zmalloc: Memory leak on test_zmalloc.c at line 104 (0x00000000)
+zmalloc: Memory leak on test_zmalloc.c at line 106 (0x00000000)
+
+Test corrupted memory
+
+Final report: (should be blank)

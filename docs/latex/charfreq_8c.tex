@@ -1,0 +1,86 @@
+\hypertarget{charfreq_8c}{}\section{bluepoint/charfreq.c File Reference}
+\label{charfreq_8c}\index{bluepoint/charfreq.\+c@{bluepoint/charfreq.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{charfreq_8c_a4dfa2bd7b47512180fb611fddea9b3af}{xerr2} (const char $\ast$msg,...)
+\item 
+unsigned int \hyperlink{charfreq_8c_a14c23a23f65aea6055912d21fe79ef8f}{getfsize} (F\+I\+LE $\ast$fp)
+\item 
+void \hyperlink{charfreq_8c_a91a3bbcc7eb26e8695255b2795d6e46f}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{charfreq_8c_aa2a4118beac894c8a75b31b964c9c7c7}{val} \mbox{[}4046\mbox{]}
+\item 
+int \hyperlink{charfreq_8c_abce66cfa23386d96b8765ea028ff5c75}{validx} = 0
+\item 
+char \hyperlink{charfreq_8c_ae3189defa0993d5796056bbaa28d774e}{decval} \mbox{[}4560\mbox{]}
+\item 
+int \hyperlink{charfreq_8c_a6aa88dff2b170615f86de9955f1e39a9}{decidx} = 0
+\item 
+int \hyperlink{charfreq_8c_a3f51e346289cffd20c738e3ba3c892e5}{freq} \mbox{[}256\mbox{]} = \{0\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{charfreq_8c_a14c23a23f65aea6055912d21fe79ef8f}\label{charfreq_8c_a14c23a23f65aea6055912d21fe79ef8f}} 
+\index{charfreq.\+c@{charfreq.\+c}!getfsize@{getfsize}}
+\index{getfsize@{getfsize}!charfreq.\+c@{charfreq.\+c}}
+\subsubsection{\texorpdfstring{getfsize()}{getfsize()}}
+{\footnotesize\ttfamily unsigned int getfsize (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{charfreq_8c_a91a3bbcc7eb26e8695255b2795d6e46f}\label{charfreq_8c_a91a3bbcc7eb26e8695255b2795d6e46f}} 
+\index{charfreq.\+c@{charfreq.\+c}!main@{main}}
+\index{main@{main}!charfreq.\+c@{charfreq.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily void main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{charfreq_8c_a4dfa2bd7b47512180fb611fddea9b3af}\label{charfreq_8c_a4dfa2bd7b47512180fb611fddea9b3af}} 
+\index{charfreq.\+c@{charfreq.\+c}!xerr2@{xerr2}}
+\index{xerr2@{xerr2}!charfreq.\+c@{charfreq.\+c}}
+\subsubsection{\texorpdfstring{xerr2()}{xerr2()}}
+{\footnotesize\ttfamily void xerr2 (\begin{DoxyParamCaption}\item[{const char $\ast$}]{msg,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{charfreq_8c_a6aa88dff2b170615f86de9955f1e39a9}\label{charfreq_8c_a6aa88dff2b170615f86de9955f1e39a9}} 
+\index{charfreq.\+c@{charfreq.\+c}!decidx@{decidx}}
+\index{decidx@{decidx}!charfreq.\+c@{charfreq.\+c}}
+\subsubsection{\texorpdfstring{decidx}{decidx}}
+{\footnotesize\ttfamily int decidx = 0}
+
+\mbox{\Hypertarget{charfreq_8c_ae3189defa0993d5796056bbaa28d774e}\label{charfreq_8c_ae3189defa0993d5796056bbaa28d774e}} 
+\index{charfreq.\+c@{charfreq.\+c}!decval@{decval}}
+\index{decval@{decval}!charfreq.\+c@{charfreq.\+c}}
+\subsubsection{\texorpdfstring{decval}{decval}}
+{\footnotesize\ttfamily char decval\mbox{[}4560\mbox{]}}
+
+\mbox{\Hypertarget{charfreq_8c_a3f51e346289cffd20c738e3ba3c892e5}\label{charfreq_8c_a3f51e346289cffd20c738e3ba3c892e5}} 
+\index{charfreq.\+c@{charfreq.\+c}!freq@{freq}}
+\index{freq@{freq}!charfreq.\+c@{charfreq.\+c}}
+\subsubsection{\texorpdfstring{freq}{freq}}
+{\footnotesize\ttfamily int freq\mbox{[}256\mbox{]} = \{0\}}
+
+\mbox{\Hypertarget{charfreq_8c_aa2a4118beac894c8a75b31b964c9c7c7}\label{charfreq_8c_aa2a4118beac894c8a75b31b964c9c7c7}} 
+\index{charfreq.\+c@{charfreq.\+c}!val@{val}}
+\index{val@{val}!charfreq.\+c@{charfreq.\+c}}
+\subsubsection{\texorpdfstring{val}{val}}
+{\footnotesize\ttfamily char val\mbox{[}4046\mbox{]}}
+
+\mbox{\Hypertarget{charfreq_8c_abce66cfa23386d96b8765ea028ff5c75}\label{charfreq_8c_abce66cfa23386d96b8765ea028ff5c75}} 
+\index{charfreq.\+c@{charfreq.\+c}!validx@{validx}}
+\index{validx@{validx}!charfreq.\+c@{charfreq.\+c}}
+\subsubsection{\texorpdfstring{validx}{validx}}
+{\footnotesize\ttfamily int validx = 0}
+

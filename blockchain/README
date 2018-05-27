@@ -1,0 +1,20 @@
+Digital Bank
+
+  This directory contains the block chain promitives.
+ 
+ Files:
+
+../common/diba.h                Header for the central items        
+
+
+data                            Location of chain data
+dibachain.c                     Check chain for various criteria
+dibapow.c                       Proof of work feasability, add items to chain
+payload
+     
+ 2.) Computing Power requirement:
+ 
+ 
+ 
+
+

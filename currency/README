@@ -1,0 +1,43 @@
+Digital Bank
+
+  This directory contains the currency generation subsystem, proof of work and 
+block chain promitives.
+
+  Curreny: 
+  
+    File: dibagen.exe
+    Usage: 
+  
+  Check currency:
+  
+  
+ 
+ Files:
+
+diba.h              Header for the central items        
+dibadec.c           Decode stuff
+dibagen.c           Generate token
+dibapow.c           Proof of work feasability
+digibank.c          Feasability study for digibank
+
+
+  Study:
+  
+ 1.) Interesting stats:
+ 
+     The random generator from gcrypt generetad triple zeros at offsets:
+     
+    4702000    Null Lead at 4703987
+    -00-00-00-07-ef-96-9f-6a-9b-b0-01-94-30-93-e1-fd-7c-7f-a8-98-1d-56-62-cc
+    
+    19306000    Null Lead at 19306992
+    -00-00-00-37-89-b5-7e-bb-da-5e-c2-f1-66-9c-f2-8c-82-58-ce-f4-9e-b4-13-b3
+    
+    46192000    Null Lead at 46193713
+    -00-00-00-53-57-61-24-de-28-97-3f-a7-27-78-bc-6b-8a-69-28-54-47-63-0d-d5
+     
+ 2.) Computing Power requirement:
+ 
+ 
+ 
+

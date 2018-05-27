@@ -1,0 +1,108 @@
+\hypertarget{dibachain_8c}{}\section{currency/dibachain.c File Reference}
+\label{dibachain_8c}\index{currency/dibachain.\+c@{currency/dibachain.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}diba.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bluepoint3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dibautils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cmdline.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{dibachain_8c_ab946e2e7f7679350627acfded8e2658b}{T\+E\+ST}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{dibachain_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} \hyperlink{dibachain_8c_ad75e49d295005b3f5fffec85f24090d3}{opts\+\_\+data} \mbox{[}$\,$\mbox{]}
+\item 
+char \hyperlink{dibachain_8c_ada2531949456336da2552c2ee7d4af44}{org\+\_\+str} \mbox{[}$\,$\mbox{]} = \char`\"{}Hello World \char`\"{}
+\item 
+char \hyperlink{dibachain_8c_acaa89bfcd1e25ba12b08f62237d2fd84}{test\+\_\+str} \mbox{[}$\,$\mbox{]} = \char`\"{} \char`\"{}
+\item 
+char \hyperlink{dibachain_8c_a309bf57684970c25483e6e61cf11dd34}{test\+\_\+pass} \mbox{[}$\,$\mbox{]} = \char`\"{}1234\char`\"{}
+\item 
+char \hyperlink{dibachain_8c_a9d22394e80281a076c2d925cdfb132c6}{progname} \mbox{[}$\,$\mbox{]} = \char`\"{}dibachain \mbox{[}options\mbox{]}\char`\"{}
+\item 
+char \hyperlink{dibachain_8c_aa6d0339ce8e9ba21bb8e4e6b088a01dc}{descr} \mbox{[}$\,$\mbox{]} = \char`\"{}Add / dump / check diba chain\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{dibachain_8c_ab946e2e7f7679350627acfded8e2658b}\label{dibachain_8c_ab946e2e7f7679350627acfded8e2658b}} 
+\index{dibachain.\+c@{dibachain.\+c}!T\+E\+ST@{T\+E\+ST}}
+\index{T\+E\+ST@{T\+E\+ST}!dibachain.\+c@{dibachain.\+c}}
+\subsubsection{\texorpdfstring{T\+E\+ST}{TEST}}
+{\footnotesize\ttfamily \#define T\+E\+ST}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{dibachain_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{dibachain_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{dibachain.\+c@{dibachain.\+c}!main@{main}}
+\index{main@{main}!dibachain.\+c@{dibachain.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{dibachain_8c_aa6d0339ce8e9ba21bb8e4e6b088a01dc}\label{dibachain_8c_aa6d0339ce8e9ba21bb8e4e6b088a01dc}} 
+\index{dibachain.\+c@{dibachain.\+c}!descr@{descr}}
+\index{descr@{descr}!dibachain.\+c@{dibachain.\+c}}
+\subsubsection{\texorpdfstring{descr}{descr}}
+{\footnotesize\ttfamily char descr\mbox{[}$\,$\mbox{]} = \char`\"{}Add / dump / check diba chain\char`\"{}}
+
+\mbox{\Hypertarget{dibachain_8c_ad75e49d295005b3f5fffec85f24090d3}\label{dibachain_8c_ad75e49d295005b3f5fffec85f24090d3}} 
+\index{dibachain.\+c@{dibachain.\+c}!opts\+\_\+data@{opts\+\_\+data}}
+\index{opts\+\_\+data@{opts\+\_\+data}!dibachain.\+c@{dibachain.\+c}}
+\subsubsection{\texorpdfstring{opts\+\_\+data}{opts\_data}}
+{\footnotesize\ttfamily \hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} opts\+\_\+data\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+                    \textcolor{charliteral}{'a'},   \textcolor{stringliteral}{"--add"}, &add, NULL, 0, 0xffff, NULL, 
+                    \textcolor{stringliteral}{"-a             --add         - add a new entry"},           
+                    \textcolor{charliteral}{'d'},   \textcolor{stringliteral}{"--dump"},  &dump,  NULL, 0, 0xffff, NULL, 
+                    \textcolor{stringliteral}{"-d             --dump        - dump the chain to screen"},
+                    \textcolor{charliteral}{'c'},   \textcolor{stringliteral}{"--check"},  &check,  NULL, 0, 0xffff, NULL, 
+                    \textcolor{stringliteral}{"-c             --check       - check chain integrity"},
+                    \textcolor{charliteral}{'v'},     \textcolor{stringliteral}{"--verbose"}, NULL, NULL,  0, 0, &verbose, 
+                    \textcolor{stringliteral}{"-v             --verbose     - Verbosity on"},
+                     0,      NULL, NULL, NULL,      0, 0,  NULL, NULL,
+                    \}
+\end{DoxyCode}
+\mbox{\Hypertarget{dibachain_8c_ada2531949456336da2552c2ee7d4af44}\label{dibachain_8c_ada2531949456336da2552c2ee7d4af44}} 
+\index{dibachain.\+c@{dibachain.\+c}!org\+\_\+str@{org\+\_\+str}}
+\index{org\+\_\+str@{org\+\_\+str}!dibachain.\+c@{dibachain.\+c}}
+\subsubsection{\texorpdfstring{org\+\_\+str}{org\_str}}
+{\footnotesize\ttfamily char org\+\_\+str\mbox{[}$\,$\mbox{]} = \char`\"{}Hello World \char`\"{}}
+
+\mbox{\Hypertarget{dibachain_8c_a9d22394e80281a076c2d925cdfb132c6}\label{dibachain_8c_a9d22394e80281a076c2d925cdfb132c6}} 
+\index{dibachain.\+c@{dibachain.\+c}!progname@{progname}}
+\index{progname@{progname}!dibachain.\+c@{dibachain.\+c}}
+\subsubsection{\texorpdfstring{progname}{progname}}
+{\footnotesize\ttfamily char progname\mbox{[}$\,$\mbox{]} = \char`\"{}dibachain \mbox{[}options\mbox{]}\char`\"{}}
+
+\mbox{\Hypertarget{dibachain_8c_a309bf57684970c25483e6e61cf11dd34}\label{dibachain_8c_a309bf57684970c25483e6e61cf11dd34}} 
+\index{dibachain.\+c@{dibachain.\+c}!test\+\_\+pass@{test\+\_\+pass}}
+\index{test\+\_\+pass@{test\+\_\+pass}!dibachain.\+c@{dibachain.\+c}}
+\subsubsection{\texorpdfstring{test\+\_\+pass}{test\_pass}}
+{\footnotesize\ttfamily char test\+\_\+pass\mbox{[}$\,$\mbox{]} = \char`\"{}1234\char`\"{}}
+
+\mbox{\Hypertarget{dibachain_8c_acaa89bfcd1e25ba12b08f62237d2fd84}\label{dibachain_8c_acaa89bfcd1e25ba12b08f62237d2fd84}} 
+\index{dibachain.\+c@{dibachain.\+c}!test\+\_\+str@{test\+\_\+str}}
+\index{test\+\_\+str@{test\+\_\+str}!dibachain.\+c@{dibachain.\+c}}
+\subsubsection{\texorpdfstring{test\+\_\+str}{test\_str}}
+{\footnotesize\ttfamily char test\+\_\+str\mbox{[}$\,$\mbox{]} = \char`\"{} \char`\"{}}
+

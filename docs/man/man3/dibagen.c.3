@@ -1,0 +1,100 @@
+.TH "currency/dibagen.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+currency/dibagen.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stddef\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <signal\&.h>\fP
+.br
+\fC#include 'bluepoint3\&.h'\fP
+.br
+\fC#include 'diba\&.h'\fP
+.br
+\fC#include 'dibautils\&.h'\fP
+.br
+\fC#include 'cmdline\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBmain\fP (int argc, char *argv[])"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBopts\fP \fBopts_data\fP []"
+.br
+.ti -1c
+.RI "char \fBpass\fP [] = '1234'"
+.br
+.ti -1c
+.RI "\fBUINT\fP \fBbound\fP = 0x41424344"
+.br
+.ti -1c
+.RI "\fBUCHAR\fP \fBstr\fP [\fBBSIZE\fP]"
+.br
+.ti -1c
+.RI "\fBUINT\fP \fBbound2\fP = 0x42434445"
+.br
+.ti -1c
+.RI "\fBUCHAR\fP \fBstr2\fP [\fBBSIZE\fP]"
+.br
+.ti -1c
+.RI "\fBUINT\fP \fBbound3\fP = 0x43444546"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char * argv[])"
+
+.SH "Variable Documentation"
+.PP 
+.SS "\fBUINT\fP bound = 0x41424344"
+
+.SS "\fBUINT\fP bound2 = 0x42434445"
+
+.SS "\fBUINT\fP bound3 = 0x43444546"
+
+.SS "\fBopts\fP opts_data[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+                    'n',   "--number",  &entries, NULL, 0, 0xffff, NULL, 
+                    "-n[num] --number  - number of entries to generate defaults to 1, range(1-16M)",
+                    's',    "--skip", &skip,  NULL, 0, 0xffff, NULL, 
+                    "-s[num] --skip    - number of entries to skip defaults to 0, range(1-16M)",
+                    'm',    "--mode", &skip, NULL, 0, 0xffff, NULL, 
+                    "-m[num] --mode    - Mode of generation, defaults to 0, range(0-255)",
+                    'v',   "--verbose",  NULL,  NULL, 0, 0, &verbose, 
+                    "-v      --verbose - Verbosity on",
+                    't',    "--test", NULL, NULL,  0, 0, &test, 
+                    "-t      --test    - test on",
+                     0,     NULL,  NULL, NULL,     0, 0,  NULL, NULL,
+                    }
+.fi
+.SS "char pass[] = '1234'"
+
+.SS "\fBUCHAR\fP str[\fBBSIZE\fP]"
+
+.SS "\fBUCHAR\fP str2[\fBBSIZE\fP]"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

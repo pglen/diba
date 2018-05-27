@@ -1,0 +1,112 @@
+\hypertarget{zmalloc_8c}{}\section{tools/zmalloc.c File Reference}
+\label{zmalloc_8c}\index{tools/zmalloc.\+c@{tools/zmalloc.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}zmalloc.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{zmalloc_8c_a9d1db42a5fe2d7bf9f4958db88a3029b}{P\+O\+O\+L\+S\+I\+ZE}~1024
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{zmalloc_8c_a9951d7fe630464c7c8e4ed9145f1dd2b}{zline2} (int line, const char $\ast$fname)
+\item 
+void \hyperlink{zmalloc_8c_a3a4345de4d713253728274f223541900}{zline} (int line)
+\item 
+void \hyperlink{zmalloc_8c_a347142eb55f8b73c40fd7194e901e5a0}{zverbose} (int flag)
+\item 
+void \hyperlink{zmalloc_8c_a91ae141306828c7bd5f5f571ae86b155}{zcheck} (void $\ast$mem, int line)
+\item 
+void $\ast$ \hyperlink{zmalloc_8c_a96a5284087aa9f9ceb02e8bb1fddab82}{zrealloc} (void $\ast$ptr, unsigned int msize)
+\item 
+void $\ast$ \hyperlink{zmalloc_8c_a3e7608f22652ad7739856285cc690296}{zalloc} (unsigned int msize)
+\item 
+void \hyperlink{zmalloc_8c_a27f9cf6fe33152cad2b531f81d3fa784}{zfree} (void $\ast$mem)
+\item 
+void \hyperlink{zmalloc_8c_a9d9e4dbd99e6c893e4d449f1bcfa17d7}{zfree2} (void $\ast$mem, int line)
+\item 
+int \hyperlink{zmalloc_8c_a1c031e40a2d09c196a87e715cbeb96a7}{zleak} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \hyperlink{zmalloc_8c_af8528daa05ad4d456cc30227cf0fbd52}{zarr} \mbox{[}\hyperlink{zmalloc_8c_a9d1db42a5fe2d7bf9f4958db88a3029b}{P\+O\+O\+L\+S\+I\+ZE}\mbox{]} = \{N\+U\+LL\}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{zmalloc_8c_a9d1db42a5fe2d7bf9f4958db88a3029b}\label{zmalloc_8c_a9d1db42a5fe2d7bf9f4958db88a3029b}} 
+\index{zmalloc.\+c@{zmalloc.\+c}!P\+O\+O\+L\+S\+I\+ZE@{P\+O\+O\+L\+S\+I\+ZE}}
+\index{P\+O\+O\+L\+S\+I\+ZE@{P\+O\+O\+L\+S\+I\+ZE}!zmalloc.\+c@{zmalloc.\+c}}
+\subsubsection{\texorpdfstring{P\+O\+O\+L\+S\+I\+ZE}{POOLSIZE}}
+{\footnotesize\ttfamily \#define P\+O\+O\+L\+S\+I\+ZE~1024}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{zmalloc_8c_a3e7608f22652ad7739856285cc690296}\label{zmalloc_8c_a3e7608f22652ad7739856285cc690296}} 
+\index{zmalloc.\+c@{zmalloc.\+c}!zalloc@{zalloc}}
+\index{zalloc@{zalloc}!zmalloc.\+c@{zmalloc.\+c}}
+\subsubsection{\texorpdfstring{zalloc()}{zalloc()}}
+{\footnotesize\ttfamily void$\ast$ zalloc (\begin{DoxyParamCaption}\item[{unsigned int}]{msize }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{zmalloc_8c_a91ae141306828c7bd5f5f571ae86b155}\label{zmalloc_8c_a91ae141306828c7bd5f5f571ae86b155}} 
+\index{zmalloc.\+c@{zmalloc.\+c}!zcheck@{zcheck}}
+\index{zcheck@{zcheck}!zmalloc.\+c@{zmalloc.\+c}}
+\subsubsection{\texorpdfstring{zcheck()}{zcheck()}}
+{\footnotesize\ttfamily void zcheck (\begin{DoxyParamCaption}\item[{void $\ast$}]{mem,  }\item[{int}]{line }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{zmalloc_8c_a27f9cf6fe33152cad2b531f81d3fa784}\label{zmalloc_8c_a27f9cf6fe33152cad2b531f81d3fa784}} 
+\index{zmalloc.\+c@{zmalloc.\+c}!zfree@{zfree}}
+\index{zfree@{zfree}!zmalloc.\+c@{zmalloc.\+c}}
+\subsubsection{\texorpdfstring{zfree()}{zfree()}}
+{\footnotesize\ttfamily void zfree (\begin{DoxyParamCaption}\item[{void $\ast$}]{mem }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{zmalloc_8c_a9d9e4dbd99e6c893e4d449f1bcfa17d7}\label{zmalloc_8c_a9d9e4dbd99e6c893e4d449f1bcfa17d7}} 
+\index{zmalloc.\+c@{zmalloc.\+c}!zfree2@{zfree2}}
+\index{zfree2@{zfree2}!zmalloc.\+c@{zmalloc.\+c}}
+\subsubsection{\texorpdfstring{zfree2()}{zfree2()}}
+{\footnotesize\ttfamily void zfree2 (\begin{DoxyParamCaption}\item[{void $\ast$}]{mem,  }\item[{int}]{line }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{zmalloc_8c_a1c031e40a2d09c196a87e715cbeb96a7}\label{zmalloc_8c_a1c031e40a2d09c196a87e715cbeb96a7}} 
+\index{zmalloc.\+c@{zmalloc.\+c}!zleak@{zleak}}
+\index{zleak@{zleak}!zmalloc.\+c@{zmalloc.\+c}}
+\subsubsection{\texorpdfstring{zleak()}{zleak()}}
+{\footnotesize\ttfamily int zleak (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{zmalloc_8c_a3a4345de4d713253728274f223541900}\label{zmalloc_8c_a3a4345de4d713253728274f223541900}} 
+\index{zmalloc.\+c@{zmalloc.\+c}!zline@{zline}}
+\index{zline@{zline}!zmalloc.\+c@{zmalloc.\+c}}
+\subsubsection{\texorpdfstring{zline()}{zline()}}
+{\footnotesize\ttfamily void zline (\begin{DoxyParamCaption}\item[{int}]{line }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{zmalloc_8c_a9951d7fe630464c7c8e4ed9145f1dd2b}\label{zmalloc_8c_a9951d7fe630464c7c8e4ed9145f1dd2b}} 
+\index{zmalloc.\+c@{zmalloc.\+c}!zline2@{zline2}}
+\index{zline2@{zline2}!zmalloc.\+c@{zmalloc.\+c}}
+\subsubsection{\texorpdfstring{zline2()}{zline2()}}
+{\footnotesize\ttfamily void zline2 (\begin{DoxyParamCaption}\item[{int}]{line,  }\item[{const char $\ast$}]{fname }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{zmalloc_8c_a96a5284087aa9f9ceb02e8bb1fddab82}\label{zmalloc_8c_a96a5284087aa9f9ceb02e8bb1fddab82}} 
+\index{zmalloc.\+c@{zmalloc.\+c}!zrealloc@{zrealloc}}
+\index{zrealloc@{zrealloc}!zmalloc.\+c@{zmalloc.\+c}}
+\subsubsection{\texorpdfstring{zrealloc()}{zrealloc()}}
+{\footnotesize\ttfamily void$\ast$ zrealloc (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{unsigned int}]{msize }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{zmalloc_8c_a347142eb55f8b73c40fd7194e901e5a0}\label{zmalloc_8c_a347142eb55f8b73c40fd7194e901e5a0}} 
+\index{zmalloc.\+c@{zmalloc.\+c}!zverbose@{zverbose}}
+\index{zverbose@{zverbose}!zmalloc.\+c@{zmalloc.\+c}}
+\subsubsection{\texorpdfstring{zverbose()}{zverbose()}}
+{\footnotesize\ttfamily void zverbose (\begin{DoxyParamCaption}\item[{int}]{flag }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{zmalloc_8c_af8528daa05ad4d456cc30227cf0fbd52}\label{zmalloc_8c_af8528daa05ad4d456cc30227cf0fbd52}} 
+\index{zmalloc.\+c@{zmalloc.\+c}!zarr@{zarr}}
+\index{zarr@{zarr}!zmalloc.\+c@{zmalloc.\+c}}
+\subsubsection{\texorpdfstring{zarr}{zarr}}
+{\footnotesize\ttfamily void$\ast$ zarr\mbox{[}\hyperlink{zmalloc_8c_a9d1db42a5fe2d7bf9f4958db88a3029b}{P\+O\+O\+L\+S\+I\+ZE}\mbox{]} = \{N\+U\+LL\}}
+

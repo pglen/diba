@@ -1,0 +1,93 @@
+.TH "tools/zmalloc.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tools/zmalloc.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'zmalloc\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBPOOLSIZE\fP   1024"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBzline2\fP (int line, const char *fname)"
+.br
+.ti -1c
+.RI "void \fBzline\fP (int line)"
+.br
+.ti -1c
+.RI "void \fBzverbose\fP (int flag)"
+.br
+.ti -1c
+.RI "void \fBzcheck\fP (void *mem, int line)"
+.br
+.ti -1c
+.RI "void * \fBzrealloc\fP (void *ptr, unsigned int msize)"
+.br
+.ti -1c
+.RI "void * \fBzalloc\fP (unsigned int msize)"
+.br
+.ti -1c
+.RI "void \fBzfree\fP (void *mem)"
+.br
+.ti -1c
+.RI "void \fBzfree2\fP (void *mem, int line)"
+.br
+.ti -1c
+.RI "int \fBzleak\fP ()"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "void * \fBzarr\fP [\fBPOOLSIZE\fP] = {NULL}"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define POOLSIZE   1024"
+
+.SH "Function Documentation"
+.PP 
+.SS "void* zalloc (unsigned int msize)"
+
+.SS "void zcheck (void * mem, int line)"
+
+.SS "void zfree (void * mem)"
+
+.SS "void zfree2 (void * mem, int line)"
+
+.SS "int zleak ()"
+
+.SS "void zline (int line)"
+
+.SS "void zline2 (int line, const char * fname)"
+
+.SS "void* zrealloc (void * ptr, unsigned int msize)"
+
+.SS "void zverbose (int flag)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "void* zarr[\fBPOOLSIZE\fP] = {NULL}"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

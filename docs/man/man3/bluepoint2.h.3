@@ -1,0 +1,113 @@
+.TH "bluepoint/bluepoint2.h" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+bluepoint/bluepoint2.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef unsigned long \fBulong\fP"
+.br
+.ti -1c
+.RI "typedef unsigned int \fBuint\fP"
+.br
+.ti -1c
+.RI "typedef unsigned long long \fBulonglong\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBbluepoint2_encrypt\fP (char *buff, int blen, const char *\fBpass\fP, int \fBplen\fP)"
+.br
+.ti -1c
+.RI "int \fBbluepoint2_decrypt\fP (char *\fBstr\fP, int \fBslen\fP, const char *\fBpass\fP, int \fBplen\fP)"
+.br
+.ti -1c
+.RI "\fBulong\fP \fBbluepoint2_hash\fP (const char *buff, int blen)"
+.br
+.ti -1c
+.RI "\fBulong\fP \fBbluepoint2_crypthash\fP (const char *buff, int blen, char *\fBpass\fP, int \fBplen\fP)"
+.br
+.ti -1c
+.RI "unsigned long long \fBbluepoint2_hash64\fP (const char *buff, int blen)"
+.br
+.ti -1c
+.RI "unsigned long long \fBbluepoint2_crypthash64\fP (const char *buff, int blen, char *\fBpass\fP, int \fBplen\fP)"
+.br
+.ti -1c
+.RI "char * \fBbluepoint2_dumphex\fP (const char *\fBstr\fP, int len)"
+.br
+.ti -1c
+.RI "char * \fBbluepoint2_dump\fP (const char *\fBstr\fP, int len)"
+.br
+.ti -1c
+.RI "char * \fBbluepoint2_undump\fP (const char *\fBstr\fP, int len)"
+.br
+.ti -1c
+.RI "char * \fBbluepoint2_tohex\fP (const char *\fBstr\fP, int len, char *out, int *olen)"
+.br
+.ti -1c
+.RI "char * \fBbluepoint2_fromhex\fP (const char *\fBstr\fP, int len, char *out, int *olen)"
+.br
+.ti -1c
+.RI "int \fBbluepoint2_set_verbose\fP (int flag)"
+.br
+.ti -1c
+.RI "int \fBbluepoint2_set_functrace\fP (int flag)"
+.br
+.ti -1c
+.RI "int \fBbluepoint2_set_debug\fP (int flag)"
+.br
+.ti -1c
+.RI "int \fBbluepoint2_set_rounds\fP (int xrounds)"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef unsigned int \fBuint\fP"
+
+.SS "typedef unsigned long \fBulong\fP"
+
+.SS "typedef unsigned long long \fBulonglong\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "\fBulong\fP bluepoint2_crypthash (const char * buff, int blen, char * pass, int plen)"
+
+.SS "unsigned long long bluepoint2_crypthash64 (const char * buff, int blen, char * pass, int plen)"
+
+.SS "int bluepoint2_decrypt (char * str, int slen, const char * pass, int plen)"
+
+.SS "char* bluepoint2_dump (const char * str, int len)"
+
+.SS "char* bluepoint2_dumphex (const char * str, int len)"
+
+.SS "int bluepoint2_encrypt (char * buff, int blen, const char * pass, int plen)"
+
+.SS "char* bluepoint2_fromhex (const char * str, int len, char * out, int * olen)"
+
+.SS "\fBulong\fP bluepoint2_hash (const char * buff, int blen)"
+
+.SS "unsigned long long bluepoint2_hash64 (const char * buff, int blen)"
+
+.SS "int bluepoint2_set_debug (int flag)"
+
+.SS "int bluepoint2_set_functrace (int flag)"
+
+.SS "int bluepoint2_set_rounds (int xrounds)"
+
+.SS "int bluepoint2_set_verbose (int flag)"
+
+.SS "char* bluepoint2_tohex (const char * str, int len, char * out, int * olen)"
+
+.SS "char* bluepoint2_undump (const char * str, int len)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

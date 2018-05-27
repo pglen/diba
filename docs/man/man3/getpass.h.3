@@ -1,0 +1,71 @@
+.TH "tools/getpass.h" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tools/getpass.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_getpassx\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBALLOW_TRIES\fP   3"
+.br
+.ti -1c
+.RI "#define \fBMINPASSLEN\fP   4"
+.br
+.ti -1c
+.RI "#define \fBCRTL_C\fP   '\\3'"
+.br
+.ti -1c
+.RI "#define \fBCRTL_D\fP   '\\4'"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fB_getpassx\fP \fBgetpassx\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBgetpass\fP (const char *prompt, char *ppp, int maxlen)"
+.br
+.ti -1c
+.RI "int \fBgetpass2\fP (\fBgetpassx\fP *passx)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define ALLOW_TRIES   3"
+
+.SS "#define CRTL_C   '\\3'"
+
+.SS "#define CRTL_D   '\\4'"
+
+.SS "#define MINPASSLEN   4"
+
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_getpassx\fP  \fBgetpassx\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "int getpass (const char * prompt, char * ppp, int maxlen)"
+
+.SS "int getpass2 (\fBgetpassx\fP * passx)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

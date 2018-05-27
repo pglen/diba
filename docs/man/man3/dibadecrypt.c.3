@@ -1,0 +1,73 @@
+.TH "transport/dibadecrypt.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+transport/dibadecrypt.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <signal\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include 'gcrypt\&.h'\fP
+.br
+\fC#include 'gcry\&.h'\fP
+.br
+\fC#include 'zmalloc\&.h'\fP
+.br
+\fC#include 'getpass\&.h'\fP
+.br
+\fC#include 'gsexp\&.h'\fP
+.br
+\fC#include 'cmdline\&.h'\fP
+.br
+\fC#include 'dibastr\&.h'\fP
+.br
+\fC#include 'bluepoint2\&.h'\fP
+.br
+\fC#include 'misc\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "char \fBdescstr\fP [] = 'Decrypt file with Private key\&.\\n'"
+.br
+.ti -1c
+.RI "char \fBusestr\fP [] = 'asdecrypt [options] keyfile'"
+.br
+.ti -1c
+.RI "\fBopts\fP \fBopts_data\fP []"
+.br
+.ti -1c
+.RI "char * \fBmstr\fP = 'No Memory'"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char ** argv)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "char descstr[] = 'Decrypt file with Private key\&.\\n'"
+
+.SS "char* mstr = 'No Memory'"
+
+.SS "\fBopts\fP opts_data[]"
+
+.SS "char usestr[] = 'asdecrypt [options] keyfile'"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

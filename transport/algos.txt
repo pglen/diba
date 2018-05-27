@@ -1,0 +1,14 @@
+Algorythm reviews.
+
+Blowfish    1-448 bits     Old and slow
+DES         56 bits        Too weak to use now
+IDEA        128 bits       Good but patented 
+RC4         1-2048 bits    Caution some keys are weak 
+RC5         128-256 bits   Good but patented 
+Rijndael    128-256 bits   Best choice
+Serpent     128-256 bits   Very strong
+TripleDES   112-168 bits   Second best choice 
+Twofish     128-256 bits   Very strong widely used 
+AES         128-256 bits   Recommended, standard
+
+

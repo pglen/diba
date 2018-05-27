@@ -1,0 +1,84 @@
+.TH "transport/dibakeyinfo.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+transport/dibakeyinfo.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <signal\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include 'gcrypt\&.h'\fP
+.br
+\fC#include 'gcry\&.h'\fP
+.br
+\fC#include 'getpass\&.h'\fP
+.br
+\fC#include 'gsexp\&.h'\fP
+.br
+\fC#include 'base64\&.h'\fP
+.br
+\fC#include 'zmalloc\&.h'\fP
+.br
+\fC#include 'cmdline\&.h'\fP
+.br
+\fC#include 'dibastr\&.h'\fP
+.br
+\fC#include 'misc\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBmy_progress_handler\fP (void *cb_data, const char *what, int printchar, int current, int total)"
+.br
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "char \fBdescstr\fP [] = 'Show various information about a DIBA key\&.'"
+.br
+.ti -1c
+.RI "char \fBusestr\fP []"
+.br
+.ti -1c
+.RI "\fBopts\fP \fBopts_data\fP []"
+.br
+.ti -1c
+.RI "char * \fBmstr\fP = 'No Memory'"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char ** argv)"
+
+.SS "void my_progress_handler (void * cb_data, const char * what, int printchar, int current, int total)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "char descstr[] = 'Show various information about a DIBA key\&.'"
+
+.SS "char* mstr = 'No Memory'"
+
+.SS "\fBopts\fP opts_data[]"
+
+.SS "char usestr[]"
+\fBInitial value:\fP
+.PP
+.nf
+= "dibakeyinfo [options] keyfile\n"
+                "Where keyfile is the basename for \&.key \&.pub files\&. "
+                "Individual files may be specified also\&. Example: file\&.key or file\&.pub"
+.fi
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

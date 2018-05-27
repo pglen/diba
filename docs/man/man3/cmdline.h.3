@@ -1,0 +1,45 @@
+.TH "tools/cmdline.h" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tools/cmdline.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_opts\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fB_opts\fP \fBopts\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBparse_commad_line\fP (char **argv, \fBopts\fP *popts_data, char **err_str)"
+.br
+.ti -1c
+.RI "void \fBusage\fP (const char *\fBprogname\fP, const char *desc, \fBopts\fP *\fBopts_data\fP)"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_opts\fP  \fBopts\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "int parse_commad_line (char ** argv, \fBopts\fP * popts_data, char ** err_str)"
+
+.SS "void usage (const char * progname, const char * desc, \fBopts\fP * opts_data)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

@@ -1,0 +1,195 @@
+.TH "bluepoint/bluepoint2.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+bluepoint/bluepoint2.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'stdio\&.h'\fP
+.br
+\fC#include 'string\&.h'\fP
+.br
+\fC#include 'stdlib\&.h'\fP
+.br
+\fC#include 'bluepoint2\&.h'\fP
+.br
+\fC#include 'bluemac\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDEF_DUMPHEX\fP   1"
+.br
+.ti -1c
+.RI "#define \fBROTATE_LONG_LONG_RIGHT\fP(x,  n)   (((x) >> (n))  | ((x) << (64 \- (n))))"
+.br
+.ti -1c
+.RI "#define \fBROTATE_LONG_LONG_LEFT\fP(x,  n)   (((x) << (n))  | ((x) >> (64 \- (n))))"
+.br
+.ti -1c
+.RI "#define \fBROTATE_LONG_RIGHT\fP(x,  n)   (((x) >> (n))  | ((x) << (32 \- (n))))"
+.br
+.ti -1c
+.RI "#define \fBROTATE_LONG_LEFT\fP(x,  n)   (((x) << (n))  | ((x) >> (32 \- (n))))"
+.br
+.ti -1c
+.RI "#define \fBROTATE_SHORT_RIGHT\fP(x,  n)   (((x) >> (n))  | ((x) << (16 \- (n))))"
+.br
+.ti -1c
+.RI "#define \fBROTATE_SHORT_LEFT\fP(x,  n)   (((x) << (n))  | ((x) >> (16 \- (n))))"
+.br
+.ti -1c
+.RI "#define \fBROTATE_CHAR_RIGHT\fP(x,  n)   (((x) >> (n))  | ((x) << (8 \- (n))))"
+.br
+.ti -1c
+.RI "#define \fBROTATE_CHAR_LEFT\fP(x,  n)   (((x) << (n))  | ((x) >> (8 \- (n))))"
+.br
+.ti -1c
+.RI "#define \fBPASSLIM\fP   64"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBbluepoint2_set_verbose\fP (int flag)"
+.br
+.ti -1c
+.RI "int \fBbluepoint2_set_debug\fP (int flag)"
+.br
+.ti -1c
+.RI "int \fBbluepoint2_set_functrace\fP (int flag)"
+.br
+.ti -1c
+.RI "int \fBbluepoint2_set_rounds\fP (int xrounds)"
+.br
+.ti -1c
+.RI "int \fBbluepoint2_encrypt\fP (char *buff, int blen, const char *\fBpass\fP, int \fBplen\fP)"
+.br
+.ti -1c
+.RI "int \fBbluepoint2_decrypt\fP (char *buff, int blen, const char *\fBpass\fP, int \fBplen\fP)"
+.br
+.ti -1c
+.RI "\fBulong\fP \fBbluepoint2_hash\fP (const char *buff, int blen)"
+.br
+.ti -1c
+.RI "unsigned long long \fBbluepoint2_hash64\fP (const char *buff, int blen)"
+.br
+.ti -1c
+.RI "\fBulong\fP \fBbluepoint2_crypthash\fP (const char *buff, int blen, char *\fBpass\fP, int \fBplen\fP)"
+.br
+.ti -1c
+.RI "unsigned long long \fBbluepoint2_crypthash64\fP (const char *buff, int blen, char *\fBpass\fP, int \fBplen\fP)"
+.br
+.ti -1c
+.RI "void \fBENCRYPT\fP (char *\fBstr\fP, int \fBslen\fP, char *\fBpass\fP, int \fBplen\fP)"
+.br
+.ti -1c
+.RI "void \fBDECRYPT\fP (char *\fBstr\fP, int \fBslen\fP, char *\fBpass\fP, int \fBplen\fP)"
+.br
+.ti -1c
+.RI "char * \fBbluepoint2_dumphex\fP (const char *\fBstr\fP, int len)"
+.br
+.ti -1c
+.RI "char * \fBbluepoint2_dump\fP (const char *\fBstr\fP, int len)"
+.br
+.ti -1c
+.RI "char * \fBbluepoint2_undump\fP (const char *\fBstr\fP, int len)"
+.br
+.ti -1c
+.RI "char * \fBbluepoint2_tohex\fP (const char *\fBstr\fP, int len, char *out, int *olen)"
+.br
+.ti -1c
+.RI "char * \fBbluepoint2_fromhex\fP (const char *\fBstr\fP, int len, char *out, int *olen)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "char \fBhector\fP [] = 'eahfdlaskjhl9807089609kljhkljfsdhlf'"
+.br
+.ti -1c
+.RI "char \fBforward\fP = 0x55"
+.br
+.ti -1c
+.RI "char \fBbackward\fP = 0x5a"
+.br
+.ti -1c
+.RI "char \fBaddend\fP = 17"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DEF_DUMPHEX   1"
+
+.SS "#define PASSLIM   64"
+
+.SS "#define ROTATE_CHAR_LEFT(x, n)   (((x) << (n))  | ((x) >> (8 \- (n))))"
+
+.SS "#define ROTATE_CHAR_RIGHT(x, n)   (((x) >> (n))  | ((x) << (8 \- (n))))"
+
+.SS "#define ROTATE_LONG_LEFT(x, n)   (((x) << (n))  | ((x) >> (32 \- (n))))"
+
+.SS "#define ROTATE_LONG_LONG_LEFT(x, n)   (((x) << (n))  | ((x) >> (64 \- (n))))"
+
+.SS "#define ROTATE_LONG_LONG_RIGHT(x, n)   (((x) >> (n))  | ((x) << (64 \- (n))))"
+
+.SS "#define ROTATE_LONG_RIGHT(x, n)   (((x) >> (n))  | ((x) << (32 \- (n))))"
+
+.SS "#define ROTATE_SHORT_LEFT(x, n)   (((x) << (n))  | ((x) >> (16 \- (n))))"
+
+.SS "#define ROTATE_SHORT_RIGHT(x, n)   (((x) >> (n))  | ((x) << (16 \- (n))))"
+
+.SH "Function Documentation"
+.PP 
+.SS "\fBulong\fP bluepoint2_crypthash (const char * buff, int blen, char * pass, int plen)"
+
+.SS "unsigned long long bluepoint2_crypthash64 (const char * buff, int blen, char * pass, int plen)"
+
+.SS "int bluepoint2_decrypt (char * buff, int blen, const char * pass, int plen)"
+
+.SS "char* bluepoint2_dump (const char * str, int len)"
+
+.SS "char* bluepoint2_dumphex (const char * str, int len)"
+
+.SS "int bluepoint2_encrypt (char * buff, int blen, const char * pass, int plen)"
+
+.SS "char* bluepoint2_fromhex (const char * str, int len, char * out, int * olen)"
+
+.SS "\fBulong\fP bluepoint2_hash (const char * buff, int blen)"
+
+.SS "unsigned long long bluepoint2_hash64 (const char * buff, int blen)"
+
+.SS "int bluepoint2_set_debug (int flag)"
+
+.SS "int bluepoint2_set_functrace (int flag)"
+
+.SS "int bluepoint2_set_rounds (int xrounds)"
+
+.SS "int bluepoint2_set_verbose (int flag)"
+
+.SS "char* bluepoint2_tohex (const char * str, int len, char * out, int * olen)"
+
+.SS "char* bluepoint2_undump (const char * str, int len)"
+
+.SS "void DECRYPT (char * str, int slen, char * pass, int plen)"
+
+.SS "void ENCRYPT (char * str, int slen, char * pass, int plen)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "char addend = 17"
+
+.SS "char backward = 0x5a"
+
+.SS "char forward = 0x55"
+
+.SS "char hector[] = 'eahfdlaskjhl9807089609kljhkljfsdhlf'"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

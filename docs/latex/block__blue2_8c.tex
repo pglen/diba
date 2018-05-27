@@ -1,0 +1,94 @@
+\hypertarget{block__blue2_8c}{}\section{bluepoint/block\+\_\+blue2.c File Reference}
+\label{block__blue2_8c}\index{bluepoint/block\+\_\+blue2.\+c@{bluepoint/block\+\_\+blue2.\+c}}
+{\ttfamily \#include \char`\"{}stdlib.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stdio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}string.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bluepoint2.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hs\+\_\+crypt.\+c\char`\"{}}\newline
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcentinel}{centinel}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{block__blue2_8c_abfae0751b37c27838de316a9e644021d}{D\+E\+F\+\_\+\+D\+U\+M\+P\+H\+EX}~1
+\item 
+\#define \hyperlink{block__blue2_8c_afcf795f5a96fd55561abe69f56224630}{B\+L\+O\+C\+K\+S\+I\+ZE}~1024
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{block__blue2_8c_af526355f72b6cec33051ff28a7971088}{sdump} (void $\ast$mem)
+\item 
+int \hyperlink{block__blue2_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcentinel}{centinel} \hyperlink{block__blue2_8c_a35fb1b7a8669f9c10da4d2947fbde2d1}{cent}
+\item 
+char \hyperlink{block__blue2_8c_a010542bf29e182284896c9c2f42e1387}{pass} \mbox{[}128\mbox{]} = \char`\"{}1234\char`\"{}
+\item 
+int \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}
+\item 
+int \hyperlink{block__blue2_8c_ad29d2259942853507dff3a3e3c05535a}{plen}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{block__blue2_8c_afcf795f5a96fd55561abe69f56224630}\label{block__blue2_8c_afcf795f5a96fd55561abe69f56224630}} 
+\index{block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}!B\+L\+O\+C\+K\+S\+I\+ZE@{B\+L\+O\+C\+K\+S\+I\+ZE}}
+\index{B\+L\+O\+C\+K\+S\+I\+ZE@{B\+L\+O\+C\+K\+S\+I\+ZE}!block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}}
+\subsubsection{\texorpdfstring{B\+L\+O\+C\+K\+S\+I\+ZE}{BLOCKSIZE}}
+{\footnotesize\ttfamily \#define B\+L\+O\+C\+K\+S\+I\+ZE~1024}
+
+\mbox{\Hypertarget{block__blue2_8c_abfae0751b37c27838de316a9e644021d}\label{block__blue2_8c_abfae0751b37c27838de316a9e644021d}} 
+\index{block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}!D\+E\+F\+\_\+\+D\+U\+M\+P\+H\+EX@{D\+E\+F\+\_\+\+D\+U\+M\+P\+H\+EX}}
+\index{D\+E\+F\+\_\+\+D\+U\+M\+P\+H\+EX@{D\+E\+F\+\_\+\+D\+U\+M\+P\+H\+EX}!block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}}
+\subsubsection{\texorpdfstring{D\+E\+F\+\_\+\+D\+U\+M\+P\+H\+EX}{DEF\_DUMPHEX}}
+{\footnotesize\ttfamily \#define D\+E\+F\+\_\+\+D\+U\+M\+P\+H\+EX~1}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{block__blue2_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{block__blue2_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}!main@{main}}
+\index{main@{main}!block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{block__blue2_8c_af526355f72b6cec33051ff28a7971088}\label{block__blue2_8c_af526355f72b6cec33051ff28a7971088}} 
+\index{block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}!sdump@{sdump}}
+\index{sdump@{sdump}!block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}}
+\subsubsection{\texorpdfstring{sdump()}{sdump()}}
+{\footnotesize\ttfamily int sdump (\begin{DoxyParamCaption}\item[{void $\ast$}]{mem }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{block__blue2_8c_a35fb1b7a8669f9c10da4d2947fbde2d1}\label{block__blue2_8c_a35fb1b7a8669f9c10da4d2947fbde2d1}} 
+\index{block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}!cent@{cent}}
+\index{cent@{cent}!block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}}
+\subsubsection{\texorpdfstring{cent}{cent}}
+{\footnotesize\ttfamily struct \hyperlink{structcentinel}{centinel}  cent}
+
+\mbox{\Hypertarget{block__blue2_8c_a010542bf29e182284896c9c2f42e1387}\label{block__blue2_8c_a010542bf29e182284896c9c2f42e1387}} 
+\index{block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}!pass@{pass}}
+\index{pass@{pass}!block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}}
+\subsubsection{\texorpdfstring{pass}{pass}}
+{\footnotesize\ttfamily char pass\mbox{[}128\mbox{]} = \char`\"{}1234\char`\"{}}
+
+\mbox{\Hypertarget{block__blue2_8c_ad29d2259942853507dff3a3e3c05535a}\label{block__blue2_8c_ad29d2259942853507dff3a3e3c05535a}} 
+\index{block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}!plen@{plen}}
+\index{plen@{plen}!block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}}
+\subsubsection{\texorpdfstring{plen}{plen}}
+{\footnotesize\ttfamily int plen}
+
+\mbox{\Hypertarget{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}\label{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}} 
+\index{block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}!slen@{slen}}
+\index{slen@{slen}!block\+\_\+blue2.\+c@{block\+\_\+blue2.\+c}}
+\subsubsection{\texorpdfstring{slen}{slen}}
+{\footnotesize\ttfamily int slen}
+

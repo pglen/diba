@@ -1,0 +1,77 @@
+\hypertarget{test__asym_8c}{}\section{tools/test\+\_\+asym.c File Reference}
+\label{test__asym_8c}\index{tools/test\+\_\+asym.\+c@{tools/test\+\_\+asym.\+c}}
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}gcrypt.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gcry.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}zmalloc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}getpass.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gsexp.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{test__asym_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{test__asym_8c_a8773c4e2c69c9a51a8b7708c6233d1bf}{usestr} \mbox{[}$\,$\mbox{]} = \char`\"{}test\+\_\+asym \mbox{[}options\mbox{]} keyfile\char`\"{}
+\item 
+\hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} \hyperlink{test__asym_8c_ad75e49d295005b3f5fffec85f24090d3}{opts\+\_\+data} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{test__asym_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{test__asym_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{test\+\_\+asym.\+c@{test\+\_\+asym.\+c}!main@{main}}
+\index{main@{main}!test\+\_\+asym.\+c@{test\+\_\+asym.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{test__asym_8c_ad75e49d295005b3f5fffec85f24090d3}\label{test__asym_8c_ad75e49d295005b3f5fffec85f24090d3}} 
+\index{test\+\_\+asym.\+c@{test\+\_\+asym.\+c}!opts\+\_\+data@{opts\+\_\+data}}
+\index{opts\+\_\+data@{opts\+\_\+data}!test\+\_\+asym.\+c@{test\+\_\+asym.\+c}}
+\subsubsection{\texorpdfstring{opts\+\_\+data}{opts\_data}}
+{\footnotesize\ttfamily \hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} opts\+\_\+data\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+                    \textcolor{charliteral}{'i'},  \textcolor{stringliteral}{"infile"},  NULL, infile,  0, 0, NULL, 
+                    \textcolor{stringliteral}{"-i <filename>  --infile <filename>     - input file name"},
+                    
+                    \textcolor{charliteral}{'o'},  \textcolor{stringliteral}{"outfile"},  NULL, outfile,  0, 0, NULL, 
+                    \textcolor{stringliteral}{"-o <filename>  --outfile <filename>    - output file name"},
+                   
+                    \textcolor{charliteral}{'p'},   \textcolor{stringliteral}{"pass"},   NULL,  thispass, 0, 0,    NULL, 
+                    \textcolor{stringliteral}{"-p             --pass                  - pass in for key (testing only)"},
+                    
+                    \textcolor{charliteral}{'k'},  \textcolor{stringliteral}{"keyfile"},  NULL, keyfile,  0, 0, NULL, 
+                    \textcolor{stringliteral}{"-k <filename>  --keyfile <filename>    - key file name"},
+
+                    \textcolor{charliteral}{'v'},   \textcolor{stringliteral}{"verbose"},  NULL, NULL,  0, 0, &\hyperlink{namespacedibagui_ab3f078684998b83967d507d0f453f454}{verbose}, 
+                    \textcolor{stringliteral}{"-v             --verbose               - Verbosity on"},
+                    
+                    \textcolor{charliteral}{'d'},   \textcolor{stringliteral}{"dump"},  NULL, NULL,  0, 0, &dump, 
+                    \textcolor{stringliteral}{"-d             --dump                  - Dump buffers"},
+                    
+                    \textcolor{charliteral}{'t'},   \textcolor{stringliteral}{"test"},  NULL,  NULL, 0, 0, &test, 
+                    \textcolor{stringliteral}{"-t             --test                  - test on"},
+                    
+                    \textcolor{charliteral}{'n'},   \textcolor{stringliteral}{"nocrypt"},  NULL,  NULL, 0, 0, &nocrypt, 
+                    \textcolor{stringliteral}{"-n             --nocrypt               - do not decypt private key"},
+                   
+                    \textcolor{charliteral}{'x'},   \textcolor{stringliteral}{"printpub"},  NULL,  NULL, 0, 0, &ppub, 
+                    \textcolor{stringliteral}{"-x             --printpub              - print public key"},
+                    
+                     0,     NULL,  NULL,   NULL,   0, 0,  NULL, NULL,
+                    \}
+\end{DoxyCode}
+\mbox{\Hypertarget{test__asym_8c_a8773c4e2c69c9a51a8b7708c6233d1bf}\label{test__asym_8c_a8773c4e2c69c9a51a8b7708c6233d1bf}} 
+\index{test\+\_\+asym.\+c@{test\+\_\+asym.\+c}!usestr@{usestr}}
+\index{usestr@{usestr}!test\+\_\+asym.\+c@{test\+\_\+asym.\+c}}
+\subsubsection{\texorpdfstring{usestr}{usestr}}
+{\footnotesize\ttfamily char usestr\mbox{[}$\,$\mbox{]} = \char`\"{}test\+\_\+asym \mbox{[}options\mbox{]} keyfile\char`\"{}}
+

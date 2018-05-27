@@ -1,0 +1,55 @@
+'This is a test. This is a test. This is a test.'
+   0   54-68-69-73  20-69-73-20  61-20-74-65  73-74-2e-20     This is a test. 
+  16   54-68-69-73  20-69-73-20  61-20-74-65  73-74-2e-20     This is a test. 
+  32   54-68-69-73  20-69-73-20  61-20-74-65  73-74-2e-00     This is a test..
+  48   20-54-68-69  73-20-69-73  20-61-20-74  65-73-74-2e      This is a test.
+  64   20-54-68-69  73-20-69-73  20-61-20-74  65-73-74-2e      This is a test.
+  80   20-0a-54-68  69-73-20-69  73-20-61-20  74-65-73-74      .This is a test
+  96   2e-20-54-68  69-73-20-69  73-20-61-20  74-65-73-74     . This is a test
+ 112   2e-20-54-68  69-73-20-69  73-20-61-20  74-65-73-74     . This is a test
+ 128   2e-20-54-68  69-73-20-69  73-20-61-20  74-65-73-74     . This is a test
+ 144   2e-20-54-68  69-73-20-69  73-20-61-20  74-65-73-74     . This is a test
+ 160   2e-20-0a-54  68-69-73-20  69-73-20-61  20-74-65-73     . .This is a tes
+ 176   74-2e-20-54  68-69-73-20  69-73-20-61  20-74-65-73     t. This is a tes
+ 192   74-2e-20-54  68-69-73-20  69-73-20-61  20-74-65-73     t. This is a tes
+ 208   74-2e-20-54  68-69-73-20  69-73-20-61  20-74-65-73     t. This is a tes
+ 224   74-2e-20-54  68-69-73-20  69-73-20-61  20-74-65-73     t. This is a tes
+ 240   74-2e-20-0a  54-68-69-73  20-69-73-20  61-20-74-65     t. .This is a te
+ 256   73-74-2e-20  54-68-69-73  20-69-73-20  61-20-74-65     st. This is a te
+ 272   73-74-2e-20  54-68-69-73  20-69-73-20  61-20-74-65     st. This is a te
+ 288   73-74-2e-20  54-68-69-73  20-69-73-20  61-20-74-65     st. This is a te
+ 304   73-74-2e-20  54-68-69-73  20-69-73-20  61-20-74-65     st. This is a te
+ 320   73-74-2e-20  0a-00-                                st. ..          
+End
+'VGhpcyBpcyBhIHRlc3QuIFRoaXMgaXMgYSB0ZXN0LiBUaGlzIGlzIGEgdGVzdC4A
+IFRoaXMgaXMgYSB0ZXN0LiBUaGlzIGlzIGEgdGVzdC4gClRoaXMgaXMgYSB0ZXN0
+LiBUaGlzIGlzIGEgdGVzdC4gVGhpcyBpcyBhIHRlc3QuIFRoaXMgaXMgYSB0ZXN0
+LiBUaGlzIGlzIGEgdGVzdC4gClRoaXMgaXMgYSB0ZXN0LiBUaGlzIGlzIGEgdGVz
+dC4gVGhpcyBpcyBhIHRlc3QuIFRoaXMgaXMgYSB0ZXN0LiBUaGlzIGlzIGEgdGVz
+dC4gClRoaXMgaXMgYSB0ZXN0LiBUaGlzIGlzIGEgdGVzdC4gVGhpcyBpcyBhIHRl
+c3QuIFRoaXMgaXMgYSB0ZXN0LiBUaGlzIGlzIGEgdGVzdC4gCgA='
+Test file boolean 0
+'This is a test. This is a test. This is a test.'
+   0   54-68-69-73  20-69-73-20  61-20-74-65  73-74-2e-20     This is a test. 
+  16   54-68-69-73  20-69-73-20  61-20-74-65  73-74-2e-20     This is a test. 
+  32   54-68-69-73  20-69-73-20  61-20-74-65  73-74-2e-00     This is a test..
+  48   20-54-68-69  73-20-69-73  20-61-20-74  65-73-74-2e      This is a test.
+  64   20-54-68-69  73-20-69-73  20-61-20-74  65-73-74-2e      This is a test.
+  80   20-0a-54-68  69-73-20-69  73-20-61-20  74-65-73-74      .This is a test
+  96   2e-20-54-68  69-73-20-69  73-20-61-20  74-65-73-74     . This is a test
+ 112   2e-20-54-68  69-73-20-69  73-20-61-20  74-65-73-74     . This is a test
+ 128   2e-20-54-68  69-73-20-69  73-20-61-20  74-65-73-74     . This is a test
+ 144   2e-20-54-68  69-73-20-69  73-20-61-20  74-65-73-74     . This is a test
+ 160   2e-20-0a-54  68-69-73-20  69-73-20-61  20-74-65-73     . .This is a tes
+ 176   74-2e-20-54  68-69-73-20  69-73-20-61  20-74-65-73     t. This is a tes
+ 192   74-2e-20-54  68-69-73-20  69-73-20-61  20-74-65-73     t. This is a tes
+ 208   74-2e-20-54  68-69-73-20  69-73-20-61  20-74-65-73     t. This is a tes
+ 224   74-2e-20-54  68-69-73-20  69-73-20-61  20-74-65-73     t. This is a tes
+ 240   74-2e-20-0a  54-68-69-73  20-69-73-20  61-20-74-65     t. .This is a te
+ 256   73-74-2e-20  54-68-69-73  20-69-73-20  61-20-74-65     st. This is a te
+ 272   73-74-2e-20  54-68-69-73  20-69-73-20  61-20-74-65     st. This is a te
+ 288   73-74-2e-20  54-68-69-73  20-69-73-20  61-20-74-65     st. This is a te
+ 304   73-74-2e-20  54-68-69-73  20-69-73-20  61-20-74-65     st. This is a te
+ 320   73-74-2e-20  0a-00-                                st. ..          
+End
+Test boolean 0

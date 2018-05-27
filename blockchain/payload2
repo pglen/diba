@@ -1,0 +1,2037 @@
+
+
+
+/* =====[ gsexp.c ]=========================================================
+
+   Description:     Sexp routines.
+
+   Revisions:
+
+      REV   DATE            BY              DESCRIPTION
+      ----  -----------     ----------      ------------------------------
+      0.00  aug.03.2017     Peter Glen      Initial version.
+      0.00  oct.20.2017     Peter Glen      Work 
+
+   ======================================================================= */
+
+#include <stdio.h>
+
+#include "gcrypt.h"
+#include "gcry.h"
+#include "gsexp.h"
+#include "zmalloc.h"
+#include "misc.h"
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to memory
+// Free the resulting pointer with zfree
+
+char *sexp_sprint(gcry_sexp_t sexp, int *len, int format)
+
+{
+    int slen = gcry_sexp_sprint(sexp, format, NULL, 0);
+    *len = 0;
+    zline2(__LINE__, __FILE__);
+    char *ppp = (char*)zalloc(slen+1);
+    if(ppp == NULL)
+        return NULL;
+
+    gcry_sexp_sprint(sexp, format, ppp, slen);
+    *len = slen;
+    // Zero terminate
+    ppp[slen-1] = '\0';
+    return(ppp);
+}
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to stdout
+
+void    sexp_print(gcry_sexp_t rsa_keypair)
+
+{
+    int len;
+    char *ppp = sexp_sprint(rsa_keypair, &len, GCRYSEXP_FMT_ADVANCED);
+    if(ppp == NULL)
+        return;
+    printf("%s\n", ppp);
+    zfree(ppp);
+}
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+
+
+
+/* =====[ gsexp.c ]=========================================================
+
+   Description:     Sexp routines.
+
+   Revisions:
+
+      REV   DATE            BY              DESCRIPTION
+      ----  -----------     ----------      ------------------------------
+      0.00  aug.03.2017     Peter Glen      Initial version.
+      0.00  oct.20.2017     Peter Glen      Work 
+
+   ======================================================================= */
+
+#include <stdio.h>
+
+#include "gcrypt.h"
+#include "gcry.h"
+#include "gsexp.h"
+#include "zmalloc.h"
+#include "misc.h"
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to memory
+// Free the resulting pointer with zfree
+
+char *sexp_sprint(gcry_sexp_t sexp, int *len, int format)
+
+{
+    int slen = gcry_sexp_sprint(sexp, format, NULL, 0);
+    *len = 0;
+    zline2(__LINE__, __FILE__);
+    char *ppp = (char*)zalloc(slen+1);
+    if(ppp == NULL)
+        return NULL;
+
+    gcry_sexp_sprint(sexp, format, ppp, slen);
+    *len = slen;
+    // Zero terminate
+    ppp[slen-1] = '\0';
+    return(ppp);
+}
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to stdout
+
+void    sexp_print(gcry_sexp_t rsa_keypair)
+
+{
+    int len;
+    char *ppp = sexp_sprint(rsa_keypair, &len, GCRYSEXP_FMT_ADVANCED);
+    if(ppp == NULL)
+        return;
+    printf("%s\n", ppp);
+    zfree(ppp);
+}
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+
+
+
+/* =====[ gsexp.c ]=========================================================
+
+   Description:     Sexp routines.
+
+   Revisions:
+
+      REV   DATE            BY              DESCRIPTION
+      ----  -----------     ----------      ------------------------------
+      0.00  aug.03.2017     Peter Glen      Initial version.
+      0.00  oct.20.2017     Peter Glen      Work 
+
+   ======================================================================= */
+
+#include <stdio.h>
+
+#include "gcrypt.h"
+#include "gcry.h"
+#include "gsexp.h"
+#include "zmalloc.h"
+#include "misc.h"
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to memory
+// Free the resulting pointer with zfree
+
+char *sexp_sprint(gcry_sexp_t sexp, int *len, int format)
+
+{
+    int slen = gcry_sexp_sprint(sexp, format, NULL, 0);
+    *len = 0;
+    zline2(__LINE__, __FILE__);
+    char *ppp = (char*)zalloc(slen+1);
+    if(ppp == NULL)
+        return NULL;
+
+    gcry_sexp_sprint(sexp, format, ppp, slen);
+    *len = slen;
+    // Zero terminate
+    ppp[slen-1] = '\0';
+    return(ppp);
+}
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to stdout
+
+void    sexp_print(gcry_sexp_t rsa_keypair)
+
+{
+    int len;
+    char *ppp = sexp_sprint(rsa_keypair, &len, GCRYSEXP_FMT_ADVANCED);
+    if(ppp == NULL)
+        return;
+    printf("%s\n", ppp);
+    zfree(ppp);
+}
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+
+
+
+/* =====[ gsexp.c ]=========================================================
+
+   Description:     Sexp routines.
+
+   Revisions:
+
+      REV   DATE            BY              DESCRIPTION
+      ----  -----------     ----------      ------------------------------
+      0.00  aug.03.2017     Peter Glen      Initial version.
+      0.00  oct.20.2017     Peter Glen      Work 
+
+   ======================================================================= */
+
+#include <stdio.h>
+
+#include "gcrypt.h"
+#include "gcry.h"
+#include "gsexp.h"
+#include "zmalloc.h"
+#include "misc.h"
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to memory
+// Free the resulting pointer with zfree
+
+char *sexp_sprint(gcry_sexp_t sexp, int *len, int format)
+
+{
+    int slen = gcry_sexp_sprint(sexp, format, NULL, 0);
+    *len = 0;
+    zline2(__LINE__, __FILE__);
+    char *ppp = (char*)zalloc(slen+1);
+    if(ppp == NULL)
+        return NULL;
+
+    gcry_sexp_sprint(sexp, format, ppp, slen);
+    *len = slen;
+    // Zero terminate
+    ppp[slen-1] = '\0';
+    return(ppp);
+}
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to stdout
+
+void    sexp_print(gcry_sexp_t rsa_keypair)
+
+{
+    int len;
+    char *ppp = sexp_sprint(rsa_keypair, &len, GCRYSEXP_FMT_ADVANCED);
+    if(ppp == NULL)
+        return;
+    printf("%s\n", ppp);
+    zfree(ppp);
+}
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+
+
+
+/* =====[ gsexp.c ]=========================================================
+
+   Description:     Sexp routines.
+
+   Revisions:
+
+      REV   DATE            BY              DESCRIPTION
+      ----  -----------     ----------      ------------------------------
+      0.00  aug.03.2017     Peter Glen      Initial version.
+      0.00  oct.20.2017     Peter Glen      Work 
+
+   ======================================================================= */
+
+#include <stdio.h>
+
+#include "gcrypt.h"
+#include "gcry.h"
+#include "gsexp.h"
+#include "zmalloc.h"
+#include "misc.h"
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to memory
+// Free the resulting pointer with zfree
+
+char *sexp_sprint(gcry_sexp_t sexp, int *len, int format)
+
+{
+    int slen = gcry_sexp_sprint(sexp, format, NULL, 0);
+    *len = 0;
+    zline2(__LINE__, __FILE__);
+    char *ppp = (char*)zalloc(slen+1);
+    if(ppp == NULL)
+        return NULL;
+
+    gcry_sexp_sprint(sexp, format, ppp, slen);
+    *len = slen;
+    // Zero terminate
+    ppp[slen-1] = '\0';
+    return(ppp);
+}
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to stdout
+
+void    sexp_print(gcry_sexp_t rsa_keypair)
+
+{
+    int len;
+    char *ppp = sexp_sprint(rsa_keypair, &len, GCRYSEXP_FMT_ADVANCED);
+    if(ppp == NULL)
+        return;
+    printf("%s\n", ppp);
+    zfree(ppp);
+}
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+
+
+
+
+
+
+/* =====[ gsexp.c ]=========================================================
+
+   Description:     Sexp routines.
+
+   Revisions:
+
+      REV   DATE            BY              DESCRIPTION
+      ----  -----------     ----------      ------------------------------
+      0.00  aug.03.2017     Peter Glen      Initial version.
+      0.00  oct.20.2017     Peter Glen      Work 
+
+   ======================================================================= */
+
+#include <stdio.h>
+
+#include "gcrypt.h"
+#include "gcry.h"
+#include "gsexp.h"
+#include "zmalloc.h"
+#include "misc.h"
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to memory
+// Free the resulting pointer with zfree
+
+char *sexp_sprint(gcry_sexp_t sexp, int *len, int format)
+
+{
+    int slen = gcry_sexp_sprint(sexp, format, NULL, 0);
+    *len = 0;
+    zline2(__LINE__, __FILE__);
+    char *ppp = (char*)zalloc(slen+1);
+    if(ppp == NULL)
+        return NULL;
+
+    gcry_sexp_sprint(sexp, format, ppp, slen);
+    *len = slen;
+    // Zero terminate
+    ppp[slen-1] = '\0';
+    return(ppp);
+}
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to stdout
+
+void    sexp_print(gcry_sexp_t rsa_keypair)
+
+{
+    int len;
+    char *ppp = sexp_sprint(rsa_keypair, &len, GCRYSEXP_FMT_ADVANCED);
+    if(ppp == NULL)
+        return;
+    printf("%s\n", ppp);
+    zfree(ppp);
+}
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+
+
+
+/* =====[ gsexp.c ]=========================================================
+
+   Description:     Sexp routines.
+
+   Revisions:
+
+      REV   DATE            BY              DESCRIPTION
+      ----  -----------     ----------      ------------------------------
+      0.00  aug.03.2017     Peter Glen      Initial version.
+      0.00  oct.20.2017     Peter Glen      Work 
+
+   ======================================================================= */
+
+#include <stdio.h>
+
+#include "gcrypt.h"
+#include "gcry.h"
+#include "gsexp.h"
+#include "zmalloc.h"
+#include "misc.h"
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to memory
+// Free the resulting pointer with zfree
+
+char *sexp_sprint(gcry_sexp_t sexp, int *len, int format)
+
+{
+    int slen = gcry_sexp_sprint(sexp, format, NULL, 0);
+    *len = 0;
+    zline2(__LINE__, __FILE__);
+    char *ppp = (char*)zalloc(slen+1);
+    if(ppp == NULL)
+        return NULL;
+
+    gcry_sexp_sprint(sexp, format, ppp, slen);
+    *len = slen;
+    // Zero terminate
+    ppp[slen-1] = '\0';
+    return(ppp);
+}
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to stdout
+
+void    sexp_print(gcry_sexp_t rsa_keypair)
+
+{
+    int len;
+    char *ppp = sexp_sprint(rsa_keypair, &len, GCRYSEXP_FMT_ADVANCED);
+    if(ppp == NULL)
+        return;
+    printf("%s\n", ppp);
+    zfree(ppp);
+}
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+
+
+
+/* =====[ gsexp.c ]=========================================================
+
+   Description:     Sexp routines.
+
+   Revisions:
+
+      REV   DATE            BY              DESCRIPTION
+      ----  -----------     ----------      ------------------------------
+      0.00  aug.03.2017     Peter Glen      Initial version.
+      0.00  oct.20.2017     Peter Glen      Work 
+
+   ======================================================================= */
+
+#include <stdio.h>
+
+#include "gcrypt.h"
+#include "gcry.h"
+#include "gsexp.h"
+#include "zmalloc.h"
+#include "misc.h"
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to memory
+// Free the resulting pointer with zfree
+
+char *sexp_sprint(gcry_sexp_t sexp, int *len, int format)
+
+{
+    int slen = gcry_sexp_sprint(sexp, format, NULL, 0);
+    *len = 0;
+    zline2(__LINE__, __FILE__);
+    char *ppp = (char*)zalloc(slen+1);
+    if(ppp == NULL)
+        return NULL;
+
+    gcry_sexp_sprint(sexp, format, ppp, slen);
+    *len = slen;
+    // Zero terminate
+    ppp[slen-1] = '\0';
+    return(ppp);
+}
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to stdout
+
+void    sexp_print(gcry_sexp_t rsa_keypair)
+
+{
+    int len;
+    char *ppp = sexp_sprint(rsa_keypair, &len, GCRYSEXP_FMT_ADVANCED);
+    if(ppp == NULL)
+        return;
+    printf("%s\n", ppp);
+    zfree(ppp);
+}
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+
+
+
+/* =====[ gsexp.c ]=========================================================
+
+   Description:     Sexp routines.
+
+   Revisions:
+
+      REV   DATE            BY              DESCRIPTION
+      ----  -----------     ----------      ------------------------------
+      0.00  aug.03.2017     Peter Glen      Initial version.
+      0.00  oct.20.2017     Peter Glen      Work 
+
+   ======================================================================= */
+
+#include <stdio.h>
+
+#include "gcrypt.h"
+#include "gcry.h"
+#include "gsexp.h"
+#include "zmalloc.h"
+#include "misc.h"
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to memory
+// Free the resulting pointer with zfree
+
+char *sexp_sprint(gcry_sexp_t sexp, int *len, int format)
+
+{
+    int slen = gcry_sexp_sprint(sexp, format, NULL, 0);
+    *len = 0;
+    zline2(__LINE__, __FILE__);
+    char *ppp = (char*)zalloc(slen+1);
+    if(ppp == NULL)
+        return NULL;
+
+    gcry_sexp_sprint(sexp, format, ppp, slen);
+    *len = slen;
+    // Zero terminate
+    ppp[slen-1] = '\0';
+    return(ppp);
+}
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to stdout
+
+void    sexp_print(gcry_sexp_t rsa_keypair)
+
+{
+    int len;
+    char *ppp = sexp_sprint(rsa_keypair, &len, GCRYSEXP_FMT_ADVANCED);
+    if(ppp == NULL)
+        return;
+    printf("%s\n", ppp);
+    zfree(ppp);
+}
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+char    *stack[12];
+int     depth = 0;
+
+static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
+
+{
+    char *ret = NULL;
+    int  onelen = gcry_sexp_length(list);
+
+    //printf( "one: %d\n", onelen);
+    sexp_print(list);
+    
+    for(int loop = 0; loop < onelen; loop++)
+        {
+        int len;
+        const char *data = gcry_sexp_nth_data(list, loop, &len);
+        if(data == NULL)
+            {
+            gcry_sexp_t element = gcry_sexp_nth(list, loop);
+            if(element)
+                {
+                int len3;
+                const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
+                //printf("element: '%.*s'\n", len3, data3);
+                char *memx = zalloc(len3 + 1);
+                memcpy(memx, data3, len3);
+                memx[len3] = '\0'; 
+                stack[depth] = memx;  
+                // We know it is going to be 3 at max
+                if(depth < 12)
+                    depth++;
+                ret = sexp_decode_one(element, plen, findstr);
+                if(ret)
+                    break;
+                }
+            }
+        else
+            {
+            //printf("data: %d '%.*s'\n", loop, len, data);
+
+            int len2;
+            if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
+                {
+                const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
+                if(data2)
+                    {
+                    //printf("'/");
+                    for(int loop3 = 0; loop3 < depth; loop3++)
+                        printf("/%s", stack[loop3]);
+                    printf("'");
+    
+                    if(is_bin(data2, len2))
+                        {
+                        int olen;
+                        zline2(__LINE__, __FILE__);
+                        char *mem2 = dohex(data2, len2, &olen);
+                        printf(" #%s#\n", mem2); 
+                        zfree(mem2);
+                        }
+                    else
+                        {
+                        printf(" '%.*s'\n", len2, data2);
+                        }
+                    zline2(__LINE__, __FILE__);
+                    ret =  zalloc(len2 + 1);
+                    memcpy(ret, data2, len2);
+                    ret[len2] = '\0'; 
+                    *plen = len2; 
+                    break;
+                    }
+                }
+            }
+        } 
+    if(depth)
+        zfree(stack[depth-1]); 
+    depth--;
+    return ret;
+}
+
+
+
+
+
+/* =====[ gsexp.c ]=========================================================
+
+   Description:     Sexp routines.
+
+   Revisions:
+
+      REV   DATE            BY              DESCRIPTION
+      ----  -----------     ----------      ------------------------------
+      0.00  aug.03.2017     Peter Glen      Initial version.
+      0.00  oct.20.2017     Peter Glen      Work 
+
+   ======================================================================= */
+
+#include <stdio.h>
+
+#include "gcrypt.h"
+#include "gcry.h"
+#include "gsexp.h"
+#include "zmalloc.h"
+#include "misc.h"
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to memory
+// Free the resulting pointer with zfree
+
+char *sexp_sprint(gcry_sexp_t sexp, int *len, int format)
+
+{
+    int slen = gcry_sexp_sprint(sexp, format, NULL, 0);
+    *len = 0;
+    zline2(__LINE__, __FILE__);
+    char *ppp = (char*)zalloc(slen+1);
+    if(ppp == NULL)
+        return NULL;
+
+    gcry_sexp_sprint(sexp, format, ppp, slen);
+    *len = slen;
+    // Zero terminate
+    ppp[slen-1] = '\0';
+    return(ppp);
+}
+
+//////////////////////////////////////////////////////////////////////////
+// Print sexp to stdout
+
+void    sexp_print(gcry_sexp_t rsa_keypair)
+
+{
+    int len;
+    char *ppp = sexp_sprint(rsa_keypair, &len, GCRYSEXP_FMT_ADVANCED);
+    if(ppp == NULL)
+        return;
+    printf("%s\n", ppp);
+    zfree(ppp);
+}
+
+char    *stack[12];
+int     depth = 0;
+
+

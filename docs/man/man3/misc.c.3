@@ -1,0 +1,118 @@
+.TH "tools/misc.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tools/misc.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stddef\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <signal\&.h>\fP
+.br
+\fC#include 'misc\&.h'\fP
+.br
+\fC#include 'zmalloc\&.h'\fP
+.br
+\fC#include 'getpass\&.h'\fP
+.br
+\fC#include 'base64\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBalloc_rand_amount\fP ()"
+.br
+.ti -1c
+.RI "void \fBrand_seed\fP ()"
+.br
+.ti -1c
+.RI "unsigned int \fBgetfsize\fP (FILE *fp)"
+.br
+.ti -1c
+.RI "char * \fBbase_and_lim\fP (const char *mem, int len, int *olen)"
+.br
+.ti -1c
+.RI "char * \fBzusername\fP ()"
+.br
+.ti -1c
+.RI "char * \fBzhostname\fP ()"
+.br
+.ti -1c
+.RI "char * \fBzdatestr\fP ()"
+.br
+.ti -1c
+.RI "char * \fBtobase64\fP (char *mem, int *len)"
+.br
+.ti -1c
+.RI "char * \fBzstrcat\fP (const char *str1, const char *\fBstr2\fP)"
+.br
+.ti -1c
+.RI "char * \fBzstrdup\fP (const char *str1, int maxsize)"
+.br
+.ti -1c
+.RI "int \fBnum_bits_set\fP (unsigned int ks)"
+.br
+.ti -1c
+.RI "char * \fBpass_fromfile\fP (const char *thispass, char **err_str)"
+.br
+.ti -1c
+.RI "int \fBprint_mem\fP (char *mem, int len)"
+.br
+.ti -1c
+.RI "void \fBdump_mem\fP (const char *ptr, int len)"
+.br
+.ti -1c
+.RI "char * \fBdohex\fP (char *mem, int len, int *olen)"
+.br
+.ti -1c
+.RI "char * \fBdounhex\fP (char *mem, int len, int *olen)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "char* alloc_rand_amount ()"
+
+.SS "char * base_and_lim (const char * mem, int len, int * olen)"
+
+.SS "char* dohex (char * mem, int len, int * olen)"
+
+.SS "char* dounhex (char * mem, int len, int * olen)"
+
+.SS "void dump_mem (const char * ptr, int len)"
+
+.SS "unsigned int getfsize (FILE * fp)"
+
+.SS "int num_bits_set (unsigned int ks)"
+
+.SS "char* pass_fromfile (const char * thispass, char ** err_str)"
+
+.SS "int print_mem (char * mem, int len)"
+
+.SS "void rand_seed ()"
+
+.SS "char* tobase64 (char * mem, int * len)"
+
+.SS "char* zdatestr ()"
+
+.SS "char* zhostname ()"
+
+.SS "char* zstrcat (const char * str1, const char * str2)"
+
+.SS "char* zstrdup (const char * str1, int maxsize)"
+
+.SS "char* zusername ()"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

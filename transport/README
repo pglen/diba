@@ -1,0 +1,105 @@
+README
+
+  These are encryption / decryption routines for the DIBA project.
+  
+  They can be used as standalone tools for:
+  
+        key generation / encryption / decryption.
+
+FILES
+
+    dibakeygen     --      Key generator.
+    dibakeyinfo    --      Key report tool. Mostly used for check / list keys. 
+    dibaencrypt    --      Asymmetric encryption with public key.
+    dibadecrypt    --      Asymmetric decryption with private key.
+    
+ Encryption:
+    
+    dibaencrypt.exe -i infile.txt -o outfile.enc testkey.pub  
+        
+ Decryption: 
+            
+dibaecrypt.exe -i infile.enc -o outfile.dec -p password_for_key testkey.key 
+    
+Full cycle can be achived thrugh pipe: (-r option)
+
+    dibaencrypt.exe -i infile.txt -o outfile.enc testkey.pub | \
+        dibadecrypt.exe -r -p password_for_key testkey.key
+        
+    Make sure you account for stdin / stdout CRLF conversion.
+       (use diff -w to test)
+            
+ See Makefile for typical usage examples. Follow the tests make path to see
+frequent useage. The programs will print basic usage information on request.
+
+BUILD
+
+ All the files are built on Windows using MSYS and MinGW. The files should
+build on linux and variants with little modification.
+ 
+PREP
+
+ Build the glibcrypt library first. This project will look for the built
+libs and includes in the .lib subdir under the original build directories.
+This allows installation-less build. (for test and experimentation)
+Then build the tools subdirectory. 
+
+Make sure you update references when building new library versions.
+
+NOTABLES
+
+  I made a small malloc subsystem. It can be used to detect leaks very easily.
+Use zalloc() like you would use malloc(). If you make an alloc mistake, this 
+malloc gently prints a string like:
+
+    zmalloc: Memory leak on gcry.c at line 711 (0x010A1178)    
+    
+  Also created a base64 encode / decode subsystem. See headers and source 
+for more info.
+
+FILE FORMAT
+
+ The output format of the encrypted file is base64 line aligned to 64 char
+length. The header and trailer line contains the DIBA string delimiter.
+
+"-----BEGIN DIGIBANK RSA CIPHER-----" etc ...
+
+  Under the hood the file is in chunks, determined by the key size.
+The chunk starts with a two byte length, 4 byte random sequence and data 
+follows. The next chunk start is calculated from the length of the current 
+chunk. 
+
+Like this:
+
+    LEN LEN RAND RAND RAND RAND DATA ..... DATA  LEN LEN DATA ....
+    |--------------------------------------------|
+    
+ This is a very simple way to produce a cipher that is never 
+the same twice. It is also one of the simplest way to adapt tho the 
+variable length output of the asymmetric encryption.    
+
+  The first two chunks are the sha hash and the public key ID. These fields
+have utility value. The sha hash allows one to detect data corruption / 
+tempering, the key ID allows for automatic key selection.
+  
+Te resulting buffer is encrypted with the bluepoint encryption. As that 
+algorythm shuffles all bits, the cipertext is super random looking.
+
+TESTING
+
+ 'make tests' will build the needed files and execute a diff on generated 
+outputs. It is comparing them with expected output of the original files. 
+Test passes if the diffs are silent.
+
+FEEDBACK
+
+This code is being developed for a larger project. However, taming the library
+and creating a transport layer  is a common task, so I shared it ...
+
+peterglen99@gmail.com
+
+            
+
+
+
+

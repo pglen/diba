@@ -1,0 +1,69 @@
+.TH "tools/getpass.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tools/getpass.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <conio\&.h>\fP
+.br
+\fC#include 'getpass\&.h'\fP
+.br
+\fC#include 'zmalloc\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBTRUE\fP   (1==1)"
+.br
+.ti -1c
+.RI "#define \fBFALSE\fP   (1!=1)"
+.br
+.ti -1c
+.RI "#define \fBCRTL_C\fP   '\\3'"
+.br
+.ti -1c
+.RI "#define \fBCRTL_D\fP   '\\4'"
+.br
+.ti -1c
+.RI "#define \fBBACKSPACE\fP   '\\b'"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBgetpass\fP (const char *prompt, char *passptr, int maxlen)"
+.br
+.ti -1c
+.RI "int \fBgetpass2\fP (\fBgetpassx\fP *passx)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define BACKSPACE   '\\b'"
+
+.SS "#define CRTL_C   '\\3'"
+
+.SS "#define CRTL_D   '\\4'"
+
+.SS "#define FALSE   (1!=1)"
+
+.SS "#define TRUE   (1==1)"
+
+.SH "Function Documentation"
+.PP 
+.SS "int getpass (const char * prompt, char * passptr, int maxlen)"
+
+.SS "int getpass2 (\fBgetpassx\fP * passx)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

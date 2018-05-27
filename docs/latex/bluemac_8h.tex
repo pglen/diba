@@ -1,0 +1,248 @@
+\hypertarget{bluemac_8h}{}\section{bluepoint/bluemac.h File Reference}
+\label{bluemac_8h}\index{bluepoint/bluemac.\+h@{bluepoint/bluemac.\+h}}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{bluemac_8h_ab6ab781cfbd88c6f4120221e703acfad}{H\+E\+C\+T\+OR}(op)
+\item 
+\#define \hyperlink{bluemac_8h_a47ed7587ea460ce5f91ed0837b09ccf8}{P\+A\+S\+S\+L\+O\+OP}(op)
+\item 
+\#define \hyperlink{bluemac_8h_acc566cc5b2d210cfbfce7b5480a37d47}{F\+W\+L\+O\+OP}(op)
+\item 
+\#define \hyperlink{bluemac_8h_ad0f6e269371fdde07d612c3170169ce1}{F\+W\+L\+O\+O\+P2}(op)
+\item 
+\#define \hyperlink{bluemac_8h_a487da5698ee0a5338585692bb63398c0}{B\+W\+L\+O\+OP}(op)
+\item 
+\#define \hyperlink{bluemac_8h_a75e8d24f4a7c1975f8c37c0d1cc34bf4}{B\+W\+L\+O\+O\+P2}(op)
+\item 
+\#define \hyperlink{bluemac_8h_a27b4d30240a99a8f5d573a50ebbc783b}{M\+I\+X\+IT}(op)
+\item 
+\#define \hyperlink{bluemac_8h_a8624e1b63029db8de2413474545c0a49}{M\+I\+X\+I\+TR}(op)
+\item 
+\#define \hyperlink{bluemac_8h_a3e3de62193701889a715b70ce296ab35}{M\+I\+X\+I\+T2}(op)
+\item 
+\#define \hyperlink{bluemac_8h_a576bb5534f7218fbd1a7642e9ad18014}{M\+I\+X\+I\+T2R}(op)
+\item 
+\#define \hyperlink{bluemac_8h_ad54b6f49452822dc2e66a1ed55b1df62}{M\+I\+X\+I\+T4}(op)
+\item 
+\#define \hyperlink{bluemac_8h_a000e2b7c3022328cbeef38cd9eb78c36}{T\+R\+I\+L\+O\+OP}(op)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{bluemac_8h_a487da5698ee0a5338585692bb63398c0}\label{bluemac_8h_a487da5698ee0a5338585692bb63398c0}} 
+\index{bluemac.\+h@{bluemac.\+h}!B\+W\+L\+O\+OP@{B\+W\+L\+O\+OP}}
+\index{B\+W\+L\+O\+OP@{B\+W\+L\+O\+OP}!bluemac.\+h@{bluemac.\+h}}
+\subsubsection{\texorpdfstring{B\+W\+L\+O\+OP}{BWLOOP}}
+{\footnotesize\ttfamily \#define B\+W\+L\+O\+OP(\begin{DoxyParamCaption}\item[{}]{op }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+bb = 0;                                         \(\backslash\)
+    for (loop = \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}-1; loop >= 0; loop--)          \(\backslash\)
+        \{                                           \(\backslash\)
+        aa = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop];                             \(\backslash\)
+        aa ^= \hyperlink{bluepoint2_8c_a49e4ae320e62711855794c2243a4f505}{backward};                             \(\backslash\)
+        aa = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa} op \hyperlink{bluepoint2_8c_a38d0261d170331691108d9caa02a8d73}{addend};                          \(\backslash\)
+        aa = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa} op bb;                              \(\backslash\)
+        bb = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                                    \(\backslash\)
+        str[loop] = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                             \(\backslash\)
+        \}                                           \(\backslash\)
+\end{DoxyCode}
+\mbox{\Hypertarget{bluemac_8h_a75e8d24f4a7c1975f8c37c0d1cc34bf4}\label{bluemac_8h_a75e8d24f4a7c1975f8c37c0d1cc34bf4}} 
+\index{bluemac.\+h@{bluemac.\+h}!B\+W\+L\+O\+O\+P2@{B\+W\+L\+O\+O\+P2}}
+\index{B\+W\+L\+O\+O\+P2@{B\+W\+L\+O\+O\+P2}!bluemac.\+h@{bluemac.\+h}}
+\subsubsection{\texorpdfstring{B\+W\+L\+O\+O\+P2}{BWLOOP2}}
+{\footnotesize\ttfamily \#define B\+W\+L\+O\+O\+P2(\begin{DoxyParamCaption}\item[{}]{op }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+cc = 0;                                         \(\backslash\)
+    for (loop = \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}-1; loop >= 0; loop--)          \(\backslash\)
+        \{                                           \(\backslash\)
+        bb = cc;                                    \(\backslash\)
+        aa = cc = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop];                        \(\backslash\)
+                                                    \(\backslash\)
+        aa = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa} op bb;                              \(\backslash\)
+        aa = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa} op \hyperlink{bluepoint2_8c_a38d0261d170331691108d9caa02a8d73}{addend};                          \(\backslash\)
+        aa ^= \hyperlink{bluepoint2_8c_a49e4ae320e62711855794c2243a4f505}{backward};                             \(\backslash\)
+        str[loop] = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                             \(\backslash\)
+        \}                                           \(\backslash\)
+\end{DoxyCode}
+\mbox{\Hypertarget{bluemac_8h_acc566cc5b2d210cfbfce7b5480a37d47}\label{bluemac_8h_acc566cc5b2d210cfbfce7b5480a37d47}} 
+\index{bluemac.\+h@{bluemac.\+h}!F\+W\+L\+O\+OP@{F\+W\+L\+O\+OP}}
+\index{F\+W\+L\+O\+OP@{F\+W\+L\+O\+OP}!bluemac.\+h@{bluemac.\+h}}
+\subsubsection{\texorpdfstring{F\+W\+L\+O\+OP}{FWLOOP}}
+{\footnotesize\ttfamily \#define F\+W\+L\+O\+OP(\begin{DoxyParamCaption}\item[{}]{op }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+bb = 0;                                         \(\backslash\)
+    for (loop = 0; loop < \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}; loop++)             \(\backslash\)
+        \{                                           \(\backslash\)
+        aa = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop];                             \(\backslash\)
+        aa ^= \hyperlink{bluepoint2_8c_a51b863de129a3ec47a907683c33458d7}{forward};                              \(\backslash\)
+        aa  += \hyperlink{bluepoint2_8c_a38d0261d170331691108d9caa02a8d73}{addend};                              \(\backslash\)
+        aa  += bb;                                  \(\backslash\)
+        aa = \hyperlink{bluepoint2_8c_aebfc1d9410369473afcb6d7752e6140f}{ROTATE\_CHAR\_RIGHT}(\hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa}, 3);              \(\backslash\)
+        bb = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                                    \(\backslash\)
+        str[loop] = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                             \(\backslash\)
+        \}                                           \(\backslash\)
+\end{DoxyCode}
+\mbox{\Hypertarget{bluemac_8h_ad0f6e269371fdde07d612c3170169ce1}\label{bluemac_8h_ad0f6e269371fdde07d612c3170169ce1}} 
+\index{bluemac.\+h@{bluemac.\+h}!F\+W\+L\+O\+O\+P2@{F\+W\+L\+O\+O\+P2}}
+\index{F\+W\+L\+O\+O\+P2@{F\+W\+L\+O\+O\+P2}!bluemac.\+h@{bluemac.\+h}}
+\subsubsection{\texorpdfstring{F\+W\+L\+O\+O\+P2}{FWLOOP2}}
+{\footnotesize\ttfamily \#define F\+W\+L\+O\+O\+P2(\begin{DoxyParamCaption}\item[{}]{op }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+cc = 0;                                         \(\backslash\)
+    for (loop = 0; loop < \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}; loop++)             \(\backslash\)
+        \{                                           \(\backslash\)
+        bb = cc;                                    \(\backslash\)
+        cc = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa} = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop];                        \(\backslash\)
+        aa = \hyperlink{bluepoint2_8c_a3586c377c3dd0880b68b840aa6120c67}{ROTATE\_CHAR\_LEFT}(\hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa}, 3);               \(\backslash\)
+        aa -=  bb;                                  \(\backslash\)
+        aa -= \hyperlink{bluepoint2_8c_a38d0261d170331691108d9caa02a8d73}{addend};                               \(\backslash\)
+        aa ^= \hyperlink{bluepoint2_8c_a51b863de129a3ec47a907683c33458d7}{forward};                              \(\backslash\)
+        str[loop] = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                             \(\backslash\)
+        \}
+\end{DoxyCode}
+\mbox{\Hypertarget{bluemac_8h_ab6ab781cfbd88c6f4120221e703acfad}\label{bluemac_8h_ab6ab781cfbd88c6f4120221e703acfad}} 
+\index{bluemac.\+h@{bluemac.\+h}!H\+E\+C\+T\+OR@{H\+E\+C\+T\+OR}}
+\index{H\+E\+C\+T\+OR@{H\+E\+C\+T\+OR}!bluemac.\+h@{bluemac.\+h}}
+\subsubsection{\texorpdfstring{H\+E\+C\+T\+OR}{HECTOR}}
+{\footnotesize\ttfamily \#define H\+E\+C\+T\+OR(\begin{DoxyParamCaption}\item[{}]{op }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+loop2 = 0;                                      \(\backslash\)
+    for (loop = 0; loop < \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}; loop++)             \(\backslash\)
+        \{                                           \(\backslash\)
+        aa = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop];                             \(\backslash\)
+        aa = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa} op \hyperlink{bluepoint2_8c_aa6503dc10eecbb5576c1d167e6438f65}{hector}[loop2];                   \(\backslash\)
+        loop2++;                                    \(\backslash\)
+        if(loop2 >= \textcolor{keyword}{sizeof}(hector)) \{loop2 = 0;\}    \(\backslash\)
+        str[loop] = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                             \(\backslash\)
+        \}
+\end{DoxyCode}
+\mbox{\Hypertarget{bluemac_8h_a27b4d30240a99a8f5d573a50ebbc783b}\label{bluemac_8h_a27b4d30240a99a8f5d573a50ebbc783b}} 
+\index{bluemac.\+h@{bluemac.\+h}!M\+I\+X\+IT@{M\+I\+X\+IT}}
+\index{M\+I\+X\+IT@{M\+I\+X\+IT}!bluemac.\+h@{bluemac.\+h}}
+\subsubsection{\texorpdfstring{M\+I\+X\+IT}{MIXIT}}
+{\footnotesize\ttfamily \#define M\+I\+X\+IT(\begin{DoxyParamCaption}\item[{}]{op }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{for} (loop = 0; loop < \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}/2; loop++)           \(\backslash\)
+        \{                                           \(\backslash\)
+        aa = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop];                             \(\backslash\)
+        bb = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[(\hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}-1) - loop];                  \(\backslash\)
+        aa = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa} op bb;                              \(\backslash\)
+        str[loop] = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                             \(\backslash\)
+        \}                                           \(\backslash\)
+\end{DoxyCode}
+\mbox{\Hypertarget{bluemac_8h_a3e3de62193701889a715b70ce296ab35}\label{bluemac_8h_a3e3de62193701889a715b70ce296ab35}} 
+\index{bluemac.\+h@{bluemac.\+h}!M\+I\+X\+I\+T2@{M\+I\+X\+I\+T2}}
+\index{M\+I\+X\+I\+T2@{M\+I\+X\+I\+T2}!bluemac.\+h@{bluemac.\+h}}
+\subsubsection{\texorpdfstring{M\+I\+X\+I\+T2}{MIXIT2}}
+{\footnotesize\ttfamily \#define M\+I\+X\+I\+T2(\begin{DoxyParamCaption}\item[{}]{op }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{for} (loop = 0; loop < \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}/2; loop++)           \(\backslash\)
+        \{                                           \(\backslash\)
+        aa = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop];                             \(\backslash\)
+        bb = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop + \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}/2];                    \(\backslash\)
+        aa = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa} op bb;                              \(\backslash\)
+        str[loop] = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                             \(\backslash\)
+        \}                                           \(\backslash\)
+\end{DoxyCode}
+\mbox{\Hypertarget{bluemac_8h_a576bb5534f7218fbd1a7642e9ad18014}\label{bluemac_8h_a576bb5534f7218fbd1a7642e9ad18014}} 
+\index{bluemac.\+h@{bluemac.\+h}!M\+I\+X\+I\+T2R@{M\+I\+X\+I\+T2R}}
+\index{M\+I\+X\+I\+T2R@{M\+I\+X\+I\+T2R}!bluemac.\+h@{bluemac.\+h}}
+\subsubsection{\texorpdfstring{M\+I\+X\+I\+T2R}{MIXIT2R}}
+{\footnotesize\ttfamily \#define M\+I\+X\+I\+T2R(\begin{DoxyParamCaption}\item[{}]{op }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{for} (loop = \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}/2; loop < \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}; loop++)        \(\backslash\)
+        \{                                           \(\backslash\)
+        aa = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop];                             \(\backslash\)
+        bb = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop - slen/2];                    \(\backslash\)
+        aa = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa} op bb;                              \(\backslash\)
+        str[loop] = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                             \(\backslash\)
+        \}                                           \(\backslash\)
+\end{DoxyCode}
+\mbox{\Hypertarget{bluemac_8h_ad54b6f49452822dc2e66a1ed55b1df62}\label{bluemac_8h_ad54b6f49452822dc2e66a1ed55b1df62}} 
+\index{bluemac.\+h@{bluemac.\+h}!M\+I\+X\+I\+T4@{M\+I\+X\+I\+T4}}
+\index{M\+I\+X\+I\+T4@{M\+I\+X\+I\+T4}!bluemac.\+h@{bluemac.\+h}}
+\subsubsection{\texorpdfstring{M\+I\+X\+I\+T4}{MIXIT4}}
+{\footnotesize\ttfamily \#define M\+I\+X\+I\+T4(\begin{DoxyParamCaption}\item[{}]{op }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{for} (loop = 0; loop < \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}/4; loop++)           \(\backslash\)
+        \{                                           \(\backslash\)
+        aa = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop];                             \(\backslash\)
+        bb = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop + \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}/2];                    \(\backslash\)
+        aa = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa} op bb;                              \(\backslash\)
+        str[loop] = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                             \(\backslash\)
+        \}                                           \(\backslash\)
+\end{DoxyCode}
+\mbox{\Hypertarget{bluemac_8h_a8624e1b63029db8de2413474545c0a49}\label{bluemac_8h_a8624e1b63029db8de2413474545c0a49}} 
+\index{bluemac.\+h@{bluemac.\+h}!M\+I\+X\+I\+TR@{M\+I\+X\+I\+TR}}
+\index{M\+I\+X\+I\+TR@{M\+I\+X\+I\+TR}!bluemac.\+h@{bluemac.\+h}}
+\subsubsection{\texorpdfstring{M\+I\+X\+I\+TR}{MIXITR}}
+{\footnotesize\ttfamily \#define M\+I\+X\+I\+TR(\begin{DoxyParamCaption}\item[{}]{op }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+loop2 = \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen} / 2;                               \(\backslash\)
+    for (loop = loop2; loop < \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}; loop++)         \(\backslash\)
+        \{                                           \(\backslash\)
+        aa = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop];                             \(\backslash\)
+        bb = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop - loop2];                     \(\backslash\)
+        aa = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa} op bb;                              \(\backslash\)
+        str[loop] = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                             \(\backslash\)
+        \}                                           \(\backslash\)
+\end{DoxyCode}
+\mbox{\Hypertarget{bluemac_8h_a47ed7587ea460ce5f91ed0837b09ccf8}\label{bluemac_8h_a47ed7587ea460ce5f91ed0837b09ccf8}} 
+\index{bluemac.\+h@{bluemac.\+h}!P\+A\+S\+S\+L\+O\+OP@{P\+A\+S\+S\+L\+O\+OP}}
+\index{P\+A\+S\+S\+L\+O\+OP@{P\+A\+S\+S\+L\+O\+OP}!bluemac.\+h@{bluemac.\+h}}
+\subsubsection{\texorpdfstring{P\+A\+S\+S\+L\+O\+OP}{PASSLOOP}}
+{\footnotesize\ttfamily \#define P\+A\+S\+S\+L\+O\+OP(\begin{DoxyParamCaption}\item[{}]{op }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+loop2 = 0;                                      \(\backslash\)
+    for (loop = 0; loop < \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}; loop++)             \(\backslash\)
+        \{                                           \(\backslash\)
+        aa = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop];                             \(\backslash\)
+        aa = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa} op \hyperlink{block__blue2_8c_a010542bf29e182284896c9c2f42e1387}{pass}[loop2];                     \(\backslash\)
+        loop2++;                                    \(\backslash\)
+        if(loop2 >= \hyperlink{block__blue2_8c_ad29d2259942853507dff3a3e3c05535a}{plen}) \{loop2 = 0;\}              \(\backslash\)
+        str[loop] = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                             \(\backslash\)
+        \}
+\end{DoxyCode}
+\mbox{\Hypertarget{bluemac_8h_a000e2b7c3022328cbeef38cd9eb78c36}\label{bluemac_8h_a000e2b7c3022328cbeef38cd9eb78c36}} 
+\index{bluemac.\+h@{bluemac.\+h}!T\+R\+I\+L\+O\+OP@{T\+R\+I\+L\+O\+OP}}
+\index{T\+R\+I\+L\+O\+OP@{T\+R\+I\+L\+O\+OP}!bluemac.\+h@{bluemac.\+h}}
+\subsubsection{\texorpdfstring{T\+R\+I\+L\+O\+OP}{TRILOOP}}
+{\footnotesize\ttfamily \#define T\+R\+I\+L\+O\+OP(\begin{DoxyParamCaption}\item[{}]{op }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}
+\textcolor{keywordflow}{for} (loop = 0; loop < \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}; loop++)             \(\backslash\)
+        \{                                           \(\backslash\)
+        aa = \hyperlink{dibadec_8c_ab4186f1a12d296dbf4708fc953cc1aa3}{str}[loop];                             \(\backslash\)
+        if(loop %3 == 0)                            \(\backslash\)
+            aa op 3;                                \(\backslash\)
+        if(loop %3 == 1)                            \(\backslash\)
+            aa op 5;                                \(\backslash\)
+        if(loop %3 == 2)                            \(\backslash\)
+            aa op 7;                                \(\backslash\)
+        str[loop] = \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa};                             \(\backslash\)
+        \}                                           \(\backslash\)
+\end{DoxyCode}

@@ -1,0 +1,235 @@
+\hypertarget{namespacedibagui}{}\section{dibagui Namespace Reference}
+\label{namespacedibagui}\index{dibagui@{dibagui}}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classdibagui_1_1_main_win}{Main\+Win}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacedibagui_aafe5e93f05012b5ea1b7a6a2ea5e304e}{showgtk} ()
+\item 
+def \hyperlink{namespacedibagui_ad90cbb2f2f6f630b3d1702505a041b97}{pprint} (ddd)
+\item 
+def \hyperlink{namespacedibagui_af9201c0c99ec1ad4e21908a912bac70b}{key\+\_\+press\+\_\+event} (win, \hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa})
+\item 
+def \hyperlink{namespacedibagui_ab3b526f5276db90995805fd06c280b74}{help} ()
+\item 
+def \hyperlink{namespacedibagui_ab81281419da07ffb44732c0d233b7134}{softmkdir} (dirx)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{namespacedibagui_ab62c3e734e7e08da39abab83df1b3fd5}{version} = 1.\+0
+\item 
+bool \hyperlink{namespacedibagui_ab3f078684998b83967d507d0f453f454}{verbose} = False
+\item 
+string \hyperlink{namespacedibagui_ac320f4c3d827e13121dcfcb8a7efa02e}{xstr} = \char`\"{}\char`\"{}
+\item 
+\hyperlink{namespacedibagui_a5cdafc01cb2d85e5af4a95537b9713de}{dataroot} = os.\+getcwd()
+\item 
+string \hyperlink{namespacedibagui_a5437a7caa57bba3f6e4d82d92bafd787}{data\+\_\+dir} = \hyperlink{namespacedibagui_a5cdafc01cb2d85e5af4a95537b9713de}{dataroot} + \char`\"{}/../customers/\char`\"{}
+\item 
+string \hyperlink{namespacedibagui_ad29c08ef121cb6e69df9433aa5b101d7}{key\+\_\+dir} = \hyperlink{namespacedibagui_a5cdafc01cb2d85e5af4a95537b9713de}{dataroot} + \char`\"{}/../customers/keys/\char`\"{}
+\item 
+string \hyperlink{namespacedibagui_a0182fb6d799f924051fc39db43ac050d}{currency\+\_\+dir} = \hyperlink{namespacedibagui_a5cdafc01cb2d85e5af4a95537b9713de}{dataroot} + \char`\"{}/../currency/\char`\"{}
+\item 
+string \hyperlink{namespacedibagui_acfd64cb0e90b8a7e009dfc0cdd61f41d}{transact\+\_\+dir} = \hyperlink{namespacedibagui_a5cdafc01cb2d85e5af4a95537b9713de}{dataroot} + \char`\"{}/../transact/\char`\"{}
+\item 
+string \hyperlink{namespacedibagui_a118b1aec766aad00e7a9b1af8ecee060}{autit\+\_\+dir} = \hyperlink{namespacedibagui_a5cdafc01cb2d85e5af4a95537b9713de}{dataroot} + \char`\"{}/../audit/\char`\"{}
+\item 
+bool \hyperlink{namespacedibagui_ade4505b1fe1f797b7ef71cbc47797527}{show\+\_\+config} = False;
+\item 
+bool \hyperlink{namespacedibagui_a0a0b222655f06efabe335006eb100963}{show\+\_\+database} = False
+\item 
+int \hyperlink{namespacedibagui_a600ddd05c2ac080c09850285e9707769}{pg\+\_\+debug} = 0
+\item 
+\hyperlink{namespacedibagui_aea382d5bc10635f82287dcc5486e4ed1}{dibadb} = \hyperlink{classpysql_1_1dibasql}{pysql.\+dibasql}(\hyperlink{namespacedibagui_a5437a7caa57bba3f6e4d82d92bafd787}{data\+\_\+dir} + \char`\"{}/data.\+mysql\char`\"{})
+\item 
+list \hyperlink{namespacedibagui_aa17b9f50d41f0a8e95659986136435dd}{opts} = \mbox{[}$\,$\mbox{]}
+\item 
+\hyperlink{namespacedibagui_a8187411843a6284ffb964ef3fb9fcab3}{args}
+\item 
+\hyperlink{namespacedibagui_a721390ce85369efa83cf64d0f62cba4b}{show\+\_\+timing}
+\item 
+\hyperlink{namespacedibagui_a1f942d68f5d92c52e0cfd6568c308788}{remove\+\_\+database}
+\item 
+\hyperlink{namespacedibagui_a89a7f6028a19c3dc081cc5f16eb53891}{db}
+\item 
+\hyperlink{namespacedibagui_a11ddbaf3386aea1f2974eee984542152}{dd}
+\item 
+\hyperlink{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}{aa} = sys.\+stdin.\+readline()
+\item 
+\hyperlink{namespacedibagui_aeb9279982226a42afdf2860dbdc29b45}{rr} = dibadb.\+rmall()
+\item 
+\hyperlink{namespacedibagui_a782c1a3f26f508cb307533b6bde86508}{mainwin} = \hyperlink{classdibagui_1_1_main_win}{Main\+Win}()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacedibagui_ab3b526f5276db90995805fd06c280b74}\label{namespacedibagui_ab3b526f5276db90995805fd06c280b74}} 
+\index{dibagui@{dibagui}!help@{help}}
+\index{help@{help}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{help()}{help()}}
+{\footnotesize\ttfamily def dibagui.\+help (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacedibagui_af9201c0c99ec1ad4e21908a912bac70b}\label{namespacedibagui_af9201c0c99ec1ad4e21908a912bac70b}} 
+\index{dibagui@{dibagui}!key\+\_\+press\+\_\+event@{key\+\_\+press\+\_\+event}}
+\index{key\+\_\+press\+\_\+event@{key\+\_\+press\+\_\+event}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{key\+\_\+press\+\_\+event()}{key\_press\_event()}}
+{\footnotesize\ttfamily def dibagui.\+key\+\_\+press\+\_\+event (\begin{DoxyParamCaption}\item[{}]{win,  }\item[{}]{aa }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacedibagui_ad90cbb2f2f6f630b3d1702505a041b97}\label{namespacedibagui_ad90cbb2f2f6f630b3d1702505a041b97}} 
+\index{dibagui@{dibagui}!pprint@{pprint}}
+\index{pprint@{pprint}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{pprint()}{pprint()}}
+{\footnotesize\ttfamily def dibagui.\+pprint (\begin{DoxyParamCaption}\item[{}]{ddd }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacedibagui_aafe5e93f05012b5ea1b7a6a2ea5e304e}\label{namespacedibagui_aafe5e93f05012b5ea1b7a6a2ea5e304e}} 
+\index{dibagui@{dibagui}!showgtk@{showgtk}}
+\index{showgtk@{showgtk}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{showgtk()}{showgtk()}}
+{\footnotesize\ttfamily def dibagui.\+showgtk (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacedibagui_ab81281419da07ffb44732c0d233b7134}\label{namespacedibagui_ab81281419da07ffb44732c0d233b7134}} 
+\index{dibagui@{dibagui}!softmkdir@{softmkdir}}
+\index{softmkdir@{softmkdir}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{softmkdir()}{softmkdir()}}
+{\footnotesize\ttfamily def dibagui.\+softmkdir (\begin{DoxyParamCaption}\item[{}]{dirx }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}\label{namespacedibagui_a74b87337454200d4d33f80c4663dc5e5}} 
+\index{dibagui@{dibagui}!aa@{aa}}
+\index{aa@{aa}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{aa}{aa}}
+{\footnotesize\ttfamily aa = sys.\+stdin.\+readline()}
+
+\mbox{\Hypertarget{namespacedibagui_a8187411843a6284ffb964ef3fb9fcab3}\label{namespacedibagui_a8187411843a6284ffb964ef3fb9fcab3}} 
+\index{dibagui@{dibagui}!args@{args}}
+\index{args@{args}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{args}{args}}
+{\footnotesize\ttfamily args}
+
+\mbox{\Hypertarget{namespacedibagui_a118b1aec766aad00e7a9b1af8ecee060}\label{namespacedibagui_a118b1aec766aad00e7a9b1af8ecee060}} 
+\index{dibagui@{dibagui}!autit\+\_\+dir@{autit\+\_\+dir}}
+\index{autit\+\_\+dir@{autit\+\_\+dir}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{autit\+\_\+dir}{autit\_dir}}
+{\footnotesize\ttfamily string autit\+\_\+dir = \hyperlink{namespacedibagui_a5cdafc01cb2d85e5af4a95537b9713de}{dataroot} + \char`\"{}/../audit/\char`\"{}}
+
+\mbox{\Hypertarget{namespacedibagui_a0182fb6d799f924051fc39db43ac050d}\label{namespacedibagui_a0182fb6d799f924051fc39db43ac050d}} 
+\index{dibagui@{dibagui}!currency\+\_\+dir@{currency\+\_\+dir}}
+\index{currency\+\_\+dir@{currency\+\_\+dir}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{currency\+\_\+dir}{currency\_dir}}
+{\footnotesize\ttfamily string currency\+\_\+dir = \hyperlink{namespacedibagui_a5cdafc01cb2d85e5af4a95537b9713de}{dataroot} + \char`\"{}/../currency/\char`\"{}}
+
+\mbox{\Hypertarget{namespacedibagui_a5437a7caa57bba3f6e4d82d92bafd787}\label{namespacedibagui_a5437a7caa57bba3f6e4d82d92bafd787}} 
+\index{dibagui@{dibagui}!data\+\_\+dir@{data\+\_\+dir}}
+\index{data\+\_\+dir@{data\+\_\+dir}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{data\+\_\+dir}{data\_dir}}
+{\footnotesize\ttfamily string data\+\_\+dir = \hyperlink{namespacedibagui_a5cdafc01cb2d85e5af4a95537b9713de}{dataroot} + \char`\"{}/../customers/\char`\"{}}
+
+\mbox{\Hypertarget{namespacedibagui_a5cdafc01cb2d85e5af4a95537b9713de}\label{namespacedibagui_a5cdafc01cb2d85e5af4a95537b9713de}} 
+\index{dibagui@{dibagui}!dataroot@{dataroot}}
+\index{dataroot@{dataroot}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{dataroot}{dataroot}}
+{\footnotesize\ttfamily dataroot = os.\+getcwd()}
+
+\mbox{\Hypertarget{namespacedibagui_a89a7f6028a19c3dc081cc5f16eb53891}\label{namespacedibagui_a89a7f6028a19c3dc081cc5f16eb53891}} 
+\index{dibagui@{dibagui}!db@{db}}
+\index{db@{db}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{db}{db}}
+{\footnotesize\ttfamily db}
+
+\mbox{\Hypertarget{namespacedibagui_a11ddbaf3386aea1f2974eee984542152}\label{namespacedibagui_a11ddbaf3386aea1f2974eee984542152}} 
+\index{dibagui@{dibagui}!dd@{dd}}
+\index{dd@{dd}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{dd}{dd}}
+{\footnotesize\ttfamily dd}
+
+\mbox{\Hypertarget{namespacedibagui_aea382d5bc10635f82287dcc5486e4ed1}\label{namespacedibagui_aea382d5bc10635f82287dcc5486e4ed1}} 
+\index{dibagui@{dibagui}!dibadb@{dibadb}}
+\index{dibadb@{dibadb}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{dibadb}{dibadb}}
+{\footnotesize\ttfamily dibadb = \hyperlink{classpysql_1_1dibasql}{pysql.\+dibasql}(\hyperlink{namespacedibagui_a5437a7caa57bba3f6e4d82d92bafd787}{data\+\_\+dir} + \char`\"{}/data.\+mysql\char`\"{})}
+
+\mbox{\Hypertarget{namespacedibagui_ad29c08ef121cb6e69df9433aa5b101d7}\label{namespacedibagui_ad29c08ef121cb6e69df9433aa5b101d7}} 
+\index{dibagui@{dibagui}!key\+\_\+dir@{key\+\_\+dir}}
+\index{key\+\_\+dir@{key\+\_\+dir}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{key\+\_\+dir}{key\_dir}}
+{\footnotesize\ttfamily string key\+\_\+dir = \hyperlink{namespacedibagui_a5cdafc01cb2d85e5af4a95537b9713de}{dataroot} + \char`\"{}/../customers/keys/\char`\"{}}
+
+\mbox{\Hypertarget{namespacedibagui_a782c1a3f26f508cb307533b6bde86508}\label{namespacedibagui_a782c1a3f26f508cb307533b6bde86508}} 
+\index{dibagui@{dibagui}!mainwin@{mainwin}}
+\index{mainwin@{mainwin}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{mainwin}{mainwin}}
+{\footnotesize\ttfamily mainwin = \hyperlink{classdibagui_1_1_main_win}{Main\+Win}()}
+
+\mbox{\Hypertarget{namespacedibagui_aa17b9f50d41f0a8e95659986136435dd}\label{namespacedibagui_aa17b9f50d41f0a8e95659986136435dd}} 
+\index{dibagui@{dibagui}!opts@{opts}}
+\index{opts@{opts}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{opts}{opts}}
+{\footnotesize\ttfamily \hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} = \mbox{[}$\,$\mbox{]}}
+
+\mbox{\Hypertarget{namespacedibagui_a600ddd05c2ac080c09850285e9707769}\label{namespacedibagui_a600ddd05c2ac080c09850285e9707769}} 
+\index{dibagui@{dibagui}!pg\+\_\+debug@{pg\+\_\+debug}}
+\index{pg\+\_\+debug@{pg\+\_\+debug}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{pg\+\_\+debug}{pg\_debug}}
+{\footnotesize\ttfamily pg\+\_\+debug = 0}
+
+\mbox{\Hypertarget{namespacedibagui_a1f942d68f5d92c52e0cfd6568c308788}\label{namespacedibagui_a1f942d68f5d92c52e0cfd6568c308788}} 
+\index{dibagui@{dibagui}!remove\+\_\+database@{remove\+\_\+database}}
+\index{remove\+\_\+database@{remove\+\_\+database}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{remove\+\_\+database}{remove\_database}}
+{\footnotesize\ttfamily remove\+\_\+database}
+
+\mbox{\Hypertarget{namespacedibagui_aeb9279982226a42afdf2860dbdc29b45}\label{namespacedibagui_aeb9279982226a42afdf2860dbdc29b45}} 
+\index{dibagui@{dibagui}!rr@{rr}}
+\index{rr@{rr}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{rr}{rr}}
+{\footnotesize\ttfamily rr = dibadb.\+rmall()}
+
+\mbox{\Hypertarget{namespacedibagui_ade4505b1fe1f797b7ef71cbc47797527}\label{namespacedibagui_ade4505b1fe1f797b7ef71cbc47797527}} 
+\index{dibagui@{dibagui}!show\+\_\+config@{show\+\_\+config}}
+\index{show\+\_\+config@{show\+\_\+config}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{show\+\_\+config}{show\_config}}
+{\footnotesize\ttfamily show\+\_\+config = False;}
+
+\mbox{\Hypertarget{namespacedibagui_a0a0b222655f06efabe335006eb100963}\label{namespacedibagui_a0a0b222655f06efabe335006eb100963}} 
+\index{dibagui@{dibagui}!show\+\_\+database@{show\+\_\+database}}
+\index{show\+\_\+database@{show\+\_\+database}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{show\+\_\+database}{show\_database}}
+{\footnotesize\ttfamily show\+\_\+database = False}
+
+\mbox{\Hypertarget{namespacedibagui_a721390ce85369efa83cf64d0f62cba4b}\label{namespacedibagui_a721390ce85369efa83cf64d0f62cba4b}} 
+\index{dibagui@{dibagui}!show\+\_\+timing@{show\+\_\+timing}}
+\index{show\+\_\+timing@{show\+\_\+timing}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{show\+\_\+timing}{show\_timing}}
+{\footnotesize\ttfamily show\+\_\+timing}
+
+\mbox{\Hypertarget{namespacedibagui_acfd64cb0e90b8a7e009dfc0cdd61f41d}\label{namespacedibagui_acfd64cb0e90b8a7e009dfc0cdd61f41d}} 
+\index{dibagui@{dibagui}!transact\+\_\+dir@{transact\+\_\+dir}}
+\index{transact\+\_\+dir@{transact\+\_\+dir}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{transact\+\_\+dir}{transact\_dir}}
+{\footnotesize\ttfamily string transact\+\_\+dir = \hyperlink{namespacedibagui_a5cdafc01cb2d85e5af4a95537b9713de}{dataroot} + \char`\"{}/../transact/\char`\"{}}
+
+\mbox{\Hypertarget{namespacedibagui_ab3f078684998b83967d507d0f453f454}\label{namespacedibagui_ab3f078684998b83967d507d0f453f454}} 
+\index{dibagui@{dibagui}!verbose@{verbose}}
+\index{verbose@{verbose}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{verbose}{verbose}}
+{\footnotesize\ttfamily bool verbose = False}
+
+\mbox{\Hypertarget{namespacedibagui_ab62c3e734e7e08da39abab83df1b3fd5}\label{namespacedibagui_ab62c3e734e7e08da39abab83df1b3fd5}} 
+\index{dibagui@{dibagui}!version@{version}}
+\index{version@{version}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{version}{version}}
+{\footnotesize\ttfamily float version = 1.\+0}
+
+\mbox{\Hypertarget{namespacedibagui_ac320f4c3d827e13121dcfcb8a7efa02e}\label{namespacedibagui_ac320f4c3d827e13121dcfcb8a7efa02e}} 
+\index{dibagui@{dibagui}!xstr@{xstr}}
+\index{xstr@{xstr}!dibagui@{dibagui}}
+\subsubsection{\texorpdfstring{xstr}{xstr}}
+{\footnotesize\ttfamily string xstr = \char`\"{}\char`\"{}}
+

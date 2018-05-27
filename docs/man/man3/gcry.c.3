@@ -1,0 +1,134 @@
+.TH "transport/gcry.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+transport/gcry.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <ctype\&.h>\fP
+.br
+\fC#include 'gcrypt\&.h'\fP
+.br
+\fC#include 'gcry\&.h'\fP
+.br
+\fC#include 'gsexp\&.h'\fP
+.br
+\fC#include 'zmalloc\&.h'\fP
+.br
+\fC#include 'getpass\&.h'\fP
+.br
+\fC#include 'base64\&.h'\fP
+.br
+\fC#include 'dibastr\&.h'\fP
+.br
+\fC#include 'misc\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_armor_params\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fB_armor_params\fP \fBarmor_params\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBxerr2\fP (const char *msg,\&.\&.\&.)"
+.br
+.ti -1c
+.RI "void \fBprinterr\fP (int err, char *\fBstr\fP)"
+.br
+.ti -1c
+.RI "void \fBgcrypt_init\fP ()"
+.br
+.ti -1c
+.RI "size_t \fBget_keypair_size\fP (int nbits)"
+.br
+.ti -1c
+.RI "void \fBget_aes_ctx\fP (gcry_cipher_hd_t *aes_hd, const char *passwd, int pass_len)"
+.br
+.ti -1c
+.RI "void \fBget_twofish_ctx\fP (gcry_cipher_hd_t *aes_hd, const char *passwd, int pass_len)"
+.br
+.ti -1c
+.RI "char * \fBdecode_pub_key\fP (char *rsa_buf, int *prsa_len, char **err_str)"
+.br
+.ti -1c
+.RI "char * \fBdecode_rsa_cyph\fP (char *rsa_buf, int *prsa_len, char **err_str)"
+.br
+.ti -1c
+.RI "char * \fBdecode_comp_key\fP (char *rsa_buf, int *prsa_len, char **err_str)"
+.br
+.ti -1c
+.RI "void \fBprint_cypher_details\fP (const char *\fBstr\fP)"
+.br
+.ti -1c
+.RI "int \fBpk_encrypt_buffer\fP (const char *buf, int len, gcry_sexp_t pubk, gcry_sexp_t *ciph)"
+.br
+.ti -1c
+.RI "int \fBwrite_pubkey\fP (gcry_sexp_t *pubk, const char *fname2)"
+.br
+.ti -1c
+.RI "int \fBwrite_mod_exp\fP (gcry_sexp_t *rsa_keypair, const char *fname2)"
+.br
+.ti -1c
+.RI "char * \fBhash_file\fP (char *fname, char **err_str)"
+.br
+.ti -1c
+.RI "char * \fBzrandstr_strong\fP (int len)"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_armor_params\fP
+ \fBarmor_params\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "char* decode_comp_key (char * rsa_buf, int * prsa_len, char ** err_str)"
+
+.SS "char* decode_pub_key (char * rsa_buf, int * prsa_len, char ** err_str)"
+
+.SS "char* decode_rsa_cyph (char * rsa_buf, int * prsa_len, char ** err_str)"
+
+.SS "void gcrypt_init ()"
+
+.SS "void get_aes_ctx (gcry_cipher_hd_t * aes_hd, const char * passwd, int pass_len)"
+
+.SS "size_t get_keypair_size (int nbits)"
+
+.SS "void get_twofish_ctx (gcry_cipher_hd_t * aes_hd, const char * passwd, int pass_len)"
+
+.SS "char* hash_file (char * fname, char ** err_str)"
+
+.SS "int pk_encrypt_buffer (const char * buf, int len, gcry_sexp_t pubk, gcry_sexp_t * ciph)"
+
+.SS "void print_cypher_details (const char * str)"
+
+.SS "void printerr (int err, char * str)"
+
+.SS "int write_mod_exp (gcry_sexp_t * rsa_keypair, const char * fname2)"
+
+.SS "int write_pubkey (gcry_sexp_t * pubk, const char * fname2)"
+
+.SS "void xerr2 (const char * msg,  \&.\&.\&.)"
+
+.SS "char* zrandstr_strong (int len)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

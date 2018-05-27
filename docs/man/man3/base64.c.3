@@ -1,0 +1,65 @@
+.TH "tools/base64.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tools/base64.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <limits\&.h>\fP
+.br
+
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef unsigned int \fBuint32_t\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBbase64_calc_encodelen\fP (int len)"
+.br
+.ti -1c
+.RI "int \fBbase64_encode\fP (const unsigned char *data, int input_length, char *encoded_data, int *output_length)"
+.br
+.ti -1c
+.RI "int \fBbase64_calc_decodelen\fP (int len)"
+.br
+.ti -1c
+.RI "int \fBbase64_decode\fP (const char *data, int input_length, unsigned char *decoded_data, int *output_length)"
+.br
+.ti -1c
+.RI "int \fBbase64_limline\fP (const char *inp, int inlen, char *outp, int *olen, int linelen)"
+.br
+.ti -1c
+.RI "int \fBbase64_clean\fP (const char *inp, int inlen, char *outp, int *olen)"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef unsigned int \fBuint32_t\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "int base64_calc_decodelen (int len)"
+
+.SS "int base64_calc_encodelen (int len)"
+
+.SS "int base64_clean (const char * inp, int inlen, char * outp, int * olen)"
+
+.SS "int base64_decode (const char * data, int input_length, unsigned char * decoded_data, int * output_length)"
+
+.SS "int base64_encode (const unsigned char * data, int input_length, char * encoded_data, int * output_length)"
+
+.SS "int base64_limline (const char * inp, int inlen, char * outp, int * olen, int linelen)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

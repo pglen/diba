@@ -1,0 +1,69 @@
+                            INSTALL
+   
+   All the files are built on Windows using MSYS and MinGW. The files also
+build on linux and variants with little modification. 
+
+  Attempts are made to disconnect any single toolchain from the dependency 
+list. Will build with gcc / MSYS/ MinGW, gcc / Linux, will build (partially) 
+with MSVC.
+
+   Most of the excutables are built with static libraries, so no external
+dependencies are needed. This will aid in authentication, as the single 
+excutable file contains all executable code, thus the checksum of the 
+executable checks the whole toolchain.
+  
+  BUILD
+  
+  The Makefile has the usual targets. Th command 'make' will build the 
+whole project, 'make tests' will check workings. The tests are producing 
+outputs that is matched to the expected output. The compare is done wit the 
+'diff' utility. It passes if the diffs remain silent. (no diferences)
+
+  DEPENDENCIES
+  
+  The following subsystems are used in DigiBank:
+  
+  MinGW, MSYS, gcc
+  libgcrypt
+  Win32
+  Python
+  PyGTK, PyGobject
+  libz
+  (others, see Makefile for a technically accurate list)
+    
+  CHOICES
+  
+   The choices on platforms ad utilities are a hybrid of POSIX and Win32
+and mostly open source.  We used the POSIX platform for its rich computing 
+capability, and the Win32 (Win64) for its rich user interface.
+
+  STRUCTURE
+  
+   The project was broken up into sub modules, and has the following structure:
+   
+   o transport   --  asymmetric encryption for client / server transport
+   o bluepoint   --  symmetric encryption for token encryption / decryption
+   o currency    --  Currency and currency transactions
+   o chest       --  Account related tools
+   o blockchain  --  blockchain related utilities
+   o audit       --  auditing related 
+   o gui         --  user interface to tie all parts together
+   o tools       --  various support tools, cmdline, base64, 
+   o common      --  coomon string and define for the DIBA project
+   o study       --  disregard, misc investigations 
+   
+  DATA
+  
+    Customer data is stored (for develoment) in the 
+                ../data/customers subdirectory
+    Currency data is stored in the 
+                ../data/currency subdirectory        
+    Transaction data is stored in the 
+                ../data/transact subdirectory        
+    Audit data is stored in the 
+                ../data/audit subdirectory        
+  
+  
+  
+
+

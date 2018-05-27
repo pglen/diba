@@ -1,0 +1,136 @@
+\hypertarget{misc_8h}{}\section{tools/misc.h File Reference}
+\label{misc_8h}\index{tools/misc.\+h@{tools/misc.\+h}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{misc_8h_afd5a51cbe3a5853b32f1aabebc42b4af}{alloc\+\_\+rand\+\_\+amount} ()
+\item 
+void \hyperlink{misc_8h_a16be086069ac5183d38901b55a47953b}{rand\+\_\+seed} ()
+\item 
+char $\ast$ \hyperlink{misc_8h_aad88f164935b986a6c6a7bd23b53999e}{base\+\_\+and\+\_\+lim} (const char $\ast$mem, int len, int $\ast$olen)
+\item 
+int \hyperlink{misc_8h_abb1b32990c741bcd086b8519daa828a0}{num\+\_\+bits\+\_\+set} (unsigned int ks)
+\item 
+char $\ast$ \hyperlink{misc_8h_a9f512d119c027541e59a5b1c8e65d0fa}{zusername} ()
+\item 
+char $\ast$ \hyperlink{misc_8h_aa11deb00ac42756bebd337ae18691f48}{zhostname} ()
+\item 
+char $\ast$ \hyperlink{misc_8h_a46b1e58a966f39840c9ab3d7d1accf0d}{zdatestr} ()
+\item 
+char $\ast$ \hyperlink{misc_8h_a1e04da39877007fa2cf873a2adebb936}{tobase64} (char $\ast$mem, int $\ast$len)
+\item 
+char $\ast$ \hyperlink{misc_8h_a76f1d415479b4f9f4de4459f2d32f1df}{zstrcat} (const char $\ast$str1, const char $\ast$\hyperlink{dibagen_8c_a936124790472f1456da44e94f3d1be23}{str2})
+\item 
+char $\ast$ \hyperlink{misc_8h_a4a1a18e23adaf8d0440bbda864cb684a}{zstrdup} (const char $\ast$str1, int maxsize)
+\item 
+char $\ast$ \hyperlink{misc_8h_a4a33eec4baf0a130fd40bc61dfe79db6}{pass\+\_\+fromfile} (const char $\ast$thispass, char $\ast$$\ast$err\+\_\+str)
+\item 
+void \hyperlink{misc_8h_a6236045094455049b8e3e8c077b1d545}{dump\+\_\+mem} (const char $\ast$ptr, int len)
+\item 
+int \hyperlink{misc_8h_a8accb4820a0c2f043fbb4b31ed820aba}{print\+\_\+mem} (char $\ast$mem, int len)
+\item 
+char $\ast$ \hyperlink{misc_8h_a42bcf4900a03147baec7a4a3effcdfc9}{dohex} (char $\ast$mem, int len, int $\ast$olen)
+\item 
+char $\ast$ \hyperlink{misc_8h_aa1ac10fa5c2631958e59627d64feba62}{dounhex} (char $\ast$mem, int len, int $\ast$olen)
+\item 
+unsigned int \hyperlink{misc_8h_a14c23a23f65aea6055912d21fe79ef8f}{getfsize} (F\+I\+LE $\ast$fp)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{misc_8h_afd5a51cbe3a5853b32f1aabebc42b4af}\label{misc_8h_afd5a51cbe3a5853b32f1aabebc42b4af}} 
+\index{misc.\+h@{misc.\+h}!alloc\+\_\+rand\+\_\+amount@{alloc\+\_\+rand\+\_\+amount}}
+\index{alloc\+\_\+rand\+\_\+amount@{alloc\+\_\+rand\+\_\+amount}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{alloc\+\_\+rand\+\_\+amount()}{alloc\_rand\_amount()}}
+{\footnotesize\ttfamily char$\ast$ alloc\+\_\+rand\+\_\+amount (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_aad88f164935b986a6c6a7bd23b53999e}\label{misc_8h_aad88f164935b986a6c6a7bd23b53999e}} 
+\index{misc.\+h@{misc.\+h}!base\+\_\+and\+\_\+lim@{base\+\_\+and\+\_\+lim}}
+\index{base\+\_\+and\+\_\+lim@{base\+\_\+and\+\_\+lim}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{base\+\_\+and\+\_\+lim()}{base\_and\_lim()}}
+{\footnotesize\ttfamily char$\ast$ base\+\_\+and\+\_\+lim (\begin{DoxyParamCaption}\item[{const char $\ast$}]{mem,  }\item[{int}]{len,  }\item[{int $\ast$}]{olen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_a42bcf4900a03147baec7a4a3effcdfc9}\label{misc_8h_a42bcf4900a03147baec7a4a3effcdfc9}} 
+\index{misc.\+h@{misc.\+h}!dohex@{dohex}}
+\index{dohex@{dohex}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{dohex()}{dohex()}}
+{\footnotesize\ttfamily char$\ast$ dohex (\begin{DoxyParamCaption}\item[{char $\ast$}]{mem,  }\item[{int}]{len,  }\item[{int $\ast$}]{olen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_aa1ac10fa5c2631958e59627d64feba62}\label{misc_8h_aa1ac10fa5c2631958e59627d64feba62}} 
+\index{misc.\+h@{misc.\+h}!dounhex@{dounhex}}
+\index{dounhex@{dounhex}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{dounhex()}{dounhex()}}
+{\footnotesize\ttfamily char$\ast$ dounhex (\begin{DoxyParamCaption}\item[{char $\ast$}]{mem,  }\item[{int}]{len,  }\item[{int $\ast$}]{olen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_a6236045094455049b8e3e8c077b1d545}\label{misc_8h_a6236045094455049b8e3e8c077b1d545}} 
+\index{misc.\+h@{misc.\+h}!dump\+\_\+mem@{dump\+\_\+mem}}
+\index{dump\+\_\+mem@{dump\+\_\+mem}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{dump\+\_\+mem()}{dump\_mem()}}
+{\footnotesize\ttfamily void dump\+\_\+mem (\begin{DoxyParamCaption}\item[{const char $\ast$}]{ptr,  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_a14c23a23f65aea6055912d21fe79ef8f}\label{misc_8h_a14c23a23f65aea6055912d21fe79ef8f}} 
+\index{misc.\+h@{misc.\+h}!getfsize@{getfsize}}
+\index{getfsize@{getfsize}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{getfsize()}{getfsize()}}
+{\footnotesize\ttfamily unsigned int getfsize (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_abb1b32990c741bcd086b8519daa828a0}\label{misc_8h_abb1b32990c741bcd086b8519daa828a0}} 
+\index{misc.\+h@{misc.\+h}!num\+\_\+bits\+\_\+set@{num\+\_\+bits\+\_\+set}}
+\index{num\+\_\+bits\+\_\+set@{num\+\_\+bits\+\_\+set}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{num\+\_\+bits\+\_\+set()}{num\_bits\_set()}}
+{\footnotesize\ttfamily int num\+\_\+bits\+\_\+set (\begin{DoxyParamCaption}\item[{unsigned int}]{ks }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_a4a33eec4baf0a130fd40bc61dfe79db6}\label{misc_8h_a4a33eec4baf0a130fd40bc61dfe79db6}} 
+\index{misc.\+h@{misc.\+h}!pass\+\_\+fromfile@{pass\+\_\+fromfile}}
+\index{pass\+\_\+fromfile@{pass\+\_\+fromfile}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{pass\+\_\+fromfile()}{pass\_fromfile()}}
+{\footnotesize\ttfamily char$\ast$ pass\+\_\+fromfile (\begin{DoxyParamCaption}\item[{const char $\ast$}]{thispass,  }\item[{char $\ast$$\ast$}]{err\+\_\+str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_a8accb4820a0c2f043fbb4b31ed820aba}\label{misc_8h_a8accb4820a0c2f043fbb4b31ed820aba}} 
+\index{misc.\+h@{misc.\+h}!print\+\_\+mem@{print\+\_\+mem}}
+\index{print\+\_\+mem@{print\+\_\+mem}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{print\+\_\+mem()}{print\_mem()}}
+{\footnotesize\ttfamily int print\+\_\+mem (\begin{DoxyParamCaption}\item[{char $\ast$}]{mem,  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_a16be086069ac5183d38901b55a47953b}\label{misc_8h_a16be086069ac5183d38901b55a47953b}} 
+\index{misc.\+h@{misc.\+h}!rand\+\_\+seed@{rand\+\_\+seed}}
+\index{rand\+\_\+seed@{rand\+\_\+seed}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{rand\+\_\+seed()}{rand\_seed()}}
+{\footnotesize\ttfamily void rand\+\_\+seed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_a1e04da39877007fa2cf873a2adebb936}\label{misc_8h_a1e04da39877007fa2cf873a2adebb936}} 
+\index{misc.\+h@{misc.\+h}!tobase64@{tobase64}}
+\index{tobase64@{tobase64}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{tobase64()}{tobase64()}}
+{\footnotesize\ttfamily char$\ast$ tobase64 (\begin{DoxyParamCaption}\item[{char $\ast$}]{mem,  }\item[{int $\ast$}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_a46b1e58a966f39840c9ab3d7d1accf0d}\label{misc_8h_a46b1e58a966f39840c9ab3d7d1accf0d}} 
+\index{misc.\+h@{misc.\+h}!zdatestr@{zdatestr}}
+\index{zdatestr@{zdatestr}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{zdatestr()}{zdatestr()}}
+{\footnotesize\ttfamily char$\ast$ zdatestr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_aa11deb00ac42756bebd337ae18691f48}\label{misc_8h_aa11deb00ac42756bebd337ae18691f48}} 
+\index{misc.\+h@{misc.\+h}!zhostname@{zhostname}}
+\index{zhostname@{zhostname}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{zhostname()}{zhostname()}}
+{\footnotesize\ttfamily char$\ast$ zhostname (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_a76f1d415479b4f9f4de4459f2d32f1df}\label{misc_8h_a76f1d415479b4f9f4de4459f2d32f1df}} 
+\index{misc.\+h@{misc.\+h}!zstrcat@{zstrcat}}
+\index{zstrcat@{zstrcat}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{zstrcat()}{zstrcat()}}
+{\footnotesize\ttfamily char$\ast$ zstrcat (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str1,  }\item[{const char $\ast$}]{str2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_a4a1a18e23adaf8d0440bbda864cb684a}\label{misc_8h_a4a1a18e23adaf8d0440bbda864cb684a}} 
+\index{misc.\+h@{misc.\+h}!zstrdup@{zstrdup}}
+\index{zstrdup@{zstrdup}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{zstrdup()}{zstrdup()}}
+{\footnotesize\ttfamily char$\ast$ zstrdup (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str1,  }\item[{int}]{maxsize }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{misc_8h_a9f512d119c027541e59a5b1c8e65d0fa}\label{misc_8h_a9f512d119c027541e59a5b1c8e65d0fa}} 
+\index{misc.\+h@{misc.\+h}!zusername@{zusername}}
+\index{zusername@{zusername}!misc.\+h@{misc.\+h}}
+\subsubsection{\texorpdfstring{zusername()}{zusername()}}
+{\footnotesize\ttfamily char$\ast$ zusername (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+

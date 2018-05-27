@@ -1,0 +1,144 @@
+\hypertarget{gcry_8h}{}\section{transport/gcry.h File Reference}
+\label{gcry_8h}\index{transport/gcry.\+h@{transport/gcry.\+h}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{gcry_8h_a4dfa2bd7b47512180fb611fddea9b3af}{xerr2} (const char $\ast$msg,...)
+\item 
+void \hyperlink{gcry_8h_a9fa017bd489a31c8ffc9576f6c353ce5}{printerr} (int err, char $\ast$\hyperlink{test__base64a_8c_a080015e087ccb9a54619cbffe677aa94}{str})
+\item 
+void \hyperlink{gcry_8h_ab9745d88e6b650dd9b8b4f3db2d07d67}{gcrypt\+\_\+init} ()
+\item 
+unsigned int \hyperlink{gcry_8h_a14c23a23f65aea6055912d21fe79ef8f}{getfsize} (F\+I\+LE $\ast$fp)
+\item 
+size\+\_\+t \hyperlink{gcry_8h_af0fe8c3ea8411234692d65106f01237c}{get\+\_\+keypair\+\_\+size} (int nbits)
+\item 
+void \hyperlink{gcry_8h_a5ba19e1c09b8c9530560dfa7b2161bd4}{get\+\_\+aes\+\_\+ctx} (gcry\+\_\+cipher\+\_\+hd\+\_\+t $\ast$aes\+\_\+hd, const char $\ast$passwd, int pass\+\_\+len)
+\item 
+void \hyperlink{gcry_8h_aad0a4363b347ba069da4a4aa7b91da12}{get\+\_\+twofish\+\_\+ctx} (gcry\+\_\+cipher\+\_\+hd\+\_\+t $\ast$aes\+\_\+hd, const char $\ast$passwd, int pass\+\_\+len)
+\item 
+void \hyperlink{gcry_8h_afe8df7198c908c1a80bb00856679356b}{print\+\_\+cypher\+\_\+details} (const char $\ast$\hyperlink{test__base64a_8c_a080015e087ccb9a54619cbffe677aa94}{str})
+\item 
+char $\ast$ \hyperlink{gcry_8h_a24c135d1fdd67a7e1932c47b7a40bafa}{decode\+\_\+comp\+\_\+key} (char $\ast$rsa\+\_\+buf, int $\ast$prsa\+\_\+len, char $\ast$$\ast$err\+\_\+str)
+\item 
+char $\ast$ \hyperlink{gcry_8h_a54c0725318a15c0d8a9e2bc4620ac359}{decode\+\_\+rsa\+\_\+cyph} (char $\ast$rsa\+\_\+buf, int $\ast$prsa\+\_\+len, char $\ast$$\ast$err\+\_\+str)
+\item 
+char $\ast$ \hyperlink{gcry_8h_a38a0faad0a825e5d2ba89c9f55a57dd6}{decode\+\_\+pub\+\_\+key} (char $\ast$rsa\+\_\+buf, int $\ast$prsa\+\_\+len, char $\ast$$\ast$err\+\_\+str)
+\item 
+int \hyperlink{gcry_8h_ac16f2293c8b1100627d274366342b357}{write\+\_\+pubkey} (gcry\+\_\+sexp\+\_\+t $\ast$rsa\+\_\+keypair, const char $\ast$xfname2)
+\item 
+int \hyperlink{gcry_8h_adfef430bbf2247397e6375918467ef71}{write\+\_\+mod\+\_\+exp} (gcry\+\_\+sexp\+\_\+t $\ast$rsa\+\_\+keypair, const char $\ast$xfname2)
+\item 
+int \hyperlink{gcry_8h_a43d6856f721c6b7e3248c0d32a589bb0}{pk\+\_\+encrypt\+\_\+buffer} (const char $\ast$buf, int len, gcry\+\_\+sexp\+\_\+t pubk, gcry\+\_\+sexp\+\_\+t $\ast$ciph)
+\item 
+char $\ast$ \hyperlink{gcry_8h_a1078b870c70c8d2ba6c37b679cb0ed2c}{zrandstr\+\_\+strong} (int len)
+\item 
+char $\ast$ \hyperlink{gcry_8h_aaf3f60a5956f5aed1286f081cb1216cc}{hash\+\_\+file} (char $\ast$fname, char $\ast$$\ast$err\+\_\+str)
+\item 
+char $\ast$ \hyperlink{gcry_8h_afd5a51cbe3a5853b32f1aabebc42b4af}{alloc\+\_\+rand\+\_\+amount} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{gcry_8h_afd5a51cbe3a5853b32f1aabebc42b4af}\label{gcry_8h_afd5a51cbe3a5853b32f1aabebc42b4af}} 
+\index{gcry.\+h@{gcry.\+h}!alloc\+\_\+rand\+\_\+amount@{alloc\+\_\+rand\+\_\+amount}}
+\index{alloc\+\_\+rand\+\_\+amount@{alloc\+\_\+rand\+\_\+amount}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{alloc\+\_\+rand\+\_\+amount()}{alloc\_rand\_amount()}}
+{\footnotesize\ttfamily char$\ast$ alloc\+\_\+rand\+\_\+amount (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_a24c135d1fdd67a7e1932c47b7a40bafa}\label{gcry_8h_a24c135d1fdd67a7e1932c47b7a40bafa}} 
+\index{gcry.\+h@{gcry.\+h}!decode\+\_\+comp\+\_\+key@{decode\+\_\+comp\+\_\+key}}
+\index{decode\+\_\+comp\+\_\+key@{decode\+\_\+comp\+\_\+key}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{decode\+\_\+comp\+\_\+key()}{decode\_comp\_key()}}
+{\footnotesize\ttfamily char$\ast$ decode\+\_\+comp\+\_\+key (\begin{DoxyParamCaption}\item[{char $\ast$}]{rsa\+\_\+buf,  }\item[{int $\ast$}]{prsa\+\_\+len,  }\item[{char $\ast$$\ast$}]{err\+\_\+str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_a38a0faad0a825e5d2ba89c9f55a57dd6}\label{gcry_8h_a38a0faad0a825e5d2ba89c9f55a57dd6}} 
+\index{gcry.\+h@{gcry.\+h}!decode\+\_\+pub\+\_\+key@{decode\+\_\+pub\+\_\+key}}
+\index{decode\+\_\+pub\+\_\+key@{decode\+\_\+pub\+\_\+key}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{decode\+\_\+pub\+\_\+key()}{decode\_pub\_key()}}
+{\footnotesize\ttfamily char$\ast$ decode\+\_\+pub\+\_\+key (\begin{DoxyParamCaption}\item[{char $\ast$}]{rsa\+\_\+buf,  }\item[{int $\ast$}]{prsa\+\_\+len,  }\item[{char $\ast$$\ast$}]{err\+\_\+str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_a54c0725318a15c0d8a9e2bc4620ac359}\label{gcry_8h_a54c0725318a15c0d8a9e2bc4620ac359}} 
+\index{gcry.\+h@{gcry.\+h}!decode\+\_\+rsa\+\_\+cyph@{decode\+\_\+rsa\+\_\+cyph}}
+\index{decode\+\_\+rsa\+\_\+cyph@{decode\+\_\+rsa\+\_\+cyph}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{decode\+\_\+rsa\+\_\+cyph()}{decode\_rsa\_cyph()}}
+{\footnotesize\ttfamily char$\ast$ decode\+\_\+rsa\+\_\+cyph (\begin{DoxyParamCaption}\item[{char $\ast$}]{rsa\+\_\+buf,  }\item[{int $\ast$}]{prsa\+\_\+len,  }\item[{char $\ast$$\ast$}]{err\+\_\+str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_ab9745d88e6b650dd9b8b4f3db2d07d67}\label{gcry_8h_ab9745d88e6b650dd9b8b4f3db2d07d67}} 
+\index{gcry.\+h@{gcry.\+h}!gcrypt\+\_\+init@{gcrypt\+\_\+init}}
+\index{gcrypt\+\_\+init@{gcrypt\+\_\+init}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{gcrypt\+\_\+init()}{gcrypt\_init()}}
+{\footnotesize\ttfamily void gcrypt\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_a5ba19e1c09b8c9530560dfa7b2161bd4}\label{gcry_8h_a5ba19e1c09b8c9530560dfa7b2161bd4}} 
+\index{gcry.\+h@{gcry.\+h}!get\+\_\+aes\+\_\+ctx@{get\+\_\+aes\+\_\+ctx}}
+\index{get\+\_\+aes\+\_\+ctx@{get\+\_\+aes\+\_\+ctx}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{get\+\_\+aes\+\_\+ctx()}{get\_aes\_ctx()}}
+{\footnotesize\ttfamily void get\+\_\+aes\+\_\+ctx (\begin{DoxyParamCaption}\item[{gcry\+\_\+cipher\+\_\+hd\+\_\+t $\ast$}]{aes\+\_\+hd,  }\item[{const char $\ast$}]{passwd,  }\item[{int}]{pass\+\_\+len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_af0fe8c3ea8411234692d65106f01237c}\label{gcry_8h_af0fe8c3ea8411234692d65106f01237c}} 
+\index{gcry.\+h@{gcry.\+h}!get\+\_\+keypair\+\_\+size@{get\+\_\+keypair\+\_\+size}}
+\index{get\+\_\+keypair\+\_\+size@{get\+\_\+keypair\+\_\+size}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{get\+\_\+keypair\+\_\+size()}{get\_keypair\_size()}}
+{\footnotesize\ttfamily size\+\_\+t get\+\_\+keypair\+\_\+size (\begin{DoxyParamCaption}\item[{int}]{nbits }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_aad0a4363b347ba069da4a4aa7b91da12}\label{gcry_8h_aad0a4363b347ba069da4a4aa7b91da12}} 
+\index{gcry.\+h@{gcry.\+h}!get\+\_\+twofish\+\_\+ctx@{get\+\_\+twofish\+\_\+ctx}}
+\index{get\+\_\+twofish\+\_\+ctx@{get\+\_\+twofish\+\_\+ctx}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{get\+\_\+twofish\+\_\+ctx()}{get\_twofish\_ctx()}}
+{\footnotesize\ttfamily void get\+\_\+twofish\+\_\+ctx (\begin{DoxyParamCaption}\item[{gcry\+\_\+cipher\+\_\+hd\+\_\+t $\ast$}]{aes\+\_\+hd,  }\item[{const char $\ast$}]{passwd,  }\item[{int}]{pass\+\_\+len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_a14c23a23f65aea6055912d21fe79ef8f}\label{gcry_8h_a14c23a23f65aea6055912d21fe79ef8f}} 
+\index{gcry.\+h@{gcry.\+h}!getfsize@{getfsize}}
+\index{getfsize@{getfsize}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{getfsize()}{getfsize()}}
+{\footnotesize\ttfamily unsigned int getfsize (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_aaf3f60a5956f5aed1286f081cb1216cc}\label{gcry_8h_aaf3f60a5956f5aed1286f081cb1216cc}} 
+\index{gcry.\+h@{gcry.\+h}!hash\+\_\+file@{hash\+\_\+file}}
+\index{hash\+\_\+file@{hash\+\_\+file}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{hash\+\_\+file()}{hash\_file()}}
+{\footnotesize\ttfamily char$\ast$ hash\+\_\+file (\begin{DoxyParamCaption}\item[{char $\ast$}]{fname,  }\item[{char $\ast$$\ast$}]{err\+\_\+str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_a43d6856f721c6b7e3248c0d32a589bb0}\label{gcry_8h_a43d6856f721c6b7e3248c0d32a589bb0}} 
+\index{gcry.\+h@{gcry.\+h}!pk\+\_\+encrypt\+\_\+buffer@{pk\+\_\+encrypt\+\_\+buffer}}
+\index{pk\+\_\+encrypt\+\_\+buffer@{pk\+\_\+encrypt\+\_\+buffer}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{pk\+\_\+encrypt\+\_\+buffer()}{pk\_encrypt\_buffer()}}
+{\footnotesize\ttfamily int pk\+\_\+encrypt\+\_\+buffer (\begin{DoxyParamCaption}\item[{const char $\ast$}]{buf,  }\item[{int}]{len,  }\item[{gcry\+\_\+sexp\+\_\+t}]{pubk,  }\item[{gcry\+\_\+sexp\+\_\+t $\ast$}]{ciph }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_afe8df7198c908c1a80bb00856679356b}\label{gcry_8h_afe8df7198c908c1a80bb00856679356b}} 
+\index{gcry.\+h@{gcry.\+h}!print\+\_\+cypher\+\_\+details@{print\+\_\+cypher\+\_\+details}}
+\index{print\+\_\+cypher\+\_\+details@{print\+\_\+cypher\+\_\+details}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{print\+\_\+cypher\+\_\+details()}{print\_cypher\_details()}}
+{\footnotesize\ttfamily void print\+\_\+cypher\+\_\+details (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_a9fa017bd489a31c8ffc9576f6c353ce5}\label{gcry_8h_a9fa017bd489a31c8ffc9576f6c353ce5}} 
+\index{gcry.\+h@{gcry.\+h}!printerr@{printerr}}
+\index{printerr@{printerr}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{printerr()}{printerr()}}
+{\footnotesize\ttfamily void printerr (\begin{DoxyParamCaption}\item[{int}]{err,  }\item[{char $\ast$}]{str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_adfef430bbf2247397e6375918467ef71}\label{gcry_8h_adfef430bbf2247397e6375918467ef71}} 
+\index{gcry.\+h@{gcry.\+h}!write\+\_\+mod\+\_\+exp@{write\+\_\+mod\+\_\+exp}}
+\index{write\+\_\+mod\+\_\+exp@{write\+\_\+mod\+\_\+exp}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{write\+\_\+mod\+\_\+exp()}{write\_mod\_exp()}}
+{\footnotesize\ttfamily int write\+\_\+mod\+\_\+exp (\begin{DoxyParamCaption}\item[{gcry\+\_\+sexp\+\_\+t $\ast$}]{rsa\+\_\+keypair,  }\item[{const char $\ast$}]{xfname2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_ac16f2293c8b1100627d274366342b357}\label{gcry_8h_ac16f2293c8b1100627d274366342b357}} 
+\index{gcry.\+h@{gcry.\+h}!write\+\_\+pubkey@{write\+\_\+pubkey}}
+\index{write\+\_\+pubkey@{write\+\_\+pubkey}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{write\+\_\+pubkey()}{write\_pubkey()}}
+{\footnotesize\ttfamily int write\+\_\+pubkey (\begin{DoxyParamCaption}\item[{gcry\+\_\+sexp\+\_\+t $\ast$}]{rsa\+\_\+keypair,  }\item[{const char $\ast$}]{xfname2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_a4dfa2bd7b47512180fb611fddea9b3af}\label{gcry_8h_a4dfa2bd7b47512180fb611fddea9b3af}} 
+\index{gcry.\+h@{gcry.\+h}!xerr2@{xerr2}}
+\index{xerr2@{xerr2}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{xerr2()}{xerr2()}}
+{\footnotesize\ttfamily void xerr2 (\begin{DoxyParamCaption}\item[{const char $\ast$}]{msg,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gcry_8h_a1078b870c70c8d2ba6c37b679cb0ed2c}\label{gcry_8h_a1078b870c70c8d2ba6c37b679cb0ed2c}} 
+\index{gcry.\+h@{gcry.\+h}!zrandstr\+\_\+strong@{zrandstr\+\_\+strong}}
+\index{zrandstr\+\_\+strong@{zrandstr\+\_\+strong}!gcry.\+h@{gcry.\+h}}
+\subsubsection{\texorpdfstring{zrandstr\+\_\+strong()}{zrandstr\_strong()}}
+{\footnotesize\ttfamily char$\ast$ zrandstr\+\_\+strong (\begin{DoxyParamCaption}\item[{int}]{len }\end{DoxyParamCaption})}
+

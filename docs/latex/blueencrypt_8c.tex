@@ -1,0 +1,61 @@
+\hypertarget{blueencrypt_8c}{}\section{bluepoint/blueencrypt.c File Reference}
+\label{blueencrypt_8c}\index{bluepoint/blueencrypt.\+c@{bluepoint/blueencrypt.\+c}}
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}getpass.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}base64.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}zmalloc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cmdline.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bluepoint3.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blueutil.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}misc.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{blueencrypt_8c_a4dfa2bd7b47512180fb611fddea9b3af}{xerr2} (const char $\ast$msg,...)
+\item 
+char $\ast$ \hyperlink{blueencrypt_8c_a3352da1728927ec5d3f40b90eab4176f}{bluepoint\+\_\+hash\+\_\+file} (char $\ast$fname, char $\ast$$\ast$err\+\_\+str)
+\item 
+int \hyperlink{blueencrypt_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} \hyperlink{blueencrypt_8c_ad75e49d295005b3f5fffec85f24090d3}{opts\+\_\+data} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{blueencrypt_8c_a3352da1728927ec5d3f40b90eab4176f}\label{blueencrypt_8c_a3352da1728927ec5d3f40b90eab4176f}} 
+\index{blueencrypt.\+c@{blueencrypt.\+c}!bluepoint\+\_\+hash\+\_\+file@{bluepoint\+\_\+hash\+\_\+file}}
+\index{bluepoint\+\_\+hash\+\_\+file@{bluepoint\+\_\+hash\+\_\+file}!blueencrypt.\+c@{blueencrypt.\+c}}
+\subsubsection{\texorpdfstring{bluepoint\+\_\+hash\+\_\+file()}{bluepoint\_hash\_file()}}
+{\footnotesize\ttfamily char$\ast$ bluepoint\+\_\+hash\+\_\+file (\begin{DoxyParamCaption}\item[{char $\ast$}]{fname,  }\item[{char $\ast$$\ast$}]{err\+\_\+str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{blueencrypt_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{blueencrypt_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{blueencrypt.\+c@{blueencrypt.\+c}!main@{main}}
+\index{main@{main}!blueencrypt.\+c@{blueencrypt.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{blueencrypt_8c_a4dfa2bd7b47512180fb611fddea9b3af}\label{blueencrypt_8c_a4dfa2bd7b47512180fb611fddea9b3af}} 
+\index{blueencrypt.\+c@{blueencrypt.\+c}!xerr2@{xerr2}}
+\index{xerr2@{xerr2}!blueencrypt.\+c@{blueencrypt.\+c}}
+\subsubsection{\texorpdfstring{xerr2()}{xerr2()}}
+{\footnotesize\ttfamily void xerr2 (\begin{DoxyParamCaption}\item[{const char $\ast$}]{msg,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{blueencrypt_8c_ad75e49d295005b3f5fffec85f24090d3}\label{blueencrypt_8c_ad75e49d295005b3f5fffec85f24090d3}} 
+\index{blueencrypt.\+c@{blueencrypt.\+c}!opts\+\_\+data@{opts\+\_\+data}}
+\index{opts\+\_\+data@{opts\+\_\+data}!blueencrypt.\+c@{blueencrypt.\+c}}
+\subsubsection{\texorpdfstring{opts\+\_\+data}{opts\_data}}
+{\footnotesize\ttfamily \hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} opts\+\_\+data\mbox{[}$\,$\mbox{]}}
+

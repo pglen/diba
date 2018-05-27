@@ -1,0 +1,22 @@
+#TOOLDIR=../tools
+#BLUEDIR=../bluepoint
+#COMMON=../common
+#
+#INC2=../../libgcrypt/libgpg-error-1.27/src 
+##INC3=../../libgcrypt/libgcrypt-1.7.8/src 
+#INC3=../../libgcrypt/libgcrypt-1.8.2/src 
+#
+#INC4=$(BLUEDIR)
+#INC5=$(TOOLDIR)
+#INC6=$(COMMON)
+#
+##LIB2=../../libgcrypt/libgcrypt-1.7.8/src/.libs/ 
+#LIB2=../../libgcrypt/libgcrypt-1.8.2/src/.libs/ 
+#LIB3=../../libgcrypt/libgpg-error-1.27/src/.libs/
+#LIB4= -l gcrypt -l gpg-error 
+## -lws2_32 
+#
+#OPT2= -I $(INC2) -I $(INC3) -I $(INC4) -I $(INC5) -I $(INC6) \
+#            -L $(LIB2) -L $(LIB3) $(LIB4)
+
+

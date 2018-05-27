@@ -1,0 +1,79 @@
+\hypertarget{bluepy_8c}{}\section{bluepoint/bluepy/bluepy.c File Reference}
+\label{bluepy_8c}\index{bluepoint/bluepy/bluepy.\+c@{bluepoint/bluepy/bluepy.\+c}}
+{\ttfamily \#include $<$Python.\+h$>$}\newline
+{\ttfamily \#include $<$pygobject.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}bluepy.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../bluepoint2.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}bdate.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{bluepy_8c_abf8bd883a89f211750ffc3708b10a712}{O\+P\+E\+N\+\_\+\+I\+M\+A\+GE}~1
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{bluepy_8c_a4b65e3744abbd30a386054cab4020879}{initbluepy} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Py\+Object $\ast$ \hyperlink{bluepy_8c_ad6fdb3f06060b0f8a1da6bd79af22e38}{module}
+\item 
+Py\+Method\+Def \hyperlink{bluepy_8c_a443ec2cbcc681091b0851d65e970f2b2}{bluepy\+\_\+functions} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{bluepy_8c_abf8bd883a89f211750ffc3708b10a712}\label{bluepy_8c_abf8bd883a89f211750ffc3708b10a712}} 
+\index{bluepy.\+c@{bluepy.\+c}!O\+P\+E\+N\+\_\+\+I\+M\+A\+GE@{O\+P\+E\+N\+\_\+\+I\+M\+A\+GE}}
+\index{O\+P\+E\+N\+\_\+\+I\+M\+A\+GE@{O\+P\+E\+N\+\_\+\+I\+M\+A\+GE}!bluepy.\+c@{bluepy.\+c}}
+\subsubsection{\texorpdfstring{O\+P\+E\+N\+\_\+\+I\+M\+A\+GE}{OPEN\_IMAGE}}
+{\footnotesize\ttfamily \#define O\+P\+E\+N\+\_\+\+I\+M\+A\+GE~1}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{bluepy_8c_a4b65e3744abbd30a386054cab4020879}\label{bluepy_8c_a4b65e3744abbd30a386054cab4020879}} 
+\index{bluepy.\+c@{bluepy.\+c}!initbluepy@{initbluepy}}
+\index{initbluepy@{initbluepy}!bluepy.\+c@{bluepy.\+c}}
+\subsubsection{\texorpdfstring{initbluepy()}{initbluepy()}}
+{\footnotesize\ttfamily initbluepy (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{bluepy_8c_a443ec2cbcc681091b0851d65e970f2b2}\label{bluepy_8c_a443ec2cbcc681091b0851d65e970f2b2}} 
+\index{bluepy.\+c@{bluepy.\+c}!bluepy\+\_\+functions@{bluepy\+\_\+functions}}
+\index{bluepy\+\_\+functions@{bluepy\+\_\+functions}!bluepy.\+c@{bluepy.\+c}}
+\subsubsection{\texorpdfstring{bluepy\+\_\+functions}{bluepy\_functions}}
+{\footnotesize\ttfamily Py\+Method\+Def bluepy\+\_\+functions\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= 
+    \{
+    
+    \{ \textcolor{stringliteral}{"version"},   (PyCFunction)\_version, METH\_VARARGS|METH\_KEYWORDS, \textcolor{stringliteral}{"Bluepy version."}\},
+    \{ \textcolor{stringliteral}{"builddate"}, (PyCFunction)\_bdate,   METH\_VARARGS|METH\_KEYWORDS, \textcolor{stringliteral}{"Bluepy build date."}\},
+    \{ \textcolor{stringliteral}{"encrypt"},   (PyCFunction)\_encrypt, METH\_VARARGS|METH\_KEYWORDS, 
+        \textcolor{stringliteral}{"Bluepy encryption. Pass buffer and pass."}\},
+    \{ \textcolor{stringliteral}{"decrypt"},   (PyCFunction)\_decrypt, METH\_VARARGS|METH\_KEYWORDS, 
+        \textcolor{stringliteral}{"Bluepy decryption. Pass buffer and pass."}\},
+    \{ \textcolor{stringliteral}{"destroy"},   (PyCFunction)\_destroy, METH\_VARARGS|METH\_KEYWORDS, 
+        \textcolor{stringliteral}{"Bluepy destruction. Scramble variable. Fill with '0' or number. "} 
+        \textcolor{stringliteral}{"Pass zero to randomize."}\},
+    \{ \textcolor{stringliteral}{"tohex"},     (PyCFunction)\_tohex,   METH\_VARARGS|METH\_KEYWORDS, 
+        \textcolor{stringliteral}{"Bluepy tohex. Convert to hex string."}\},
+    \{ \textcolor{stringliteral}{"fromhex"},   (PyCFunction)\_fromhex, METH\_VARARGS|METH\_KEYWORDS, 
+        \textcolor{stringliteral}{"Bluepy fromhex. Convert from hex string."}\},
+    
+    \{  NULL \},
+    \}
+\end{DoxyCode}
+\mbox{\Hypertarget{bluepy_8c_ad6fdb3f06060b0f8a1da6bd79af22e38}\label{bluepy_8c_ad6fdb3f06060b0f8a1da6bd79af22e38}} 
+\index{bluepy.\+c@{bluepy.\+c}!module@{module}}
+\index{module@{module}!bluepy.\+c@{bluepy.\+c}}
+\subsubsection{\texorpdfstring{module}{module}}
+{\footnotesize\ttfamily Py\+Object$\ast$ module}
+

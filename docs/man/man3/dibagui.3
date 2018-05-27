@@ -1,0 +1,165 @@
+.TH "dibagui" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+dibagui
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "class \fBMainWin\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fBshowgtk\fP ()"
+.br
+.ti -1c
+.RI "def \fBpprint\fP (ddd)"
+.br
+.ti -1c
+.RI "def \fBkey_press_event\fP (win, \fBaa\fP)"
+.br
+.ti -1c
+.RI "def \fBhelp\fP ()"
+.br
+.ti -1c
+.RI "def \fBsoftmkdir\fP (dirx)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "float \fBversion\fP = 1\&.0"
+.br
+.ti -1c
+.RI "bool \fBverbose\fP = False"
+.br
+.ti -1c
+.RI "string \fBxstr\fP = ''"
+.br
+.ti -1c
+.RI "\fBdataroot\fP = os\&.getcwd()"
+.br
+.ti -1c
+.RI "string \fBdata_dir\fP = \fBdataroot\fP + '/\&.\&./customers/'"
+.br
+.ti -1c
+.RI "string \fBkey_dir\fP = \fBdataroot\fP + '/\&.\&./customers/keys/'"
+.br
+.ti -1c
+.RI "string \fBcurrency_dir\fP = \fBdataroot\fP + '/\&.\&./currency/'"
+.br
+.ti -1c
+.RI "string \fBtransact_dir\fP = \fBdataroot\fP + '/\&.\&./transact/'"
+.br
+.ti -1c
+.RI "string \fBautit_dir\fP = \fBdataroot\fP + '/\&.\&./audit/'"
+.br
+.ti -1c
+.RI "bool \fBshow_config\fP = False;"
+.br
+.ti -1c
+.RI "bool \fBshow_database\fP = False"
+.br
+.ti -1c
+.RI "int \fBpg_debug\fP = 0"
+.br
+.ti -1c
+.RI "\fBdibadb\fP = \fBpysql\&.dibasql\fP(\fBdata_dir\fP + '/data\&.mysql')"
+.br
+.ti -1c
+.RI "list \fBopts\fP = []"
+.br
+.ti -1c
+.RI "\fBargs\fP"
+.br
+.ti -1c
+.RI "\fBshow_timing\fP"
+.br
+.ti -1c
+.RI "\fBremove_database\fP"
+.br
+.ti -1c
+.RI "\fBdb\fP"
+.br
+.ti -1c
+.RI "\fBdd\fP"
+.br
+.ti -1c
+.RI "\fBaa\fP = sys\&.stdin\&.readline()"
+.br
+.ti -1c
+.RI "\fBrr\fP = dibadb\&.rmall()"
+.br
+.ti -1c
+.RI "\fBmainwin\fP = \fBMainWin\fP()"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "def dibagui\&.help ()"
+
+.SS "def dibagui\&.key_press_event ( win,  aa)"
+
+.SS "def dibagui\&.pprint ( ddd)"
+
+.SS "def dibagui\&.showgtk ()"
+
+.SS "def dibagui\&.softmkdir ( dirx)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "aa = sys\&.stdin\&.readline()"
+
+.SS "args"
+
+.SS "string autit_dir = \fBdataroot\fP + '/\&.\&./audit/'"
+
+.SS "string currency_dir = \fBdataroot\fP + '/\&.\&./currency/'"
+
+.SS "string data_dir = \fBdataroot\fP + '/\&.\&./customers/'"
+
+.SS "dataroot = os\&.getcwd()"
+
+.SS "db"
+
+.SS "dd"
+
+.SS "dibadb = \fBpysql\&.dibasql\fP(\fBdata_dir\fP + '/data\&.mysql')"
+
+.SS "string key_dir = \fBdataroot\fP + '/\&.\&./customers/keys/'"
+
+.SS "mainwin = \fBMainWin\fP()"
+
+.SS "\fBopts\fP = []"
+
+.SS "pg_debug = 0"
+
+.SS "remove_database"
+
+.SS "rr = dibadb\&.rmall()"
+
+.SS "show_config = False;"
+
+.SS "show_database = False"
+
+.SS "show_timing"
+
+.SS "string transact_dir = \fBdataroot\fP + '/\&.\&./transact/'"
+
+.SS "bool verbose = False"
+
+.SS "float version = 1\&.0"
+
+.SS "string xstr = ''"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

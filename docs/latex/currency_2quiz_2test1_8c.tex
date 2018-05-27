@@ -1,0 +1,195 @@
+\hypertarget{currency_2quiz_2test1_8c}{}\section{currency/quiz/test1.c File Reference}
+\label{currency_2quiz_2test1_8c}\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdarg.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{currency_2quiz_2test1_8c_aa8cecfc5c5c054d2875c03e77b7be15d}{T\+R\+UE}~(1==1)
+\item 
+\#define \hyperlink{currency_2quiz_2test1_8c_aa93f0eb578d23995850d61f7d61c55c1}{F\+A\+L\+SE}~(1==0)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{currency_2quiz_2test1_8c_a4dfa2bd7b47512180fb611fddea9b3af}{xerr2} (const char $\ast$msg,...)
+\item 
+unsigned int \hyperlink{currency_2quiz_2test1_8c_a14c23a23f65aea6055912d21fe79ef8f}{getfsize} (F\+I\+LE $\ast$fp)
+\item 
+int \hyperlink{currency_2quiz_2test1_8c_abd301d01c47695d30b4bef318db6103f}{is\+\_\+sane} (const char $\ast$txt)
+\item 
+void \hyperlink{currency_2quiz_2test1_8c_a91a3bbcc7eb26e8695255b2795d6e46f}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{currency_2quiz_2test1_8c_a9adae5d41fbc3809cf3252fac4c551d5}{val} \mbox{[}256\mbox{]}
+\item 
+int \hyperlink{currency_2quiz_2test1_8c_abce66cfa23386d96b8765ea028ff5c75}{validx} = 0
+\item 
+char \hyperlink{currency_2quiz_2test1_8c_a615c110d0cf1a2bc9668d06302228462}{decval} \mbox{[}256\mbox{]}
+\item 
+int \hyperlink{currency_2quiz_2test1_8c_a6aa88dff2b170615f86de9955f1e39a9}{decidx} = 0
+\item 
+int \hyperlink{currency_2quiz_2test1_8c_a3f51e346289cffd20c738e3ba3c892e5}{freq} \mbox{[}256\mbox{]} = \{0\}
+\item 
+int \hyperlink{currency_2quiz_2test1_8c_aab8ac8f289baf65a4f1352782085ee87}{freqtable} \mbox{[}$\,$\mbox{]}
+\item 
+char \hyperlink{currency_2quiz_2test1_8c_abdf9bbb5aa972639d3de8c93f7f90146}{goodtable} \mbox{[}$\,$\mbox{]}
+\item 
+char \hyperlink{currency_2quiz_2test1_8c_aa99aa077e159c61b44f21e8b609c77b9}{goodtable2} \mbox{[}sizeof(\hyperlink{currency_2quiz_2test1_8c_abdf9bbb5aa972639d3de8c93f7f90146}{goodtable}) $\ast$10\mbox{]} = \{0\}
+\item 
+int \hyperlink{currency_2quiz_2test1_8c_a3239c09fe51c4964f68e05ccad1c0c40}{xidx} \mbox{[}$\,$\mbox{]}
+\item 
+char \hyperlink{currency_2quiz_2test1_8c_ab20bfa7d2872c351db24d44eb66d70a4}{coll} \mbox{[}1000\mbox{]} = \{0\}
+\item 
+int \hyperlink{currency_2quiz_2test1_8c_a75270f8773b05934acfc12e2a7c967e3}{idxcoll} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_aa93f0eb578d23995850d61f7d61c55c1}\label{currency_2quiz_2test1_8c_aa93f0eb578d23995850d61f7d61c55c1}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!F\+A\+L\+SE@{F\+A\+L\+SE}}
+\index{F\+A\+L\+SE@{F\+A\+L\+SE}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{F\+A\+L\+SE}{FALSE}}
+{\footnotesize\ttfamily \#define F\+A\+L\+SE~(1==0)}
+
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_aa8cecfc5c5c054d2875c03e77b7be15d}\label{currency_2quiz_2test1_8c_aa8cecfc5c5c054d2875c03e77b7be15d}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!T\+R\+UE@{T\+R\+UE}}
+\index{T\+R\+UE@{T\+R\+UE}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{T\+R\+UE}{TRUE}}
+{\footnotesize\ttfamily \#define T\+R\+UE~(1==1)}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_a14c23a23f65aea6055912d21fe79ef8f}\label{currency_2quiz_2test1_8c_a14c23a23f65aea6055912d21fe79ef8f}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!getfsize@{getfsize}}
+\index{getfsize@{getfsize}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{getfsize()}{getfsize()}}
+{\footnotesize\ttfamily unsigned int getfsize (\begin{DoxyParamCaption}\item[{F\+I\+LE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_abd301d01c47695d30b4bef318db6103f}\label{currency_2quiz_2test1_8c_abd301d01c47695d30b4bef318db6103f}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!is\+\_\+sane@{is\+\_\+sane}}
+\index{is\+\_\+sane@{is\+\_\+sane}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{is\+\_\+sane()}{is\_sane()}}
+{\footnotesize\ttfamily int is\+\_\+sane (\begin{DoxyParamCaption}\item[{const char $\ast$}]{txt }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_a91a3bbcc7eb26e8695255b2795d6e46f}\label{currency_2quiz_2test1_8c_a91a3bbcc7eb26e8695255b2795d6e46f}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!main@{main}}
+\index{main@{main}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily void main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_a4dfa2bd7b47512180fb611fddea9b3af}\label{currency_2quiz_2test1_8c_a4dfa2bd7b47512180fb611fddea9b3af}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!xerr2@{xerr2}}
+\index{xerr2@{xerr2}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{xerr2()}{xerr2()}}
+{\footnotesize\ttfamily void xerr2 (\begin{DoxyParamCaption}\item[{const char $\ast$}]{msg,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_ab20bfa7d2872c351db24d44eb66d70a4}\label{currency_2quiz_2test1_8c_ab20bfa7d2872c351db24d44eb66d70a4}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!coll@{coll}}
+\index{coll@{coll}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{coll}{coll}}
+{\footnotesize\ttfamily char coll\mbox{[}1000\mbox{]} = \{0\}}
+
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_a6aa88dff2b170615f86de9955f1e39a9}\label{currency_2quiz_2test1_8c_a6aa88dff2b170615f86de9955f1e39a9}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!decidx@{decidx}}
+\index{decidx@{decidx}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{decidx}{decidx}}
+{\footnotesize\ttfamily int decidx = 0}
+
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_a615c110d0cf1a2bc9668d06302228462}\label{currency_2quiz_2test1_8c_a615c110d0cf1a2bc9668d06302228462}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!decval@{decval}}
+\index{decval@{decval}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{decval}{decval}}
+{\footnotesize\ttfamily char decval\mbox{[}256\mbox{]}}
+
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_a3f51e346289cffd20c738e3ba3c892e5}\label{currency_2quiz_2test1_8c_a3f51e346289cffd20c738e3ba3c892e5}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!freq@{freq}}
+\index{freq@{freq}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{freq}{freq}}
+{\footnotesize\ttfamily int freq\mbox{[}256\mbox{]} = \{0\}}
+
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_aab8ac8f289baf65a4f1352782085ee87}\label{currency_2quiz_2test1_8c_aab8ac8f289baf65a4f1352782085ee87}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!freqtable@{freqtable}}
+\index{freqtable@{freqtable}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{freqtable}{freqtable}}
+{\footnotesize\ttfamily int freqtable\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{
+
+
+688,  32, 318, 101, 235, 116, 191, 105, 165,  97, 150, 115, 
+147, 111, 144, 110, 142, 114, 135, 108, 102, 100,  92,  99,  
+89, 104,  79, 117,  74,  45,  71,  46, 
+ 71, 121,  66, 112,  61, 102,  53, 109,  52,  98,  43, 107, 
+ 38, 103,  29, 119,  14, 120,  13, 118,   7,  44,   7,  47, 
+  7,  58,   6,  40,   6,  41,   5,  49,   4,  52,   4,  95, 
+  3,  48,   3,  54,   3, 106,   3, 113,   3, 122,   3, 124, 
+  2,  34,   2,  39,   2,  55,   2,  57,   1,  56,   1,  64, 
+  1,  92, 
+
+  \}
+\end{DoxyCode}
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_abdf9bbb5aa972639d3de8c93f7f90146}\label{currency_2quiz_2test1_8c_abdf9bbb5aa972639d3de8c93f7f90146}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!goodtable@{goodtable}}
+\index{goodtable@{goodtable}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{goodtable}{goodtable}}
+{\footnotesize\ttfamily char goodtable\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{\textcolor{charliteral}{' '}, \textcolor{charliteral}{'e'}, \textcolor{charliteral}{'t'}, \textcolor{charliteral}{'a'}, \textcolor{charliteral}{'o'}, \textcolor{charliteral}{'i'}, \textcolor{charliteral}{'n'}, \textcolor{charliteral}{'s'}, \textcolor{charliteral}{'h'}, \textcolor{charliteral}{'r'}, \textcolor{charliteral}{'d'}, 
+                        \textcolor{charliteral}{'l'}, \textcolor{charliteral}{'c'}, \textcolor{charliteral}{'u'}, \textcolor{charliteral}{'m'}, \textcolor{charliteral}{'w'}, \textcolor{charliteral}{'f'}, \textcolor{charliteral}{'g'}, \textcolor{charliteral}{'y'}, \textcolor{charliteral}{'p'}, \textcolor{charliteral}{'b'}, 
+                        \textcolor{charliteral}{'v'}, \textcolor{charliteral}{'k'},  \textcolor{charliteral}{'j'}, \textcolor{charliteral}{'x'}, \textcolor{charliteral}{'q'}, \textcolor{charliteral}{'z'}
+                        \}
+\end{DoxyCode}
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_aa99aa077e159c61b44f21e8b609c77b9}\label{currency_2quiz_2test1_8c_aa99aa077e159c61b44f21e8b609c77b9}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!goodtable2@{goodtable2}}
+\index{goodtable2@{goodtable2}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{goodtable2}{goodtable2}}
+{\footnotesize\ttfamily char goodtable2\mbox{[}sizeof(\hyperlink{currency_2quiz_2test1_8c_abdf9bbb5aa972639d3de8c93f7f90146}{goodtable}) $\ast$10\mbox{]} = \{0\}}
+
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_a75270f8773b05934acfc12e2a7c967e3}\label{currency_2quiz_2test1_8c_a75270f8773b05934acfc12e2a7c967e3}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!idxcoll@{idxcoll}}
+\index{idxcoll@{idxcoll}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{idxcoll}{idxcoll}}
+{\footnotesize\ttfamily int idxcoll = 0}
+
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_a9adae5d41fbc3809cf3252fac4c551d5}\label{currency_2quiz_2test1_8c_a9adae5d41fbc3809cf3252fac4c551d5}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!val@{val}}
+\index{val@{val}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{val}{val}}
+{\footnotesize\ttfamily int val\mbox{[}256\mbox{]}}
+
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_abce66cfa23386d96b8765ea028ff5c75}\label{currency_2quiz_2test1_8c_abce66cfa23386d96b8765ea028ff5c75}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!validx@{validx}}
+\index{validx@{validx}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{validx}{validx}}
+{\footnotesize\ttfamily int validx = 0}
+
+\mbox{\Hypertarget{currency_2quiz_2test1_8c_a3239c09fe51c4964f68e05ccad1c0c40}\label{currency_2quiz_2test1_8c_a3239c09fe51c4964f68e05ccad1c0c40}} 
+\index{currency/quiz/test1.\+c@{currency/quiz/test1.\+c}!xidx@{xidx}}
+\index{xidx@{xidx}!currency/quiz/test1.\+c@{currency/quiz/test1.\+c}}
+\subsubsection{\texorpdfstring{xidx}{xidx}}
+{\footnotesize\ttfamily int xidx\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+= \{  82, 151, 161, 58, 160, 147, 149, 155,  127,  
+                158,  164,  123,  142,  143,  150,  153, 
+                165, 134,  135,  136,  137  
+                \}
+\end{DoxyCode}

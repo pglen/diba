@@ -1,0 +1,72 @@
+.TH "transport/dibakeygen.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+transport/dibakeygen.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <signal\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include 'gcrypt\&.h'\fP
+.br
+\fC#include 'gcry\&.h'\fP
+.br
+\fC#include 'getpass\&.h'\fP
+.br
+\fC#include 'gsexp\&.h'\fP
+.br
+\fC#include 'base64\&.h'\fP
+.br
+\fC#include 'zmalloc\&.h'\fP
+.br
+\fC#include 'cmdline\&.h'\fP
+.br
+\fC#include 'dibastr\&.h'\fP
+.br
+\fC#include 'misc\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBmy_progress_handler\fP (void *cb_data, const char *what, int printchar, int current, int total)"
+.br
+.ti -1c
+.RI "void \fBxerr3\fP (const char *\fBstr\fP,\&.\&.\&.)"
+.br
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBopts\fP \fBopts_data\fP []"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char ** argv)"
+
+.IP "\(bu" 2
+Write the encrypted base64 key pair to disk\&. */ 
+.PP
+
+.SS "void my_progress_handler (void * cb_data, const char * what, int printchar, int current, int total)"
+
+.SS "void xerr3 (const char * str,  \&.\&.\&.)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "\fBopts\fP opts_data[]"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

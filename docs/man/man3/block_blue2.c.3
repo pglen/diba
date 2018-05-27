@@ -1,0 +1,87 @@
+.TH "bluepoint/block_blue2.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+bluepoint/block_blue2.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'stdlib\&.h'\fP
+.br
+\fC#include 'stdio\&.h'\fP
+.br
+\fC#include 'string\&.h'\fP
+.br
+\fC#include 'bluepoint2\&.h'\fP
+.br
+\fC#include 'hs_crypt\&.c'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBcentinel\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDEF_DUMPHEX\fP   1"
+.br
+.ti -1c
+.RI "#define \fBBLOCKSIZE\fP   1024"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsdump\fP (void *mem)"
+.br
+.ti -1c
+.RI "int \fBmain\fP (int argc, char *argv[])"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "struct \fBcentinel\fP \fBcent\fP"
+.br
+.ti -1c
+.RI "char \fBpass\fP [128] = '1234'"
+.br
+.ti -1c
+.RI "int \fBslen\fP"
+.br
+.ti -1c
+.RI "int \fBplen\fP"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define BLOCKSIZE   1024"
+
+.SS "#define DEF_DUMPHEX   1"
+
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char * argv[])"
+
+.SS "int sdump (void * mem)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "struct \fBcentinel\fP  cent"
+
+.SS "char pass[128] = '1234'"
+
+.SS "int plen"
+
+.SS "int slen"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

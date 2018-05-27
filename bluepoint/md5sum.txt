@@ -1,0 +1,10 @@
+012b071204bc1ea7a67995832cc08e4c *Makefile
+b948090313bbbf44c8040b0f07c66167 *block_blue2.c
+8dc9cb9827b226d946120e9e2dcb5afd *block_blue2.exe
+b1b57b7b0984fd0048dba71ce375b955 *bluemac.h
+786643a4eab2482dcacd01ab3df64c49 *bluepoint2.c
+0659952383dcf8cd9d8a1c441edcdbba *bluepoint2.h
+2cd269771153974819fa4e6375e2e178 *hs_crypt.c
+0ce8db639505f84271f0e2636a78b7ae *test.org
+edecb67bd1ab91c4fecbe3bf38b08baa *test_blue2.c
+70c4fcef2a5f963ebed182ec73d11440 *test_blue2.exe

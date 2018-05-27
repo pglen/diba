@@ -1,0 +1,59 @@
+.TH "bluepoint/bluefunc.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+bluepoint/bluefunc.c
+.SH SYNOPSIS
+.br
+.PP
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDEF_CFUNC\fP(funcname,  xmacro,  arg)"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef void(* \fBcfunc\fP) (char *, int, char *, int)"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDEF_CFUNC\fP (mixit, \fBMIXIT\fP,+)"
+.br
+.ti -1c
+.RI "\fBDEF_CFUNC\fP (mixit3, \fBMIXIT\fP, \-)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DEF_CFUNC(funcname, xmacro, arg)"
+\fBValue:\fP
+.PP
+.nf
+\
+void    funcname(char *str, int slen, char *pass, int plen)   \
+                                                              \
+{                                                             \
+    int loop, loop2 = 0;  unsigned char  aa, bb, cc;          \
+    xmacro(arg)                                               \
+}                                                             \
+.fi
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef void(* cfunc) (char *, int, char *, int)"
+
+.SH "Function Documentation"
+.PP 
+.SS "DEF_CFUNC (mixit, \fBMIXIT\fP, +)"
+
+.SS "DEF_CFUNC (mixit3, \fBMIXIT\fP, \-)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

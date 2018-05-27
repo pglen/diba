@@ -1,0 +1,158 @@
+\hypertarget{bluepoint2_8h}{}\section{bluepoint/bluepoint2.h File Reference}
+\label{bluepoint2_8h}\index{bluepoint/bluepoint2.\+h@{bluepoint/bluepoint2.\+h}}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef unsigned long \hyperlink{bluepoint2_8h_a718b4eb2652c286f4d42dc18a8e71a1a}{ulong}
+\item 
+typedef unsigned int \hyperlink{bluepoint2_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}
+\item 
+typedef unsigned long long \hyperlink{bluepoint2_8h_a8c42bcc74c4498c45586ad15fab3b829}{ulonglong}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{bluepoint2_8h_a3e16746b20153ab734f7dcb313d40014}{bluepoint2\+\_\+encrypt} (char $\ast$buff, int blen, const char $\ast$\hyperlink{dibagen_8c_a0c2356d302e37fcf49be9c6dab314eb2}{pass}, int \hyperlink{block__blue2_8c_ad29d2259942853507dff3a3e3c05535a}{plen})
+\item 
+int \hyperlink{bluepoint2_8h_ad5eb6949266d8d8f4b13a58219489430}{bluepoint2\+\_\+decrypt} (char $\ast$\hyperlink{test__base64a_8c_a080015e087ccb9a54619cbffe677aa94}{str}, int \hyperlink{block__blue2_8c_a77e5778dba48d5d75c364f1c6f9f5da4}{slen}, const char $\ast$\hyperlink{dibagen_8c_a0c2356d302e37fcf49be9c6dab314eb2}{pass}, int \hyperlink{block__blue2_8c_ad29d2259942853507dff3a3e3c05535a}{plen})
+\item 
+\hyperlink{bluepoint2_8h_a718b4eb2652c286f4d42dc18a8e71a1a}{ulong} \hyperlink{bluepoint2_8h_ac15cd954c05489d2ec644c188b038f7f}{bluepoint2\+\_\+hash} (const char $\ast$buff, int blen)
+\item 
+\hyperlink{bluepoint2_8h_a718b4eb2652c286f4d42dc18a8e71a1a}{ulong} \hyperlink{bluepoint2_8h_a012b12a4e34c60153d8ebc068a0fdd3e}{bluepoint2\+\_\+crypthash} (const char $\ast$buff, int blen, char $\ast$\hyperlink{dibagen_8c_a0c2356d302e37fcf49be9c6dab314eb2}{pass}, int \hyperlink{block__blue2_8c_ad29d2259942853507dff3a3e3c05535a}{plen})
+\item 
+unsigned long long \hyperlink{bluepoint2_8h_a72a1a6ed26a070def36411421e42a621}{bluepoint2\+\_\+hash64} (const char $\ast$buff, int blen)
+\item 
+unsigned long long \hyperlink{bluepoint2_8h_a12d0216f2c2a74c61033ff00cc262365}{bluepoint2\+\_\+crypthash64} (const char $\ast$buff, int blen, char $\ast$\hyperlink{dibagen_8c_a0c2356d302e37fcf49be9c6dab314eb2}{pass}, int \hyperlink{block__blue2_8c_ad29d2259942853507dff3a3e3c05535a}{plen})
+\item 
+char $\ast$ \hyperlink{bluepoint2_8h_a8e584bbff721ff35df339225936e2bb7}{bluepoint2\+\_\+dumphex} (const char $\ast$\hyperlink{test__base64a_8c_a080015e087ccb9a54619cbffe677aa94}{str}, int len)
+\item 
+char $\ast$ \hyperlink{bluepoint2_8h_a6d7cb5730874826983548c2dd947206d}{bluepoint2\+\_\+dump} (const char $\ast$\hyperlink{test__base64a_8c_a080015e087ccb9a54619cbffe677aa94}{str}, int len)
+\item 
+char $\ast$ \hyperlink{bluepoint2_8h_a70d8bf334d6192f549655a234f8697fa}{bluepoint2\+\_\+undump} (const char $\ast$\hyperlink{test__base64a_8c_a080015e087ccb9a54619cbffe677aa94}{str}, int len)
+\item 
+char $\ast$ \hyperlink{bluepoint2_8h_a34c435e73324389a1ccfba8e0c25adcb}{bluepoint2\+\_\+tohex} (const char $\ast$\hyperlink{test__base64a_8c_a080015e087ccb9a54619cbffe677aa94}{str}, int len, char $\ast$out, int $\ast$olen)
+\item 
+char $\ast$ \hyperlink{bluepoint2_8h_a31df1264a0b55cb1c13bc5876eba3e4f}{bluepoint2\+\_\+fromhex} (const char $\ast$\hyperlink{test__base64a_8c_a080015e087ccb9a54619cbffe677aa94}{str}, int len, char $\ast$out, int $\ast$olen)
+\item 
+int \hyperlink{bluepoint2_8h_aef2e004257e884c2ef940bea043c87e0}{bluepoint2\+\_\+set\+\_\+verbose} (int flag)
+\item 
+int \hyperlink{bluepoint2_8h_aaf291d68c67fdc1b9f72767fa1765c01}{bluepoint2\+\_\+set\+\_\+functrace} (int flag)
+\item 
+int \hyperlink{bluepoint2_8h_a1b10a8a2b2cde8d7bbacf06baac23179}{bluepoint2\+\_\+set\+\_\+debug} (int flag)
+\item 
+int \hyperlink{bluepoint2_8h_a52ad23d5c2bb59877937ebecd109c706}{bluepoint2\+\_\+set\+\_\+rounds} (int xrounds)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{bluepoint2_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}\label{bluepoint2_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!uint@{uint}}
+\index{uint@{uint}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{uint}{uint}}
+{\footnotesize\ttfamily typedef unsigned int \hyperlink{bluepoint2_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}}
+
+\mbox{\Hypertarget{bluepoint2_8h_a718b4eb2652c286f4d42dc18a8e71a1a}\label{bluepoint2_8h_a718b4eb2652c286f4d42dc18a8e71a1a}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!ulong@{ulong}}
+\index{ulong@{ulong}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{ulong}{ulong}}
+{\footnotesize\ttfamily typedef unsigned long \hyperlink{bluepoint2_8h_a718b4eb2652c286f4d42dc18a8e71a1a}{ulong}}
+
+\mbox{\Hypertarget{bluepoint2_8h_a8c42bcc74c4498c45586ad15fab3b829}\label{bluepoint2_8h_a8c42bcc74c4498c45586ad15fab3b829}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!ulonglong@{ulonglong}}
+\index{ulonglong@{ulonglong}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{ulonglong}{ulonglong}}
+{\footnotesize\ttfamily typedef unsigned long long \hyperlink{bluepoint2_8h_a8c42bcc74c4498c45586ad15fab3b829}{ulonglong}}
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{bluepoint2_8h_a012b12a4e34c60153d8ebc068a0fdd3e}\label{bluepoint2_8h_a012b12a4e34c60153d8ebc068a0fdd3e}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+crypthash@{bluepoint2\+\_\+crypthash}}
+\index{bluepoint2\+\_\+crypthash@{bluepoint2\+\_\+crypthash}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+crypthash()}{bluepoint2\_crypthash()}}
+{\footnotesize\ttfamily \hyperlink{bluepoint2_8h_a718b4eb2652c286f4d42dc18a8e71a1a}{ulong} bluepoint2\+\_\+crypthash (\begin{DoxyParamCaption}\item[{const char $\ast$}]{buff,  }\item[{int}]{blen,  }\item[{char $\ast$}]{pass,  }\item[{int}]{plen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_a12d0216f2c2a74c61033ff00cc262365}\label{bluepoint2_8h_a12d0216f2c2a74c61033ff00cc262365}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+crypthash64@{bluepoint2\+\_\+crypthash64}}
+\index{bluepoint2\+\_\+crypthash64@{bluepoint2\+\_\+crypthash64}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+crypthash64()}{bluepoint2\_crypthash64()}}
+{\footnotesize\ttfamily unsigned long long bluepoint2\+\_\+crypthash64 (\begin{DoxyParamCaption}\item[{const char $\ast$}]{buff,  }\item[{int}]{blen,  }\item[{char $\ast$}]{pass,  }\item[{int}]{plen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_ad5eb6949266d8d8f4b13a58219489430}\label{bluepoint2_8h_ad5eb6949266d8d8f4b13a58219489430}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+decrypt@{bluepoint2\+\_\+decrypt}}
+\index{bluepoint2\+\_\+decrypt@{bluepoint2\+\_\+decrypt}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+decrypt()}{bluepoint2\_decrypt()}}
+{\footnotesize\ttfamily int bluepoint2\+\_\+decrypt (\begin{DoxyParamCaption}\item[{char $\ast$}]{str,  }\item[{int}]{slen,  }\item[{const char $\ast$}]{pass,  }\item[{int}]{plen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_a6d7cb5730874826983548c2dd947206d}\label{bluepoint2_8h_a6d7cb5730874826983548c2dd947206d}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+dump@{bluepoint2\+\_\+dump}}
+\index{bluepoint2\+\_\+dump@{bluepoint2\+\_\+dump}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+dump()}{bluepoint2\_dump()}}
+{\footnotesize\ttfamily char$\ast$ bluepoint2\+\_\+dump (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str,  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_a8e584bbff721ff35df339225936e2bb7}\label{bluepoint2_8h_a8e584bbff721ff35df339225936e2bb7}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+dumphex@{bluepoint2\+\_\+dumphex}}
+\index{bluepoint2\+\_\+dumphex@{bluepoint2\+\_\+dumphex}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+dumphex()}{bluepoint2\_dumphex()}}
+{\footnotesize\ttfamily char$\ast$ bluepoint2\+\_\+dumphex (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str,  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_a3e16746b20153ab734f7dcb313d40014}\label{bluepoint2_8h_a3e16746b20153ab734f7dcb313d40014}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+encrypt@{bluepoint2\+\_\+encrypt}}
+\index{bluepoint2\+\_\+encrypt@{bluepoint2\+\_\+encrypt}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+encrypt()}{bluepoint2\_encrypt()}}
+{\footnotesize\ttfamily int bluepoint2\+\_\+encrypt (\begin{DoxyParamCaption}\item[{char $\ast$}]{buff,  }\item[{int}]{blen,  }\item[{const char $\ast$}]{pass,  }\item[{int}]{plen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_a31df1264a0b55cb1c13bc5876eba3e4f}\label{bluepoint2_8h_a31df1264a0b55cb1c13bc5876eba3e4f}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+fromhex@{bluepoint2\+\_\+fromhex}}
+\index{bluepoint2\+\_\+fromhex@{bluepoint2\+\_\+fromhex}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+fromhex()}{bluepoint2\_fromhex()}}
+{\footnotesize\ttfamily char$\ast$ bluepoint2\+\_\+fromhex (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str,  }\item[{int}]{len,  }\item[{char $\ast$}]{out,  }\item[{int $\ast$}]{olen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_ac15cd954c05489d2ec644c188b038f7f}\label{bluepoint2_8h_ac15cd954c05489d2ec644c188b038f7f}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+hash@{bluepoint2\+\_\+hash}}
+\index{bluepoint2\+\_\+hash@{bluepoint2\+\_\+hash}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+hash()}{bluepoint2\_hash()}}
+{\footnotesize\ttfamily \hyperlink{bluepoint2_8h_a718b4eb2652c286f4d42dc18a8e71a1a}{ulong} bluepoint2\+\_\+hash (\begin{DoxyParamCaption}\item[{const char $\ast$}]{buff,  }\item[{int}]{blen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_a72a1a6ed26a070def36411421e42a621}\label{bluepoint2_8h_a72a1a6ed26a070def36411421e42a621}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+hash64@{bluepoint2\+\_\+hash64}}
+\index{bluepoint2\+\_\+hash64@{bluepoint2\+\_\+hash64}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+hash64()}{bluepoint2\_hash64()}}
+{\footnotesize\ttfamily unsigned long long bluepoint2\+\_\+hash64 (\begin{DoxyParamCaption}\item[{const char $\ast$}]{buff,  }\item[{int}]{blen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_a1b10a8a2b2cde8d7bbacf06baac23179}\label{bluepoint2_8h_a1b10a8a2b2cde8d7bbacf06baac23179}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+set\+\_\+debug@{bluepoint2\+\_\+set\+\_\+debug}}
+\index{bluepoint2\+\_\+set\+\_\+debug@{bluepoint2\+\_\+set\+\_\+debug}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+set\+\_\+debug()}{bluepoint2\_set\_debug()}}
+{\footnotesize\ttfamily int bluepoint2\+\_\+set\+\_\+debug (\begin{DoxyParamCaption}\item[{int}]{flag }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_aaf291d68c67fdc1b9f72767fa1765c01}\label{bluepoint2_8h_aaf291d68c67fdc1b9f72767fa1765c01}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+set\+\_\+functrace@{bluepoint2\+\_\+set\+\_\+functrace}}
+\index{bluepoint2\+\_\+set\+\_\+functrace@{bluepoint2\+\_\+set\+\_\+functrace}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+set\+\_\+functrace()}{bluepoint2\_set\_functrace()}}
+{\footnotesize\ttfamily int bluepoint2\+\_\+set\+\_\+functrace (\begin{DoxyParamCaption}\item[{int}]{flag }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_a52ad23d5c2bb59877937ebecd109c706}\label{bluepoint2_8h_a52ad23d5c2bb59877937ebecd109c706}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+set\+\_\+rounds@{bluepoint2\+\_\+set\+\_\+rounds}}
+\index{bluepoint2\+\_\+set\+\_\+rounds@{bluepoint2\+\_\+set\+\_\+rounds}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+set\+\_\+rounds()}{bluepoint2\_set\_rounds()}}
+{\footnotesize\ttfamily int bluepoint2\+\_\+set\+\_\+rounds (\begin{DoxyParamCaption}\item[{int}]{xrounds }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_aef2e004257e884c2ef940bea043c87e0}\label{bluepoint2_8h_aef2e004257e884c2ef940bea043c87e0}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+set\+\_\+verbose@{bluepoint2\+\_\+set\+\_\+verbose}}
+\index{bluepoint2\+\_\+set\+\_\+verbose@{bluepoint2\+\_\+set\+\_\+verbose}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+set\+\_\+verbose()}{bluepoint2\_set\_verbose()}}
+{\footnotesize\ttfamily int bluepoint2\+\_\+set\+\_\+verbose (\begin{DoxyParamCaption}\item[{int}]{flag }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_a34c435e73324389a1ccfba8e0c25adcb}\label{bluepoint2_8h_a34c435e73324389a1ccfba8e0c25adcb}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+tohex@{bluepoint2\+\_\+tohex}}
+\index{bluepoint2\+\_\+tohex@{bluepoint2\+\_\+tohex}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+tohex()}{bluepoint2\_tohex()}}
+{\footnotesize\ttfamily char$\ast$ bluepoint2\+\_\+tohex (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str,  }\item[{int}]{len,  }\item[{char $\ast$}]{out,  }\item[{int $\ast$}]{olen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{bluepoint2_8h_a70d8bf334d6192f549655a234f8697fa}\label{bluepoint2_8h_a70d8bf334d6192f549655a234f8697fa}} 
+\index{bluepoint2.\+h@{bluepoint2.\+h}!bluepoint2\+\_\+undump@{bluepoint2\+\_\+undump}}
+\index{bluepoint2\+\_\+undump@{bluepoint2\+\_\+undump}!bluepoint2.\+h@{bluepoint2.\+h}}
+\subsubsection{\texorpdfstring{bluepoint2\+\_\+undump()}{bluepoint2\_undump()}}
+{\footnotesize\ttfamily char$\ast$ bluepoint2\+\_\+undump (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str,  }\item[{int}]{len }\end{DoxyParamCaption})}
+

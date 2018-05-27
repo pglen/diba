@@ -1,0 +1,64 @@
+\hypertarget{gsexp_8h}{}\section{transport/gsexp.h File Reference}
+\label{gsexp_8h}\index{transport/gsexp.\+h@{transport/gsexp.\+h}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{gsexp_8h_aec6fb97fdedc39a1dc0851d7f6b9c32b}{sprint\+\_\+sexp} (gcry\+\_\+sexp\+\_\+t sexp, int $\ast$len, int format)
+\item 
+void \hyperlink{gsexp_8h_a8401fe7063b832e4f0c6a833942d78bd}{print\+\_\+sexp} (gcry\+\_\+sexp\+\_\+t rsa\+\_\+keypair)
+\item 
+int \hyperlink{gsexp_8h_a0b22eb8c08a7fa060ac6afdf7ded833e}{decode\+\_\+sexp} (gcry\+\_\+sexp\+\_\+t list, const char $\ast$findstr)
+\item 
+char $\ast$ \hyperlink{gsexp_8h_a3efda51e52e08bbc574210af32accb6b}{get\+\_\+sexp\+\_\+buff} (gcry\+\_\+sexp\+\_\+t sexp, int $\ast$\hyperlink{block__blue2_8c_ad29d2259942853507dff3a3e3c05535a}{plen})
+\item 
+char $\ast$ \hyperlink{gsexp_8h_a70d868ab522ab07dc2656e0a471c0ce5}{sexp\+\_\+nth\+\_\+data} (gcry\+\_\+sexp\+\_\+t element, int num, int $\ast$\hyperlink{block__blue2_8c_ad29d2259942853507dff3a3e3c05535a}{plen})
+\item 
+char $\ast$ \hyperlink{gsexp_8h_a79ad8f47c12510b40b1c51b25913e95f}{hash\+\_\+sexp} (gcry\+\_\+sexp\+\_\+t pubk, int $\ast$olen)
+\item 
+int \hyperlink{gsexp_8h_accb707407dd2daba77da0ee35e1cae6a}{list\+\_\+sexp} (gcry\+\_\+sexp\+\_\+t list)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{gsexp_8h_a0b22eb8c08a7fa060ac6afdf7ded833e}\label{gsexp_8h_a0b22eb8c08a7fa060ac6afdf7ded833e}} 
+\index{gsexp.\+h@{gsexp.\+h}!decode\+\_\+sexp@{decode\+\_\+sexp}}
+\index{decode\+\_\+sexp@{decode\+\_\+sexp}!gsexp.\+h@{gsexp.\+h}}
+\subsubsection{\texorpdfstring{decode\+\_\+sexp()}{decode\_sexp()}}
+{\footnotesize\ttfamily int decode\+\_\+sexp (\begin{DoxyParamCaption}\item[{gcry\+\_\+sexp\+\_\+t}]{list,  }\item[{const char $\ast$}]{findstr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gsexp_8h_a3efda51e52e08bbc574210af32accb6b}\label{gsexp_8h_a3efda51e52e08bbc574210af32accb6b}} 
+\index{gsexp.\+h@{gsexp.\+h}!get\+\_\+sexp\+\_\+buff@{get\+\_\+sexp\+\_\+buff}}
+\index{get\+\_\+sexp\+\_\+buff@{get\+\_\+sexp\+\_\+buff}!gsexp.\+h@{gsexp.\+h}}
+\subsubsection{\texorpdfstring{get\+\_\+sexp\+\_\+buff()}{get\_sexp\_buff()}}
+{\footnotesize\ttfamily char$\ast$ get\+\_\+sexp\+\_\+buff (\begin{DoxyParamCaption}\item[{gcry\+\_\+sexp\+\_\+t}]{sexp,  }\item[{int $\ast$}]{plen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gsexp_8h_a79ad8f47c12510b40b1c51b25913e95f}\label{gsexp_8h_a79ad8f47c12510b40b1c51b25913e95f}} 
+\index{gsexp.\+h@{gsexp.\+h}!hash\+\_\+sexp@{hash\+\_\+sexp}}
+\index{hash\+\_\+sexp@{hash\+\_\+sexp}!gsexp.\+h@{gsexp.\+h}}
+\subsubsection{\texorpdfstring{hash\+\_\+sexp()}{hash\_sexp()}}
+{\footnotesize\ttfamily char$\ast$ hash\+\_\+sexp (\begin{DoxyParamCaption}\item[{gcry\+\_\+sexp\+\_\+t}]{pubk,  }\item[{int $\ast$}]{olen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gsexp_8h_accb707407dd2daba77da0ee35e1cae6a}\label{gsexp_8h_accb707407dd2daba77da0ee35e1cae6a}} 
+\index{gsexp.\+h@{gsexp.\+h}!list\+\_\+sexp@{list\+\_\+sexp}}
+\index{list\+\_\+sexp@{list\+\_\+sexp}!gsexp.\+h@{gsexp.\+h}}
+\subsubsection{\texorpdfstring{list\+\_\+sexp()}{list\_sexp()}}
+{\footnotesize\ttfamily int list\+\_\+sexp (\begin{DoxyParamCaption}\item[{gcry\+\_\+sexp\+\_\+t}]{list }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gsexp_8h_a8401fe7063b832e4f0c6a833942d78bd}\label{gsexp_8h_a8401fe7063b832e4f0c6a833942d78bd}} 
+\index{gsexp.\+h@{gsexp.\+h}!print\+\_\+sexp@{print\+\_\+sexp}}
+\index{print\+\_\+sexp@{print\+\_\+sexp}!gsexp.\+h@{gsexp.\+h}}
+\subsubsection{\texorpdfstring{print\+\_\+sexp()}{print\_sexp()}}
+{\footnotesize\ttfamily void print\+\_\+sexp (\begin{DoxyParamCaption}\item[{gcry\+\_\+sexp\+\_\+t}]{rsa\+\_\+keypair }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gsexp_8h_a70d868ab522ab07dc2656e0a471c0ce5}\label{gsexp_8h_a70d868ab522ab07dc2656e0a471c0ce5}} 
+\index{gsexp.\+h@{gsexp.\+h}!sexp\+\_\+nth\+\_\+data@{sexp\+\_\+nth\+\_\+data}}
+\index{sexp\+\_\+nth\+\_\+data@{sexp\+\_\+nth\+\_\+data}!gsexp.\+h@{gsexp.\+h}}
+\subsubsection{\texorpdfstring{sexp\+\_\+nth\+\_\+data()}{sexp\_nth\_data()}}
+{\footnotesize\ttfamily char$\ast$ sexp\+\_\+nth\+\_\+data (\begin{DoxyParamCaption}\item[{gcry\+\_\+sexp\+\_\+t}]{element,  }\item[{int}]{num,  }\item[{int $\ast$}]{plen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gsexp_8h_aec6fb97fdedc39a1dc0851d7f6b9c32b}\label{gsexp_8h_aec6fb97fdedc39a1dc0851d7f6b9c32b}} 
+\index{gsexp.\+h@{gsexp.\+h}!sprint\+\_\+sexp@{sprint\+\_\+sexp}}
+\index{sprint\+\_\+sexp@{sprint\+\_\+sexp}!gsexp.\+h@{gsexp.\+h}}
+\subsubsection{\texorpdfstring{sprint\+\_\+sexp()}{sprint\_sexp()}}
+{\footnotesize\ttfamily char$\ast$ sprint\+\_\+sexp (\begin{DoxyParamCaption}\item[{gcry\+\_\+sexp\+\_\+t}]{sexp,  }\item[{int $\ast$}]{len,  }\item[{int}]{format }\end{DoxyParamCaption})}
+

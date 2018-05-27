@@ -1,0 +1,104 @@
+.TH "currency/dibachain.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+currency/dibachain.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stddef\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <signal\&.h>\fP
+.br
+\fC#include 'diba\&.h'\fP
+.br
+\fC#include 'bluepoint3\&.h'\fP
+.br
+\fC#include 'dibautils\&.h'\fP
+.br
+\fC#include 'cmdline\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBTEST\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBmain\fP (int argc, char *argv[])"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBopts\fP \fBopts_data\fP []"
+.br
+.ti -1c
+.RI "char \fBorg_str\fP [] = 'Hello World '"
+.br
+.ti -1c
+.RI "char \fBtest_str\fP [] = ' '"
+.br
+.ti -1c
+.RI "char \fBtest_pass\fP [] = '1234'"
+.br
+.ti -1c
+.RI "char \fBprogname\fP [] = 'dibachain [options]'"
+.br
+.ti -1c
+.RI "char \fBdescr\fP [] = 'Add / dump / check diba chain'"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define TEST"
+
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char * argv[])"
+
+.SH "Variable Documentation"
+.PP 
+.SS "char descr[] = 'Add / dump / check diba chain'"
+
+.SS "\fBopts\fP opts_data[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+                    'a',   "--add", &add, NULL, 0, 0xffff, NULL, 
+                    "-a             --add         - add a new entry",           
+                    'd',   "--dump",  &dump,  NULL, 0, 0xffff, NULL, 
+                    "-d             --dump        - dump the chain to screen",
+                    'c',   "--check",  &check,  NULL, 0, 0xffff, NULL, 
+                    "-c             --check       - check chain integrity",
+                    'v',     "--verbose", NULL, NULL,  0, 0, &verbose, 
+                    "-v             --verbose     - Verbosity on",
+                     0,      NULL, NULL, NULL,      0, 0,  NULL, NULL,
+                    }
+.fi
+.SS "char org_str[] = 'Hello World '"
+
+.SS "char progname[] = 'dibachain [options]'"
+
+.SS "char test_pass[] = '1234'"
+
+.SS "char test_str[] = ' '"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

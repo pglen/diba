@@ -1,0 +1,52 @@
+.TH "tools/encrypt.c" 3 "Fri Sep 29 2017" "diba" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tools/encrypt.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <gcrypt\&.h>\fP
+.br
+\fC#include <assert\&.h>\fP
+.br
+\fC#include 'zmalloc\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBprinterr\fP (int err, char *\fBstr\fP)"
+.br
+.ti -1c
+.RI "void \fBprinthex\fP (void *mem, int len)"
+.br
+.ti -1c
+.RI "int \fBmain\fP ()"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "char \fBkey\fP [] = 'This is the key we are using'"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int main ()"
+
+.SS "void printerr (int err, char * str)"
+
+.SS "void printhex (void * mem, int len)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "char key[] = 'This is the key we are using'"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for diba from the source code\&.

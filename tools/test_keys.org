@@ -1,0 +1,16 @@
+
+Get chunks:
+
+Key: 'key str' keylen=7
+len2=63 Value='This is a test. This is a test. This is a test. This is a test.'
+Key: 'key str2' keylen=8
+len2=50 Value='This is a test2. This is a test2. This is a test2.'
+err_str: 'End of file.'
+
+Get Key / Val:
+
+len=7 Key='key str'
+len=63 Val='This is a test. This is a test. This is a test. This is a test.'
+len=8 Key='key str2'
+len=50 Val='This is a test2. This is a test2. This is a test2.'
+err_str: End of file.

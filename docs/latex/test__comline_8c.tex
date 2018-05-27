@@ -1,0 +1,68 @@
+\hypertarget{test__comline_8c}{}\section{tools/test\+\_\+comline.c File Reference}
+\label{test__comline_8c}\index{tools/test\+\_\+comline.\+c@{tools/test\+\_\+comline.\+c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}cmdline.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}zmalloc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}base64.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{test__comline_8c_a80ded1c1f8dfbf179f2f78181ffc0b78}{xerr} (const char $\ast$msg)
+\item 
+int \hyperlink{test__comline_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} \hyperlink{test__comline_8c_ad75e49d295005b3f5fffec85f24090d3}{opts\+\_\+data} \mbox{[}$\,$\mbox{]}
+\item 
+char $\ast$ \hyperlink{test__comline_8c_a8f55672429625511cfa89aea6cf26136}{argv2} \mbox{[}$\,$\mbox{]} = \{ \char`\"{}prog\char`\"{}, \char`\"{}-\/v\char`\"{}, \char`\"{}-\/sf\char`\"{}, N\+U\+LL \}
+\item 
+char $\ast$ \hyperlink{test__comline_8c_a3301ca454808f35f8a7c260ce370d104}{argv3} \mbox{[}$\,$\mbox{]} = \{ \char`\"{}prog\char`\"{}, \char`\"{}-\/k\char`\"{}, \char`\"{}1024\char`\"{}, \char`\"{}-\/-\/\hyperlink{dibagen_8c_a0c2356d302e37fcf49be9c6dab314eb2}{pass}\char`\"{}, \char`\"{}Hello\char`\"{}, \char`\"{}-\/v\char`\"{}, N\+U\+LL \}
+\item 
+char $\ast$ \hyperlink{test__comline_8c_ae4b196336d297a2f4a55ed72e5b7d3ca}{argv4} \mbox{[}$\,$\mbox{]} = \{ \char`\"{}prog\char`\"{}, \char`\"{}-\/?\char`\"{}, N\+U\+LL \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{test__comline_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{test__comline_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{test\+\_\+comline.\+c@{test\+\_\+comline.\+c}!main@{main}}
+\index{main@{main}!test\+\_\+comline.\+c@{test\+\_\+comline.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{test__comline_8c_a80ded1c1f8dfbf179f2f78181ffc0b78}\label{test__comline_8c_a80ded1c1f8dfbf179f2f78181ffc0b78}} 
+\index{test\+\_\+comline.\+c@{test\+\_\+comline.\+c}!xerr@{xerr}}
+\index{xerr@{xerr}!test\+\_\+comline.\+c@{test\+\_\+comline.\+c}}
+\subsubsection{\texorpdfstring{xerr()}{xerr()}}
+{\footnotesize\ttfamily void xerr (\begin{DoxyParamCaption}\item[{const char $\ast$}]{msg }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{test__comline_8c_a8f55672429625511cfa89aea6cf26136}\label{test__comline_8c_a8f55672429625511cfa89aea6cf26136}} 
+\index{test\+\_\+comline.\+c@{test\+\_\+comline.\+c}!argv2@{argv2}}
+\index{argv2@{argv2}!test\+\_\+comline.\+c@{test\+\_\+comline.\+c}}
+\subsubsection{\texorpdfstring{argv2}{argv2}}
+{\footnotesize\ttfamily char$\ast$ argv2\mbox{[}$\,$\mbox{]} = \{ \char`\"{}prog\char`\"{}, \char`\"{}-\/v\char`\"{}, \char`\"{}-\/sf\char`\"{}, N\+U\+LL \}}
+
+\mbox{\Hypertarget{test__comline_8c_a3301ca454808f35f8a7c260ce370d104}\label{test__comline_8c_a3301ca454808f35f8a7c260ce370d104}} 
+\index{test\+\_\+comline.\+c@{test\+\_\+comline.\+c}!argv3@{argv3}}
+\index{argv3@{argv3}!test\+\_\+comline.\+c@{test\+\_\+comline.\+c}}
+\subsubsection{\texorpdfstring{argv3}{argv3}}
+{\footnotesize\ttfamily char$\ast$ argv3\mbox{[}$\,$\mbox{]} = \{ \char`\"{}prog\char`\"{}, \char`\"{}-\/k\char`\"{}, \char`\"{}1024\char`\"{}, \char`\"{}-\/-\/\hyperlink{dibagen_8c_a0c2356d302e37fcf49be9c6dab314eb2}{pass}\char`\"{}, \char`\"{}Hello\char`\"{}, \char`\"{}-\/v\char`\"{}, N\+U\+LL \}}
+
+\mbox{\Hypertarget{test__comline_8c_ae4b196336d297a2f4a55ed72e5b7d3ca}\label{test__comline_8c_ae4b196336d297a2f4a55ed72e5b7d3ca}} 
+\index{test\+\_\+comline.\+c@{test\+\_\+comline.\+c}!argv4@{argv4}}
+\index{argv4@{argv4}!test\+\_\+comline.\+c@{test\+\_\+comline.\+c}}
+\subsubsection{\texorpdfstring{argv4}{argv4}}
+{\footnotesize\ttfamily char$\ast$ argv4\mbox{[}$\,$\mbox{]} = \{ \char`\"{}prog\char`\"{}, \char`\"{}-\/?\char`\"{}, N\+U\+LL \}}
+
+\mbox{\Hypertarget{test__comline_8c_ad75e49d295005b3f5fffec85f24090d3}\label{test__comline_8c_ad75e49d295005b3f5fffec85f24090d3}} 
+\index{test\+\_\+comline.\+c@{test\+\_\+comline.\+c}!opts\+\_\+data@{opts\+\_\+data}}
+\index{opts\+\_\+data@{opts\+\_\+data}!test\+\_\+comline.\+c@{test\+\_\+comline.\+c}}
+\subsubsection{\texorpdfstring{opts\+\_\+data}{opts\_data}}
+{\footnotesize\ttfamily \hyperlink{cmdline_8h_a5ba458a06f0f7fe23f0cc0ce4003ad62}{opts} opts\+\_\+data\mbox{[}$\,$\mbox{]}}
+
