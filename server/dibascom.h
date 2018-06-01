@@ -51,6 +51,7 @@ typedef struct _handshake_struct
     
 } handshake_struct;
 
+void set_debuglevel(int level);
 int send_data(int socket, const char *str, int len, int uw);
 int recv_data(int sock, char *buff, int len, int ur);
 int print2sock(int sock, int uw, char *fmt, ...);
@@ -60,6 +61,7 @@ int  handshake(handshake_struct *hs);
 char *decrypt_session_key(gcry_sexp_t *privk, char *buffer, int len);
 
 // EOF
+
 
 
 

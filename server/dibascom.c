@@ -57,6 +57,15 @@ char sesscmd[]  = "session";
 char echocmd[]  = "echo";
 char noopcmd[]  = "noop";
 
+static int debug_level = 0;
+
+/////////////////////////////////////////////////////////////////////////
+
+void set_debuglevel(int level)
+{
+    debug_level = level;              
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Send data. The UW flag instructs to use write instead of send. 
 // The server will use write as the worker recives the socket 
@@ -237,20 +246,20 @@ int  handshake(handshake_struct *hs)
         rets = send_data(hs->sock, hs->sstr, hs->slen, 0);
         }
     if(rets <= 0)
-        {
+        {                                                        
         if(hs->debug > 0)
-           printf("handshake: Could not send data: '%.*s'\n", min(36, rets), hs->sstr);   
+           printf("handshake: Could not send data: '%.*s'\n", MIN(36, rets), hs->sstr);   
         return rets;
         }
     if(hs->debug > 8)
-        printf("handshake: Data sent: '%.*s'\n", min(64, rets), hs->sstr);   
+        printf("handshake: Data sent: '%.*s'\n", MIN(64, rets), hs->sstr);   
     
     // Get answer
-    int retr = recv_data(hs->sock, hs->buff, hs->rlen, 0);
+    int retr = recv_data(hs->sock, hs->buff, hs->rlen, 1);
     if(retr <= 0)
         {
         if(hs->debug > 0)
-            printf("handshake: Could not recv data: '%.*s'\n", min(64, retr), hs->buff);   
+            printf("handshake: Could not recv data: '%.*s'\n", MIN(64, retr), hs->buff);   
         return retr;
         }
     // If session, decrypt
@@ -273,7 +282,7 @@ int  handshake(handshake_struct *hs)
         return -1;
         }
     if(hs->debug > 8)
-        printf("handshake: Data recd: '%.*s'\n", min(64, retr), hs->buff);   
+        printf("handshake: Data recd: '%.*s'\n", MIN(64, retr), hs->buff);   
     return retr;
 }
 
@@ -322,6 +331,9 @@ char *decrypt_session_key(gcry_sexp_t *privk, char *buffer, int len)
 }
 
 // EOF
+
+
+
 
 
 

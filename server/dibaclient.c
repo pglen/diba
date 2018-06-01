@@ -16,12 +16,12 @@
 #include <signal.h>
 #include <time.h>
 #include <stdio.h>
-
-//#include <sys/socket.h>
-#include <winsock2.h>
-#include <wininet.h>
-
 #include <string.h>
+#include <errno.h>
+
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 #include "diba.h"
 #include "gcrypt.h"
@@ -38,6 +38,9 @@
 #include "dibafile.h"
 #include "dibascom.h"
 #include "bluepoint3.h"
+
+//#define WSAAPI
+//#define WINSOCK_API_LINKAGE
 
 // Include a basic pair of public and private key.
 // Used in development, can be used as testing and fallback.
@@ -359,12 +362,13 @@ int main(int argc, char** argv)
     //    printf("dibaclient: Missing argument");
     //    usage(usestr, descstr, opts_data); exit(2);
     //    }
-    
+    #if 0
     WSADATA wsa;
     if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
     {
         xerr3("Socket start failed. Error Code : %d", WSAGetLastError());
     }
+    #endif
     
     int clsock;
     struct sockaddr_in serverAddr;
@@ -588,18 +592,18 @@ int     handshake2(int sock, cchar *sstr, int slen, char *buff, int rlen)
         }
     if(rets <= 0)
         {
-        printf("Could not send data: '%.*s'\n", min(36, rets), sstr);   
+        printf("Could not send data: '%.*s'\n", MIN(36, rets), sstr);   
         return rets;
         }
         
     if(debug > 8)
-        printf("Data sent: '%.*s'\n", min(64, rets), sstr);   
+        printf("Data sent: '%.*s'\n", MIN(64, rets), sstr);   
     
     // Get answer
     int retr = recv_data(sock, buff, rlen, 0);
     if(retr <= 0)
         {
-        printf("Could not recv data: '%.*s'\n", min(64, retr), buff);   
+        printf("Could not recv data: '%.*s'\n", MIN(64, retr), buff);   
         return retr;
         }
     // If session, decrypt
@@ -620,11 +624,12 @@ int     handshake2(int sock, cchar *sstr, int slen, char *buff, int rlen)
         return -1;
         }
     if(debug > 8)
-        printf("Data recd: '%.*s'\n", min(64, retr), buff);   
+        printf("Data recd: '%.*s'\n", MIN(64, retr), buff);   
     return retr;
 }
     
 /* EOF */
+
 
 
 

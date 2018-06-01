@@ -16,12 +16,11 @@
 #include <signal.h>
 #include <time.h>
 #include <stdio.h>
+#include <string.h>
 
 #include <sys/socket.h>
-//#include <winsock2.h>
-//#include <wininet.h>
-
-#include <string.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 #include "diba.h"
 #include "gcrypt.h"
@@ -366,11 +365,13 @@ int main(int argc, char** argv)
     //    usage(usestr, descstr, opts_data); exit(2);
     //    }
     
+    #if 0
     WSADATA wsa;
     if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
     {
         xerr3("Socket start failed. Error Code : %d", WSAGetLastError());
     }
+    #endif
     
     int clsock;
     struct sockaddr_in serverAddr;
@@ -449,6 +450,8 @@ int main(int argc, char** argv)
 
     
 /* EOF */
+
+
 
 
 

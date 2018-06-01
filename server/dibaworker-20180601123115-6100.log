@@ -1,0 +1,10 @@
+Processed 4 comline entries
+Diba Worker started. 6100 2018/06/01 12:31:15
+Diba Worker arguments: '-d' '9' '-l' '0' 
+Parsing 'echo pFrodgpLEWjn+rSlEbn4cfxWf3EFcGWlU9bpoVs6WvQ5ZevmE6ZK5hcWYNPLUUJQe+85dA/p1Q=='
+Got echo cmd: 'echo pFrodgpLEWjn+rSlEbn4cfxWf3EFcGWlU9bpoVs6WvQ5ZevmE6ZK5hcWYNPLUUJQe+85dA/p1Q=='
+Parsing 'close'
+Got close cmd: 'close'
+Got empty buffer
+Diba Worker [6100] exited at 2018/06/01 12:31:15
+

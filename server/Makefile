@@ -19,7 +19,8 @@ include ../dibamac.inc
 
 # Exclude building server ... it is just a stub for the worker
 all: 	dibaserv.exe dibaclient.exe dibaworker.exe dibaquery.exe \
-            dibacli_hello.exe dibacli_key.exe dibacli_sess.exe
+            dibacli_hello.exe dibacli_key.exe dibacli_sess.exe \
+               dibacli_ping.exe 
 
 dibaserv.exe: dibaserv.c $(TOOLS) $(OBJS) $(CRYPTER) dibascom.c
 	$(CC)  $^ $(ALL_OPTS) $(ALL_LIBS) -lws2_32 -o $@
@@ -28,7 +29,10 @@ dibaclient.exe: dibaclient.c $(TOOLS) $(OBJS) $(CRYPTER) dibascom.c
 	$(CC)  $^ $(ALL_OPTS) $(ALL_LIBS) -lws2_32 -o $@
 
 dibacli_hello.exe: dibacli_hello.c $(TOOLS) $(OBJS) $(CRYPTER) dibascom.c
-	$(CC)  $^ $(ALL_OPTS) $(ALL_LIBS) -lws2_32 -o $@
+	$(CC)  $^ $(ALL_OPTS)$(ALL_LIBS) -lws2_32   -o $@
+
+dibacli_ping.exe: dibacli_ping.c $(TOOLS) $(OBJS) $(CRYPTER) dibascom.c
+	$(CC)  $^ $(ALL_OPTS)$(ALL_LIBS) -lws2_32   -o $@
 
 dibacli_key.exe: dibacli_key.c $(TOOLS) $(OBJS) $(CRYPTER) dibascom.c
 	$(CC)  $^ $(ALL_OPTS) $(ALL_LIBS) -lws2_32 -o $@
@@ -55,6 +59,8 @@ clean:
 	-@rm -f *.exe
 
 distclean: clean
+
+
 
 
 

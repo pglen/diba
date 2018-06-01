@@ -17,12 +17,22 @@
 #include <time.h>
 #include <stdio.h>
 #include <fcntl.h>
-
-//#include <winsock2.h>
-//#include <netinet/in.h>
-//#include <wininet.h>
-
+#include <errno.h>
 #include <string.h>
+
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+#include <windows.h>
+#include <stdio.h>
+
+int exitCondition;
+
+struct threadParams{
+    int param1;
+    int param2;
+};
 
 #include "diba.h"
 #include "gcrypt.h"
@@ -40,6 +50,7 @@
 #include "bluepoint3.h"
 
 #define TIMEOUT 4        // Seconds before server timeouts
+#define HANDLE int
 
 static  unsigned int keysize = 2048;
 
@@ -65,6 +76,16 @@ static char    *keydesc  = NULL;
 static char    *creator  = NULL;
 static char    *errout   = NULL;
 
+static gcry_sexp_t pubkey;
+static int pubkey_bits = 0;
+
+static int      got_key = 0;
+static int      got_sess = 0;
+static int      debuglevel = 0;
+static int      loglevel = 0;
+static  char    *randkey = NULL;
+static  char    *testkey = "1234";
+
 static char recbuff[4096];
 
 /*  char    opt;
@@ -86,8 +107,11 @@ opts opts_data[] = {
         'V',   "version",  NULL, NULL,  0, 0, &version,
         "-V             --version     - Print version numbers and exit",
 
-        'u',   "dump",  NULL, NULL,  0, 0,    &dump,
-        "-u             --dump        - Dump key to terminal",
+        'd',   "debug",   &debuglevel,  NULL, 0,  10, NULL,  
+        "-d  level        --debug       - Debug level (1-10)",
+
+        'l',   "loglevel",   &loglevel, NULL, 0,  10, NULL,  
+        "-d             --loglevel     - Logging level (1-10) 0 - none",
 
         't',   "test",  NULL,  NULL, 0, 0, &test,
         "-t             --test        - run self test before proceeding",
@@ -112,17 +136,86 @@ opts opts_data[] = {
 
         0,     NULL,  NULL,   NULL,   0, 0,  NULL, NULL,
     };
-  
+
+// Forwards
+static int printlog(char *str, ...);
 static FILE *logfp = NULL;
-static gcry_sexp_t pubkey;
-static int pubkey_bits = 0;
+static FILE *cfp = NULL;
 
-static int got_key = 0;
-static int got_sess = 0;
-static int loglevel = 3;
-static  char    *randkey = NULL;
-static  char    *testkey = "1234";
+int xerr_serv(const char *str, ...)
+{
+    char mystr[128];
 
+    printlog("Error exit in %d.\n", getpid());
+    
+    va_list ap; va_start(ap, str);
+    int ret = vsnprintf(mystr, sizeof(mystr), str, ap);
+    
+    send_data(1, mystr, ret, 1);
+    recv_data(0,  mystr, ret, 1);
+    
+    char  *ddd = zsnprintf("%s error exit.", errstr);
+    send_data(1, ddd, strlen(ddd) + 1, 0);
+    zfree(ddd);
+    
+    // We do not know the state of the program, free all
+    zautofree();
+    zleakfp(logfp);
+    exit(5);
+}
+
+static int printlog(char *str, ...)
+
+{
+    va_list ap;
+    va_start(ap, str);    
+        
+    if(logfp == NULL)
+        {
+        // Encode log file name
+        char tmp[48];
+        char *tname = zdatename();
+        snprintf(tmp, sizeof(tmp), "%s-%s-%d.%s", 
+                                "dibaworker", tname, getpid(), "log");
+        zfree(tname);
+        //printf("tmp=%s\n", tmp);
+        logfp = fopen(tmp, "ab+");
+        }
+    if(!logfp)
+        {
+        xerr_serv("Cannot open/create log file.\n");
+        }
+    if(logfp)
+        {
+        vfprintf(logfp, str, ap); fflush(logfp);
+        }
+    va_start(ap, str);    
+    if(cfp == NULL)
+        {
+        cfp = fopen("/dev/pty1", "r+");
+        }
+    if(cfp)
+        {
+        vfprintf(cfp, str, ap);  fflush(cfp);
+        }
+    return 0;
+}
+        
+static void myfunc(int sig)
+{
+    //printf("\nSignal %d (segment violation)\n", sig);
+    fprintf(logfp, "\nSignal %d (segment violation)\n %d.\n", sig, getpid());
+    exit(111);
+}
+
+static void myfunc2(int sig)
+{
+    //printf("\nSignal %d\n", sig);
+    fprintf(logfp, "\nSignal %d (interrupt)\n %d.\n", sig, getpid());
+    signal(sig, myfunc2);
+    //exit(111);
+}
+    
 // Functions
 void closefunc(char *buff, int len);
 void checkfunc(char *buff, int len);
@@ -153,25 +246,6 @@ struct dibaparse parsearr[ sizeof(cmdarr) / sizeof(char *) + 2];
 //////////////////////////////////////////////////////////////////////////
 // Signal error, terminate with final handshake
 
-int xerr_serv(const char *str, ...)
-{
-    char mystr[128];
-
-    fprintf(logfp, "Error exit in %d.\n", getpid());
-    
-    va_list ap; va_start(ap, str);
-    int ret = vsnprintf(mystr, sizeof(mystr), str, ap);
-    
-    send_data(1, mystr, ret, 0);
-    recv_data(0,  mystr, ret, 0);
-    
-    char  *ddd = zsnprintf("%s error exit.", errstr);
-    send_data(1, ddd, strlen(ddd) + 1, 0);
-
-    zautofree();
-    zleakfp(logfp);
-    exit(5);
-}
 
 static volatile int timeout = 0;
 
@@ -182,7 +256,10 @@ unsigned __stdcall Thread(void *ArgList)
     
     while(1)
         {
-        Sleep(1000);
+        struct timespec ts = {1, 0};
+         
+        nanosleep(&ts, NULL);
+        
         timeout ++;
         if(timeout > TIMEOUT)
             {
@@ -204,7 +281,7 @@ unsigned __stdcall Thread(void *ArgList)
         send_data(1, ddd, strlen(ddd), 1);
         }
     
-    fprintf(logfp, "Timeout exit %d.\n", getpid());
+    printlog("Timeout exit %d.\n", getpid());
 
     // Totally meaningless, but for correctness sake
     close(0); close(1);
@@ -254,8 +331,8 @@ int parse_cmd(char *buff, int len)
         buff = data_buff; len = data_len;    
         }
 
-    if(loglevel > 4)
-        fprintf(logfp, "Parsing '%.*s'\n", len, buff);
+    if(debuglevel > 4)
+        printlog("Parsing '%.*s'\n", len, buff);
 
     while(1)
         {
@@ -263,12 +340,12 @@ int parse_cmd(char *buff, int len)
         if(currp.cmd == NULL)
             break;
 
-        if(loglevel > 9)
-            fprintf(logfp, "scanning %s\n", currp.cmd);
+        if(debuglevel > 9)
+            printlog("scanning %s\n", currp.cmd);
 
         if(strncmp(buff, currp.cmd, currp.len) == 0)
             {
-            //fprintf(logfp, "found cmd: '%s'\n", currp.cmd);
+            //printlog("found cmd: '%s'\n", currp.cmd);
             ret = 0;
             currp.func(buff, len);
             }
@@ -285,35 +362,50 @@ int parse_cmd(char *buff, int len)
 void my_progress_handler (void *cb_data, const char *what,
                             int printchar, int current, int total)
 {
-    printf(".");
+    //printf(".");
     //printf("%c", printchar);
 }
 
-static void myfunc(int sig)
-{
-    fprintf(logfp, "\nSignal %d (segment violation)\n", sig);
-    exit(111);
-}
-
-static void myfunc2(int sig)
-{
-    fprintf(logfp, "\nSignal %d (alarm)\n", sig);
-}
 
 // Forward declarations
 static  int     check_pubkey(gcry_sexp_t *pubkey, const char *rsa_buf, int rsa_len);
 static  int     check_trans_valid(char *buff, int len, char **reason_str);
 
+static DWORD WINAPI myFirstThread(void* threadParams)
+
+{
+    struct threadParams* params = (struct threadParams*)threadParams;
+
+    while(exitCondition){
+        printlog("My Thread! Param1:%d, Param2:%d\n", 
+                    params->param1, params->param2);
+        fflush(stdout);
+        Sleep(1000);
+    }
+
+    return 0;
+}
+
 // -----------------------------------------------------------------------
 
 int main(int argc, char** argv)
 {
-    signal(SIGSEGV, myfunc);
+    //signal(SIGSEGV, myfunc);
     //signal(SIGALRM, myfunc2);
 
+    signal(SIGSEGV, myfunc);
+    signal(SIGINT, myfunc2);
+    
     zline2(__LINE__, __FILE__);
     char    *dummy = alloc_rand_amount();
-
+    
+    if(isatty(1))
+        {
+        printf("This program is not meant to run from the terminal.\n");
+        printf("Use dibaserv to drive it.\n");
+        exit(2);
+        }
+        
     initdibaparser();
 
     // Pre allocate all string items
@@ -324,16 +416,23 @@ int main(int argc, char** argv)
     keydesc  = zalloc(MAX_PATH); if(keydesc  == NULL) xerr_serv(mstr);
     creator  = zalloc(MAX_PATH); if(creator  == NULL) xerr_serv(mstr);
     errout   = zalloc(MAX_PATH); if(errout   == NULL) xerr_serv(mstr);
+    
+    set_debuglevel(debuglevel);
+   
+    if(debuglevel > 0) 
+        printlog("Diba Worker started.\n ");
 
     char *err_str = NULL;
     int nn = parse_commad_line(argv, opts_data, &err_str);
 
-    //printf("Processed %d comline entries\n", nn);
+    if(debuglevel > 0) 
+        printlog("Processed %d comline entries\n", nn);
 
     if (err_str)
         {
-        printf(err_str);
-        usage(usestr, descstr, opts_data); exit(2);
+        printlog("%s", err_str);
+        //usage(usestr, descstr, opts_data); exit(2);
+        exit(2);
         }
     if(errout[0] != '\0')
         {
@@ -342,8 +441,8 @@ int main(int argc, char** argv)
         }
     if(version)
         {
-        printf("dibaworker version %d.%d.%d\n", ver_num_major, ver_num_minor, ver_num_rele);
-        printf("libgcrypt version %s\n", GCRYPT_VERSION);
+        printlog("dibaworker version %d.%d.%d\n", ver_num_major, ver_num_minor, ver_num_rele);
+        printlog("libgcrypt version %s\n", GCRYPT_VERSION);
         exit(1);
         }
     if(thispass[0] != '\0')
@@ -363,7 +462,7 @@ int main(int argc, char** argv)
         char *err_str, *hash_str = hash_file(argv[0], &err_str);
         if(hash_str != NULL)
             {
-            printf("Executable sha hash: '%s'\n", hash_str);
+            printlog("Executable sha hash: '%s'\n", hash_str);
             zfree(hash_str);
             }
         else
@@ -374,67 +473,67 @@ int main(int argc, char** argv)
 
     if(test)
         {
-        printf("Excuting self tests ... ");
+        printlog("Excuting self tests ... ");
         gcry_error_t err = 0;
         err = gcry_control(GCRYCTL_SELFTEST);
         if(err)
             {
-            printf("fail.\n");
+            printlog("fail.\n");
             exit(3);
             }
         else
             {
-            printf("pass.\n");
+            printlog("pass.\n");
             }
         }
 
     // ---------------------------------------------------------------
     // Begin worker
-
-    int pid = getpid();
-    logfp = fopen("dibaserv.log", "ab+");
-    if(!logfp)
-        {
-        xerr_serv("Cannot open/create log file.\n");
-        }
-
+    
+    #if 0
     // Create a manual-reset nonsignaled unnamed event
     HANDLE hThread, hEvent;
     unsigned int ThreadId;
    
-    hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
-    hThread = (HANDLE)_beginthreadex(NULL, 0, Thread, &hEvent, 0, &ThreadId);
-    if (hThread == 0) 
-        {
-        fprintf(logfp, "Could not create thread %d.\n", errno);
-        }
-    
-    WSADATA wsa;
-    if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
-        {
-        xerr_serv("Socket start failed. Error Code : %d\n", WSAGetLastError());
-        }
+    DWORD threadDescriptor;
+    struct threadParams params1 = {1, 2};
+    exitCondition = 1; 
+   
+   CreateThread(
+        NULL,                   /* default security attributes.   */
+        0,                      /* use default stack size.        */
+        myFirstThread,          /* thread function name.          */
+        (void*)&params1,        /* argument to thread function.   */
+        0,                      /* use default creation flags.    */
+        &threadDescriptor);     /* returns the thread identifier. */
 
+    #endif
+    
     zline2( __LINE__, __FILE__);
-    if(loglevel > 0)
+    if(debuglevel > 0)
         {
         char *ttime     = zdatestr();
-        fprintf(logfp, "Diba Worker [%d] %s from %s on port %s\n",
-                                    pid, ttime, argv[2], argv[3]);
+        printlog("Diba Worker started. %d %s\n", getpid(), ttime);
         zfree(ttime);
         }
 
-   if(loglevel > 5)
+   if(debuglevel > 5)
         {
-        fprintf(logfp, "Diba Worker arguments: ", argv[1], pid);
+        printlog("Diba Worker arguments: ");
         for(int loop = 1; loop < argc; loop ++)
             {
-            fprintf(logfp, "'%s' ", argv[loop]);
+            printlog("'%s' ", argv[loop]);
             }
-        fprintf(logfp, "\n");
+        printlog("\n");
         }
-    int hhh = atoi(argv[1]);
-    int ret = send_data(1, hellostr, strlen(hellostr), 1);
+        
+    //int hhh = atoi(argv[1]);
+    //int ret = send_data(1, hellostr, strlen(hellostr), 1);
+    char  *ddd = zsnprintf("%s %d.%d.%d", hellostr, 
+                              ver_num_major, ver_num_minor, ver_num_rele);
+    send_data(1, ddd, strlen(ddd) + 1, 0);
+    zfree(ddd);
+    
     while(1)
         {
         int ret2 = recv_data(0, recbuff, sizeof(recbuff), 1);
@@ -444,16 +543,16 @@ int main(int argc, char** argv)
 
         if(ret2 == 0)
             {
-            if(loglevel > 2)
-                fprintf(logfp, "Got empty buffer\n");
+            if(debuglevel > 2)
+                printlog("Got empty buffer\n");
 
             break;
             }
         int ret = parse_cmd(recbuff, ret2);
         if(ret < 0)
             {
-            if(loglevel > 2)
-                fprintf(logfp, "Got unknown cmd: '%.*s'\n", ret2, recbuff);
+            if(debuglevel > 2)
+                printlog("Got unknown cmd: '%.*s'\n", ret2, recbuff);
             //ret = write(1, buff, ret2);
             ret = print2sock(1, 1, "%s %s", errstr, nocmd, 1);
             }
@@ -466,11 +565,11 @@ int main(int argc, char** argv)
     if(randkey)
         zfree(randkey);
 
-    if(loglevel > 0)
+    if(debuglevel > 0)
         {
         char *ttime2     = zdatestr();
         fprintf(logfp, "Diba Worker [%d] exited at %s\n\n",
-                                    pid, ttime2);
+                                    getpid(), ttime2);
         zfree(ttime2);
         }
 
@@ -491,20 +590,20 @@ int check_pubkey(gcry_sexp_t *pubkey, const char *rsa_buf, int rsa_len)
     if(mem == NULL)
         {
         //printf("%s\n", dec_err_str);
-        if(loglevel > 0)
-            fprintf(logfp, "Cannot decode public key. %s\n", dec_err_str);
+        if(debuglevel > 0)
+            printlog("Cannot decode public key. %s\n", dec_err_str);
         return -1;
         }
     int err = gcry_sexp_new(pubkey, mem, outlen, 1);
     zfree(mem);
     if (err) {
-        if(loglevel > 0)
-            fprintf(logfp, "Failed to create create public key sexp. %s\n",
+        if(debuglevel > 0)
+            printlog("Failed to create create public key sexp. %s\n",
                                                       gcry_strerror (err));
         return -1;
         }
-    if(loglevel > 2)
-        fprintf(logfp, "Created public key.\n");
+    if(debuglevel > 2)
+        printlog("Created public key.\n");
 
     ret = gcry_pk_get_nbits(*pubkey);
 
@@ -516,8 +615,8 @@ void closefunc(char *buff, int len)
 {
     int ret;
 
-    if(loglevel > 2)
-        fprintf(logfp, "Got close cmd: '%.*s'\n", len, buff);
+    if(debuglevel > 2)
+        printlog("Got close cmd: '%.*s'\n", len, buff);
 
     int slen = strlen(endstr) + 1;
     // If session, encrypt
@@ -538,8 +637,8 @@ void    echofunc(char *buff, int len)
 {
     int ret;
 
-    if(loglevel > 2)
-        fprintf(logfp, "Got echo cmd: '%.*s'\n", len, buff);
+    if(debuglevel > 2)
+        printlog("Got echo cmd: '%.*s'\n", len, buff);
 
     if(got_sess)
         {
@@ -560,8 +659,8 @@ void    echofunc(char *buff, int len)
 void    checkfunc(char *buff, int len)
 {
     int ret;
-    if(loglevel > 2)
-        fprintf(logfp, "Got check cmd: '%.*s'\n", len, buff);
+    if(debuglevel > 2)
+        printlog("Got check cmd: '%.*s'\n", len, buff);
 
     // If session, encrypt
     if(got_sess)
@@ -584,7 +683,9 @@ void    checkfunc(char *buff, int len)
                         "Cannnot determine or insufficien data");
             }
         int xlen = strlen(sumstr) + 1;
-        fprintf(logfp, "Sumstr: '%.*s'\n", xlen, sumstr);
+        if(debuglevel > 0) 
+            printlog("Sumstr: '%.*s'\n", xlen, sumstr);
+            
         int outx;
         char *xptr = bp3_encrypt_cp(sumstr, xlen,
                                             randkey, strlen(randkey), &outx);
@@ -605,8 +706,8 @@ void sessfunc(char *buff, int len)
 
 {
     int ret;
-    if(loglevel > 2)
-        fprintf(logfp, "Got sess cmd: '%.*s'\n", len, buff);
+    if(debuglevel > 2)
+        printlog("Got sess cmd: '%.*s'\n", len, buff);
 
     if(!got_key)
         {
@@ -617,13 +718,13 @@ void sessfunc(char *buff, int len)
 
     if(strlen(randkey) * 8 >  pubkey_bits)
         {
-        fprintf(logfp,
+        printlog(
             "Rand key legth (%d) bigger than public key length. (%d)\n",
                 strlen(randkey) * 8, pubkey_bits);
         ret = print2sock(1, 1, "%s %s", errstr, "Public key too small.");
         }
 
-    if(loglevel > 1)
+    if(debuglevel > 1)
         fprintf(logfp, "Sending rand key: '%s'\n", randkey);
 
     /* Encrypt the message. */
@@ -634,7 +735,10 @@ void sessfunc(char *buff, int len)
     if (err) {
         xerr_serv("dibaworker: Failed to create a mpi from the message.");
         }
-    //printf("mpi scanned %d\n", scanned);
+        
+    if(debuglevel > 0) 
+        printlog("scanned %d\n", scanned);
+        
     err = gcry_sexp_build(&enc_data, NULL,
                            "(data (flags raw) (value %m))", msg);
     if (err) {
@@ -680,8 +784,8 @@ void keyfunc(char *buff, int len)
     char buff2[4096];
     int ret, ret3;
 
-    if(loglevel > 2)
-        fprintf(logfp, "Got key cmd: '%.*s'\n", len, buff);
+    if(debuglevel > 2)
+        printlog("Got key cmd: '%.*s'\n", len, buff);
 
     if(got_key)
         {
@@ -694,8 +798,8 @@ void keyfunc(char *buff, int len)
     if(ret3 <= 0)
         return;
 
-    if(loglevel > 8)
-        fprintf(logfp, "Got key body: '%.*s'\n", ret3, buff);
+    if(debuglevel > 8)
+        printlog("Got key body: '%.*s'\n", ret3, buff);
 
     // Interpret key data, validate key
     pubkey_bits = check_pubkey(&pubkey, buff2, ret3);
@@ -708,7 +812,7 @@ void keyfunc(char *buff, int len)
         ret = print2sock(1, 1, "%s pubkey accepted, %d bits.",
                                     okstr, pubkey_bits);
         //ret = send_data(1, okstr, strlen(okstr), 1);
-        if(loglevel > 9)
+        if(debuglevel > 9)
             sexp_fprint(pubkey, logfp);
         }
 }
@@ -723,10 +827,17 @@ int     check_trans_valid(char *buff, int len, char **reason_str)
     ret = rand() % 3 - 1;
     *reason_str = "something";
     
-    fprintf(logfp, "ret %d\n", ret);
+    if(debuglevel > 5) 
+        printlog("ret %d\n", ret);
     return ret;
 }
         
 /* EOF */
+
+
+
+
+
+
 
 

@@ -16,13 +16,11 @@
 #include <signal.h>
 #include <time.h>
 #include <stdio.h>
-#include <errno.h>
+#include <string.h>
 
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-
-#include <string.h>
 
 #include "diba.h"
 #include "gcrypt.h"
@@ -124,11 +122,13 @@ T3hOSXhQYmhocW5icDNqeEk9KSk=\n\
 
 // -----------------------------------------------------------------------
 
+//static gcry_sexp_t pubkey;
+
 static int weak = FALSE;
 static int force = FALSE;    
 static int verbose = 0;
 static int test = 0;
-static int debug = 0;
+static int debuglevel = 0;
 static int calcsum = 0;
 static int version = 0;
 
@@ -174,7 +174,7 @@ opts opts_data[] = {
         't',   "test",  NULL,  NULL, 0, 0, &test, 
         "-t             --test        - Run self test before proceeding",
         
-        'd',   "debug",  &debug, NULL, 0, 10, &test, 
+        'd',   "debug",  &debuglevel, NULL, 0, 10, NULL, 
         "-d level       --debug level  - Output debug data (level 1-9)",
         
         's',   "sum",  NULL,  NULL, 0, 0, &calcsum, 
@@ -194,8 +194,6 @@ static void myfunc(int sig)
     printf("\nSignal %d (segment violation)\n", sig);
     exit(5);
 }
-
-// Static local functions
 
 // -----------------------------------------------------------------------
 // Chain to err routine, dup error to file first 
@@ -267,23 +265,6 @@ int main(int argc, char** argv)
         exit(4);
         }
         
-    if(query[0] == '\0')
-        {
-        xerr3("dibaclient: missing query file. Use -? option to see help\n");
-        } 
-    int qlen;
-    
-    char *querystr = grabfile(query, &qlen, &err_str);
-    if(!querystr)
-        {
-        //printf("dibaclient: error on loading query file '%s'. (%s)\n", 
-        //                    query, err_str);
-        xerr3("dibaclient: error on loading query file %s. (%s)\n", 
-                            query, err_str);
-        }
-        
-    //printf("query %.*s\n", 64, querystr);
-             
     gcrypt_init();
 
     if(calcsum)
@@ -317,142 +298,72 @@ int main(int argc, char** argv)
             }
         }
    
-    //////////////////////////////////////////////////////////////////////
-    
-    char *err_str2;
-    get_priv_key_struct pks;
-    gcry_sexp_t info, privk, pubkey;
-    
-    if(keyfile[0] != '\0')
-        {
-        pks.rsa_buf = grabfile(keyfile, &pks.rsa_len, &err_str);
-        if(!pks.rsa_buf)
-            xerr3("dibaclient: Cannot load keyfile. %s", err_str);
-        }
-    else
-        {
-        pks.rsa_buf   = mypkey;
-        pks.rsa_len   = sizeof(mypkey);
-        }
-        
-    pks.err_str   = &err_str;
-    pks.err_str2  = &err_str2;
-    pks.nocrypt   = 0;
-    pks.privkey   = &privk;
-    pks.pubkey    = &pubkey;
-    pks.info      = &info;
-    pks.thispass  = thispass;
-    
-    int keylen = get_privkey(&pks);
-    if(keylen < 0)
-        {
-        xerr3("dibaclient: %s. (%s)", err_str, err_str2);
-        }
-    
-    if(keyfile[0] != '\0')
-        zfree(pks.rsa_buf);
-    
-    printf("pubkey: %s\nprivkey: '%s'\n", pks.pubkey, pks.privkey);
-    
-    //if (argc - nn != 2) {
-    //    printf("dibaclient: Missing argument");
-    //    usage(usestr, descstr, opts_data); exit(2);
-    //    }
-    
-    #if 0
-    WSADATA wsa;
-    if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
-    {
-        xerr3("Socket start failed. Error Code : %d", WSAGetLastError());
-    }
-    #endif
-    
-    int clsock, xcode;
+    int clsock;
     struct sockaddr_in serverAddr;
     socklen_t addr_size;
     
     /*---- Create the socket. The three arguments are: ----*/
     clsock = socket(PF_INET, SOCK_STREAM, 0);
     
+    char *server = "127.0.0.1";
     /* Address family = Internet */
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_port = htons(6789);
-    serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    serverAddr.sin_addr.s_addr = inet_addr(server);
     memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);  
+    
+    if(debuglevel > 0)
+        printf("Connecting ... \n");   
     
     /*---- Connect ----*/
     addr_size = sizeof serverAddr;
     int err = connect(clsock, (struct sockaddr *) &serverAddr, addr_size);
     if(err)
-        xerr3("Error on connecting. %d (errno %d %s)\n", 
-                            err, errno, strerror(errno));
+        xerr3("Error on connecting to server '%s'.\n", server   );
+    
+    if(debuglevel > 0)
+        printf("Connected, waiting for initial buffer.\n");   
+        
+    int xcode = 0;
     
     /*---- Read the initial message ----*/
     recv_data(clsock, buffer, sizeof(buffer), 0);
     
-    if(verbose || debug)
+    if(debuglevel > 0)
         printf("Initial data received: '%s'\n", buffer);   
+
+    if(verbose)
+        printf("Server alive.\n");   
     
     int ret;
     
-    handshake_struct hs; memset(&hs, 0, sizeof(hs));
-    hs.sock = clsock;
-    hs.sstr = keycmd;   hs.slen = strlen(keycmd);
-    hs.buff = buffer;   hs.rlen = sizeof(buffer);
-    hs.debug = debug;   hs.got_session = got_sess;
-    ret = handshake(&hs);
-    
-    if(strncmp(buffer, okstr, STRSIZE(okstr)) != 0)
-        {
-        printf("Server does not accept the key command.\n");
-        
-        handshake_struct hs2; memset(&hs2, 0, sizeof(hs2));
-        hs2.sock = clsock;
-        hs2.sstr = closecmd; hs2.slen = strlen(closecmd);
-        hs2.buff = buffer;   hs2.rlen = sizeof(buffer);
-        hs2.debug = debug;   hs2.got_session = got_sess;
-        ret = handshake(&hs2);                    
-        
-        zautofree();
-        exit(4);
-        }
-    //handshake_struct hs; 
-    
-    
-    
-    memset(&hs, 0, sizeof(hs));
-    hs.sock = clsock;
-    hs.sstr = mykey; hs.slen = strlen(mykey);
-    hs.buff = buffer;   hs.rlen = sizeof(buffer);
-    hs.debug = debug;   hs.got_session = got_sess;
-    ret = handshake(&hs);
-    
-    if(strncmp(buffer, okstr, STRSIZE(okstr)) != 0)
-        {
-        printf("Server rejected key.\n");
-        handshake_struct hs; memset(&hs, 0, sizeof(hs));
-        hs.sock = clsock;
-        hs.sstr = closecmd; hs.slen = strlen(closecmd);
-        hs.buff = buffer;   hs.rlen = sizeof(buffer);
-        hs.debug = debug;   hs.got_session = got_sess;
-        ret = handshake(&hs);
-        
-        zautofree();
-        exit(4);
-        }
-        
     int rlen = rand() % 32 + 24;
     char *randstr = zrandstr_strong(rlen); 
     char *sumstr = zstrmcat(0, "echo ", randstr, NULL); 
-    zfree(randstr);  zfree(sumstr);  
+    zfree(randstr); 
     
-    memset(&hs, 0, sizeof(hs));
+    if(debuglevel > 0)
+        printf("Rand sent: '%s'\n", sumstr);
+        
+    // Test echo
+    handshake_struct hs2; memset(&hs2, 0, sizeof(hs2));
+    hs2.sock = clsock;
+    hs2.sstr = sumstr;      hs2.slen = strlen(sumstr);
+    hs2.buff = buffer;      hs2.rlen = sizeof(buffer);
+    hs2.debug = debuglevel; hs2.got_session = got_sess;
+    ret = handshake(&hs2);                    
+    
+    // Test timeout
+    //printf("Waiting for timeout .... "); Sleep(6000); printf("Done\n");
+    zfree(sumstr);  
+    
+    handshake_struct hs; memset(&hs, 0, sizeof(hs));
     hs.sock = clsock;
     hs.sstr = closecmd;
     hs.slen = strlen(closecmd);
     hs.buff = buffer; 
     hs.rlen = sizeof(buffer);
-    hs.debug = debug;
+    hs.debug = debuglevel;
     hs.got_session = got_sess;
     
     ret = handshake(&hs);
@@ -462,7 +373,7 @@ int main(int argc, char** argv)
     
     zfree(thispass);    zfree(keyname);      
     zfree(errout);      zfree(keyfile);
-    zfree(query);       zfree(querystr);
+    zfree(query);       
     
     if(randkey)
         zfree(randkey);
@@ -473,7 +384,14 @@ int main(int argc, char** argv)
     return xcode;
 }
 
+    
 /* EOF */
+
+
+
+
+
+
 
 
 

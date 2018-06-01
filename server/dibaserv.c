@@ -1,4 +1,4 @@
-
+    
 /* =====[ dibaserv.c ]=========================================================
 
    Description:     Server process for DIBA. Will spawn worker process.
@@ -14,19 +14,12 @@
 #include <unistd.h>
 #include <signal.h>
 #include <string.h>
-#include <time.h>
 #include <stdio.h>
-#include <fcntl.h>
 #include <errno.h>
 
-#include <windows.h>
-
-// FIXME: Windoze now, will do Linux soon
 #include <sys/socket.h>
-//#include <winsock2.h>
-
 #include <netinet/in.h>
-//#include <wininet.h>
+#include <arpa/inet.h>
 
 #include "diba.h"
 #include "gcrypt.h"
@@ -51,6 +44,8 @@ static int test = 0;
 static int stay_fg = 0;
 static int calcsum = 0;
 static int version = 0;
+static int debuglevel = 0;
+static int loglevel = 0;
 
 static int ver_num_major = 0;
 static int ver_num_minor = 0;
@@ -77,6 +72,12 @@ opts opts_data[] = {
         'V',   "version",  NULL, NULL,  0, 0, &version, 
         "-V             --version     - Print version numbers and exit",
         
+        'd',   "debug",   &debuglevel, NULL, 0,  10, NULL,  
+        "-d             --debug       - Debug level (1-10) 0 - none",
+
+        'l',   "loglevel",   &loglevel, NULL, 0,  10, NULL,  
+        "-d             --loglevel     - Logging level (1-10) 0 - none",
+
         'u',   "dump",  NULL, NULL,  0, 0,    &dump, 
         "-u             --dump        - Dump key to terminal",
         
@@ -111,71 +112,61 @@ static void myfunc(int sig)
 
 static void myfunc2(int sig)
 {
-    //printf("\nSignal %d\n", sig);
+    if(stay_fg) 
+        {
+        printf("Terminating on signal %d\n", sig);
+        fflush(stdout);
+        exit(111);
+        }
+        
+    // Ignore, reset
     signal(sig, myfunc2);
-    //exit(111);
 }
 
-int winfork(char *cmd, int ClientSocket)
+    
+int unixfork(char *cmd, int ClientSocket)
 
 {
-    STARTUPINFO si;
-    PROCESS_INFORMATION pi;
-
+    pid_t pid = fork();
+    
+    //printf("Forked, ret=%d\n", pid);
     struct sockaddr_in saddr;
     socklen_t  addrlen = sizeof(saddr);
     int retp = getpeername(ClientSocket,  
                               (struct sockaddr *)&saddr, &addrlen);
     if(retp < 0)
         {
-        xerr2("Error on getpeername. %d (errno %d %s)\n", 
+        printf("Error on getpeername. %d (errno %d %s)\n", 
                             retp, errno, strerror(errno));
         } 
         
     char *ipstr = inet_ntoa(saddr.sin_addr);
     int ppp = ntohs(saddr.sin_port);
     
-    printf("Connection from:  %s on port %d\n", ipstr, ppp);
-
-    char arr[MAX_PATH];
-    snprintf(arr, sizeof(arr), "%s %d %s %d ", 
-                            cmd, ClientSocket, ipstr, ppp);
-    
-    ZeroMemory( &si, sizeof(si) );
-    si.cb = sizeof(si);
-    si.dwFlags = STARTF_USESTDHANDLES | STARTF_USESHOWWINDOW;
-    si.wShowWindow = SW_HIDE;
-
-    si.hStdInput = (HANDLE)ClientSocket;
-    si.hStdOutput = (HANDLE)ClientSocket;
-    //si.hStdError = (HANDLE)ClientSocket;
-    
-    //FILE *logfp = fopen("dibaserv.log", "ab+");
-    //if(!logfp)
-    //    {
-    //    xerr2("Cannot open log file.\n");
-    //    }
-    //si.hStdError = (HANDLE)fileno(logfp);
-    
-    ZeroMemory( &pi, sizeof(pi) );
-    
-     if( !CreateProcess( NULL,   // No module name (use command line)
-        arr,            // Command line
-        NULL,           // Process handle not inheritable
-        NULL,           // Thread handle not inheritable
-        TRUE,           // Set handle inheritance
-        0,              // No creation flags
-        NULL,           // Use parent's environment block
-        NULL,           // Use parent's starting directory 
-        &si,            // Pointer to STARTUPINFO structure
-        &pi )           // Pointer to PROCESS_INFORMATION structure
-    ) 
-    {
-        printf( "CreateProcess failed (%d).\n", GetLastError() );
-        return 0;
-    }
-    
-    return 1;
+    printf("Connection from: %s on port %d\n", ipstr, ppp);
+        
+    if(pid == 0)
+        {
+        // Child
+        char tmp[12], tmp2[12];
+        snprintf(tmp, sizeof(tmp), "%d", debuglevel);
+        snprintf(tmp2, sizeof(tmp2), "%d", loglevel);
+        
+        // Reshuffle fp-s
+        close(0); close(1); close(2);
+        dup2(ClientSocket, 0); 
+        dup2(ClientSocket, 1);
+        dup2(ClientSocket, 2);
+  
+        // Pass debug level and log level to client       
+        int ret = execl(cmd, cmd, "-d", tmp, "-l", tmp2, NULL);
+        printf("Could not exec %s ret=%d\n", cmd, ret);
+        }
+    if(pid > 0)
+        {
+        printf("Started child process %d\n", pid);
+        }
+    return pid;    
 }
 
 // -----------------------------------------------------------------------
@@ -192,7 +183,7 @@ void    xerr3(const char *str, ...)
     // Ignore error, empty or non existant file will indicate error to caller
     if (errf) {
         vfprintf(errf, str, ap);
-        fclose(errf);
+            fclose(errf);
     }
     
     va_list ap2;
@@ -225,7 +216,8 @@ int main(int argc, char** argv)
     char *err_str = NULL;
     int nn = parse_commad_line(argv, opts_data, &err_str);
     
-    //printf("Processed %d comline entries\n", nn);
+    //if(debuglevel > 0)
+    //    printf("Processed %d comline entries\n", nn);
     
     if (err_str)
         {
@@ -299,11 +291,14 @@ int main(int argc, char** argv)
         xerr2("Cannot open log file.\n");
         }
     fclose(logfp);
+    
     //syslog(LOG_INFO, "Connection from host %d", callinghostname);
+    
+    #if 0
     // Daemonize
     if(!stay_fg)
         {
-        int fd0 = open("\\.\\nul", _O_RDWR);
+        int fd0 = open("/dev/null", O_RDWR);
         if(fd0 < 0)
             {
             xerr2("Cannot open nul file.\n");
@@ -312,6 +307,7 @@ int main(int argc, char** argv)
         dup2(fd0, 1);
         dup2(fd0, 2);
         }
+    #endif
     
     int   welcomeSocket, newSocket;
     char  buffer[1024];
@@ -343,15 +339,22 @@ int main(int argc, char** argv)
     
     /*---- Listen on the socket, with 5 max connection requests queued ----*/
     
+    if(debuglevel > 0)
+        printf("Server stared. (pid=%d) \n", getpid());
     while(1)
         {
         err = listen(welcomeSocket, 5);
         if(err)
             xerr2("Error on socket listening. %d (errno %d %s)\n", 
                                 err, errno, strerror(errno));
+      
+        if(debuglevel > 0)  
+            printf("Listening .... \n");
         
-        printf("Listening .... (pid=%d) \n", getpid());
-         
+        // Force a fault
+        //int *nullp = NULL;
+        //*nullp = 1;
+        
         /*----  the incoming connection ----*/
         addr_size = sizeof serverStorage;
         newSocket = accept(welcomeSocket, (struct sockaddr *) &serverStorage,
@@ -360,33 +363,23 @@ int main(int argc, char** argv)
             xerr2("Error on socket accept. %d (errno %d %s)\n", 
                                 err, errno, strerror(errno));
         
-        printf("Accepted connection. on handle: %d\n", newSocket);
+        //printf("Accepted connection from on handle: %d\n", newSocket);
         
-        pid_t chh = winfork("dibaworker.exe", newSocket);
-        if(chh == 0)
+        pid_t chh = unixfork("./dibaworker.exe", newSocket);
+        
+        if(chh == -1)
             {
             // Child
-            printf("Child pid %d\n", chh);
+            printf("Child could not fork. err %d\n", chh);
             }
         }
     zfree(errout);
-    
     zfree(dummy);
     zleak();
     return 0;
 }
 
 /* EOF */
-
-
-
-
-
-
-
-
-
-
 
 
 

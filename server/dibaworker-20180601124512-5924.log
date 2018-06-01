@@ -1,0 +1,10 @@
+Processed 4 comline entries
+Diba Worker started. 5924 2018/06/01 12:45:12
+Diba Worker arguments: '-d' '9' '-l' '0' 
+Parsing 'echo imu/OQRrdA7FOLiL7zVB1BvzH5FYXAxScPygbI6MmMRTPK3M2Xeuo5BlJ42B6fIof7U='
+Got echo cmd: 'echo imu/OQRrdA7FOLiL7zVB1BvzH5FYXAxScPygbI6MmMRTPK3M2Xeuo5BlJ42B6fIof7U='
+Parsing 'close'
+Got close cmd: 'close'
+Got empty buffer
+Diba Worker [5924] exited at 2018/06/01 12:45:12
+

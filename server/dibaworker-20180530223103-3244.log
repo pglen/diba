@@ -1,0 +1,19 @@
+Diba Worker started. 3244 2018/05/30 22:31:03
+Diba Worker arguments: '-d' '10' '-l' '0' 
+Parsing 'echo OuKj4S7rDhRs3dAIHCB8VYhr7J1kXqARni9fs3IYPmcvC7xR402pmAIEWGf3fi5xhVr/eC/i'
+scanning close
+scanning check
+scanning key
+scanning session
+scanning echo
+Got echo cmd: 'echo OuKj4S7rDhRs3dAIHCB8VYhr7J1kXqARni9fs3IYPmcvC7xR402pmAIEWGf3fi5xhVr/eC/i'
+Parsing 'close'
+scanning close
+Got close cmd: 'close'
+scanning check
+scanning key
+scanning session
+scanning echo
+Got empty buffer
+Diba Worker [3244] exited at 2018/05/30 22:31:03
+
