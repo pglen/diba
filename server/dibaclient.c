@@ -391,7 +391,7 @@ int main(int argc, char** argv)
                             err, errno, strerror(errno));
     
     /*---- Read the initial message ----*/
-    recv_data(clsock, buffer, sizeof(buffer), 0);
+    scom_recv_data(clsock, buffer, sizeof(buffer), 0);
     
     if(verbose)
         printf("Initial data received: '%s'\n", buffer);   
@@ -583,12 +583,12 @@ int     handshake2(int sock, cchar *sstr, int slen, char *buff, int rlen)
         {
         int outx;
         char *xptr = bp3_encrypt_cp(sstr, slen, randkey, strlen(randkey), &outx);
-        rets = send_data(sock, xptr, outx, 0);
+        rets = scom_send_data(sock, xptr, outx, 0);
         zfree(xptr);
         }
     else
         {
-        rets = send_data(sock, sstr, slen, 0);
+        rets = scom_send_data(sock, sstr, slen, 0);
         }
     if(rets <= 0)
         {
@@ -600,7 +600,7 @@ int     handshake2(int sock, cchar *sstr, int slen, char *buff, int rlen)
         printf("Data sent: '%.*s'\n", MIN(64, rets), sstr);   
     
     // Get answer
-    int retr = recv_data(sock, buff, rlen, 0);
+    int retr = scom_recv_data(sock, buff, rlen, 0);
     if(retr <= 0)
         {
         printf("Could not recv data: '%.*s'\n", MIN(64, retr), buff);   
@@ -629,6 +629,7 @@ int     handshake2(int sock, cchar *sstr, int slen, char *buff, int rlen)
 }
     
 /* EOF */
+
 
 
 

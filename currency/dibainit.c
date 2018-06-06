@@ -21,6 +21,8 @@
 #include <string.h>
 #include <signal.h>
 #include <unistd.h>
+#include <errno.h>
+#include <sys/stat.h>
 
 #include "diba.h"
 #include "bluepoint3.h"
@@ -142,7 +144,7 @@ int    main(int argc, char *argv[])
         if(verbose)
             printf("Make %s\n", tmp_str);
             
-        ret = mkdir(tmp_str);
+        ret = mkdir(tmp_str, 0755);
         if(ret < 0 && !force)
             xerr2("Cannot make dir '%s' Error: %s\n", 
                                                 tmp_str, strerror(errno));
@@ -154,7 +156,7 @@ int    main(int argc, char *argv[])
         snprintf(tmp_str, MAX_PATH, "%s/Tr_0/Bi_%d", diba_currdir, loop);
         if(verbose)
             printf("Make %s\n", tmp_str);
-        ret = mkdir(tmp_str);
+        ret = mkdir(tmp_str, 0755);
         if(ret < 0 && !force)
             xerr2("Cannot make dir '%s' Error: %s\n", 
                                                 tmp_str, strerror(errno));
@@ -166,7 +168,7 @@ int    main(int argc, char *argv[])
         snprintf(tmp_str, MAX_PATH, "%s/Tr_0/Bi_0/Mi_%d", diba_currdir, loop);
         if(verbose)
             printf("Make %s\n", tmp_str);
-        ret = mkdir(tmp_str);
+        ret = mkdir(tmp_str, 0755);
         if(ret < 0 && !force)
             xerr2("Cannot make dir '%s' Error: %s\n", 
                                                 tmp_str, strerror(errno));
@@ -179,7 +181,7 @@ int    main(int argc, char *argv[])
         if(verbose)
             printf("Make %s\n", tmp_str);
             
-        ret = mkdir(tmp_str);
+        ret = mkdir(tmp_str, 0755);
         if(ret < 0 && !force)
             xerr2("Cannot make dir '%s' Error: %s\n", 
                                                 tmp_str, strerror(errno));
@@ -194,6 +196,7 @@ int    main(int argc, char *argv[])
 }
 
 /* EOF */
+
 
 
 

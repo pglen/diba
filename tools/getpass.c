@@ -16,16 +16,22 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include <termios.h>
+
+// Futile attempt
+//#include "wintermios.h"
 
 static int debuglev = 0;
 
-//#if defined __linux__  
-//#include <unistd.h>
-//extern char *getpass (__const char *__prompt);
-//#else
-//#include <conio.h>
-//#endif
+#include <termios.h>
+
+#if defined __linux__  
+extern char *getpass (__const char *__prompt);
+#else
+//#include "conio.h"
+//#include "c:/msys32/usr/include/sys/termios.h"
+#endif
+   
+//#include "readline/readline.h"
 
 #include "getpass.h"
 #include "zmalloc.h"
@@ -91,6 +97,9 @@ int     dibagetpass(const char *prompt, char *passptr, int maxlen)
     strncpy(passptr, ppp, maxlen);
     memset(ppp, strlen(ppp), '\0');
 #else
+
+    //printf("maxlen = %d\n", maxlen);
+    
     // Get it from the terminal
     int ret = 0;
     unsigned int idx = 0;
@@ -99,6 +108,7 @@ int     dibagetpass(const char *prompt, char *passptr, int maxlen)
     printf("%s ", prompt);
     fflush(stdout);
     
+    #if 1
     struct termios oldt;
     struct termios newt;
     
@@ -110,7 +120,6 @@ int     dibagetpass(const char *prompt, char *passptr, int maxlen)
     newt.c_iflag &= ~(IXON | ICRNL);
     
     int ret2 = tcsetattr(STDIN_FILENO, TCSANOW, &newt); 
-    
     //printf("Return  from setettr %d\r\n", ret2);
     if(ret2)
         {
@@ -119,17 +128,18 @@ int     dibagetpass(const char *prompt, char *passptr, int maxlen)
         printf("Cannot set terminal attributes.\n");
         return ret;
         }
+    #endif
     
     while(TRUE) {
-    
-        unsigned char cc = getchar(); 
+            
+        unsigned char cc = getc(stdin); 
         
-        if(debuglev > 5)
+        if(debuglev > 9)
             printf(" '%c' %d ", cc, cc & 0xff);
             
         if(cc == 224 || cc == 0)
             {
-            getchar();  // Throw away
+            getc(stdin);  // Throw away
             continue;
             }    
     
@@ -165,22 +175,25 @@ int     dibagetpass(const char *prompt, char *passptr, int maxlen)
             idx ++;
             }
         
-        if (idx >= maxlen)
+        if (idx >= maxlen - 1)
+            {
+            passptr[idx] = '\0';
             break;
+            }
         }    
    
+   #if 1
     // Restore terminal attributes
     tcsetattr(0, TCSANOW, &oldt);
+  #endif
          
     if(debuglev > 9)      
         printf("\ngot pass '%s'\n", passptr);  
-        
         
     printf("\n");    
     return ret;
     
     #endif
-
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -289,5 +302,9 @@ int getpass2(getpassx *passx)
 }
 
 // EOF
+
+
+
+
 
 

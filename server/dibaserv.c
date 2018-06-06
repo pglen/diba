@@ -51,10 +51,11 @@ static int ver_num_major = 0;
 static int ver_num_minor = 0;
 static int ver_num_rele  = 8;
 
-static char descstr[] = "Listen for DIBA requests ";
+static char descstr[] = "Listen for DIBA requests. ";
 static char usestr[]  = "dibaserv [options]\n";
                 
 static char    *errout   = NULL;
+static char    *term  = NULL;
 
 /*  char    opt;
     char    *long_opt;
@@ -67,31 +68,34 @@ static char    *errout   = NULL;
 opts opts_data[] = {
 
         'v',   "verbose",  NULL, NULL,  0, 0, &verbose, 
-        "-v             --verbose     - Verbosity on",
+        "-v             --verbose     - Verbosity on (def: off)",
         
         'V',   "version",  NULL, NULL,  0, 0, &version, 
         "-V             --version     - Print version numbers and exit",
         
         'd',   "debug",   &debuglevel, NULL, 0,  10, NULL,  
-        "-d             --debug       - Debug level (1-10) 0 - none",
+        "-d             --debug       - Debug level (0-10) (def: 0-none)",
 
         'l',   "loglevel",   &loglevel, NULL, 0,  10, NULL,  
-        "-d             --loglevel     - Logging level (1-10) 0 - none",
+        "-l             --loglevel    - Logging level (0-10) (def:0-none)",
 
         'u',   "dump",  NULL, NULL,  0, 0,    &dump, 
-        "-u             --dump        - Dump key to terminal",
+        "-u             --dump        - Dump key to log / terminal",
         
         't',   "test",  NULL,  NULL, 0, 0, &test, 
-        "-t             --test        - run self test before proceeding",
+        "-t             --test        - Run self test before proceeding",
         
         's',   "sum",  NULL,  NULL, 0, 0, &calcsum, 
-        "-s             --sum         - print sha sum before proceeding",
+        "-s             --sum         - Print sha sum before proceeding",
         
+        'r',   "term",  NULL,  &term, 0, 0, NULL,
+        "-r term        --term tname  - Debug to terminal (ex: /dev/pty1)",
+
         'e',   "errout",  NULL,  &errout, 0, 0, NULL, 
-        "-e fname       --errout fnm  - dup stderr to file. (for GUI)",
+        "-e fname       --errout fnme - Dup stderr to file. (for GUI)",
        
         'f',   "foreground",  NULL,   NULL, 0, 0, &stay_fg, 
-        "-f             --foreground   - stay in foreground",
+        "-f             --foreground  - Stay in foreground",
        
         0,     NULL,  NULL,   NULL,   0, 0,  NULL, NULL,
         };
@@ -151,6 +155,9 @@ int unixfork(char *cmd, int ClientSocket)
         char tmp[12], tmp2[12];
         snprintf(tmp, sizeof(tmp), "%d", debuglevel);
         snprintf(tmp2, sizeof(tmp2), "%d", loglevel);
+   
+        //printf("exec %s %s %s %s %s %s %s %s\n",
+        //        cmd, cmd, "-d", tmp, "-l", tmp2, "-r", term);
         
         // Reshuffle fp-s
         close(0); close(1); close(2);
@@ -158,8 +165,8 @@ int unixfork(char *cmd, int ClientSocket)
         dup2(ClientSocket, 1);
         dup2(ClientSocket, 2);
   
-        // Pass debug level and log level to client       
-        int ret = execl(cmd, cmd, "-d", tmp, "-l", tmp2, NULL);
+        // Pass debug level and log level and terminal string to client       
+        int ret = execl(cmd, cmd, "-d", tmp, "-l", tmp2, "-r", term, NULL);
         printf("Could not exec %s ret=%d\n", cmd, ret);
         }
     if(pid > 0)
@@ -198,13 +205,6 @@ int main(int argc, char** argv)
     signal(SIGSEGV, myfunc);
     signal(SIGINT, myfunc2);
     
-    //signal(SIGTERM, myfunc2);
-    //signal(SIGCHLD,SIG_IGN); /* ignore child */
-	//signal(SIGTSTP,SIG_IGN); /* ignore tty signals */
-	//signal(SIGTTOU,SIG_IGN);
-	//signal(SIGTTIN,SIG_IGN);
-	//signal(SIGHUP,myfunc); /* catch hangup signal */
-
     zline2(__LINE__, __FILE__);
     char    *dummy = alloc_rand_amount();
     
@@ -212,12 +212,19 @@ int main(int argc, char** argv)
     //char *mstr = "No Memory";
     zline2(__LINE__, __FILE__);
     errout   = zalloc(MAX_PATH); if(errout   == NULL) xerr3(mstr);
+    term     = zalloc(MAX_PATH); if(term     == NULL) xerr3(mstr);
     
     char *err_str = NULL;
     int nn = parse_commad_line(argv, opts_data, &err_str);
     
-    //if(debuglevel > 0)
-    //    printf("Processed %d comline entries\n", nn);
+    if(debuglevel > 0)
+        {
+        //printf("Processed %d comline entries\n", nn);
+        printf("Term='%s' ", term);
+        printf("Debug=%d ", debuglevel);
+        printf("Log=%d ", loglevel);
+        printf("FG=%d\n", stay_fg);
+        }
     
     if (err_str)
         {
@@ -323,8 +330,10 @@ int main(int argc, char** argv)
     serverAddr.sin_family = AF_INET;
     /* Set port number, using htons function to use proper byte order */
     serverAddr.sin_port = htons(6789);
+    
     /* Set IP address to localhost */
-    serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    //serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    serverAddr.sin_addr.s_addr = inet_addr("0.0.0.0");
     //serverAddr.sin_addr.s_addr = inet_addr(INADDR_ANY);
     
     /* Set all bits of the padding field to 0 */
@@ -374,12 +383,18 @@ int main(int argc, char** argv)
             }
         }
     zfree(errout);
+    zfree(term);
     zfree(dummy);
     zleak();
     return 0;
 }
 
 /* EOF */
+
+
+
+
+
 
 
 

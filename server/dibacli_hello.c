@@ -396,7 +396,7 @@ int main(int argc, char** argv)
     int xcode = 0;
     
     /*---- Read the initial message ----*/
-    recv_data(clsock, buffer, sizeof(buffer), 0);
+    scom_recv_data(clsock, buffer, sizeof(buffer), 0);
     
     if(verbose)
         printf("Initial data received: '%s'\n", buffer);   
@@ -450,6 +450,7 @@ int main(int argc, char** argv)
 
     
 /* EOF */
+
 
 
 

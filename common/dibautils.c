@@ -20,7 +20,7 @@
 #include <stdarg.h>
 
 // This is a hack to get multi platform compile
-int nanosleep( const struct timespec *period, struct timespec *residual );
+int     nanosleep( const struct timespec *period, struct timespec *residual );
 
 #include "dibautils.h"
 
@@ -70,7 +70,7 @@ void    rand_asci_buff(char *str, int len)
         }
 }
 
-void rand_str(char *str, int len)
+void    rand_str(char *str, int len)
 
 {
     int loop;
@@ -88,7 +88,7 @@ void rand_str(char *str, int len)
    str[loop] = '\0';
 }
 
-void show_str(const char* str, int len)
+void    show_str(const char* str, int len)
 
 {
     int olen = 3 * len;
@@ -126,7 +126,7 @@ void    genrev(char *str, int len)
     // Count up
     for(loop = len-(ASIZE+1); loop >= ASIZE; loop--)
         {
-        UCHAR cc = str[loop];
+        unsigned char cc = str[loop];
         if(cc == 0xff)
             {
             str[loop] = 0;
@@ -139,7 +139,7 @@ void    genrev(char *str, int len)
         }
 }
 
-char *diba_alloc(int size)
+char    *diba_alloc(int size)
 
 {
     zline2(__LINE__, __FILE__);
@@ -150,14 +150,13 @@ char *diba_alloc(int size)
         fprintf(stderr, "%s\n", mstr);
         exit(2);
         }
-        
     return ret;
 }
 
 //////////////////////////////////////////////////////////////////////////
 // Build next sexp
 
-int  build_next(gcry_sexp_t *chain_next, build_next_struct *bns)
+int     build_next(gcry_sexp_t *chain_next, build_next_struct *bns)
 
 {
     int err = gcry_sexp_build(chain_next, NULL, 
@@ -269,8 +268,6 @@ int     get_pubkey(get_pub_key_struct *pks)
         return -1;
         };
         
-    //sexp_print(pubkey);
-        
     *pks->pubkey = gcry_sexp_find_token(pubkey, "public-key", 0);
     if (err) 
         {
@@ -300,7 +297,7 @@ int     get_pubkey(get_pub_key_struct *pks)
 // Get private and public key from file, prompt for pass if needed
 // Return number of key bits ot -1 for error. err_str has details
 
-int get_privkey(get_priv_key_struct *pks)
+int     get_privkey(get_priv_key_struct *pks)
 
 {
     gcry_error_t err;
@@ -308,7 +305,7 @@ int get_privkey(get_priv_key_struct *pks)
     
     if(pks->debug > 5)
         {
-        printf("get_privkey: buff=%p len=%d\n", 
+        printf("get_privkey(): buff=%p len=%d\n", 
                             pks->rsa_buf, pks->rsa_len);    
         }
     if(!pks->composite) 
@@ -324,17 +321,33 @@ int get_privkey(get_priv_key_struct *pks)
     char *mem = decode_comp_key(pks->rsa_buf, &declen, pks->err_str2);
     if(mem == NULL)
         {
+        if(pks->debug > 5)
+            {
+            printf("get_privkey(): Cannot decode private key"); 
+            }
         *pks->err_str = "Cannot decode private key";
         return -1;
         }
-    //dump_mem(mem, declen); 
+    
+    if(pks->debug > 9)
+        {
+        dump_mem(mem, declen); 
+        }
+    
     err = gcry_sexp_new(pks->composite, mem, declen, 1);
     if (!*pks->composite) 
         {
-        *pks->err_str = ("No composite key in this file.");
+        zfree(mem);     
+        if(pks->debug > 5)
+            {
+            printf("get_privkey(): composite key in this data."); 
+            }
+        *pks->err_str = ("No composite key in this data.");
+        return -1;
         }
-    if(pks->debug > 9) {
-        printf("get_privkey() Composite:\n");
+    if(pks->debug > 9) 
+        {
+        printf("get_privkey(): Composite:\n");
         sexp_print(*pks->composite);
         }
     zfree(mem);     
@@ -429,7 +442,7 @@ int get_privkey(get_priv_key_struct *pks)
         *pks->privkey = gcry_sexp_find_token(keydata, "private-key", 0);
         
         if(pks->debug > 9) {
-            printf("get_privkey key_data:\n");
+            printf("get_privkey(): key_data:\n");
             sexp_print(*pks->privkey);
             }
         }
@@ -437,7 +450,7 @@ int get_privkey(get_priv_key_struct *pks)
         {
         *pks->pubkey = gcry_sexp_find_token(keydata, "public-key", 0);
         if(pks->debug > 9) {
-            printf("get_privkey() pubkey:\n");
+            printf("get_privkey() key:\n");
             sexp_print(*pks->pubkey);
             }
         }
@@ -445,7 +458,7 @@ int get_privkey(get_priv_key_struct *pks)
         {
         *pks->hash = gcry_sexp_find_token(*pks->composite, "dibacrypt-hash", 0);
         if(pks->debug > 9) {
-            printf("get_privkey() hash:\n");
+            printf("get_privkey(): hash:\n");
             sexp_print(*pks->hash);
             }
         }
@@ -453,24 +466,27 @@ int get_privkey(get_priv_key_struct *pks)
         {
         *pks->info = gcry_sexp_find_token(*pks->composite, "dibacrypt-key", 0);
         if(pks->debug > 9) {
-            printf("get_privkey() info:\n");
+            printf("get_privkey(): info:\n");
             sexp_print(*pks->info);
             }
         }
-        
     gcry_sexp_release(keydata);
     
     gcry_sexp_t rsa_keypair;
     rsa_keypair = gcry_sexp_find_token(*pks->privkey, "private-key", 0);
     if(rsa_keypair == NULL)
-        {                           
+        {     
+        if(pks->debug > 0) 
+            {
+            printf("No private key present in buffer.");
+            }
         *pks->err_str = "No private key present in buffer.";
         return -1;
         }
     zline2(__LINE__, __FILE__);
     keylen =  gcry_pk_get_nbits(rsa_keypair) / 8 ;
-    if(pks->debug > 5) {
-        printf("get_privkey() Key length : %d\n", keylen * 8);
+    if(pks->debug > 2) {
+        printf("get_privkey(): Key length: %d\n", keylen * 8);
         }
     return(keylen);   
 }    
@@ -610,6 +626,9 @@ void show_prepoc()
 }
         
 // EOF
+
+
+
 
 
 

@@ -1,7 +1,7 @@
 
-/* =====[ dibaclient.c ]=========================================================
+/* =====[ dibacli_ping.c ]=========================================================
 
-   Description:     Client to query DIBA server.
+   Description:     Client to query DIBA server. Simple ping.
 
    Revisions:
 
@@ -9,6 +9,7 @@
       ----  -----------     ----------      ------------------------------
       0.00  nov.21.2017     Peter Glen      Initial
       0.00  jan.14.2018     Peter Glen      Timeout, base64, str ...
+      0.00  jun.02.2018     Peter Glen      Ping created.
       
    ======================================================================= */
 
@@ -131,6 +132,7 @@ static int test = 0;
 static int debuglevel = 0;
 static int calcsum = 0;
 static int version = 0;
+static int test_tou = 0;
 
 static int ver_num_major = 0;
 static int ver_num_minor = 0;
@@ -174,17 +176,20 @@ opts opts_data[] = {
         't',   "test",  NULL,  NULL, 0, 0, &test, 
         "-t             --test        - Run self test before proceeding",
         
+        'o',   "tout",  NULL,  NULL, 0, 0, &test_tou, 
+        "-o             --tout        - Test timeout",
+        
         'd',   "debug",  &debuglevel, NULL, 0, 10, NULL, 
-        "-d level       --debug level  - Output debug data (level 1-9)",
+        "-d level       --debug level - Output debug data (level 0-10)",
         
         's',   "sum",  NULL,  NULL, 0, 0, &calcsum, 
         "-s             --sum         - Print sha sum before proceeding",
         
         'p',   "pass",   NULL,   &thispass, 0, 0,    NULL, 
-        "-p val         --pass val    - Pass in for key (@file reads pass from file)",
+        "-p val         --pass val    - Pass in for key (@name for file)",
         
         'e',   "errout",  NULL,  &errout, 0, 0, NULL, 
-        "-e fname       --errout fnm  - Dup stderr to file. (for GUI deployment)",
+        "-e fname       --errout fnm  - Dup stderr to file. (for GUI)",
        
         0,     NULL,  NULL,   NULL,   0, 0,  NULL, NULL,
         };
@@ -327,13 +332,13 @@ int main(int argc, char** argv)
     int xcode = 0;
     
     /*---- Read the initial message ----*/
-    recv_data(clsock, buffer, sizeof(buffer), 0);
+    scom_recv_data(clsock, buffer, sizeof(buffer), 1);
     
     if(debuglevel > 0)
         printf("Initial data received: '%s'\n", buffer);   
 
-    if(verbose)
-        printf("Server alive.\n");   
+    //if(verbose)
+    printf("Server alive.\n");   
     
     int ret;
     
@@ -352,22 +357,37 @@ int main(int argc, char** argv)
     hs2.buff = buffer;      hs2.rlen = sizeof(buffer);
     hs2.debug = debuglevel; hs2.got_session = got_sess;
     ret = handshake(&hs2);                    
-    
-    // Test timeout
-    //printf("Waiting for timeout .... "); Sleep(6000); printf("Done\n");
     zfree(sumstr);  
     
-    handshake_struct hs; memset(&hs, 0, sizeof(hs));
-    hs.sock = clsock;
-    hs.sstr = closecmd;
-    hs.slen = strlen(closecmd);
-    hs.buff = buffer; 
-    hs.rlen = sizeof(buffer);
-    hs.debug = debuglevel;
-    hs.got_session = got_sess;
+    if(ret > 0)
+        {
+        printf("Server responded to echo.\n");   
+        }
+        
+    if(verbose)
+        printf("Response: '%s'\n", buffer);
     
-    ret = handshake(&hs);
+    // Test timeout
+    if(test_tou)
+        {
+        printf("Waiting for timeout .... "); fflush(stdout); 
+        sleep(6); printf("Done waiting for timeout.\n");
+        }
     
+    ret = close_conn(clsock);
+    
+    if(ret < 0)
+        {
+        printf("Error on close.\n");   
+        }
+    else
+        {
+        printf("Server responded to close.\n");   
+        }
+        
+    if(verbose)
+        printf("Response: '%s'\n", buffer);
+            
     // Close connection
     close(clsock);
     
@@ -386,6 +406,9 @@ int main(int argc, char** argv)
 
     
 /* EOF */
+
+
+
 
 
 

@@ -42,7 +42,7 @@ TOOLS=$(TOOLDIR)/gcry.c $(TOOLDIR)/gsexp.c   \
                                 $(BLUEDIR)/bluepoint3.c
 
 LIBS2= -l gpg-error 
-LIBS=-l z -l gcrypt -l ncurses
+LIBS=-l z -l gcrypt 
 #OPT_LIBS= -L $(LIB2) -L $(LIB3) -L $(LIB4) 
 
 #OPT2= -I $(INC2) -I $(INC3) -I $(INC5) 
@@ -68,6 +68,7 @@ FILTER=sed s/0x[0-9A-F]*/0x00000000/g
 HELLO="Hello World"
 
 # EOF
+
 
 
 

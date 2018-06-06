@@ -1,7 +1,7 @@
 
-/* =====[ dibaclient.c ]=========================================================
+/* =====[ dibacli_key.c ]=========================================================
 
-   Description:     Client to query DIBA server.
+   Description:     Client to query DIBA server. Estabilish a key exchange.
 
    Revisions:
 
@@ -45,80 +45,80 @@
 
 char mykey[] = "\
 -----BEGIN DIGIBANK RSA PUBLIC KEY-----\n\
-KDEzOmRpYmFjcnlwdC1rZXkoMTc6S2V5IENyZWF0aW9uIERhdGUxOToyMDE3LzEy\n\
-LzIxIDAxOjA5OjI2KSgxMTpLZXkgVmVyc2lvbjU6MC4wLjQpKDg6S2V5IE5hbWUx\n\
+KDEzOmRpYmFjcnlwdC1rZXkoMTc6S2V5IENyZWF0aW9uIERhdGUxOToyMDE4LzA1\n\
+LzIzIDExOjMwOjI4KSgxMTpLZXkgVmVyc2lvbjU6MC4wLjQpKDg6S2V5IE5hbWUx\n\
 MTp1bm5hbWVkIGtleSkoODpLZXkgVHlwZTM6UlNBKSgxNTpLZXkgRGVzY3JpcHRp\n\
-b24xNDpubyBkZXNjcmlwdGlvbikoNjpLZXkgSUQzMjpONEV5M1R2bldxbE1JcTlG\n\
-eUlrSkovZ2k1clpQbWl6TCkoMTE6S2V5IENyZWF0b3I5OnBldGVyZ2xlbikoMTI6\n\
-S2V5IEhvc3RuYW1lMzpIUDIpKDE1OlB1YmxpYyBGaWxlbmFtZTY6YmIucHViKSgx\n\
-MTpQdWJsaWMgSGFzaDQ0OkNtSThwUUM1Rnczb0o1TDNWWlFIWHJFV0JXcklBR0lL\n\
-bDdEWFVSa3RPYlE9KSgxNjpQcml2YXRlIEZpbGVuYW1lNjpiYi5rZXkpKDEyOlBy\n\
-aXZhdGUgSGFzaDQ0OnBzY1FyUUpWalZCY1F6akpBdm5zRXFDU2hoZy9ncnhCcmxa\n\
-dGxZUlpVR1U9KSkoMTA6cHVibGljLWtleSgzOnJzYSgxOm4yNTc6AMgFTcDA/WGw\n\
-TVdBuSHOyTIva2gOJcbWXuU/siYOHu594eIgn+O4fyhkp2VQM1rT5LSFjWLb4KTT\n\
-A5apU5ibXF0BOzEYgN2swOfTJ2Iw3iu/aftEfKEhLaUIi8gOgZJHJNuXxUOg0+I2\n\
-2f69s0DnTXXcbeuZXPZxI0wirrP5CafuSjPSH+fmrmJM08biJQ0TRmFiOOc7f95H\n\
-jcnh9kPkJy7ucS4Nl7FsXqFJ+ZZn74FDy8NzwBHuoklvdL3yM+cyJddoREe6eTco\n\
-XzR7zVYAbvpqZ/VU3Mc/6aoNS+irnUK2iSIK2hZSIvX73JKZLWLtlT5DctEqRBNi\n\
-qSNmRoBVRvspKDE6ZTM6AQABKSkpKDE0OmRpYmFjcnlwdC1oYXNoKDE4Okhhc2gg\n\
-Q3JlYXRpb24gRGF0ZTE5OjIwMTcvMTIvMjEgMDE6MDk6MjYpKDEyOkhhc2ggVmVy\n\
-c2lvbjU6MC4wLjQpKDY6S2V5IElEMzI6TjRFeTNUdm5XcWxNSXE5RnlJa0pKL2dp\n\
-NXJaUG1pekwpKDE1OlB1YmxpYyBGaWxlbmFtZTY6YmIucHViKSgxMTpQdWJsaWMg\n\
-SGFzaDQ0OkNtSThwUUM1Rnczb0o1TDNWWlFIWHJFV0JXcklBR0lLbDdEWFVSa3RP\n\
-YlE9KSgxNjpQcml2YXRlIEZpbGVuYW1lNjpiYi5rZXkpKDEyOlByaXZhdGUgSGFz\n\
-aDQ0OnBzY1FyUUpWalZCY1F6akpBdm5zRXFDU2hoZy9ncnhCcmxadGxZUlpVR1U9\n\
-KSg5OkluZm8gSGFzaDQ0Ok5qd2dtZDJiVVdxaHZha0VSNER0ZHhQa21QT3hOSXhQ\n\
-YmhocW5icDNqeEk9KSkA\n\
+b24yOjEwKSg2OktleSBJRDMyOmw0OG5kUlQxUFcwcTZuUUxEQlluenMxUGdsVE01\n\
+UkE1KSgxMTpLZXkgQ3JlYXRvcjEyOnVua25vd24gbmFtZSkoMTI6S2V5IEhvc3Ru\n\
+YW1lMTI6dW5rbm93biBob3N0KSgxNTpQdWJsaWMgRmlsZW5hbWU2OmJiLnB1Yiko\n\
+MTE6UHVibGljIEhhc2g0NDpkOENwWWxoWEFVSEdxblkvcVp4U2czK2tOcGFhTlI0\n\
+MjkvSHhpd1czbE5zPSkoMTY6UHJpdmF0ZSBGaWxlbmFtZTY6YmIua2V5KSgxMjpQ\n\
+cml2YXRlIEhhc2g0NDpuNVlqRUdKNzVqTGUyZkN3NEFhZndVaTZjenovZnp6ODVa\n\
+ZFU3VEJZelcwPSkpKDEwOnB1YmxpYy1rZXkoMzpyc2EoMTpuMjU3OgDQNgU1UOVz\n\
+zrSVFrgJHBpRQs8vwU0OYgaTMtLN3J4Mx+XANYpwUXi45KBIzcAZPYpPCsPF0iF4\n\
+ZfjrwlNgcDYpEUivtcaGIQqu5R40S4N9k3Lp3NhaapWB4nlncQ3w3jHZY3tl05+Y\n\
+KPjIXnOHciZ7/Z9PcYuG6EmnVEcvqhNtc+Uoa2R7Jsgx1rhTJYmNoyqzcqPp2b3v\n\
+9uqlKYc7yqWYcuu3h0MmNbSk8Td4BeXRDG2AqeTgCvDWKyGXVyvfOkSdhmyWroVJ\n\
+zWImDaHY24B8aMagb/qyhlh32TaMUgyHhhbjZ5A3TDOr3ARBvqKLr33RCET+/8bI\n\
+4OjXjYgQAw7pKSgxOmUzOgEAASkpKSgxNDpkaWJhY3J5cHQtaGFzaCgxODpIYXNo\n\
+IENyZWF0aW9uIERhdGUxOToyMDE4LzA1LzIzIDExOjMwOjI4KSgxMjpIYXNoIFZl\n\
+cnNpb241OjAuMC40KSg2OktleSBJRDMyOmw0OG5kUlQxUFcwcTZuUUxEQlluenMx\n\
+UGdsVE01UkE1KSgxNTpQdWJsaWMgRmlsZW5hbWU2OmJiLnB1YikoMTE6UHVibGlj\n\
+IEhhc2g0NDpkOENwWWxoWEFVSEdxblkvcVp4U2czK2tOcGFhTlI0MjkvSHhpd1cz\n\
+bE5zPSkoMTY6UHJpdmF0ZSBGaWxlbmFtZTY6YmIua2V5KSgxMjpQcml2YXRlIEhh\n\
+c2g0NDpuNVlqRUdKNzVqTGUyZkN3NEFhZndVaTZjenovZnp6ODVaZFU3VEJZelcw\n\
+PSkoOTpJbmZvIEhhc2g0NDp1SFpRMTdvQ3gzeUZsZW1SUkdzakFTTGszczFHTDFS\n\
+QlVlUGRPOEFCTkZFPSkpAA==\n\
 -----END DIGIBANK RSA PUBLIC KEY-----\n\
 ";
 
 char mypkey[] = "\
 -----BEGIN DIGIBANK RSA COMPOSITE KEY-----\n\
-KDEzOmRpYmFjcnlwdC1rZXkoMTc6S2V5IENyZWF0aW9uIERhdGUxOToyMDE3LzEy\n\
-LzIxIDAxOjA5OjI2KSgxMTpLZXkgVmVyc2lvbjU6MC4wLjQpKDg6S2V5IE5hbWUx\n\
+KDEzOmRpYmFjcnlwdC1rZXkoMTc6S2V5IENyZWF0aW9uIERhdGUxOToyMDE4LzA1\n\
+LzIzIDExOjMwOjI4KSgxMTpLZXkgVmVyc2lvbjU6MC4wLjQpKDg6S2V5IE5hbWUx\n\
 MTp1bm5hbWVkIGtleSkoODpLZXkgVHlwZTM6UlNBKSgxNTpLZXkgRGVzY3JpcHRp\n\
-b24xNDpubyBkZXNjcmlwdGlvbikoNjpLZXkgSUQzMjpONEV5M1R2bldxbE1JcTlG\n\
-eUlrSkovZ2k1clpQbWl6TCkoMTE6S2V5IENyZWF0b3I5OnBldGVyZ2xlbikoMTI6\n\
-S2V5IEhvc3RuYW1lMzpIUDIpKDE1OlB1YmxpYyBGaWxlbmFtZTY6YmIucHViKSgx\n\
-MTpQdWJsaWMgSGFzaDQ0OkNtSThwUUM1Rnczb0o1TDNWWlFIWHJFV0JXcklBR0lL\n\
-bDdEWFVSa3RPYlE9KSgxNjpQcml2YXRlIEZpbGVuYW1lNjpiYi5rZXkpKDEyOlBy\n\
-aXZhdGUgSGFzaDQ0OnBzY1FyUUpWalZCY1F6akpBdm5zRXFDU2hoZy9ncnhCcmxa\n\
-dGxZUlpVR1U9KSkoMTU6cHJpdmF0ZS1jcnlwdGVkMTI4NzrGvXOqqnAaa7uCQaF8\n\
-lHiBL6lux9it2iMnzxdonXwQd/xfUBHk6dJMdgJfyftX7Z1s/ff+/CxkvsKAdVdJ\n\
-YmFny2CO5lraaNZjnB/9T/qmA9njCxxBzcpTRXUufggOEXzKnUtyHVvO89dhndaB\n\
-5iBmyWC9PU46doK1j7FSDp3Wt8QXzF8RwMP7YSM7+6zNmLoOOU1BOOmQfaq/449S\n\
-Sp5NyJguD2wCS4mw9oJQ8Q5cnSUZZgH7u9Mma/U8ew4sK9JXRq/FFGIVp+OH+0Jm\n\
-hZjm7nx+G3llV0f/+It9XTVyPdVdUl6Zv0ziRZQ+gwr7SSRh6rYT7wLGYElpp1Nk\n\
-1nk2o5/aisrg8dWUStG96N2356x5SxTbs4N6cSX26YtnGP2CWKnE9Yfq6v6Zsc2F\n\
-no64IT3TD9SDwk4MD1qELJUwnSP1H7lH9xybza9r2ig2lRqwMh2iIOkUoZzktJoj\n\
-V43OmK9AQWMu5FiF3MZ+z8Q4LlY/fbh5W46p2eejpfNcgrGSrEhJJ9tgzr7w367Y\n\
-tUnU0qtgG1nGqRrhSjTbVL8mMS2h1LXEELPqkLiPWynbDXLNUYp8WlVQWWkuhT5K\n\
-5KmQArp4Jo0MBKGd+K1ceWKn+DDgz4mVwB6u0b1LKjqGpl1+ZWmVHW+J/J9N0vNI\n\
-Fhh4Ewr5xUOFGMhyeonEdzl6n6ZRzgwe6bltupur4vAm7n4fvkgGmwtUwxeCgXcI\n\
-ug9vb+n6Bbc2aLx+q5gWf7CAec1CrUll0kZP9B/E1DUc3qEdplcOuU5qMsrBdBog\n\
-yjzi2hmpvnwzPncaARuyOi0DiZbi03AtaqOJRQRWO8nVZvPmB5LnDr/QNRtzAp8W\n\
-ePC6pCVJ1XjXZVkk6UrnCoaiQrfjxULMCk8OIboohTKjmSnUE/T+MK1T19NT7oJ7\n\
-d9xcB7qlTK5uqq1DZ1wo5fm9dyWWzMkkgs8S2U3EgQfInQjZcRzxNk60IQvGq7Km\n\
-tKiR5cFhJ5Ud0G8KbDusGl/oNFexUagBTi4EygXqcq8cfMftqhbxha2P0lqTXELT\n\
-WnYbbKuu7AsCDC+i7tNBFn00XeuF9eGFi8VxvHl5zLDS36/YIklkJIlkimZRFnNl\n\
-7wE6OYz+nNMnNrq9UNmCfhWGxBO6pfmFdiTssUIRCpQH7tnEe45w49PhbmC0w7Tu\n\
-n8lhIsBKhtrTRRG+4uUs3Vmq9GAgUkd8yTFoNNF/V3ymjQTW0PgYtMt5CN+CXeI0\n\
-ZSrRgMrCMBB/A+HEjePpCpI+alch6mUUMS6J8hUY9NOhhRp/Fwn15s0fRhUSusFM\n\
-jrx/mZwLwtTDzs++NHllI4ayFih1FHiEkDyPxXBJmBVo6r4zz68RnPrOFfprkcub\n\
-NSQKDQY8qeS2U5E7x2ofw1vjO5lXMOuJbJWtg1xNT/86r5i3vPaW7eSqQz7GwcdL\n\
-PS58VOQNuSaQYXTBXGOvUj7+iOHtrtR2gc64s6EM/Yja68/mqL8JlWpsTAYXsbc/\n\
-fJWiSva6uIOgubRy3CRVqX+VR/6k65L0Z3pj0cbSSNV6bVXw6fKuqxzXQL7A9YdO\n\
-SidNNv/95l25yjQ8TM2y2bOmqonWr/P8Bv3DKKLUkvSK56puo8474deAC6oeyknC\n\
-UHokH+pI+Q+C9GAmsuFWJnLrUP6cLWignZn0EGSf+qKfGsTa9sgwrJyKycyyoO1S\n\
-wBCDiFtG9O81pFy4hlDfhPY08wJOM4Wi9TUpKDE0OmRpYmFjcnlwdC1oYXNoKDE4\n\
-Okhhc2ggQ3JlYXRpb24gRGF0ZTE5OjIwMTcvMTIvMjEgMDE6MDk6MjYpKDEyOkhh\n\
-c2ggVmVyc2lvbjU6MC4wLjQpKDY6S2V5IElEMzI6TjRFeTNUdm5XcWxNSXE5RnlJ\n\
-a0pKL2dpNXJaUG1pekwpKDE1OlB1YmxpYyBGaWxlbmFtZTY6YmIucHViKSgxMTpQ\n\
-dWJsaWMgSGFzaDQ0OkNtSThwUUM1Rnczb0o1TDNWWlFIWHJFV0JXcklBR0lLbDdE\n\
-WFVSa3RPYlE9KSgxNjpQcml2YXRlIEZpbGVuYW1lNjpiYi5rZXkpKDEyOlByaXZh\n\
-dGUgSGFzaDQ0OnBzY1FyUUpWalZCY1F6akpBdm5zRXFDU2hoZy9ncnhCcmxadGxZ\n\
-UlpVR1U9KSg5OkluZm8gSGFzaDQ0Ok5qd2dtZDJiVVdxaHZha0VSNER0ZHhQa21Q\n\
-T3hOSXhQYmhocW5icDNqeEk9KSk=\n\
+b24yOjEwKSg2OktleSBJRDMyOmw0OG5kUlQxUFcwcTZuUUxEQlluenMxUGdsVE01\n\
+UkE1KSgxMTpLZXkgQ3JlYXRvcjEyOnVua25vd24gbmFtZSkoMTI6S2V5IEhvc3Ru\n\
+YW1lMTI6dW5rbm93biBob3N0KSgxNTpQdWJsaWMgRmlsZW5hbWU2OmJiLnB1Yiko\n\
+MTE6UHVibGljIEhhc2g0NDpkOENwWWxoWEFVSEdxblkvcVp4U2czK2tOcGFhTlI0\n\
+MjkvSHhpd1czbE5zPSkoMTY6UHJpdmF0ZSBGaWxlbmFtZTY6YmIua2V5KSgxMjpQ\n\
+cml2YXRlIEhhc2g0NDpuNVlqRUdKNzVqTGUyZkN3NEFhZndVaTZjenovZnp6ODVa\n\
+ZFU3VEJZelcwPSkpKDE1OnByaXZhdGUtY3J5cHRlZDEyODg6xr1zqqpwGmu7gkGh\n\
+fJR4gS+pbsfYrdojJ88XaJ18EHf8X1AR5OnSTG4xFzxrT//j/4WKF1wD0Se972cR\n\
+w1aQMbfdehNBr+zbkRqMcydM0DVnpoAtLo0V1KUildkrv0jbfTwSvyGMlC1tUEIY\n\
+dBMl7rO5GAwCkt8xteAUXwqVpLDzAIXx6iFDckbpfuk46CmNTNAwoBgor5IRf2TA\n\
+xcM+EbBBH3q25/KdFkXQBpAsKqdwIc72BU+Tqkc0spnezg/Eu2WY2BTbharx1azy\n\
+84+7Q4PtS4+u2oNQyQyrFHFxQ2RmwHlEGe1P6R4jVt6EZmzFzPpAadi9J3g+yzqv\n\
+u0kGzgy3IJFEFnIW6Jsdc1oECXJdnfm+4LGsF5xKfbbwbBxxzoszKlUmHkXjBSbv\n\
+IBaSxQhkcTG9O43oPhiswMFS+bRkH7rlmA43cAz46A86hD13SiGNPJYI5OslqUIZ\n\
+J1Cdbeb85/5iV9gK18SGkfjE9V0UZgb+7QkycdoDGhPB2Wi44fyRcD7K2fWzIRct\n\
+J4vxXaufFKn1UcsxAN+KIqUGjxfwezYA2sXETU8BN3H7NZvAtfbSHuOWBrGqQp/z\n\
+6QMcJZ2dsUMMc1xrSvKemjd5NxtGXn6ASHK24T+D2vICdbQTWJuwqdgpQu0q6/jB\n\
+fL72JLf82K89du8VFgrcuF+m+cm3WEU3Sbl9vV4hNpr7974ngWNEQdb1Nku7V+pX\n\
+4MKsm8TMipu0lZiA637p381KEx4TcgSUct/lh01Rmka0cSf8+U5Z1TL1Qq/BpUDk\n\
+RL/cM1VQdnRJP7PI35scKBIyrgYhn+di+6N+wiq5F2L3dsIuxP0Oy+Eh83wczgIt\n\
+QDRAPvT3Wi7fjjqDxI2IWu0w97MQ19fTVu7lGXVhGM+yUB8QvHk1RsgdWG3jiiaP\n\
+1Fh/I2aQ/9iCvNNSXruVpjPTz7dvZCzvvnafpAdLnrOf/KkodyTdMQWh0sHiq8hz\n\
+jqw8pBQ71BV+f+ZS/ISUv+oQn2iiAI3/vs9c+gXkaTAKYaC8dRw0WVPEkPhgOqtv\n\
+z+rixTa7YUTepDsv3aEATV82E6PGA+KEBxENC8rM+ciC90WoOy9z05NnQsbjec1M\n\
+0B0v5UWhK5q1WRQ1WRXmnIRRXtCoTJ1kJ8Y00FmCeo/8aQ/RDdBa3AFGptd27q+t\n\
+8WWZVgp4DwVSs632qcnsr/NEEHtZD1Ku1xV/9brtxBhXDm5DebctQB5VYlvnLULY\n\
+MW0rqwzqJd799EZoD53TWPInpjVIbNE7KCOXWh7eZ9dx+JtGnZtSt5wWzIlNi94t\n\
+sW+3EcImroQ7ljokZ2OcsblYYWsk4rYoECOVVEAkzw/XvOOzj6Iy52DXqEcL+yii\n\
+z9A1dHSoKwPbBS5uyUmgG+7GjJVcPhflzr2TJUt05PvgD90kA9cUYfZq3fDKbOHY\n\
+IjJk5r4L3Rh2rgJbvPJ70eiPgfWdLWszBbelkFMdiTdARulkVBhyK7NmTJu+iNEY\n\
+NTPjHjWrlOYt6O3KmZpZ4ibVAsU3/0OCIj+GzXSsczU30aPej0BdxV0Op5HIByjm\n\
+iFfC9MWfiL7eLfcCrCn/++eFshf5SlB96HfSmkNPJa7NWuAC2QkMeRNUC0Md4OHh\n\
+sh6d9J9htdC7JYR4qtCjIN80bRRK1igGZRTdvX4qhWlNGK6plB1dwZffAqrq49K6\n\
+KOD3sP140zkGU6QdKt8oljkFdKeVFKynC4xZ8ykoMTQ6ZGliYWNyeXB0LWhhc2go\n\
+MTg6SGFzaCBDcmVhdGlvbiBEYXRlMTk6MjAxOC8wNS8yMyAxMTozMDoyOCkoMTI6\n\
+SGFzaCBWZXJzaW9uNTowLjAuNCkoNjpLZXkgSUQzMjpsNDhuZFJUMVBXMHE2blFM\n\
+REJZbnpzMVBnbFRNNVJBNSkoMTU6UHVibGljIEZpbGVuYW1lNjpiYi5wdWIpKDEx\n\
+OlB1YmxpYyBIYXNoNDQ6ZDhDcFlsaFhBVUhHcW5ZL3FaeFNnMytrTnBhYU5SNDI5\n\
+L0h4aXdXM2xOcz0pKDE2OlByaXZhdGUgRmlsZW5hbWU2OmJiLmtleSkoMTI6UHJp\n\
+dmF0ZSBIYXNoNDQ6bjVZakVHSjc1akxlMmZDdzRBYWZ3VWk2Y3p6L2Z6ejg1WmRV\n\
+N1RCWXpXMD0pKDk6SW5mbyBIYXNoNDQ6dUhaUTE3b0N4M3lGbGVtUlJHc2pBU0xr\n\
+M3MxR0wxUkJVZVBkTzhBQk5GRT0pKQ==\n\
 -----END DIGIBANK RSA COMPOSITE KEY-----\n\
 ";
 
@@ -128,7 +128,7 @@ static int weak = FALSE;
 static int force = FALSE;    
 static int verbose = 0;
 static int test = 0;
-static int debug = 0;
+static int debuglevel = 0;
 static int calcsum = 0;
 static int version = 0;
 
@@ -136,17 +136,19 @@ static int ver_num_major = 0;
 static int ver_num_minor = 0;
 static int ver_num_rele  = 4;
 
-static char descstr[] = "Connect to DIBA peers ";
-static char usestr[]  = "dibaclient [options]\n";
+static char descstr[] = "Estabilish DIBA key exchange ";
+static char usestr[]  = "dibacli_key [options]\n";
                 
 static char    *thispass = NULL;
+static char    *ihost = NULL;
 static char    *keyname  = NULL;
 static char    *keyfile = NULL;
 static char    *query = NULL;
 static char    *errout   = NULL;
 
-static  char    *testkey = "1234";
-static char    *randkey  = NULL;
+//static  char    *testkey = "1234";
+//static char    *randkey  = NULL;
+
 static int      got_sess = 0;
 
 /*  char    opt;
@@ -174,7 +176,7 @@ opts opts_data[] = {
         't',   "test",  NULL,  NULL, 0, 0, &test, 
         "-t             --test        - Run self test before proceeding",
         
-        'd',   "debug",  &debug, NULL, 0, 10, &test, 
+        'd',   "debug",  &debuglevel, NULL, 0, 10, NULL, 
         "-d level       --debug level  - Output debug data (level 1-9)",
         
         's',   "sum",  NULL,  NULL, 0, 0, &calcsum, 
@@ -182,6 +184,9 @@ opts opts_data[] = {
         
         'p',   "pass",   NULL,   &thispass, 0, 0,    NULL, 
         "-p val         --pass val    - Pass in for key (@file reads pass from file)",
+        
+        'i',   "ihost",   NULL,   &ihost, 0, 0,    NULL, 
+        "-i name         --ihost name  - Internet host name / IP address",
         
         'e',   "errout",  NULL,  &errout, 0, 0, NULL, 
         "-e fname       --errout fnm  - Dup stderr to file. (for GUI deployment)",
@@ -194,6 +199,7 @@ static void myfunc(int sig)
     printf("\nSignal %d (segment violation)\n", sig);
     exit(5);
 }
+
 
 // Static local functions
 
@@ -237,6 +243,7 @@ int main(int argc, char** argv)
     //char *mstr = "No Memory";
     zline2(__LINE__, __FILE__);
     thispass = zalloc(MAX_PATH); if(thispass == NULL) xerr3(mstr);
+    ihost   = zalloc(MAX_PATH);  if(ihost == NULL) xerr3(mstr);
     keyname  = zalloc(MAX_PATH); if(keyname  == NULL) xerr3(mstr);
     errout   = zalloc(MAX_PATH); if(errout   == NULL) xerr3(mstr);
     keyfile  = zalloc(MAX_PATH); if(keyfile  == NULL) xerr3(mstr);
@@ -261,26 +268,28 @@ int main(int argc, char** argv)
         }
     if(version)
         {
-        printf("dibaclient version %d.%d.%d\n", ver_num_major, ver_num_minor, ver_num_rele);
+        printf("dibacli_key version %d.%d.%d\n", ver_num_major, ver_num_minor, ver_num_rele);
         printf("libgcrypt version %s\n", GCRYPT_VERSION);
         zautofree();
         exit(4);
         }
-        
+      
+    #if 0  
     if(query[0] == '\0')
         {
-        xerr3("dibaclient: missing query file. Use -? option to see help\n");
+        xerr3("dibacli_key: missing query file. Use -? option to see help\n");
         } 
     int qlen;
     
     char *querystr = grabfile(query, &qlen, &err_str);
     if(!querystr)
         {
-        //printf("dibaclient: error on loading query file '%s'. (%s)\n", 
+        //printf("dibacli_key: error on loading query file '%s'. (%s)\n", 
         //                    query, err_str);
-        xerr3("dibaclient: error on loading query file %s. (%s)\n", 
+        xerr3("dibacli_key: error on loading query file %s. (%s)\n", 
                             query, err_str);
         }
+    #endif
         
     //printf("query %.*s\n", 64, querystr);
              
@@ -296,7 +305,7 @@ int main(int argc, char** argv)
             }
         else 
             {
-            xerr3("dibaclient: %s\n", err_str);
+            xerr3("dibacli_key: %s\n", err_str);
             }
         }
     
@@ -320,14 +329,14 @@ int main(int argc, char** argv)
     //////////////////////////////////////////////////////////////////////
     
     char *err_str2;
-    get_priv_key_struct pks;
-    gcry_sexp_t info, privk, pubkey;
+    get_priv_key_struct pks; memset(&pks, 0, sizeof(pks));
+    gcry_sexp_t info, privk, composite, pubkey;
     
     if(keyfile[0] != '\0')
         {
         pks.rsa_buf = grabfile(keyfile, &pks.rsa_len, &err_str);
         if(!pks.rsa_buf)
-            xerr3("dibaclient: Cannot load keyfile. %s", err_str);
+            xerr3("dibacli_key: Cannot load keyfile. %s", err_str);
         }
     else
         {
@@ -339,33 +348,31 @@ int main(int argc, char** argv)
     pks.err_str2  = &err_str2;
     pks.nocrypt   = 0;
     pks.privkey   = &privk;
+    pks.composite = &composite;
     pks.pubkey    = &pubkey;
     pks.info      = &info;
+    pks.debug     = debuglevel;
     pks.thispass  = thispass;
     
     int keylen = get_privkey(&pks);
     if(keylen < 0)
         {
-        xerr3("dibaclient: %s. (%s)", err_str, err_str2);
+        xerr3("dibacli_key: %s. (%s)", err_str, err_str2);
         }
     
     if(keyfile[0] != '\0')
         zfree(pks.rsa_buf);
     
-    printf("pubkey: %s\nprivkey: '%s'\n", pks.pubkey, pks.privkey);
-    
-    //if (argc - nn != 2) {
-    //    printf("dibaclient: Missing argument");
-    //    usage(usestr, descstr, opts_data); exit(2);
-    //    }
-    
-    #if 0
-    WSADATA wsa;
-    if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
-    {
-        xerr3("Socket start failed. Error Code : %d", WSAGetLastError());
-    }
-    #endif
+    if(debuglevel > 9)
+        {
+        printf("pubkey: %s\n", "");
+        sexp_print(*pks.pubkey);
+        }
+    if(debuglevel > 9)
+        {
+        printf("privkey: '%s'\n", ""); 
+        sexp_print(*pks.privkey);
+        }
     
     int clsock, xcode;
     struct sockaddr_in serverAddr;
@@ -377,7 +384,7 @@ int main(int argc, char** argv)
     /* Address family = Internet */
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_port = htons(6789);
-    serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    serverAddr.sin_addr.s_addr = inet_addr(ihost);
     memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);  
     
     /*---- Connect ----*/
@@ -388,9 +395,9 @@ int main(int argc, char** argv)
                             err, errno, strerror(errno));
     
     /*---- Read the initial message ----*/
-    recv_data(clsock, buffer, sizeof(buffer), 0);
+    scom_recv_data(clsock, buffer, sizeof(buffer), 0);
     
-    if(verbose || debug)
+    if(verbose || debuglevel > 0)
         printf("Initial data received: '%s'\n", buffer);   
     
     int ret;
@@ -399,73 +406,95 @@ int main(int argc, char** argv)
     hs.sock = clsock;
     hs.sstr = keycmd;   hs.slen = strlen(keycmd);
     hs.buff = buffer;   hs.rlen = sizeof(buffer);
-    hs.debug = debug;   hs.got_session = got_sess;
+    hs.debug = debuglevel;   hs.got_session = got_sess;
     ret = handshake(&hs);
     
     if(strncmp(buffer, okstr, STRSIZE(okstr)) != 0)
         {
         printf("Server does not accept the key command.\n");
+        printf("Response: '%s'\n", buffer);
         
-        handshake_struct hs2; memset(&hs2, 0, sizeof(hs2));
-        hs2.sock = clsock;
-        hs2.sstr = closecmd; hs2.slen = strlen(closecmd);
-        hs2.buff = buffer;   hs2.rlen = sizeof(buffer);
-        hs2.debug = debug;   hs2.got_session = got_sess;
-        ret = handshake(&hs2);                    
         
         zautofree();
         exit(4);
         }
-    //handshake_struct hs; 
+        
+    handshake_struct hs2; 
     
-    
-    
-    memset(&hs, 0, sizeof(hs));
-    hs.sock = clsock;
-    hs.sstr = mykey; hs.slen = strlen(mykey);
-    hs.buff = buffer;   hs.rlen = sizeof(buffer);
-    hs.debug = debug;   hs.got_session = got_sess;
-    ret = handshake(&hs);
+    memset(&hs2, 0, sizeof(hs2));
+    hs2.sock = clsock;
+    hs2.sstr = mykey; hs2.slen = strlen(mykey);
+    hs2.buff = buffer;   hs2.rlen = sizeof(buffer);
+    hs2.debug = debuglevel;   hs2.got_session = got_sess;
+    ret = handshake(&hs2);
     
     if(strncmp(buffer, okstr, STRSIZE(okstr)) != 0)
         {
         printf("Server rejected key.\n");
-        handshake_struct hs; memset(&hs, 0, sizeof(hs));
-        hs.sock = clsock;
-        hs.sstr = closecmd; hs.slen = strlen(closecmd);
-        hs.buff = buffer;   hs.rlen = sizeof(buffer);
-        hs.debug = debug;   hs.got_session = got_sess;
-        ret = handshake(&hs);
+        if(verbose)
+            printf("Response: '%s'\n", buffer);
         
+        close_conn(clsock);
+ 
         zautofree();
         exit(4);
         }
         
+    if(ret >= 0)
+        {
+        printf("Server accepted key.\n", buffer);   
+        if(verbose)
+            printf("Response: '%s'\n", buffer);
+        }
+
     int rlen = rand() % 32 + 24;
     char *randstr = zrandstr_strong(rlen); 
     char *sumstr = zstrmcat(0, "echo ", randstr, NULL); 
-    zfree(randstr);  zfree(sumstr);  
+    zfree(randstr); 
     
-    memset(&hs, 0, sizeof(hs));
-    hs.sock = clsock;
-    hs.sstr = closecmd;
-    hs.slen = strlen(closecmd);
-    hs.buff = buffer; 
-    hs.rlen = sizeof(buffer);
-    hs.debug = debug;
-    hs.got_session = got_sess;
+    if(debuglevel > 0)
+        printf("Rand sent: '%s'\n", sumstr);
+        
+    // Test echo
+    handshake_struct hs2r; memset(&hs2r, 0, sizeof(hs2r));
+    hs2r.sock = clsock;
+    hs2r.sstr = sumstr;      hs2r.slen = strlen(sumstr);
+    hs2r.buff = buffer;      hs2r.rlen = sizeof(buffer);
+    hs2r.debug = debuglevel; hs2r.got_session = got_sess;
+    ret = handshake(&hs2r);                    
+    zfree(sumstr);  
     
-    ret = handshake(&hs);
+    if(ret > 0)
+        {
+        printf("Server responded to echo.\n");   
+        }
+        
+    if(verbose)
+        printf("Response: '%s'\n", buffer);
+    
+                    
+    //int rlen = rand() % 32 + 24;
+    //char *randstr = zrandstr_strong(rlen); 
+    //char *sumstr = zstrmcat(0, "echo ", randstr, NULL); 
+    //zfree(randstr);  zfree(sumstr);  
+    
+    close_conn(clsock);
+
+    //printf("got_sess %d\n", got_sess);
     
     // Close connection
     close(clsock);
     
+    if(verbose)
+        printf("Closed connection.\n");
+               
     zfree(thispass);    zfree(keyname);      
     zfree(errout);      zfree(keyfile);
-    zfree(query);       zfree(querystr);
+    zfree(query);       zfree(ihost);
+    //zfree(querystr);
     
-    if(randkey)
-        zfree(randkey);
+    //if(randkey)
+    //    zfree(randkey);
         
     zfree(dummy);
     
@@ -474,6 +503,9 @@ int main(int argc, char** argv)
 }
 
 /* EOF */
+
+
+
 
 
 

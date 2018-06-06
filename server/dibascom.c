@@ -61,7 +61,7 @@ static int debug_level = 0;
 
 /////////////////////////////////////////////////////////////////////////
 
-void set_debuglevel(int level)
+void scom_set_debuglevel(int level)
 {
     debug_level = level;              
 }
@@ -72,7 +72,7 @@ void set_debuglevel(int level)
 // as a handle, the client will use send as it is a socket.
 // Not strickly needed, but makes for a cleaner transfer.
 
-int send_data(int socket, const char *str, int len, int uw)
+int scom_send_data(int socket, const char *str, int len, int uw)
 
 {
     int ret = 0, ret2 = 0;
@@ -112,13 +112,13 @@ int send_data(int socket, const char *str, int len, int uw)
 // If no response within timout, the process sends FATAL
 // and the server termnates, after attemts to close connection.
 
-int recv_data(int socket, char *buff, int len, int ur)
+int scom_recv_data(int socket, char *buff, int len, int ur)
 
 {
     int ret3, ret2, idx2 = 0;
     short xlen = 0; 
     
-    //fprintf(stderr, "recv_data: %p %d\n", buff, len);
+    //fprintf(stderr, "scom_recv_data: %p %d\n", buff, len);
     
     if(ur)
         ret3 = read(socket, (char*)&xlen, sizeof(short));
@@ -172,11 +172,13 @@ int print2sock(int sock, int uw, char *fmt, ...)
 {
     va_list ap;  va_start(ap, fmt);    
     
-    char *buff = zalloc(DEFSOCKBUFF);
+    char *buff = zalloc(DEFSOCKBUFFLEN);
     if(!buff)
         return -1;
-    int ret = vsnprintf(buff, DEFSOCKBUFF, fmt, ap);
-    int ret2 = send_data(sock, buff, strlen(buff), uw);
+        
+    int ret = vsnprintf(buff, DEFSOCKBUFFLEN, fmt, ap);
+    
+    int ret2 = scom_send_data(sock, buff, strlen(buff), uw);
     
     zfree(buff);
     return ret2;
@@ -217,19 +219,20 @@ char *bp3_encrypt_cp(cchar *buff, int len, cchar *key, int klen, int *outx)
 // Send / Recv
 // Return -1 if error or fatal response
 
-//int     handshake(int sock, cchar *sstr, int slen, char *buff, int rlen)
-
 int  handshake(handshake_struct *hs)
 
 {
     int rets = 0;
     // Quick check
-    if(hs->rlen <= 0 || hs->buff == NULL)
+    if(hs->buff == NULL)
         {
         if(hs->debug > 0)
            printf("Invalid parameters\n");
         return -1;
         }
+        
+    if(hs->rlen <= 0)
+        hs->rlen = strlen(hs->sstr);
     
     *hs->buff = '\0'; 
     // If session, encrypt
@@ -238,28 +241,28 @@ int  handshake(handshake_struct *hs)
         int outx;                    
         char *xptr = bp3_encrypt_cp(hs->sstr, hs->slen, 
                         hs->rand_key, strlen(hs->rand_key), &outx);
-        rets = send_data(hs->sock, xptr, outx, 0);
+        rets = scom_send_data(hs->sock, xptr, outx, 1);
         zfree(xptr);
         }
     else
         {
-        rets = send_data(hs->sock, hs->sstr, hs->slen, 0);
+        rets = scom_send_data(hs->sock, hs->sstr, hs->slen, 1);
         }
     if(rets <= 0)
         {                                                        
         if(hs->debug > 0)
-           printf("handshake: Could not send data: '%.*s'\n", MIN(36, rets), hs->sstr);   
+           printf("handshake(): Could not send data: '%.*s'\n", MIN(36, rets), hs->sstr);   
         return rets;
         }
     if(hs->debug > 8)
-        printf("handshake: Data sent: '%.*s'\n", MIN(64, rets), hs->sstr);   
+        printf("handshake(): Data sent: '%.*s'\n", MIN(64, rets), hs->sstr);   
     
     // Get answer
-    int retr = recv_data(hs->sock, hs->buff, hs->rlen, 1);
+    int retr = scom_recv_data(hs->sock, hs->buff, hs->rlen, 1);
     if(retr <= 0)
         {
         if(hs->debug > 0)
-            printf("handshake: Could not recv data: '%.*s'\n", MIN(64, retr), hs->buff);   
+            printf("handshake(): Could not recv data: '%.*s'\n", MIN(64, retr), hs->buff);   
         return retr;
         }
     // If session, decrypt
@@ -278,11 +281,11 @@ int  handshake(handshake_struct *hs)
     if(strncmp(hs->buff, fatstr, strlen(fatstr) - 1) == 0)
         {
         if(hs->debug > 0)
-            printf("handshake: Fatal %s\n", hs->buff);
+            printf("handshake(): Fatal buff='%s'\n", hs->buff);
         return -1;
         }
     if(hs->debug > 8)
-        printf("handshake: Data recd: '%.*s'\n", MIN(64, retr), hs->buff);   
+        printf("handshake(): Data recd: '%.*s'\n", MIN(64, retr), hs->buff);   
     return retr;
 }
 
@@ -330,7 +333,27 @@ char *decrypt_session_key(gcry_sexp_t *privk, char *buffer, int len)
     return ret;
 }
 
+int    close_conn(int clsock)
+
+{
+    char *buff = zalloc(128);
+    
+    handshake_struct hs2a; memset(&hs2a, 0, sizeof(hs2a));
+    hs2a.sock = clsock;
+    hs2a.sstr = closecmd;       hs2a.slen = strlen(closecmd);
+    hs2a.buff = buff;           hs2a.rlen = 128;
+    hs2a.debug = debug_level;   //hs2a.got_session = got_sess;
+    int ret = handshake(&hs2a);                    
+    
+    zfree(buff);
+    
+    return ret;
+}
+
+          
 // EOF
+
+
 
 
 

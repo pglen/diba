@@ -41,6 +41,8 @@
     #endif    
 #endif            
 
+#ifdef __linux__
+
 #ifndef UINT 
     #define UINT unsigned int
 #endif            
@@ -48,6 +50,10 @@
 #ifndef UCHAR 
     #define UCHAR unsigned char
 #endif            
+
+#else
+    // Win already has this
+#endif
 
 #ifndef TRUE
 #define TRUE    1
@@ -69,9 +75,6 @@
 #define MAX(a, b) a>b?a:b
 #endif
 
-//#define UCHAR unsigned char
-//#define UINT unsigned int
-
 /* -------- Configurables: ----------------------------------------------- */
 
 #define BSIZE 1024          // Number of bytes for one entry (*8 for bits)
@@ -81,6 +84,7 @@
 
 //static char *pass = "digibankdigibankdigibankdigibank";
 //static char *pass = "digibank";
+
 
 
 

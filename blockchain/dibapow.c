@@ -468,7 +468,7 @@ ulong   calc_padding(const char *str, int len, char *out, int *olen, uint tresh)
     //bluepoint3_set_verbose(TRUE);
     bluepoint3_set_rounds(3);
     
-    UINT loop, looping = MAXLOOP;
+    uint loop, looping = MAXLOOP;
     for(loop = 0; loop < looping; loop++)
         {
         //rand_str(out, *olen);
@@ -661,6 +661,7 @@ int    update_next_field(const char *backf, const char *newf, const char *nexid)
 }
 
 /* EOF */
+
 
 
 

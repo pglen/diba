@@ -22,7 +22,9 @@ all: 	dibaserv.exe dibaclient.exe dibaworker.exe dibaquery.exe \
             dibacli_hello.exe dibacli_key.exe dibacli_sess.exe \
                dibacli_ping.exe 
 
-dibaserv.exe: dibaserv.c $(TOOLS) $(OBJS) $(CRYPTER) dibascom.c
+#$(TOOLS) $(OBJS) $(CRYPTER)
+
+dibaserv.exe: dibaserv.c  $(TOOLS) dibascom.c
 	$(CC)  $^ $(ALL_OPTS) $(ALL_LIBS) -lws2_32 -o $@
 
 dibaclient.exe: dibaclient.c $(TOOLS) $(OBJS) $(CRYPTER) dibascom.c
@@ -59,6 +61,7 @@ clean:
 	-@rm -f *.exe
 
 distclean: clean
+
 
 
 

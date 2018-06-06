@@ -23,6 +23,7 @@ int     num_bits_set(unsigned int ks);
 char    *zusername();
 char    *zhostname();
 char    *zdatestr();
+char    *zdatename();
 char    *tobase64(char *mem, int *len);
 char    *pass_fromfile(const char *thispass, char **err_str);
 
@@ -50,6 +51,7 @@ int     is_bin(const char *ptr, int len);
 void    dibalog(int level, const char* msg, ...);
 
 // EOF
+
 
 
 

@@ -39,7 +39,6 @@ OPT3=  $(OPT2) $(OPT_LIBS)
 .c.o:
 	$(CC) $(OPT3) -c $<
   
-
 all:
 	@./alldirs.sh
 
@@ -71,11 +70,6 @@ checksum:
 check:
 	@# Filter out good responses, so we see better
 	-md5sum  -c md5sum.txt | grep -v "OK"
-
-
-
-
-
 
 
 

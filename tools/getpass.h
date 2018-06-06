@@ -37,9 +37,11 @@ typedef struct _getpassx
 #define ZERO_GETP_STRUCT(gp) memset(gp, 0, sizeof(getpassx));
 
 int getdibapass(const char *prompt, char *ppp, int maxlen);
+
 int getpass2(getpassx *passx);
 
 // EOF
+
 
 
 

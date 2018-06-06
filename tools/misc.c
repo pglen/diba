@@ -211,6 +211,23 @@ char    *zdatestr()
     return ttt;
 }
 
+// Date with no spaces
+
+char    *zdatename()
+
+{
+    int allocsize = 64;
+    zline2(__LINE__, __FILE__);
+    char *ttt = zalloc(allocsize);
+    time_t tme = time(NULL);
+    struct tm *tmm = localtime(&tme);
+    int len = snprintf(ttt, allocsize, "%4d%02d%02d%02d%02d%02d",
+               tmm->tm_year + 1900, tmm->tm_mon + 1, tmm->tm_mday,
+                tmm->tm_hour, tmm->tm_min, tmm->tm_sec );
+    zcheck(ttt, __LINE__);
+    return ttt;
+}
+
 // Turn memory to base64 representation
 // Must free with zfree
 
@@ -548,6 +565,7 @@ void    dibalog(int level, const char* msg, ...)
 }
 
 /* EOF */
+
 
 
 

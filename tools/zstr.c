@@ -146,11 +146,13 @@ char    *zstrcpy(char *targ, const char *src, int maxsize)
 }
 
 //////////////////////////////////////////////////////////////////////////
+// Print a string, reuurn allocaed buffer.
+// Must free with zfree
 
 char    *zsnprintf(const char *str, ...)
 
 {
-    int len = 256;
+    int len = 128;                  // General guess of length
     char *mystr = zalloc(len + 1);
     
     va_list ap; va_start(ap, str);
@@ -177,6 +179,7 @@ char    *zsnprintf(const char *str, ...)
 }
 
 // EOF
+
 
 
 

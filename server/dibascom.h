@@ -12,7 +12,7 @@
    ======================================================================= */
 
 #define STRSIZE(sss) (strlen(sss) - 1)
-#define DEFSOCKBUFF 4096
+#define DEFSOCKBUFFLEN 4096
 #define RANDKEY_LENGTH 128
 
 typedef const char cchar;
@@ -51,16 +51,23 @@ typedef struct _handshake_struct
     
 } handshake_struct;
 
-void set_debuglevel(int level);
-int send_data(int socket, const char *str, int len, int uw);
-int recv_data(int sock, char *buff, int len, int ur);
+int    close_conn(int clsock);
+
+#define ZERO_HANDSHAKE_STRUC(ptr) memset(ptr, '\0', sizeof(handshake_struct));
+int  handshake(handshake_struct *hs);
+
+void scom_set_debuglevel(int level);
+int scom_send_data(int socket, const char *str, int len, int uw);
+int scom_recv_data(int sock, char *buff, int len, int ur);
+
 int print2sock(int sock, int uw, char *fmt, ...);
 char *bp3_encrypt_cp(cchar *buff, int len, cchar *key, int klen, int *outx);
-int  handshake(handshake_struct *hs);
 
 char *decrypt_session_key(gcry_sexp_t *privk, char *buffer, int len);
 
 // EOF
+
+
 
 
 

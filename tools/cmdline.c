@@ -9,6 +9,7 @@
       REV   DATE            BY              DESCRIPTION
       ----  -----------     ----------      ------------------------------
       0.00  aug.23.2017     Peter Glen      Extracted from gcry
+      0.00  jun.02.2018     Peter Glen      '/' no longer recognized
 
    ======================================================================= */
 
@@ -109,7 +110,7 @@ int     parse_commad_line(char **argv, opts *popts_data, char **err_str)
                 idx++;
                 }
             }
-        else if(argv[nn][0] == '-' ||  argv[nn][0] == '/')   
+        else if(argv[nn][0] == '-') // ||  argv[nn][0] == '/')   
             {                                     /* option recognized */
             int idx = 0;
             char cmd = argv[nn][1];
@@ -283,6 +284,7 @@ Options can be:     \n\
     printf(    "               -h             --help        - displays this help\n");
     printf(    "Option with argument needs one option per command line item.\n");
 }
+
 
 
 
