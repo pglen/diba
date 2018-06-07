@@ -65,7 +65,10 @@ char *bp3_encrypt_cp(cchar *buff, int len, cchar *key, int klen, int *outx);
 
 char *decrypt_session_key(gcry_sexp_t *privk, char *buffer, int len);
 
+int     hostname_to_ip(char *hostname, char *ip, int lim);
+
 // EOF
+
 
 
 

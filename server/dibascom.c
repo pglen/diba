@@ -16,6 +16,12 @@
 #include <limits.h>
 #include <time.h>
 
+#include <sys/socket.h>
+#include <errno.h> 
+#include <netdb.h> 
+#include <arpa/inet.h>
+#include <netinet/in.h>
+
 #include "diba.h"
 #include "gcrypt.h"
 #include "gcry.h"
@@ -350,18 +356,36 @@ int    close_conn(int clsock)
     return ret;
 }
 
-          
+//////////////////////////////////////////////////////////////////////////
+//
+
+int     hostname_to_ip(char *hostname, char *ip, int lim)
+
+{
+    struct hostent *he;
+    struct in_addr **addr_list;
+    int i;
+         
+    if ( (he = gethostbyname( hostname ) ) == NULL) 
+        {
+        // get the host info
+        //herror("gethostbyname");
+        return -1;
+        }
+ 
+    addr_list = (struct in_addr **) he->h_addr_list;
+     
+    for(i = 0; addr_list[i] != NULL; i++) 
+        {
+        // Return the first one;
+        if(i == 0)
+            strncpy(ip, inet_ntoa(*addr_list[i]), lim);
+        
+        //printf("'%s' ", inet_ntoa(*addr_list[i]));
+        }
+    //printf("\n");     
+    return 0;  
+}
+
+                    
 // EOF
-
-
-
-
-
-
-
-
-
-
-
-
-

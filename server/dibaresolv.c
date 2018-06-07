@@ -3,11 +3,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#include<sys/socket.h>
-#include<errno.h> //For errno - the error number
-#include<netdb.h> //hostent
-#include<arpa/inet.h>
- 
+#include <sys/socket.h>
+#include <errno.h> 
+#include <netdb.h> 
+#include <arpa/inet.h>
 #include <netinet/in.h>
 
 //  Get ip from domain name
@@ -61,3 +60,4 @@ int main(int argc, char *argv[])
     
     return 0;
 }
+

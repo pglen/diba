@@ -274,25 +274,6 @@ int main(int argc, char** argv)
         exit(4);
         }
       
-    #if 0  
-    if(query[0] == '\0')
-        {
-        xerr3("dibacli_key: missing query file. Use -? option to see help\n");
-        } 
-    int qlen;
-    
-    char *querystr = grabfile(query, &qlen, &err_str);
-    if(!querystr)
-        {
-        //printf("dibacli_key: error on loading query file '%s'. (%s)\n", 
-        //                    query, err_str);
-        xerr3("dibacli_key: error on loading query file %s. (%s)\n", 
-                            query, err_str);
-        }
-    #endif
-        
-    //printf("query %.*s\n", 64, querystr);
-             
     gcrypt_init();
 
     if(calcsum)
@@ -378,13 +359,28 @@ int main(int argc, char** argv)
     struct sockaddr_in serverAddr;
     socklen_t addr_size;
     
+    if(ihost[0] == '\0')
+        {
+        xerr3("Please specify host name.");
+        }
+    char ipp[24];
+    int  reth = hostname_to_ip(ihost, ipp, sizeof(ipp)-1);
+    if(reth < 0)
+        {
+        xerr3("Cannot resolv host '%s'.\n", ihost);
+        }
+        
+   if(debuglevel > 5)
+        {
+        printf("Connecting to host: '%s'\n", ipp);   
+        }     
     /*---- Create the socket. The three arguments are: ----*/
     clsock = socket(PF_INET, SOCK_STREAM, 0);
     
     /* Address family = Internet */
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_port = htons(6789);
-    serverAddr.sin_addr.s_addr = inet_addr(ihost);
+    serverAddr.sin_addr.s_addr = inet_addr(ipp);
     memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);  
     
     /*---- Connect ----*/
@@ -503,6 +499,7 @@ int main(int argc, char** argv)
 }
 
 /* EOF */
+
 
 
 

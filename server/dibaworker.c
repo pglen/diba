@@ -217,15 +217,19 @@ static int printlog(char *str, ...)
         
 static void myfunc(int sig)
 {
-    printf("\nSignal %d (segment violation)\n", sig);
-    fprintf(logfp, "\nSignal %d (segment violation)\n %d.\n", sig, getpid());
-    exit(111);
+    //printf("\nSignal %d (segment violation)\n", sig);
+    
+    printlog("\ndibaworker: Signal %d (segment violation) pid=%d.\n", 
+                                sig, getpid());
+                                
+    xerr_serv("FATAL dibaworker: Signal %d (segment violation)\n");
+    //exit(111);
 }
 
 static void myfunc2(int sig)
 {
-    printf("\nServer recived Signal %d\n", sig);
-    fprintf(logfp, "\nSignal %d (interrupt)\n %d.\n", sig, getpid());
+    //printf("\nServer recived Signal %d\n", sig);
+    printlog("\ndibaworker: Signal %d (interrupt)\n %d.\n", sig, getpid());
     signal(sig, myfunc2);
     //exit(111);
 }
@@ -851,7 +855,8 @@ void keyfunc(char *buff, int len)
     
         if(debuglevel > 9)
             {
-            //sexp_fprint(pubkey, logfp);
+            //if(logfp)
+                sexp_fprint(pubkey, logfp);
             }
         }
     //printlog("Done keyfunc.\n");
@@ -873,6 +878,7 @@ int     check_trans_valid(char *buff, int len, char **reason_str)
 }
         
 /* EOF */
+
 
 
 
