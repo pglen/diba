@@ -308,6 +308,7 @@ int main(int argc, char** argv)
         }
    
     //////////////////////////////////////////////////////////////////////
+    scom_set_debuglevel(debuglevel);
     
     char *err_str2;
     get_priv_key_struct pks; memset(&pks, 0, sizeof(pks));
@@ -430,7 +431,7 @@ int main(int argc, char** argv)
         if(verbose)
             printf("Response: '%s'\n", buffer);
         
-        close_conn(clsock);
+        close_conn(clsock, got_sess, "");
  
         zautofree();
         exit(4);
@@ -443,41 +444,28 @@ int main(int argc, char** argv)
             printf("Response: '%s'\n", buffer);
         }
 
+    // Test echo
     int rlen = rand() % 32 + 24;
     char *randstr = zrandstr_strong(rlen); 
     char *sumstr = zstrmcat(0, "echo ", randstr, NULL); 
     zfree(randstr); 
     
-    if(debuglevel > 0)
-        printf("Rand sent: '%s'\n", sumstr);
-        
-    // Test echo
-    handshake_struct hs2r; memset(&hs2r, 0, sizeof(hs2r));
-    hs2r.sock = clsock;
-    hs2r.sstr = sumstr;      hs2r.slen = strlen(sumstr);
-    hs2r.buff = buffer;      hs2r.rlen = sizeof(buffer);
-    hs2r.debug = debuglevel; hs2r.got_session = got_sess;
-    ret = handshake(&hs2r);                    
+    //handshake_struct hs2; memset(&hs2, 0, sizeof(hs2));
+    hs2.sock = clsock;
+    hs2.sstr = sumstr;      hs2.slen = strlen(sumstr);
+    hs2.buff = buffer;      hs2.rlen = sizeof(buffer);
+    hs2.debug = debuglevel; hs2.got_session = got_sess;
+
+    ret = handshake(&hs2);                    
     zfree(sumstr);  
     
     if(ret > 0)
         {
         printf("Server responded to echo.\n");   
         }
-        
-    if(verbose)
-        printf("Response: '%s'\n", buffer);
     
-                    
-    //int rlen = rand() % 32 + 24;
-    //char *randstr = zrandstr_strong(rlen); 
-    //char *sumstr = zstrmcat(0, "echo ", randstr, NULL); 
-    //zfree(randstr);  zfree(sumstr);  
-    
-    close_conn(clsock);
+    close_conn(clsock, got_sess, "");
 
-    //printf("got_sess %d\n", got_sess);
-    
     // Close connection
     close(clsock);
     
@@ -499,6 +487,9 @@ int main(int argc, char** argv)
 }
 
 /* EOF */
+
+
+
 
 
 

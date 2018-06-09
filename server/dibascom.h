@@ -51,23 +51,35 @@ typedef struct _handshake_struct
     
 } handshake_struct;
 
-int    close_conn(int clsock);
+typedef struct _session_key
+{
+    gcry_sexp_t *privk, *plain; 
+    char    *buffer;
+    int     blen;
+    char    *randkey;
+    int     klen;
+    int     got_sess;
+} session_key;
+
+int    close_conn(int clsock, int got_sess, char *rand_key);
 
 #define ZERO_HANDSHAKE_STRUC(ptr) memset(ptr, '\0', sizeof(handshake_struct));
-int  handshake(handshake_struct *hs);
+int     handshake(handshake_struct *hs);
 
-void scom_set_debuglevel(int level);
-int scom_send_data(int socket, const char *str, int len, int uw);
-int scom_recv_data(int sock, char *buff, int len, int ur);
+void    scom_set_debuglevel(int level);
+int     scom_send_data(int socket, const char *str, int len, int uw);
+int     scom_recv_data(int sock, char *buff, int len, int ur);
 
-int print2sock(int sock, int uw, char *fmt, ...);
-char *bp3_encrypt_cp(cchar *buff, int len, cchar *key, int klen, int *outx);
+int     print2sock(int sock, int uw, char *fmt, ...);
+char    *bp3_encrypt_cp(cchar *buff, int len, cchar *key, int klen, int *outx);
 
-char *decrypt_session_key(gcry_sexp_t *privk, char *buffer, int len);
+int     decrypt_session_key(session_key *sk);
 
 int     hostname_to_ip(char *hostname, char *ip, int lim);
 
 // EOF
+
+
 
 
 

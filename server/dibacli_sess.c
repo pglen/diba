@@ -127,7 +127,7 @@ static int weak = FALSE;
 static int force = FALSE;    
 static int verbose = 0;
 static int test = 0;
-static int debug = 0;
+static int debuglevel = 0;
 static int calcsum = 0;
 static int version = 0;
 
@@ -145,7 +145,7 @@ static char    *query = NULL;
 static char    *errout   = NULL;
 
 static  char    *testkey = "1234";
-static char    *randkey  = NULL;
+static char     *randkey  = NULL;
 static int      got_sess = 0;
 
 /*  char    opt;
@@ -173,7 +173,7 @@ opts opts_data[] = {
         't',   "test",  NULL,  NULL, 0, 0, &test, 
         "-t             --test        - Run self test before proceeding",
         
-        'd',   "debug",  &debug, NULL, 0, 10, &test, 
+        'd',   "debug",  &debuglevel, NULL, 0, 10, NULL, 
         "-d level       --debug level  - Output debug data (level 1-9)",
         
         's',   "sum",  NULL,  NULL, 0, 0, &calcsum, 
@@ -237,6 +237,7 @@ int main(int argc, char** argv)
     zline2(__LINE__, __FILE__);
     thispass = zalloc(MAX_PATH); if(thispass == NULL) xerr3(mstr);
     keyname  = zalloc(MAX_PATH); if(keyname  == NULL) xerr3(mstr);
+    randkey  = zalloc(MAX_PATH); if(randkey  == NULL) xerr3(mstr);
     errout   = zalloc(MAX_PATH); if(errout   == NULL) xerr3(mstr);
     keyfile  = zalloc(MAX_PATH); if(keyfile  == NULL) xerr3(mstr);
     query    = zalloc(MAX_PATH); if(query  == NULL)   xerr3(mstr);
@@ -266,23 +267,6 @@ int main(int argc, char** argv)
         exit(4);
         }
         
-    if(query[0] == '\0')
-        {
-        xerr3("dibaclient: missing query file. Use -? option to see help\n");
-        } 
-    int qlen;
-    
-    char *querystr = grabfile(query, &qlen, &err_str);
-    if(!querystr)
-        {
-        //printf("dibaclient: error on loading query file '%s'. (%s)\n", 
-        //                    query, err_str);
-        xerr3("dibaclient: error on loading query file %s. (%s)\n", 
-                            query, err_str);
-        }
-        
-    //printf("query %.*s\n", 64, querystr);
-             
     gcrypt_init();
 
     if(calcsum)
@@ -319,8 +303,8 @@ int main(int argc, char** argv)
     //////////////////////////////////////////////////////////////////////
     
     char *err_str2;
-    get_priv_key_struct pks;
-    gcry_sexp_t info, privk;
+    get_priv_key_struct pks; memset(&pks, 0, sizeof(pks));
+    gcry_sexp_t info, privk, composite;
     
     if(keyfile[0] != '\0')
         {
@@ -337,6 +321,7 @@ int main(int argc, char** argv)
     pks.err_str   = &err_str;
     pks.err_str2  = &err_str2;
     pks.nocrypt   = 0;
+    pks.composite = &composite;
     pks.privkey   = &privk;
     pks.info      = &info;
     pks.thispass  = thispass;
@@ -349,19 +334,6 @@ int main(int argc, char** argv)
     
     if(keyfile[0] != '\0')
         zfree(pks.rsa_buf);
-    
-    //if (argc - nn != 2) {
-    //    printf("dibaclient: Missing argument");
-    //    usage(usestr, descstr, opts_data); exit(2);
-    //    }
-    
-    #if 0
-    WSADATA wsa;
-    if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
-    {
-        xerr3("Socket start failed. Error Code : %d", WSAGetLastError());
-    }
-    #endif
     
     int clsock, xcode;
     struct sockaddr_in serverAddr;
@@ -390,73 +362,158 @@ int main(int argc, char** argv)
         printf("Initial data received: '%s'\n", buffer);   
     
     int ret;
-    
     handshake_struct hs; memset(&hs, 0, sizeof(hs));
+    
     hs.sock = clsock;
-    hs.sstr = keycmd;   hs.slen = strlen(keycmd);
-    hs.buff = buffer;   hs.rlen = sizeof(buffer);
-    hs.debug = debug;   hs.got_session = got_sess;
+    hs.sstr = keycmd;       hs.slen = strlen(keycmd);
+    hs.buff = buffer;       hs.rlen = sizeof(buffer);
+    hs.debug = debuglevel;  hs.got_session = got_sess;
     ret = handshake(&hs);
     
     if(strncmp(buffer, okstr, STRSIZE(okstr)) != 0)
         {
-        printf("Server did does not accept key command.\n");
-        
-        handshake_struct hs2; memset(&hs2, 0, sizeof(hs2));
-        hs2.sock = clsock;
-        hs2.sstr = closecmd; hs2.slen = strlen(closecmd);
-        hs2.buff = buffer;   hs2.rlen = sizeof(buffer);
-        hs2.debug = debug;   hs2.got_session = got_sess;
-        ret = handshake(&hs2);                    
-        
+        printf("Server does not accept key command.\n");
+        close_conn(clsock, got_sess, randkey);
         zautofree();
         exit(4);
         }
-    //handshake_struct hs; 
+        
     memset(&hs, 0, sizeof(hs));
     hs.sock = clsock;
     hs.sstr = mykey; hs.slen = strlen(mykey);
     hs.buff = buffer;   hs.rlen = sizeof(buffer);
-    hs.debug = debug;   hs.got_session = got_sess;
+    hs.debug = debuglevel;   hs.got_session = got_sess;
     ret = handshake(&hs);
     
     if(strncmp(buffer, okstr, STRSIZE(okstr)) != 0)
         {
         printf("Server rejected key.\n");
-        handshake_struct hs; memset(&hs, 0, sizeof(hs));
-        hs.sock = clsock;
-        hs.sstr = closecmd; hs.slen = strlen(closecmd);
-        hs.buff = buffer;   hs.rlen = sizeof(buffer);
-        hs.debug = debug;   hs.got_session = got_sess;
-        ret = handshake(&hs);
-        
+        close_conn(clsock, got_sess, randkey);
         zautofree();
         exit(4);
         }
-        
+    if(ret)
+        {
+        printf("Server accepted key.\n");
+        }
+    
     int rlen = rand() % 32 + 24;
     char *randstr = zrandstr_strong(rlen); 
     char *sumstr = zstrmcat(0, "echo ", randstr, NULL); 
-    zfree(randstr);  zfree(sumstr);  
+    zfree(randstr);  
     
-    //handshake_struct hs; 
     memset(&hs, 0, sizeof(hs));
     hs.sock = clsock;
-    hs.sstr = closecmd;
-    hs.slen = strlen(closecmd);
+    hs.sstr = sumstr;
+    hs.slen = strlen(sumstr);
     hs.buff = buffer; 
     hs.rlen = sizeof(buffer);
-    hs.debug = debug;
+    hs.debug = debuglevel;
     hs.got_session = got_sess;
     
     ret = handshake(&hs);
+    zfree(sumstr);  
+   
+    if(ret >= 0)
+        {
+        printf("Server responded to echo.\n");
+        }
     
+    int rlen3 = rand() % 32 + 24;
+    char *randstr3 = zrandstr_strong(rlen3); 
+    char *sstr = zstrmcat(0, sesscmd, " ", randstr3, NULL); 
+    zfree(randstr3);  
+    
+    memset(&hs, 0, sizeof(hs));
+    hs.sock = clsock;
+    hs.sstr = sstr;
+    hs.slen = strlen(sstr);
+    hs.buff = buffer; 
+    hs.rlen = sizeof(buffer);
+    hs.debug = debuglevel;
+    hs.got_session = got_sess;
+    hs.rand_key = randkey;
+    
+    ret = handshake(&hs);
+    zfree(sstr);
+    
+    if(ret < 0)
+        {
+        printf("Could not estabilish session.\n");
+        printf("Server said: '%s'\n", buffer);
+        close_conn(clsock, got_sess, randkey);
+        exit(2);
+        }
+        
+    if(strncmp(buffer, okstr, STRSIZE(okstr)) != 0)
+        {
+        printf("Server does not accept session command.\n");
+        printf("Server said: '%s'\n", buffer);
+        close_conn(clsock, got_sess, randkey);
+        exit(3);
+        }
+    
+    //printf("key: '%s'\n", buffer);
+    
+    session_key  sk; memset(&sk, 0, sizeof(sk));
+    gcry_sexp_t plain;
+    
+    sk.privk    = &privk;
+    sk.plain    = &plain; 
+    sk.buffer   = buffer;
+    sk.blen     = ret;
+    sk.randkey  = randkey;
+    sk.klen     = MAX_PATH - 1;
+    
+    int  rets = decrypt_session_key(&sk);
+    
+    if(rets == 0)
+        {
+        printf("Could not decrypt session key: '%s'\n", randkey);
+        close_conn(clsock, got_sess, randkey);
+        exit(4);
+        }
+    
+    if(debuglevel > 9)
+        printf("Session (decrypted) key: '%s'\n", randkey);
+
+    if(ret)
+        {
+        printf("Estabilished session.\n");
+        }
+    
+    got_sess = sk.got_sess;
+    
+    int rlen2 = rand() % 32 + 24;
+    char *randstr2 = zrandstr_strong(rlen2); 
+    char *sumstr2 = zstrmcat(0, "echo ", randstr2, NULL); 
+    zfree(randstr2);  
+    
+    memset(&hs, 0, sizeof(hs));
+    hs.sock = clsock;
+    hs.sstr = sumstr2;
+    hs.slen = strlen(sumstr2);
+    hs.buff = buffer; 
+    hs.rlen = sizeof(buffer);
+    hs.debug = debuglevel;
+    hs.got_session = got_sess;
+    hs.rand_key = randkey;
+    
+    ret = handshake(&hs);
+    zfree(sumstr2);  
+    
+    if(ret)
+        {
+        printf("Server got session echo.\n");
+        }
+   
     // Close connection
+    close_conn(clsock, got_sess, randkey);
     close(clsock);
     
     zfree(thispass);    zfree(keyname);      
     zfree(errout);      zfree(keyfile);
-    zfree(query);       zfree(querystr);
+    zfree(query);       
     
     if(randkey)
         zfree(randkey);
@@ -468,6 +525,10 @@ int main(int argc, char** argv)
 }
 
 /* EOF */
+
+
+
+
 
 
 

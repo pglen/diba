@@ -233,7 +233,7 @@ int  handshake(handshake_struct *hs)
     if(hs->buff == NULL)
         {
         if(hs->debug > 0)
-           printf("Invalid parameters\n");
+           printf("Invalid parameter for buffer\n");
         return -1;
         }
         
@@ -247,6 +247,7 @@ int  handshake(handshake_struct *hs)
         int outx;                    
         char *xptr = bp3_encrypt_cp(hs->sstr, hs->slen, 
                         hs->rand_key, strlen(hs->rand_key), &outx);
+                        
         rets = scom_send_data(hs->sock, xptr, outx, 1);
         zfree(xptr);
         }
@@ -278,6 +279,7 @@ int  handshake(handshake_struct *hs)
         data_buff = unbase_and_unlim(hs->buff, retr, &data_len);
         bluepoint3_decrypt(data_buff, data_len, 
                         hs->rand_key, strlen(hs->rand_key));
+        
         // Put it back to buffer and len
         memcpy(hs->buff, data_buff, data_len);       
         retr = data_len;    
@@ -295,51 +297,7 @@ int  handshake(handshake_struct *hs)
     return retr;
 }
 
-//////////////////////////////////////////////////////////////////////////
-// Session key is back, decrypt it
-
-char *decrypt_session_key(gcry_sexp_t *privk, char *buffer, int len)
-
-{
-    char *ret = 0;
-    gcry_error_t err = 0;  int data_len;
-    char *data_buf = unbase_and_unlim(buffer + 3, len - 3, &data_len);
-    
-    /* Create a message. */
-    gcry_sexp_t ciph;
-    err = gcry_sexp_build(&ciph, NULL, 
-                                "(enc-val (rsa (a %b)))", 
-                                    data_len, data_buf );
-    if(err)
-        {
-        //xerr3("dibaclient: sexp build failed");
-        ret = NULL;
-        return ret;
-        }
-            
-    //sexp_print(ciph);
-    zfree(data_buf);
-        
-    /* Decrypt the message. */
-    gcry_sexp_t plain;  gcry_error_t gerr;
-    gerr = gcry_pk_decrypt(&plain, ciph, *privk);
-    if(gerr)
-        {
-        //xerr3("dibaclient: cannot decrypt session key.");
-        ret = NULL;
-        return ret;
-        }
-    //sexp_print(plain);
-    int plen;
-    ret = sexp_nth_data(plain, 0, &plen);
-    
-    //if(debug > 5)
-    //    printf("Session (random) key: '%s'\n", randkey);
-        
-    return ret;
-}
-
-int    close_conn(int clsock)
+int    close_conn(int clsock, int got_sess, char *rand_key)
 
 {
     char *buff = zalloc(128);
@@ -348,7 +306,8 @@ int    close_conn(int clsock)
     hs2a.sock = clsock;
     hs2a.sstr = closecmd;       hs2a.slen = strlen(closecmd);
     hs2a.buff = buff;           hs2a.rlen = 128;
-    hs2a.debug = debug_level;   //hs2a.got_session = got_sess;
+    hs2a.debug = debug_level;   hs2a.got_session = got_sess;
+    hs2a.rand_key = rand_key;
     int ret = handshake(&hs2a);                    
     
     zfree(buff);
@@ -387,5 +346,60 @@ int     hostname_to_ip(char *hostname, char *ip, int lim)
     return 0;  
 }
 
+//////////////////////////////////////////////////////////////////////////
+// Session key is back, decrypt it
+
+int    decrypt_session_key(session_key *sk)
+
+{
+    gcry_error_t err = 0;  int data_len;
+    char *data_buf = unbase_and_unlim(sk->buffer + 3, sk->blen - 3, &data_len);
+    
+    /* Create a message. */
+    gcry_sexp_t ciph;
+    err = gcry_sexp_build(&ciph, NULL, 
+                                "(enc-val (rsa (a %b)))", 
+                                    data_len, data_buf );
+    if(err)
+        {
+        //xerr3("dibaclient: sexp build failed");
+        if(debug_level)
+            printf("decrypt_session_key(): sexp build failed");
+        return 0;
+        }
+    //sexp_print(ciph);
+    zfree(data_buf);
+        
+    /* Decrypt the message. */
+    gcry_error_t gerr;
+    gerr = gcry_pk_decrypt(sk->plain, ciph, *sk->privk);
+    if(gerr)
+        {
+        if(debug_level)
+            printf("decrypt_session_key(): cannot decrypt");
+        return 0;
+        }
+        
+    if(debug_level > 9)
+        sexp_print(*sk->plain);
+        
+    sk->got_sess = 1;
+
+    int plen;
+    char *randk = sexp_nth_data(*sk->plain, 0, &plen);
+    if(!randk)
+        {
+        if(debug_level)
+            printf("decrypt_session_key(): cannot find data in sexp");
+        return 0;
+        }
+    strncpy(sk->randkey, randk, sk->klen);
+    zfree(randk);
+        
+    return 1;
+}
                     
 // EOF
+
+
+

@@ -303,6 +303,9 @@ int main(int argc, char** argv)
             }
         }
    
+    //////////////////////////////////////////////////////////////////////
+    scom_set_debuglevel(debuglevel);
+ 
     int clsock;
     struct sockaddr_in serverAddr;
     socklen_t addr_size;
@@ -337,8 +340,8 @@ int main(int argc, char** argv)
     if(debuglevel > 0)
         printf("Initial data received: '%s'\n", buffer);   
 
-    //if(verbose)
-    printf("Server alive.\n");   
+    if(verbose)
+        printf("Server alive.\n");   
     
     int ret;
     
@@ -374,7 +377,7 @@ int main(int argc, char** argv)
         sleep(6); printf("Done waiting for timeout.\n");
         }
     
-    ret = close_conn(clsock);
+    ret = close_conn(clsock, got_sess, "");
     
     if(ret < 0)
         {
@@ -382,11 +385,11 @@ int main(int argc, char** argv)
         }
     else
         {
-        printf("Server responded to close.\n");   
+        //printf("Server responded to close.\n");   
         }
         
-    if(verbose)
-        printf("Response: '%s'\n", buffer);
+    //if(verbose)
+    //    printf("Response: '%s'\n", buffer);
             
     // Close connection
     close(clsock);
@@ -406,6 +409,9 @@ int main(int argc, char** argv)
 
     
 /* EOF */
+
+
+
 
 
 

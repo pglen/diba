@@ -144,7 +144,7 @@ opts opts_data[] = {
 // Forwards
 static int printlog(char *str, ...);
 static FILE *logfp = NULL;
-static FILE *cfp = NULL;
+static FILE *termfp = NULL;
 
 int xerr_serv(const char *str, ...)
 {
@@ -164,7 +164,10 @@ int xerr_serv(const char *str, ...)
     
     // We do not know the state of the program, free all
     zautofree();
-    zleakfp(logfp);
+    
+    if(logfp)
+        zleakfp(logfp);
+        
     exit(5);
 }
 
@@ -201,15 +204,15 @@ static int printlog(char *str, ...)
     // Print to pty if there is one
     if(term[0] != '\0')
         {
-        if(cfp == NULL)
+        if(termfp == NULL)
             {
-            cfp = fopen(term, "r+");
+            termfp = fopen(term, "r+");
             }
             
-        if(cfp)
+        if(termfp)
             {
             va_start(ap, str);    
-            vfprintf(cfp, str, ap);  fflush(cfp);
+            vfprintf(termfp, str, ap);  fflush(termfp);
             }
         }
     return 0;
@@ -306,7 +309,9 @@ DWORD WINAPI Thread(void *ArgList)
     close(0); close(1);
     
     zautofree();
-    zleakfp(logfp);
+    if(logfp)
+        zleakfp(logfp);
+    
     
     exit(4);
     return 0;
@@ -589,13 +594,15 @@ int main(int argc, char** argv)
         }
 
     // Redirect to log
-    zleakfp(logfp);
+    if(logfp)
+        zleakfp(logfp);
 
+    // Close all 
     if(logfp)
         fclose(logfp);
         
-    if(cfp)
-        fclose(cfp);
+    if(termfp)
+        fclose(termfp);
 
     return 0;
 }
@@ -747,8 +754,9 @@ void sessfunc(char *buff, int len)
         }
 
     if(debuglevel > 1)
-        fprintf(logfp, "Sending rand key: '%s'\n", randkey);
+        printlog("Sending rand key: '%s'\n", randkey);
 
+    #if 1
     /* Encrypt the message. */
     gcry_sexp_t ciph, enc_data;
     gcry_mpi_t msg; int scanned;
@@ -759,7 +767,7 @@ void sessfunc(char *buff, int len)
         }
         
     if(debuglevel > 0) 
-        printlog("scanned %d\n", scanned);
+        printlog("scanned mpi len=%d\n", scanned);
         
     err = gcry_sexp_build(&enc_data, NULL,
                            "(data (flags raw) (value %m))", msg);
@@ -787,10 +795,17 @@ void sessfunc(char *buff, int len)
 
     unsigned int plen = 0, outx = 0;
     char *dptr = (char *)gcry_sexp_nth_data(ddd, 1, &plen);
-    //dump_memfp(dptr, plen, logfp);
+    
     char *mem3 = base_and_lim(dptr, plen, &outx);
+    #else
+    unsigned int plen = 0, outx = 0;
+    char *mem3 = randkey; 
+    #endif
+        
     char  *catm = zstrmcat(0, okstr, " ", mem3, NULL);
-    //dump_memfp(catm, strlen(catm) + 1, logfp);
+    
+    if(debuglevel > 9)
+        printlog("Enc Key: '%s'\n", catm);
     
     // Send session response, switch to session mode after
     ret = scom_send_data(1, catm, strlen(catm) + 1, 1);
@@ -801,8 +816,6 @@ void sessfunc(char *buff, int len)
 
 //////////////////////////////////////////////////////////////////////////
 // Receive public key from peer
-
-char buff2[4096];
     
 void keyfunc(char *buff, int len)
 
@@ -817,19 +830,27 @@ void keyfunc(char *buff, int len)
         ret = print2sock(1, 1, "%s %s", errstr, "Key already sent");
         return;
         }
-
+        
+    #define MAX_KEYLEN 5000   // This len is enough for 4096 bit keys
+    char *buff2 = zalloc(MAX_KEYLEN);
+    if(!buff2)
+        {
+        printlog("Cannot alloc memory.\n");
+        ret = print2sock(1, 1, "%s %s", errstr, "Cannot alloc memory.");
+        return;
+        }
+    
     // Get key
     handshake_struct hs2r; memset(&hs2r, 0, sizeof(hs2r));
     hs2r.sock = 1;
     hs2r.sstr = keystr;      hs2r.slen = strlen(keystr);
-    hs2r.buff = buff2;       hs2r.rlen = sizeof(buff2);
+    hs2r.buff = buff2;       hs2r.rlen = MAX_KEYLEN;
     hs2r.debug = debuglevel; hs2r.got_session = got_sess;
     ret = handshake(&hs2r);                    
     
-    //ret = 
     if(ret < 0)
         {
-        printf("Client did not respond.\n");   
+        printlog("Client did not respond.\n");   
         return;
         }
     
@@ -848,18 +869,18 @@ void keyfunc(char *buff, int len)
         got_key = 1;
         ret = print2sock(1, 1, "%s pubkey accepted, %d bits.",
                                     okstr, pubkey_bits);
-        //ret = scom_send_data(1, okstr, strlen(okstr), 0);
-        
         if(debuglevel > 8)
+            {
             printlog("Approved key.\n");
+            }
     
         if(debuglevel > 9)
             {
-            //if(logfp)
+            if(logfp)
                 sexp_fprint(pubkey, logfp);
             }
         }
-    //printlog("Done keyfunc.\n");
+    zfree(buff2);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -878,6 +899,9 @@ int     check_trans_valid(char *buff, int len, char **reason_str)
 }
         
 /* EOF */
+
+
+
 
 
 

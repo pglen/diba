@@ -352,26 +352,12 @@ int main(int argc, char** argv)
         }
     if(debug > 5)
         {
-        printf("Grabbed private key\n");
-        sexp_print(privk);
+        //printf("Grabbed private key\n");
+        //sexp_print(privk);
         }
     
     if(keyfile[0] != '\0')
         zfree(pks.rsa_buf);
-    
-    
-    //if (argc - nn != 2) {
-    //    printf("dibaclient: Missing argument");
-    //    usage(usestr, descstr, opts_data); exit(2);
-    //    }
-    
-    #if 0
-    WSADATA wsa;
-    if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
-    {
-        xerr3("Socket start failed. Error Code : %d", WSAGetLastError());
-    }
-    #endif
     
     int clsock;
     struct sockaddr_in serverAddr;
@@ -450,6 +436,7 @@ int main(int argc, char** argv)
 
     
 /* EOF */
+
 
 
 
