@@ -577,7 +577,13 @@ int main(int argc, char** argv)
             ret = print2sock(1, 1, "%s %s", errstr, nocmd, 1);
             }
         }
-
+   
+    // Allow fast shutdown
+    struct linger ld = {1, 0}; int len = sizeof(ld);
+    setsockopt(1, SOL_SOCKET, SO_LINGER, (char*)&ld, sizeof(ld));
+     
+    close(0); close(1);
+       
     zfree(thispass);    zfree(keyname);
     zfree(keydesc);     zfree(creator);
     zfree(errout);      zfree(dummy);
@@ -899,4 +905,5 @@ int     check_trans_valid(char *buff, int len, char **reason_str)
 }
         
 /* EOF */
+
 

@@ -391,9 +391,6 @@ int main(int argc, char** argv)
     //if(verbose)
     //    printf("Response: '%s'\n", buffer);
             
-    // Close connection
-    close(clsock);
-    
     zfree(thispass);    zfree(keyname);      
     zfree(errout);      zfree(keyfile);
     zfree(query);       
@@ -409,6 +406,7 @@ int main(int argc, char** argv)
 
     
 /* EOF */
+
 
 
 

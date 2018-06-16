@@ -312,6 +312,15 @@ int    close_conn(int clsock, int got_sess, char *rand_key)
     
     zfree(buff);
     
+    struct linger ld = {1, 0}; int len = sizeof(ld);
+    int ret2 = setsockopt( clsock, SOL_SOCKET, SO_LINGER,
+                                         (char*)&ld, sizeof(ld));
+    if(ret2 < 0)
+        {
+        printf("close_conn(): Cannot set linger\n");
+        }
+    close(clsock);
+    
     return ret;
 }
 
@@ -400,6 +409,7 @@ int    decrypt_session_key(session_key *sk)
 }
                     
 // EOF
+
 
 
 

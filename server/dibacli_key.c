@@ -432,7 +432,7 @@ int main(int argc, char** argv)
             printf("Response: '%s'\n", buffer);
         
         close_conn(clsock, got_sess, "");
- 
+        close(clsock);
         zautofree();
         exit(4);
         }
@@ -487,6 +487,7 @@ int main(int argc, char** argv)
 }
 
 /* EOF */
+
 
 
 

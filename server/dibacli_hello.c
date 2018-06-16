@@ -400,6 +400,7 @@ int main(int argc, char** argv)
     zfree(randstr); 
     
     //printf("Rand sent: '%s'\n", sumstr);
+    
     // Test echo
     handshake_struct hs2; memset(&hs2, 0, sizeof(hs2));
     hs2.sock = clsock;

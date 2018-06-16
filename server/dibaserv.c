@@ -151,23 +151,23 @@ int unixfork(char *cmd, int ClientSocket)
         
         printf("Connection from: %s on port %d\n", ipstr, ppp);
         
-        if (setsid() < 0)
-            {
-            printf("Could not set session leader.\n");
-            exit(EXIT_FAILURE);
-            }
         //printf("exec %s %s %s %s %s %s %s %s\n",
         //        cmd, cmd, "-d", tmp, "-l", tmp2, "-r", term);
         
-        pid_t pid2 = fork();
+        //pid_t pid2 = fork();
         
-        if(pid2 < 0)
+        //if(pid2 < 0)
+        //    {
+        //    printf("Could not second fork %s ret=%d\n", cmd, pid2);
+        //    return -1;
+        //    }
+        if(pid == 0)
             {
-            printf("Could not second fork %s ret=%d\n", cmd, pid2);
-            return -1;
-            }
-        if(pid2 == 0)
-            {
+            if (setsid() < 0)
+                {
+                printf("Could not set session leader.\n");
+                exit(EXIT_FAILURE);
+                }
             // Reshuffle fp-s
             close(0); close(1); close(2);
             dup2(ClientSocket, 0); 
@@ -179,10 +179,12 @@ int unixfork(char *cmd, int ClientSocket)
             snprintf(tmp, sizeof(tmp), "%d", debuglevel);
             snprintf(tmp2, sizeof(tmp2), "%d", loglevel);
             int ret = execl(cmd, cmd, "-d", tmp, "-l", tmp2, "-r", term, NULL);
+            
+            // Not reached
             printf("Could not exec %s ret=%d\n", cmd, ret);
             exit(0);
             }
-        // First child exit
+        // First parent exit
         exit(0);     
         }
     if(pid > 0)
@@ -344,6 +346,11 @@ int main(int argc, char** argv)
     //    WSASocket (AF_INET, SOCK_STREAM, IPPROTO_TCP, NULL, 0, 0); 
     socket (PF_INET, SOCK_STREAM, 0);
     
+    if (setsockopt(welcomeSocket, SOL_SOCKET, SO_REUSEADDR, 
+                    &(int){ 1 }, sizeof(int)) < 0)
+        xerr2("setsockopt(SO_REUSEADDR) failed");
+    
+    
     /*---- Configure settings of the server address struct ----*/
     serverAddr.sin_family = AF_INET;
     /* Set port number, using htons function to use proper byte order */
@@ -408,6 +415,8 @@ int main(int argc, char** argv)
 }
 
 /* EOF */
+
+
 
 
 
