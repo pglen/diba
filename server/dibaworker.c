@@ -900,18 +900,3 @@ int     check_trans_valid(char *buff, int len, char **reason_str)
         
 /* EOF */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

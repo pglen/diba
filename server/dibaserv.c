@@ -133,41 +133,57 @@ int unixfork(char *cmd, int ClientSocket)
 {
     pid_t pid = fork();
     
-    //printf("Forked, ret=%d\n", pid);
-    struct sockaddr_in saddr;
-    socklen_t  addrlen = sizeof(saddr);
-    int retp = getpeername(ClientSocket,  
-                              (struct sockaddr *)&saddr, &addrlen);
-    if(retp < 0)
-        {
-        printf("Error on getpeername. %d (errno %d %s)\n", 
-                            retp, errno, strerror(errno));
-        } 
-        
-    char *ipstr = inet_ntoa(saddr.sin_addr);
-    int ppp = ntohs(saddr.sin_port);
-    
-    printf("Connection from: %s on port %d\n", ipstr, ppp);
-        
     if(pid == 0)
         {
         // Child
-        char tmp[12], tmp2[12];
-        snprintf(tmp, sizeof(tmp), "%d", debuglevel);
-        snprintf(tmp2, sizeof(tmp2), "%d", loglevel);
-   
+        //printf("Forked, ret=%d\n", pid);
+        struct sockaddr_in saddr;
+        socklen_t  addrlen = sizeof(saddr);
+        int retp = getpeername(ClientSocket,  
+                                  (struct sockaddr *)&saddr, &addrlen);
+        if(retp < 0)
+            {
+            printf("Error on getpeername. %d (errno %d %s)\n", 
+                                retp, errno, strerror(errno));
+            } 
+        char *ipstr = inet_ntoa(saddr.sin_addr);
+        int ppp = ntohs(saddr.sin_port);
+        
+        printf("Connection from: %s on port %d\n", ipstr, ppp);
+        
+        if (setsid() < 0)
+            {
+            printf("Could not set session leader.\n");
+            exit(EXIT_FAILURE);
+            }
         //printf("exec %s %s %s %s %s %s %s %s\n",
         //        cmd, cmd, "-d", tmp, "-l", tmp2, "-r", term);
         
-        // Reshuffle fp-s
-        close(0); close(1); close(2);
-        dup2(ClientSocket, 0); 
-        dup2(ClientSocket, 1);
-        dup2(ClientSocket, 2);
-  
-        // Pass debug level and log level and terminal string to client       
-        int ret = execl(cmd, cmd, "-d", tmp, "-l", tmp2, "-r", term, NULL);
-        printf("Could not exec %s ret=%d\n", cmd, ret);
+        pid_t pid2 = fork();
+        
+        if(pid2 < 0)
+            {
+            printf("Could not second fork %s ret=%d\n", cmd, pid2);
+            return -1;
+            }
+        if(pid2 == 0)
+            {
+            // Reshuffle fp-s
+            close(0); close(1); close(2);
+            dup2(ClientSocket, 0); 
+            dup2(ClientSocket, 1);
+            dup2(ClientSocket, 2);
+         
+            // Pass debug level and log level and terminal string to client       
+            char tmp[12], tmp2[12];
+            snprintf(tmp, sizeof(tmp), "%d", debuglevel);
+            snprintf(tmp2, sizeof(tmp2), "%d", loglevel);
+            int ret = execl(cmd, cmd, "-d", tmp, "-l", tmp2, "-r", term, NULL);
+            printf("Could not exec %s ret=%d\n", cmd, ret);
+            exit(0);
+            }
+        // First child exit
+        exit(0);     
         }
     if(pid > 0)
         {
@@ -204,7 +220,9 @@ int main(int argc, char** argv)
 {
     signal(SIGSEGV, myfunc);
     signal(SIGINT, myfunc2);
-    
+    // Stops the parent waiting for the child process
+        signal(SIGCHLD, SIG_IGN); 
+        
     zline2(__LINE__, __FILE__);
     char    *dummy = alloc_rand_amount();
     
@@ -390,6 +408,7 @@ int main(int argc, char** argv)
 }
 
 /* EOF */
+
 
 
 

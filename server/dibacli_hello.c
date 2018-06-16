@@ -144,6 +144,7 @@ static char    *keyname  = NULL;
 static char    *keyfile = NULL;
 static char    *query = NULL;
 static char    *errout   = NULL;
+static char    *ihost = NULL;
 
 static  char    *testkey = "1234";
 static char    *randkey  = NULL;
@@ -177,14 +178,17 @@ opts opts_data[] = {
         'd',   "debug",  &debug, NULL, 0, 10, &debug, 
         "-d level       --debug level  - Output debug data (level 1-9)",
         
+        'i',   "ihost",   NULL,   &ihost, 0, 0,    NULL, 
+        "-i name        --ihost name  - Internet host name / IP address",
+     
         's',   "sum",  NULL,  NULL, 0, 0, &calcsum, 
         "-s             --sum         - Print sha sum before proceeding",
         
         'p',   "pass",   NULL,   &thispass, 0, 0,    NULL, 
-        "-p val         --pass val    - Pass in for key (@file reads pass from file)",
+        "-p val         --pass val    - Pass in for key (@file from file)",
         
         'e',   "errout",  NULL,  &errout, 0, 0, NULL, 
-        "-e fname       --errout fnm  - Dup stderr to file. (for GUI deployment)",
+        "-e fname       --errout fnm  - Dup stderr to file. (for GUI)",
        
         0,     NULL,  NULL,   NULL,   0, 0,  NULL, NULL,
         };
@@ -239,6 +243,7 @@ int main(int argc, char** argv)
     errout   = zalloc(MAX_PATH); if(errout   == NULL) xerr3(mstr);
     keyfile  = zalloc(MAX_PATH); if(keyfile  == NULL) xerr3(mstr);
     query    = zalloc(MAX_PATH); if(query  == NULL)   xerr3(mstr);
+    ihost   = zalloc(MAX_PATH);  if(ihost == NULL) xerr3(mstr);
     
     char *err_str = NULL;
     int nn = parse_commad_line(argv, opts_data, &err_str);
@@ -424,6 +429,7 @@ int main(int argc, char** argv)
     zfree(thispass);    zfree(keyname);      
     zfree(errout);      zfree(keyfile);
     zfree(query);       zfree(querystr);
+    zfree(ihost);
     
     if(randkey)
         zfree(randkey);
@@ -436,19 +442,3 @@ int main(int argc, char** argv)
 
     
 /* EOF */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

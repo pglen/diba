@@ -143,6 +143,7 @@ static char    *keyname  = NULL;
 static char    *keyfile = NULL;
 static char    *query = NULL;
 static char    *errout   = NULL;
+static char    *ihost = NULL;
 
 static  char    *testkey = "1234";
 static char     *randkey  = NULL;
@@ -172,6 +173,9 @@ opts opts_data[] = {
         
         't',   "test",  NULL,  NULL, 0, 0, &test, 
         "-t             --test        - Run self test before proceeding",
+        
+        'i',   "ihost",   NULL,   &ihost, 0, 0,    NULL, 
+        "-i name         --ihost name  - Internet host name / IP address",
         
         'd',   "debug",  &debuglevel, NULL, 0, 10, NULL, 
         "-d level       --debug level  - Output debug data (level 1-9)",
@@ -525,6 +529,7 @@ int main(int argc, char** argv)
 }
 
 /* EOF */
+
 
 
 
