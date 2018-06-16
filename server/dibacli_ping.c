@@ -146,6 +146,7 @@ static char    *keyname  = NULL;
 static char    *keyfile = NULL;
 static char    *query = NULL;
 static char    *errout   = NULL;
+static char    *ihost = NULL;
 
 static  char    *testkey = "1234";
 static char    *randkey  = NULL;
@@ -178,6 +179,9 @@ opts opts_data[] = {
         
         'o',   "tout",  NULL,  NULL, 0, 0, &test_tou, 
         "-o             --tout        - Test timeout",
+        
+        'i',   "ihost",   NULL,   &ihost, 0, 0,    NULL, 
+        "-i name        --ihost name  - Internet host name / IP address",
         
         'd',   "debug",  &debuglevel, NULL, 0, 10, NULL, 
         "-d level       --debug level - Output debug data (level 0-10)",
@@ -244,6 +248,7 @@ int main(int argc, char** argv)
     errout   = zalloc(MAX_PATH); if(errout   == NULL) xerr3(mstr);
     keyfile  = zalloc(MAX_PATH); if(keyfile  == NULL) xerr3(mstr);
     query    = zalloc(MAX_PATH); if(query  == NULL)   xerr3(mstr);
+    ihost   = zalloc(MAX_PATH);  if(ihost == NULL) xerr3(mstr);
     
     char *err_str = NULL;
     int nn = parse_commad_line(argv, opts_data, &err_str);
@@ -306,6 +311,22 @@ int main(int argc, char** argv)
     //////////////////////////////////////////////////////////////////////
     scom_set_debuglevel(debuglevel);
  
+    if(ihost[0] == '\0')
+        {
+        xerr3("Please specify host name.");
+        }
+    char ipp[24];
+    int  reth = hostname_to_ip(ihost, ipp, sizeof(ipp)-1);
+    if(reth < 0)
+        {
+        xerr3("Cannot resolv host '%s'.\n", ihost);
+        }
+        
+   if(debuglevel > 5)
+        {
+        printf("Connecting to host: '%s'\n", ipp);   
+        }     
+    
     int clsock;
     struct sockaddr_in serverAddr;
     socklen_t addr_size;
@@ -313,11 +334,12 @@ int main(int argc, char** argv)
     /*---- Create the socket. The three arguments are: ----*/
     clsock = socket(PF_INET, SOCK_STREAM, 0);
     
-    char *server = "127.0.0.1";
+    //char *server = "127.0.0.1";
     /* Address family = Internet */
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_port = htons(6789);
-    serverAddr.sin_addr.s_addr = inet_addr(server);
+    //serverAddr.sin_addr.s_addr = inet_addr(server);
+    serverAddr.sin_addr.s_addr = inet_addr(ipp);
     memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);  
     
     if(debuglevel > 0)
@@ -327,7 +349,7 @@ int main(int argc, char** argv)
     addr_size = sizeof serverAddr;
     int err = connect(clsock, (struct sockaddr *) &serverAddr, addr_size);
     if(err)
-        xerr3("Error on connecting to server '%s'.\n", server   );
+        xerr3("Error on connecting to server '%s'.\n", ipp   );
     
     if(debuglevel > 0)
         printf("Connected, waiting for initial buffer.\n");   
@@ -393,7 +415,7 @@ int main(int argc, char** argv)
             
     zfree(thispass);    zfree(keyname);      
     zfree(errout);      zfree(keyfile);
-    zfree(query);       
+    zfree(query);       zfree(ihost);      
     
     if(randkey)
         zfree(randkey);

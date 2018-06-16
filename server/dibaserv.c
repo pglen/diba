@@ -385,7 +385,7 @@ int main(int argc, char** argv)
         if(debuglevel > 0)  
             printf("Listening .... \n");
         
-        // Force a fault
+        // Force a fault to test log response on fault
         //int *nullp = NULL;
         //*nullp = 1;
         

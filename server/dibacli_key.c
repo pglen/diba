@@ -177,19 +177,19 @@ opts opts_data[] = {
         "-t             --test        - Run self test before proceeding",
         
         'd',   "debug",  &debuglevel, NULL, 0, 10, NULL, 
-        "-d level       --debug level  - Output debug data (level 1-9)",
+        "-d level       --debug level - Output debug data (level 1-9)",
         
         's',   "sum",  NULL,  NULL, 0, 0, &calcsum, 
         "-s             --sum         - Print sha sum before proceeding",
         
         'p',   "pass",   NULL,   &thispass, 0, 0,    NULL, 
-        "-p val         --pass val    - Pass in for key (@file reads pass from file)",
+        "-p val         --pass val    - Pass in for key (@file from file)",
         
         'i',   "ihost",   NULL,   &ihost, 0, 0,    NULL, 
-        "-i name         --ihost name  - Internet host name / IP address",
+        "-i name        --ihost name  - Internet host name / IP address",
         
         'e',   "errout",  NULL,  &errout, 0, 0, NULL, 
-        "-e fname       --errout fnm  - Dup stderr to file. (for GUI deployment)",
+        "-e fname       --errout fnm  - Dup stderr to file. (for GUI)",
        
         0,     NULL,  NULL,   NULL,   0, 0,  NULL, NULL,
         };
@@ -310,6 +310,11 @@ int main(int argc, char** argv)
     //////////////////////////////////////////////////////////////////////
     scom_set_debuglevel(debuglevel);
     
+    if(ihost[0] == '\0')
+        {
+        xerr3("Please specify host name.");
+        }
+    
     char *err_str2;
     get_priv_key_struct pks; memset(&pks, 0, sizeof(pks));
     gcry_sexp_t info, privk, composite, pubkey;
@@ -360,10 +365,6 @@ int main(int argc, char** argv)
     struct sockaddr_in serverAddr;
     socklen_t addr_size;
     
-    if(ihost[0] == '\0')
-        {
-        xerr3("Please specify host name.");
-        }
     char ipp[24];
     int  reth = hostname_to_ip(ihost, ipp, sizeof(ipp)-1);
     if(reth < 0)

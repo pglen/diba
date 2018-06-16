@@ -305,13 +305,16 @@ DWORD WINAPI Thread(void *ArgList)
     
     printlog("Timeout exit %d.\n", getpid());
 
+    // Allow fast shutdown
+    struct linger ld = {1, 0}; int len = sizeof(ld);
+    setsockopt(1, SOL_SOCKET, SO_LINGER, (char*)&ld, sizeof(ld));
+    
     // Totally meaningless, but for correctness sake
     close(0); close(1);
     
     zautofree();
     if(logfp)
         zleakfp(logfp);
-    
     
     exit(4);
     return 0;
@@ -509,7 +512,7 @@ int main(int argc, char** argv)
     struct threadParams params1 = {1, 2};
     exitCondition = 1; 
    
-   CreateThread(
+    CreateThread(
         NULL,                   /* default security attributes.   */
         0,                      /* use default stack size.        */
         Thread,                 /* thread function name.          */
@@ -538,6 +541,10 @@ int main(int argc, char** argv)
         printlog("\n");
         }
     #endif
+    
+    // Force a fault to test log response on fault
+    //int *nullp = NULL;
+    // *nullp = 1;
         
     //int hhh = atoi(argv[1]);
     //int ret = scom_send_data(1, hellostr, strlen(hellostr), 1);
@@ -551,11 +558,12 @@ int main(int argc, char** argv)
     while(1)
         {
         int ret2 = scom_recv_data(0, recbuff, sizeof(recbuff), 1);
-
+                 
         if(ret2 < 0)
             {
             if(debuglevel > 2)
-                printlog("Error on recv\n");
+                printlog("Error on recv %d (errno %d %s)\n", 
+                                ret2, errno, strerror(errno));
             break;
             }
         if(ret2 == 0)
@@ -582,7 +590,8 @@ int main(int argc, char** argv)
     struct linger ld = {1, 0}; int len = sizeof(ld);
     setsockopt(1, SOL_SOCKET, SO_LINGER, (char*)&ld, sizeof(ld));
      
-    close(0); close(1);
+    // Not really needed
+    close(0);  close(1);
        
     zfree(thispass);    zfree(keyname);
     zfree(keydesc);     zfree(creator);

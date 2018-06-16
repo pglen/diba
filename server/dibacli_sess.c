@@ -175,19 +175,19 @@ opts opts_data[] = {
         "-t             --test        - Run self test before proceeding",
         
         'i',   "ihost",   NULL,   &ihost, 0, 0,    NULL, 
-        "-i name         --ihost name  - Internet host name / IP address",
+        "-i name        --ihost name  - Internet host name / IP address",
         
         'd',   "debug",  &debuglevel, NULL, 0, 10, NULL, 
-        "-d level       --debug level  - Output debug data (level 1-9)",
+        "-d level       --debug level - Output debug data (level 1-9)",
         
         's',   "sum",  NULL,  NULL, 0, 0, &calcsum, 
         "-s             --sum         - Print sha sum before proceeding",
         
         'p',   "pass",   NULL,   &thispass, 0, 0,    NULL, 
-        "-p val         --pass val    - Pass in for key (@file reads pass from file)",
+        "-p val         --pass val    - Pass in for key (@file reads file)",
         
         'e',   "errout",  NULL,  &errout, 0, 0, NULL, 
-        "-e fname       --errout fnm  - Dup stderr to file. (for GUI deployment)",
+        "-e fname       --errout fnm  - Dup stderr to file. (for GUI)",
        
         0,     NULL,  NULL,   NULL,   0, 0,  NULL, NULL,
         };
@@ -245,6 +245,7 @@ int main(int argc, char** argv)
     errout   = zalloc(MAX_PATH); if(errout   == NULL) xerr3(mstr);
     keyfile  = zalloc(MAX_PATH); if(keyfile  == NULL) xerr3(mstr);
     query    = zalloc(MAX_PATH); if(query  == NULL)   xerr3(mstr);
+    ihost   = zalloc(MAX_PATH);  if(ihost == NULL) xerr3(mstr);
     
     char *err_str = NULL;
     int nn = parse_commad_line(argv, opts_data, &err_str);
@@ -305,6 +306,10 @@ int main(int argc, char** argv)
         }
    
     //////////////////////////////////////////////////////////////////////
+    if(ihost[0] == '\0')
+        {
+        xerr3("Please specify host name.");
+        }
     
     char *err_str2;
     get_priv_key_struct pks; memset(&pks, 0, sizeof(pks));
@@ -517,7 +522,7 @@ int main(int argc, char** argv)
     
     zfree(thispass);    zfree(keyname);      
     zfree(errout);      zfree(keyfile);
-    zfree(query);       
+    zfree(query);       zfree(ihost);
     
     if(randkey)
         zfree(randkey);
@@ -529,6 +534,7 @@ int main(int argc, char** argv)
 }
 
 /* EOF */
+
 
 
 
