@@ -46,6 +46,7 @@ static int calcsum = 0;
 static int version = 0;
 static int debuglevel = 0;
 static int loglevel = 0;
+static int port = 6789;
 
 static int ver_num_major = 0;
 static int ver_num_minor = 0;
@@ -75,6 +76,9 @@ opts opts_data[] = {
         
         'd',   "debug",   &debuglevel, NULL, 0,  10, NULL,  
         "-d             --debug       - Debug level (0-10) (def: 0-none)",
+
+        'p',   "port",   &port, NULL, 0,  10, NULL,  
+        "-p             --port        - port to listen on (def: 6789)",
 
         'l',   "loglevel",   &loglevel, NULL, 0,  10, NULL,  
         "-l             --loglevel    - Logging level (0-10) (def:0-none)",
@@ -298,19 +302,6 @@ int main(int argc, char** argv)
             }
         }
    
-    //if (argc - nn != 2) {
-    //    printf("dibaserv: Missing argument");
-    //    usage(usestr, descstr, opts_data); exit(2);
-    //    }
-    
-    #if 0
-    WSADATA wsa;
-    if (WSAStartup(MAKEWORD(2,2),&wsa) != 0)
-    {
-        xerr2("Socket start failed. Error Code : %d", WSAGetLastError());
-    }
-    #endif
-    
     // Touch logfile (for debug)
     FILE *logfp = fopen("dibaserv.log", "ab+");
     if(!logfp)
@@ -318,8 +309,6 @@ int main(int argc, char** argv)
         xerr2("Cannot open log file.\n");
         }
     fclose(logfp);
-    
-    //syslog(LOG_INFO, "Connection from host %d", callinghostname);
     
     #if 0
     // Daemonize
@@ -342,24 +331,23 @@ int main(int argc, char** argv)
     struct sockaddr_storage serverStorage;
     socklen_t addr_size;
     
-    welcomeSocket = 
-    //    WSASocket (AF_INET, SOCK_STREAM, IPPROTO_TCP, NULL, 0, 0); 
-    socket (PF_INET, SOCK_STREAM, 0);
+    welcomeSocket = socket (PF_INET, SOCK_STREAM, 0);
     
     if (setsockopt(welcomeSocket, SOL_SOCKET, SO_REUSEADDR, 
                     &(int){ 1 }, sizeof(int)) < 0)
+        {
         xerr2("setsockopt(SO_REUSEADDR) failed");
-    
+        }
     
     /*---- Configure settings of the server address struct ----*/
     serverAddr.sin_family = AF_INET;
     /* Set port number, using htons function to use proper byte order */
-    serverAddr.sin_port = htons(6789);
+    serverAddr.sin_port = htons(port);
     
     /* Set IP address to localhost */
     //serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
-    serverAddr.sin_addr.s_addr = inet_addr("0.0.0.0");
     //serverAddr.sin_addr.s_addr = inet_addr(INADDR_ANY);
+    serverAddr.sin_addr.s_addr = inet_addr("0.0.0.0");
     
     /* Set all bits of the padding field to 0 */
     memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);  
@@ -383,7 +371,7 @@ int main(int argc, char** argv)
                                 err, errno, strerror(errno));
       
         if(debuglevel > 0)  
-            printf("Listening .... \n");
+            printf("Listening on port %d .... \n", port);
         
         // Force a fault to test log response on fault
         //int *nullp = NULL;
@@ -415,6 +403,7 @@ int main(int argc, char** argv)
 }
 
 /* EOF */
+
 
 
 

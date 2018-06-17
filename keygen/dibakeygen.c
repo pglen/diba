@@ -72,7 +72,7 @@ static char    *errout   = NULL;
 opts opts_data[] = {
 
         'k',   "keylen",   &keysize,  NULL,  1024, 32768,    NULL, 
-        "-k             --keylen      - key length in bits (default 2048)",
+        "-k             --keylen      - key length in bits (def: 2048)",
         
         'v',   "verbose",  NULL, NULL,  0, 0, &verbose, 
         "-v             --verbose     - Verbosity on (keys not listed)",
@@ -102,7 +102,7 @@ opts opts_data[] = {
         "-n             --nocrypt     - do not encrypt key (testing only)",
         
         'p',   "pass",   NULL,   &thispass, 0, 0,    NULL, 
-        "-p val         --pass val    - pass in for key (@file reads pass from file)",
+        "-p val         --pass val    - pass in for key (@file from file)",
         
         'm',   "keyname",  NULL,   &keyname, 0, 0, NULL, 
         "-m name        --keyname nm  - user legible key name",
@@ -111,10 +111,10 @@ opts opts_data[] = {
         "-d desc        --desc  desc  - key description",
        
         'e',   "errout",  NULL,  &errout, 0, 0, NULL, 
-        "-e fname       --errout fnm  - dup stderr to file. (for GUI deployment)",
+        "-e fname       --errout fnm  - dup stderr to file. (for GUI)",
        
         'c',   "creator",  NULL,   &creator, 0, 0, NULL, 
-        "-c name        --creator nm  - override creator name (def: logon name)",
+        "-c name        --creator nm  - creator name (def: logon name)",
        
         0,     NULL,  NULL,   NULL,   0, 0,  NULL, NULL,
         };
@@ -523,6 +523,7 @@ int main(int argc, char** argv)
 }
 
 /* EOF */
+
 
 
 

@@ -79,7 +79,7 @@ static char   *thispass = NULL;
     
 opts opts_data[] = {
                     'p',   "pass",   NULL,  &thispass, 0, 0,    NULL, 
-                    "-p val         --pass val    - Pass in for key (@file for pass file)",
+                    "-p val         --pass val    - Pass in for key (@file for file)",
                     
                     'v',   "verbose",  NULL, NULL,  0, 0, &verbose, 
                     "-v             --verbose     - Verbosity on",
@@ -94,10 +94,10 @@ opts opts_data[] = {
                     "-i             --pinfo       - Print key info",
 
                     's',   "sum",  NULL,  NULL, 0, 0, &calcsum, 
-                    "-s             --sum         - Print executable checksum before proceeding",
+                    "-s             --sum         - Print executable checksum.",
                             
                     'k',   "pkey",  NULL,  NULL, 0, 0,  &prkeys, 
-                    "-k             --pkey        - Print key (public / private)",
+                    "-k             --pkey        - Print key (public / private.)",
                     
                     'l',   "plen",  NULL,  NULL, 0, 0, &prlen , 
                     "-l             --plen        - Print key length",
@@ -109,7 +109,7 @@ opts opts_data[] = {
                     "-d level       --debug level - Output debug data (level 1-9)",
                     
                     'u',   "dump",  NULL,  NULL, 0, 0, &dump, 
-                    "-u             --dump        - Dump key to console (private key printed enrypted) ",
+                    "-u             --dump        - Dump key to console ",
                    
                     'V',   "version",  NULL, NULL,  0, 0, &version, 
                     "-V             --version     - Print version numbers and exit",
@@ -156,7 +156,9 @@ int main(int argc, char** argv)
     if (err_str)
         {
         printf(err_str);
-        usage(usestr, descstr, opts_data); exit(2);
+        usage(usestr, descstr, opts_data); 
+        printf("All private keys are printed enrypted.\n");
+        exit(2);
         }
     
     if(version)
@@ -472,11 +474,11 @@ int    operate_privkey(const char *fname, const char *basename)
         //sexp_print(composite);
         printf("info: ");
         sexp_print(info);
-        printf("privkey: ");
+        printf("Private key:\n");
         sexp_print(privkey);
-        printf("pubkey: ");
+        printf("Public key:\n");
         sexp_print(pubkey);
-        printf("hash: ");
+        printf("Hash: ");
         sexp_print(hash);
         }
     
@@ -632,6 +634,7 @@ static int get_pass()
 }
 
 // EOF
+
 
 
 

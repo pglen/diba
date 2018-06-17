@@ -75,8 +75,13 @@ void scom_set_debuglevel(int level)
 //////////////////////////////////////////////////////////////////////////
 // Send data. The UW flag instructs to use write instead of send. 
 // The server will use write as the worker recives the socket 
-// as a handle, the client will use send as it is a socket.
+// as a handle, the client will use send it as a socket.
+//
 // Not strickly needed, but makes for a cleaner transfer.
+//
+// History:
+//    jun 2018 -- uw flag obsolete
+//
 
 int scom_send_data(int socket, const char *str, int len, int uw)
 
@@ -117,6 +122,7 @@ int scom_send_data(int socket, const char *str, int len, int uw)
 // If short is negative, error
 // If no response within timout, the process sends FATAL
 // and the server termnates, after attemts to close connection.
+//
 
 int scom_recv_data(int socket, char *buff, int len, int ur)
 
@@ -171,6 +177,7 @@ int scom_recv_data(int socket, char *buff, int len, int ur)
     return idx2;      
 }
 
+//////////////////////////////////////////////////////////////////////////
 // Assemble and send a socket string
 
 int print2sock(int sock, int uw, char *fmt, ...)
@@ -183,7 +190,6 @@ int print2sock(int sock, int uw, char *fmt, ...)
         return -1;
         
     int ret = vsnprintf(buff, DEFSOCKBUFFLEN, fmt, ap);
-    
     int ret2 = scom_send_data(sock, buff, strlen(buff), uw);
     
     zfree(buff);
@@ -208,6 +214,7 @@ char *bp3_encrypt_cp(cchar *buff, int len, cchar *key, int klen, int *outx)
     return(mem3);
 }
 
+// Just for eazy access. See real one in header.
 //typedef struct _handshake_struct
 //{
 //    int     sock; 
@@ -409,6 +416,7 @@ int    decrypt_session_key(session_key *sk)
 }
                     
 // EOF
+
 
 
 

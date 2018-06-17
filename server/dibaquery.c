@@ -8,6 +8,7 @@
       REV   DATE            BY              DESCRIPTION
       ----  -----------     ----------      ------------------------------
       0.00  jan.31.2018     Peter Glen      Initial version.
+      0.00  jun.16.2018     Peter Glen      More
 
    ======================================================================= */
 
@@ -74,7 +75,7 @@ static char   *outfile = NULL;
     
 opts opts_data[] = {
                     'p',   "pass",   NULL,  &thispass, 0, 0,    NULL, 
-                    "-p val         --pass val    - Pass in for key (@file for pass file)",
+                    "-p val         --pass val    - Pass in for key (@file)",
                     
                     'v',   "verbose",  NULL, NULL,  0, 0, &verbose, 
                     "-v             --verbose     - Verbosity on",
@@ -95,17 +96,17 @@ opts opts_data[] = {
                     "-o             --outfile     - Output (result) file with sexp ",
 
                     's',   "sum",  NULL,  NULL, 0, 0, &calcsum, 
-                    "-s             --sum         - Print executable checksum before proceeding",
+                    "-s             --sum         - Print executable checksum",
                             
                     'k',   "pkey",  NULL,  NULL, 0, 0,  &prkeys, 
                     "-k             --pkey        - Print key (public / private)",
                     
                     'd',   "dump",  NULL,  NULL, 0, 0, &dump, 
-                    "-d             --dump        - Dump key to console (private key printed enrypted) ",
+                    "-d             --dump        - Dump key to console",
                    
                     'V',   "version",  NULL, NULL,  0, 0, &version, 
                     "-V             --version     - Print version numbers and exit",
-
+                                                                       
                     0,     NULL,  NULL,   NULL,   0, 0,  NULL, NULL,
                     };
 
@@ -705,6 +706,7 @@ static int get_pass()
 }
 
 // EOF
+
 
 
 

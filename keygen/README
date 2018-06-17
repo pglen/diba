@@ -1,0 +1,52 @@
+README
+
+  These are encryption / decryption routines for the DIBA project.
+  
+  They can be used as standalone tools for:
+  
+        key generation / encryption / decryption.
+
+FILES
+
+    dibakeygen     --      Key generator.
+    dibakeyinfo    --      Key report tool. Mostly used for check / list keys. 
+    
+ See Makefile for typical usage examples. Follow the tests make path to see
+frequent useage. The programs will print basic usage information on request.
+
+BUILD
+
+ All the files are built on Windows using MSYS and MinGW. The files should
+build on linux and variants with little modification.
+ 
+PREP
+
+ NOTE: now we are using libraries from the officaldistros. Disregard prep below.
+ 
+ Build the glibcrypt library first. (if applicable) 
+This project will look for the built libs and includes in the .lib subdir 
+under the original build directories.
+This allows installation-less build. (for test and experimentation)
+Then build the tools subdirectory. 
+
+Make sure you update references when building new library versions.
+
+TESTING
+
+ 'make tests' will build the needed files and execute a diff on generated 
+outputs. It is comparing them with expected output of the original files. 
+Test passes if the diffs are silent.
+
+FEEDBACK
+
+ This code is being developed for a larger project. However, taming the library
+and creating a keygen layer  is a common task, so I shared it ...
+
+peterglen99@gmail.com
+
+            
+
+
+
+
+
