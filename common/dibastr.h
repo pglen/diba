@@ -13,10 +13,17 @@
 
    ======================================================================= */
 
+// Consistant naming throughout the files
+
 #define DIBACRYPT_HASH  "dibacrypt-hash"
 #define DIBACRYPT_KEY   "dibacrypt-key"
 #define DIBACRYPT_SIG   "dibacrypt-signature"
 #define PRIVATE_CRYPTED "private-crypted"
+
+#define PUBLIC_KEY      "public-key"
+#define PRIVATE_KEY     "private-key"
+#define GCRYPT_KEY      "gcrypt-key"
+
 
 // Unified strings for files
 
@@ -57,6 +64,8 @@ const  char *dibapass;
 const  char *custdbname;
 
 // EOF
+
+
 
 
 

@@ -57,7 +57,7 @@ static int debug = 0;
 
 static int ver_num_major = 0;
 static int ver_num_minor = 0;
-static int ver_num_rele  = 4;
+static int ver_num_rele  = 5;
 
 char descstr[] = "Show various information about a DIBA key.";
 char usestr[] = "dibakeyinfo [options] keyfile\n"
@@ -109,7 +109,7 @@ opts opts_data[] = {
                     "-d level       --debug level - Output debug data (level 1-9)",
                     
                     'u',   "dump",  NULL,  NULL, 0, 0, &dump, 
-                    "-u             --dump        - Dump key to console ",
+                    "-u             --dump        - Dump key to console.",
                    
                     'V',   "version",  NULL, NULL,  0, 0, &version, 
                     "-V             --version     - Print version numbers and exit",
@@ -320,7 +320,7 @@ int    operate_pubkey(const char *fname, const char *basename)
         }
     zfree(rsa_buf);
     
-    gcry_sexp_t info_key = gcry_sexp_find_token(pubkey, "gcrypt-key", 0);
+    gcry_sexp_t info_key = gcry_sexp_find_token(pubkey, GCRYPT_KEY, 0);
     
     if(pinfo)
         sexp_list(info_key);
@@ -346,7 +346,7 @@ int    operate_pubkey(const char *fname, const char *basename)
         else
             {
             // Hash and check
-            gcry_sexp_t pubkc = gcry_sexp_find_token(pubkey, "public-key", 0);
+            gcry_sexp_t pubkc = gcry_sexp_find_token(pubkey, PUBLIC_KEY, 0);
             
             int olen;
             char *hash_str = sexp_hash(pubkc, &olen);
@@ -472,14 +472,27 @@ int    operate_privkey(const char *fname, const char *basename)
         {
         //printf("composite: :");
         //sexp_print(composite);
-        printf("info: ");
+        printf("Info: ");
         sexp_print(info);
-        printf("Private key:\n");
-        sexp_print(privkey);
+        
         printf("Public key:\n");
         sexp_print(pubkey);
+        
         printf("Hash: ");
         sexp_print(hash);
+        
+        printf("%s ", "About to show private key. Are you sure? [y/N]");
+        fflush(stdout);
+        char aa[12] = {};
+        fgets(aa, sizeof(aa)-1, stdin);
+        //printf("got: '%s'\n", aa);
+        if(aa[0] != 'y' && aa[0] != 'Y')
+            {
+            xerr2("Not showing private key.");
+            }
+        printf("Private key:\n");
+        sexp_print(privkey);
+        
         }
     
     gcry_sexp_t keyid = gcry_sexp_find_token(info, "Key ID", 0);
@@ -506,7 +519,7 @@ int    operate_privkey(const char *fname, const char *basename)
         gcry_sexp_t shax = gcry_sexp_find_token(info, "Private Hash", 0);
         if(shax)
             {
-            gcry_sexp_t pk = gcry_sexp_find_token(privkey, "private-key", 0);
+            gcry_sexp_t pk = gcry_sexp_find_token(privkey, PRIVATE_KEY, 0);
             int olen;
             char *hash_str = sexp_hash(pk, &olen);
             unsigned int plen2;
@@ -626,7 +639,7 @@ static int get_pass()
             if(newpass == NULL)
                 xerr2("dibakeyinfo: %s\n", err_str);
                 
-            strcpy(thispass, newpass);
+            zstrcpy(thispass, newpass, MAX_PATH);
             zfree(newpass);
             }
         }

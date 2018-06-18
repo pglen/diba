@@ -1,6 +1,6 @@
 README
 
-  These are encryption / decryption routines for the DIBA project.
+  These are the key generation routines for the DIBA project.
   
   They can be used as standalone tools for:
   
@@ -10,6 +10,7 @@ FILES
 
     dibakeygen     --      Key generator.
     dibakeyinfo    --      Key report tool. Mostly used for check / list keys. 
+    dibakeyedit    --      Key editing tool. Minimal implementation. 
     
  See Makefile for typical usage examples. Follow the tests make path to see
 frequent useage. The programs will print basic usage information on request.
@@ -45,6 +46,7 @@ and creating a keygen layer  is a common task, so I shared it ...
 peterglen99@gmail.com
 
             
+
 
 
 

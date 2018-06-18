@@ -268,21 +268,21 @@ int     get_pubkey(get_pub_key_struct *pks)
         return -1;
         };
         
-    *pks->pubkey = gcry_sexp_find_token(pubkey, "public-key", 0);
+    *pks->pubkey = gcry_sexp_find_token(pubkey, PUBLIC_KEY, 0);
     if (err) 
         {
         *pks->err_str =  "No public key found.";
         return -1;
         };
         
-    *pks->composite = gcry_sexp_find_token(pubkey, "dibacrypt-key", 0);
+    *pks->composite = gcry_sexp_find_token(pubkey, DIBACRYPT_KEY, 0);
     if (err) 
         {
         *pks->err_str =  "No public key info found.";
         return -1;
         };
         
-    *pks->hash = gcry_sexp_find_token(pubkey, "dibacrypt-hash", 0);
+    *pks->hash = gcry_sexp_find_token(pubkey, DIBACRYPT_HASH, 0);
     if (err) 
         {
         *pks->err_str =  "No public key hash found.";
@@ -390,7 +390,7 @@ int     get_privkey(get_priv_key_struct *pks)
         }
     //printf("thispass '%s'\n", pks->thispass);
     gcry_sexp_t privkid = gcry_sexp_find_token(*pks->composite,
-                             "private-crypted", 0);
+                             PRIVATE_CRYPTED, 0);
     if(privkid == NULL)
         {
         *pks->err_str = "No key found in private composite key.";
@@ -439,7 +439,7 @@ int     get_privkey(get_priv_key_struct *pks)
         }
     if(pks->privkey)
         {
-        *pks->privkey = gcry_sexp_find_token(keydata, "private-key", 0);
+        *pks->privkey = gcry_sexp_find_token(keydata, PRIVATE_KEY, 0);
         
         if(pks->debug > 9) {
             printf("get_privkey(): key_data:\n");
@@ -448,7 +448,7 @@ int     get_privkey(get_priv_key_struct *pks)
         }
     if(pks->pubkey)
         {
-        *pks->pubkey = gcry_sexp_find_token(keydata, "public-key", 0);
+        *pks->pubkey = gcry_sexp_find_token(keydata, PUBLIC_KEY, 0);
         if(pks->debug > 9) {
             printf("get_privkey() key:\n");
             sexp_print(*pks->pubkey);
@@ -456,7 +456,7 @@ int     get_privkey(get_priv_key_struct *pks)
         }
     if(pks->hash)
         {
-        *pks->hash = gcry_sexp_find_token(*pks->composite, "dibacrypt-hash", 0);
+        *pks->hash = gcry_sexp_find_token(*pks->composite, DIBACRYPT_HASH, 0);
         if(pks->debug > 9) {
             printf("get_privkey(): hash:\n");
             sexp_print(*pks->hash);
@@ -464,7 +464,7 @@ int     get_privkey(get_priv_key_struct *pks)
         }
     if(pks->info)
         {
-        *pks->info = gcry_sexp_find_token(*pks->composite, "dibacrypt-key", 0);
+        *pks->info = gcry_sexp_find_token(*pks->composite, DIBACRYPT_KEY, 0);
         if(pks->debug > 9) {
             printf("get_privkey(): info:\n");
             sexp_print(*pks->info);
@@ -473,7 +473,7 @@ int     get_privkey(get_priv_key_struct *pks)
     gcry_sexp_release(keydata);
     
     gcry_sexp_t rsa_keypair;
-    rsa_keypair = gcry_sexp_find_token(*pks->privkey, "private-key", 0);
+    rsa_keypair = gcry_sexp_find_token(*pks->privkey, PRIVATE_KEY, 0);
     if(rsa_keypair == NULL)
         {     
         if(pks->debug > 0) 
@@ -626,6 +626,7 @@ void show_prepoc()
 }
         
 // EOF
+
 
 
 

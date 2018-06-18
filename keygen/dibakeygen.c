@@ -44,7 +44,7 @@ static int version = 0;
 
 static int ver_num_major = 0;
 static int ver_num_minor = 0;
-static int ver_num_rele  = 4;
+static int ver_num_rele  = 5;
 
 static char descstr[] = 
     "Generate Public / Private keypair, write them into a set of key files.";
@@ -78,7 +78,7 @@ opts opts_data[] = {
         "-v             --verbose     - Verbosity on (keys not listed)",
         
         'l',   "list",  NULL, NULL,  0, 0, &list, 
-        "-l             --list        - List keys (keys not listed)",
+        "-l             --list        - List details (keys not listed)",
         
         'V',   "version",  NULL, NULL,  0, 0, &version, 
         "-V             --version     - Print version numbers and exit",
@@ -123,7 +123,7 @@ opts opts_data[] = {
 void my_progress_handler (void *cb_data, const char *what,
                             int printchar, int current, int total)
 {
-    printf(".");
+    printf("."); fflush(stdout);
     //printf("%c", printchar);
 }
 
@@ -250,11 +250,12 @@ int main(int argc, char** argv)
     
     if(access(fname, F_OK) >= 0 && !force)
         {
-        xerr3("dibakeygen: File already exists, use different name or delete the file or use -f (--force) option.");
+        xerr3("dibakeygen: File already exists, use different name or delete the file.\n"
+                    "You may use -f (--force) option to override.");
         }
         
     /* Generate a new RSA key pair. */
-    printf("\nRSA key generation (of %d bits) can take a few minutes. \nYour computer "
+    printf("\nRSA key generation (of %d bits) may take a few minutes. \nYour computer "
            "needs to gather random entropy.\n\n", keysize);
     printf("Please wait ");
 
@@ -336,11 +337,11 @@ int main(int argc, char** argv)
     char *keyver = zalloc(MAX_PATH);
     snprintf(keyver, MAX_PATH, "%d.%d.%d", ver_num_major, ver_num_minor, ver_num_rele);
 
-    gcry_sexp_t pubk = gcry_sexp_find_token(rsa_keypair, "public-key", 0);
+    gcry_sexp_t pubk = gcry_sexp_find_token(rsa_keypair, PUBLIC_KEY, 0);
     int olen;
     char *hash_str = sexp_hash(pubk, &olen);
     
-    gcry_sexp_t privk = gcry_sexp_find_token(rsa_keypair, "private-key", 0);
+    gcry_sexp_t privk = gcry_sexp_find_token(rsa_keypair, PRIVATE_KEY, 0);
     char *hash_str2 = sexp_hash(privk, &olen);
     
     //if(verbose)
@@ -349,13 +350,13 @@ int main(int argc, char** argv)
     //    sexp_list(pubk);
         
     if(keyname[0] == '\0')
-        strcpy(keyname, "unnamed key");
+        zstrcpy(keyname, "unnamed key",  MAX_PATH);
     if(keydesc[0] == '\0')
-        strcpy(keydesc, "no description");
+        zstrcpy(keydesc, "no description", MAX_PATH);
         
     gcry_sexp_t glib_keys;
     err = gcry_sexp_build(&glib_keys, NULL, 
-                    "( " DIBACRYPT_KEY " "
+                    "(" DIBACRYPT_KEY " "
                     "(\"Key Creation Date\" %s) "
                     "(\"Key Version\" %s) (\"Key Name\" %s) "
                     "(\"Key Type\" %s) "
@@ -497,7 +498,7 @@ int main(int argc, char** argv)
     fclose(lockf);
     zfree(mem6);
     
-    printf("Key '%s'  successfully saved to '%s' and '%s'.\n", 
+    printf("Key '%s' successfully saved.\nFiles: '%s' and '%s'.\n", 
                                                 randkeyid, fname, fname2);
     
     /* Release build contexts. */
