@@ -67,7 +67,7 @@ tests:  build_tests
 	@-rm -f test2.tmp test.tmp *.enc *.dec bb.*
     
 build_tests: dibaencrypt.exe dibadecrypt.exe \
-             dibasign.exe dibacheck.exe dibakeygen.exe dibakeyinfo.exe
+             dibasign.exe dibacheck.exe 
 
 enctest.org:
 	$(ENCTEST) > enctest.org
@@ -121,6 +121,7 @@ distclean:    clean allclean
 	@-rm -f *.key *.pub  
 
 	
+
 
 
 
