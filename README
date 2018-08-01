@@ -12,12 +12,13 @@ NOTE
   Items in the 'gui' directory are partially funtional. (oct 2017)
   Items in the 'blockchain' directory are partially funtional. (oct 2017)
   Items in the 'server' directory are partially funtional. (jun 2018)
+  Items in the 'voting' directory have started. (jul 2018)
   
 The rest is under development. See individual subdirs for more README-s.
  
 BUILD
 
- All the files are built on Windows using MSYS and MinGW. The files should
+ All the files are built on Windows using MSYS2 and MinGW. The files should
 build on linux and variants with little modification. See INSTALL for more 
 infomation.
  
@@ -70,6 +71,7 @@ voting                  Voting related files
 
     
        
+
 
 
 

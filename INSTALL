@@ -33,8 +33,11 @@ outputs that is matched to the expected output. The compare is done wit the
   
   On MSYS2, one can install the dependency with:
     pacman -S <depenency list>
-  Example:
+    
+  Examples:
     pacman -S libgcrypt libgcrypt-devel 
+    pacman -S zlib zlib-devel
+    (see: getdeps.sh)
     
   CHOICES
   
@@ -70,6 +73,7 @@ capability, and the Win32 (Win64) for its rich user interface.
   
   
   
+
 
 
 
