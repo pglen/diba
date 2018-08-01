@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------
-# Makefile for digibank 
+# Makefile for digibank (diba)
 #
 # This makefile usues a bare minimum of features. Can be run both on windows
 # and posix tools with a help of batch files. Both make and nmake will work.
@@ -70,6 +70,7 @@ checksum:
 check:
 	@# Filter out good responses, so we see better
 	-md5sum  -c md5sum.txt | grep -v "OK"
+
 
 
 

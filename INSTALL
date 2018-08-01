@@ -24,12 +24,17 @@ outputs that is matched to the expected output. The compare is done wit the
   The following subsystems are used in DigiBank:
   
   MinGW, MSYS, gcc
-  libgcrypt
+  libgcrypt, libgcrypt-devel
   Win32
   Python
   PyGTK, PyGobject
-  libz
+  zlib zlib-devel
   (others, see Makefile for a technically accurate list)
+  
+  On MSYS2, one can install the dependency with:
+    pacman -S <depenency list>
+  Example:
+    pacman -S libgcrypt libgcrypt-devel 
     
   CHOICES
   
@@ -65,5 +70,6 @@ capability, and the Win32 (Win64) for its rich user interface.
   
   
   
+
 
 
