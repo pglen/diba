@@ -287,7 +287,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
 #SUBDIRS = currency gui keygen tools server blockchain bluepoint common transport voting
-SUBDIRS = tools keygen transport 
+SUBDIRS = tools keygen #transport 
 all: all-recursive
 
 .SUFFIXES:

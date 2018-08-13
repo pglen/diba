@@ -9,8 +9,6 @@ AM_LDFLAGS = -L$(top_srcdir)/common -L$(top_srcdir)/tools -l z -l gcrypt \
 
 #AUTOMAKE_OPTIONS = subdir-objects
 
-include $(top_srcdir)/diba.inc
-
 # this lists the binaries to produce, the (non-PHONY, binary) targets in
 # the previous manual Makefile
 

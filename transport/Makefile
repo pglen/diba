@@ -14,6 +14,9 @@
 
 
 
+# ------------------------------------------------------------------------
+# 
+
 
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
@@ -98,10 +101,18 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_dibadecrypt_OBJECTS = dibsdecrypt.$(OBJEXT)
+am_dibadecrypt_OBJECTS = dibadecrypt.$(OBJEXT) zmalloc.$(OBJEXT) \
+	gcry.$(OBJEXT) base64.$(OBJEXT) cmdline.$(OBJEXT) \
+	zstr.$(OBJEXT) getpass.$(OBJEXT) dibafile.$(OBJEXT) \
+	misc.$(OBJEXT) gsexp.$(OBJEXT) dibastr.$(OBJEXT) \
+	dibautils.$(OBJEXT) bluepoint3.$(OBJEXT)
 dibadecrypt_OBJECTS = $(am_dibadecrypt_OBJECTS)
 dibadecrypt_LDADD = $(LDADD)
-am_dibaencrypt_OBJECTS = dibaencrypt.$(OBJEXT)
+am_dibaencrypt_OBJECTS = dibaencrypt.$(OBJEXT) zmalloc.$(OBJEXT) \
+	gcry.$(OBJEXT) base64.$(OBJEXT) cmdline.$(OBJEXT) \
+	zstr.$(OBJEXT) getpass.$(OBJEXT) dibafile.$(OBJEXT) \
+	misc.$(OBJEXT) gsexp.$(OBJEXT) dibastr.$(OBJEXT) \
+	dibautils.$(OBJEXT) bluepoint3.$(OBJEXT)
 dibaencrypt_OBJECTS = $(am_dibaencrypt_OBJECTS)
 dibaencrypt_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -120,6 +131,10 @@ DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
+AM_V_lt = $(am__v_lt_$(V))
+am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
+am__v_lt_0 = --silent
+am__v_lt_1 = 
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 AM_V_CC = $(am__v_CC_$(V))
@@ -248,12 +263,24 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
+AM_CFLAGS = -std=c99 -I../common -I../bluepoint -I../tools 
+AM_LDFLAGS = -L../bluepoint -L../common -L../tools \
+            -l z -l gcrypt -l gpg-error 
 
-#what flags you want to pass to the C compiler & linker
-AM_CFLAGS = --pedantic -Wall -std=c99 -O2
-AM_LDFLAGS = 
-dibaencrypt_SOURCES = dibaencrypt.c
-dibadecrypt_SOURCES = dibsdecrypt.c
+dibaencrypt_SOURCES = dibaencrypt.c \
+    ../tools/zmalloc.c ../tools/gcry.c \
+   ../tools/base64.c ../tools/cmdline.c ../tools/zstr.c ../tools/getpass.c \
+   ../tools/dibafile.c ../tools/misc.c ../tools/gsexp.c \
+   ../common/dibastr.c ../common/dibautils.c \
+   ../bluepoint/bluepoint3.c
+
+dibadecrypt_SOURCES = dibadecrypt.c  \
+   ../tools/zmalloc.c ../tools/gcry.c \
+   ../tools/base64.c ../tools/cmdline.c ../tools/zstr.c ../tools/getpass.c \
+   ../tools/dibafile.c ../tools/misc.c ../tools/gsexp.c \
+   ../common/dibastr.c ../common/dibautils.c \
+   ../bluepoint/bluepoint3.c
+
 all: all-am
 
 .SUFFIXES:
@@ -344,8 +371,20 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/base64.Po
+include ./$(DEPDIR)/bluepoint3.Po
+include ./$(DEPDIR)/cmdline.Po
+include ./$(DEPDIR)/dibadecrypt.Po
 include ./$(DEPDIR)/dibaencrypt.Po
-include ./$(DEPDIR)/dibsdecrypt.Po
+include ./$(DEPDIR)/dibafile.Po
+include ./$(DEPDIR)/dibastr.Po
+include ./$(DEPDIR)/dibautils.Po
+include ./$(DEPDIR)/gcry.Po
+include ./$(DEPDIR)/getpass.Po
+include ./$(DEPDIR)/gsexp.Po
+include ./$(DEPDIR)/misc.Po
+include ./$(DEPDIR)/zmalloc.Po
+include ./$(DEPDIR)/zstr.Po
 
 .c.o:
 	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -360,6 +399,174 @@ include ./$(DEPDIR)/dibsdecrypt.Po
 #	$(AM_V_CC)source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(AM_V_CC_no)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+zmalloc.o: ../tools/zmalloc.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT zmalloc.o -MD -MP -MF $(DEPDIR)/zmalloc.Tpo -c -o zmalloc.o `test -f '../tools/zmalloc.c' || echo '$(srcdir)/'`../tools/zmalloc.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/zmalloc.Tpo $(DEPDIR)/zmalloc.Po
+#	$(AM_V_CC)source='../tools/zmalloc.c' object='zmalloc.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o zmalloc.o `test -f '../tools/zmalloc.c' || echo '$(srcdir)/'`../tools/zmalloc.c
+
+zmalloc.obj: ../tools/zmalloc.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT zmalloc.obj -MD -MP -MF $(DEPDIR)/zmalloc.Tpo -c -o zmalloc.obj `if test -f '../tools/zmalloc.c'; then $(CYGPATH_W) '../tools/zmalloc.c'; else $(CYGPATH_W) '$(srcdir)/../tools/zmalloc.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/zmalloc.Tpo $(DEPDIR)/zmalloc.Po
+#	$(AM_V_CC)source='../tools/zmalloc.c' object='zmalloc.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o zmalloc.obj `if test -f '../tools/zmalloc.c'; then $(CYGPATH_W) '../tools/zmalloc.c'; else $(CYGPATH_W) '$(srcdir)/../tools/zmalloc.c'; fi`
+
+gcry.o: ../tools/gcry.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gcry.o -MD -MP -MF $(DEPDIR)/gcry.Tpo -c -o gcry.o `test -f '../tools/gcry.c' || echo '$(srcdir)/'`../tools/gcry.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/gcry.Tpo $(DEPDIR)/gcry.Po
+#	$(AM_V_CC)source='../tools/gcry.c' object='gcry.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gcry.o `test -f '../tools/gcry.c' || echo '$(srcdir)/'`../tools/gcry.c
+
+gcry.obj: ../tools/gcry.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gcry.obj -MD -MP -MF $(DEPDIR)/gcry.Tpo -c -o gcry.obj `if test -f '../tools/gcry.c'; then $(CYGPATH_W) '../tools/gcry.c'; else $(CYGPATH_W) '$(srcdir)/../tools/gcry.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/gcry.Tpo $(DEPDIR)/gcry.Po
+#	$(AM_V_CC)source='../tools/gcry.c' object='gcry.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gcry.obj `if test -f '../tools/gcry.c'; then $(CYGPATH_W) '../tools/gcry.c'; else $(CYGPATH_W) '$(srcdir)/../tools/gcry.c'; fi`
+
+base64.o: ../tools/base64.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT base64.o -MD -MP -MF $(DEPDIR)/base64.Tpo -c -o base64.o `test -f '../tools/base64.c' || echo '$(srcdir)/'`../tools/base64.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/base64.Tpo $(DEPDIR)/base64.Po
+#	$(AM_V_CC)source='../tools/base64.c' object='base64.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o base64.o `test -f '../tools/base64.c' || echo '$(srcdir)/'`../tools/base64.c
+
+base64.obj: ../tools/base64.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT base64.obj -MD -MP -MF $(DEPDIR)/base64.Tpo -c -o base64.obj `if test -f '../tools/base64.c'; then $(CYGPATH_W) '../tools/base64.c'; else $(CYGPATH_W) '$(srcdir)/../tools/base64.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/base64.Tpo $(DEPDIR)/base64.Po
+#	$(AM_V_CC)source='../tools/base64.c' object='base64.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o base64.obj `if test -f '../tools/base64.c'; then $(CYGPATH_W) '../tools/base64.c'; else $(CYGPATH_W) '$(srcdir)/../tools/base64.c'; fi`
+
+cmdline.o: ../tools/cmdline.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT cmdline.o -MD -MP -MF $(DEPDIR)/cmdline.Tpo -c -o cmdline.o `test -f '../tools/cmdline.c' || echo '$(srcdir)/'`../tools/cmdline.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/cmdline.Tpo $(DEPDIR)/cmdline.Po
+#	$(AM_V_CC)source='../tools/cmdline.c' object='cmdline.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o cmdline.o `test -f '../tools/cmdline.c' || echo '$(srcdir)/'`../tools/cmdline.c
+
+cmdline.obj: ../tools/cmdline.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT cmdline.obj -MD -MP -MF $(DEPDIR)/cmdline.Tpo -c -o cmdline.obj `if test -f '../tools/cmdline.c'; then $(CYGPATH_W) '../tools/cmdline.c'; else $(CYGPATH_W) '$(srcdir)/../tools/cmdline.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/cmdline.Tpo $(DEPDIR)/cmdline.Po
+#	$(AM_V_CC)source='../tools/cmdline.c' object='cmdline.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o cmdline.obj `if test -f '../tools/cmdline.c'; then $(CYGPATH_W) '../tools/cmdline.c'; else $(CYGPATH_W) '$(srcdir)/../tools/cmdline.c'; fi`
+
+zstr.o: ../tools/zstr.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT zstr.o -MD -MP -MF $(DEPDIR)/zstr.Tpo -c -o zstr.o `test -f '../tools/zstr.c' || echo '$(srcdir)/'`../tools/zstr.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/zstr.Tpo $(DEPDIR)/zstr.Po
+#	$(AM_V_CC)source='../tools/zstr.c' object='zstr.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o zstr.o `test -f '../tools/zstr.c' || echo '$(srcdir)/'`../tools/zstr.c
+
+zstr.obj: ../tools/zstr.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT zstr.obj -MD -MP -MF $(DEPDIR)/zstr.Tpo -c -o zstr.obj `if test -f '../tools/zstr.c'; then $(CYGPATH_W) '../tools/zstr.c'; else $(CYGPATH_W) '$(srcdir)/../tools/zstr.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/zstr.Tpo $(DEPDIR)/zstr.Po
+#	$(AM_V_CC)source='../tools/zstr.c' object='zstr.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o zstr.obj `if test -f '../tools/zstr.c'; then $(CYGPATH_W) '../tools/zstr.c'; else $(CYGPATH_W) '$(srcdir)/../tools/zstr.c'; fi`
+
+getpass.o: ../tools/getpass.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT getpass.o -MD -MP -MF $(DEPDIR)/getpass.Tpo -c -o getpass.o `test -f '../tools/getpass.c' || echo '$(srcdir)/'`../tools/getpass.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/getpass.Tpo $(DEPDIR)/getpass.Po
+#	$(AM_V_CC)source='../tools/getpass.c' object='getpass.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o getpass.o `test -f '../tools/getpass.c' || echo '$(srcdir)/'`../tools/getpass.c
+
+getpass.obj: ../tools/getpass.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT getpass.obj -MD -MP -MF $(DEPDIR)/getpass.Tpo -c -o getpass.obj `if test -f '../tools/getpass.c'; then $(CYGPATH_W) '../tools/getpass.c'; else $(CYGPATH_W) '$(srcdir)/../tools/getpass.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/getpass.Tpo $(DEPDIR)/getpass.Po
+#	$(AM_V_CC)source='../tools/getpass.c' object='getpass.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o getpass.obj `if test -f '../tools/getpass.c'; then $(CYGPATH_W) '../tools/getpass.c'; else $(CYGPATH_W) '$(srcdir)/../tools/getpass.c'; fi`
+
+dibafile.o: ../tools/dibafile.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dibafile.o -MD -MP -MF $(DEPDIR)/dibafile.Tpo -c -o dibafile.o `test -f '../tools/dibafile.c' || echo '$(srcdir)/'`../tools/dibafile.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/dibafile.Tpo $(DEPDIR)/dibafile.Po
+#	$(AM_V_CC)source='../tools/dibafile.c' object='dibafile.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dibafile.o `test -f '../tools/dibafile.c' || echo '$(srcdir)/'`../tools/dibafile.c
+
+dibafile.obj: ../tools/dibafile.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dibafile.obj -MD -MP -MF $(DEPDIR)/dibafile.Tpo -c -o dibafile.obj `if test -f '../tools/dibafile.c'; then $(CYGPATH_W) '../tools/dibafile.c'; else $(CYGPATH_W) '$(srcdir)/../tools/dibafile.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/dibafile.Tpo $(DEPDIR)/dibafile.Po
+#	$(AM_V_CC)source='../tools/dibafile.c' object='dibafile.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dibafile.obj `if test -f '../tools/dibafile.c'; then $(CYGPATH_W) '../tools/dibafile.c'; else $(CYGPATH_W) '$(srcdir)/../tools/dibafile.c'; fi`
+
+misc.o: ../tools/misc.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT misc.o -MD -MP -MF $(DEPDIR)/misc.Tpo -c -o misc.o `test -f '../tools/misc.c' || echo '$(srcdir)/'`../tools/misc.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/misc.Tpo $(DEPDIR)/misc.Po
+#	$(AM_V_CC)source='../tools/misc.c' object='misc.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o misc.o `test -f '../tools/misc.c' || echo '$(srcdir)/'`../tools/misc.c
+
+misc.obj: ../tools/misc.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT misc.obj -MD -MP -MF $(DEPDIR)/misc.Tpo -c -o misc.obj `if test -f '../tools/misc.c'; then $(CYGPATH_W) '../tools/misc.c'; else $(CYGPATH_W) '$(srcdir)/../tools/misc.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/misc.Tpo $(DEPDIR)/misc.Po
+#	$(AM_V_CC)source='../tools/misc.c' object='misc.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o misc.obj `if test -f '../tools/misc.c'; then $(CYGPATH_W) '../tools/misc.c'; else $(CYGPATH_W) '$(srcdir)/../tools/misc.c'; fi`
+
+gsexp.o: ../tools/gsexp.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gsexp.o -MD -MP -MF $(DEPDIR)/gsexp.Tpo -c -o gsexp.o `test -f '../tools/gsexp.c' || echo '$(srcdir)/'`../tools/gsexp.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/gsexp.Tpo $(DEPDIR)/gsexp.Po
+#	$(AM_V_CC)source='../tools/gsexp.c' object='gsexp.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gsexp.o `test -f '../tools/gsexp.c' || echo '$(srcdir)/'`../tools/gsexp.c
+
+gsexp.obj: ../tools/gsexp.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gsexp.obj -MD -MP -MF $(DEPDIR)/gsexp.Tpo -c -o gsexp.obj `if test -f '../tools/gsexp.c'; then $(CYGPATH_W) '../tools/gsexp.c'; else $(CYGPATH_W) '$(srcdir)/../tools/gsexp.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/gsexp.Tpo $(DEPDIR)/gsexp.Po
+#	$(AM_V_CC)source='../tools/gsexp.c' object='gsexp.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gsexp.obj `if test -f '../tools/gsexp.c'; then $(CYGPATH_W) '../tools/gsexp.c'; else $(CYGPATH_W) '$(srcdir)/../tools/gsexp.c'; fi`
+
+dibastr.o: ../common/dibastr.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dibastr.o -MD -MP -MF $(DEPDIR)/dibastr.Tpo -c -o dibastr.o `test -f '../common/dibastr.c' || echo '$(srcdir)/'`../common/dibastr.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/dibastr.Tpo $(DEPDIR)/dibastr.Po
+#	$(AM_V_CC)source='../common/dibastr.c' object='dibastr.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dibastr.o `test -f '../common/dibastr.c' || echo '$(srcdir)/'`../common/dibastr.c
+
+dibastr.obj: ../common/dibastr.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dibastr.obj -MD -MP -MF $(DEPDIR)/dibastr.Tpo -c -o dibastr.obj `if test -f '../common/dibastr.c'; then $(CYGPATH_W) '../common/dibastr.c'; else $(CYGPATH_W) '$(srcdir)/../common/dibastr.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/dibastr.Tpo $(DEPDIR)/dibastr.Po
+#	$(AM_V_CC)source='../common/dibastr.c' object='dibastr.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dibastr.obj `if test -f '../common/dibastr.c'; then $(CYGPATH_W) '../common/dibastr.c'; else $(CYGPATH_W) '$(srcdir)/../common/dibastr.c'; fi`
+
+dibautils.o: ../common/dibautils.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dibautils.o -MD -MP -MF $(DEPDIR)/dibautils.Tpo -c -o dibautils.o `test -f '../common/dibautils.c' || echo '$(srcdir)/'`../common/dibautils.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/dibautils.Tpo $(DEPDIR)/dibautils.Po
+#	$(AM_V_CC)source='../common/dibautils.c' object='dibautils.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dibautils.o `test -f '../common/dibautils.c' || echo '$(srcdir)/'`../common/dibautils.c
+
+dibautils.obj: ../common/dibautils.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dibautils.obj -MD -MP -MF $(DEPDIR)/dibautils.Tpo -c -o dibautils.obj `if test -f '../common/dibautils.c'; then $(CYGPATH_W) '../common/dibautils.c'; else $(CYGPATH_W) '$(srcdir)/../common/dibautils.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/dibautils.Tpo $(DEPDIR)/dibautils.Po
+#	$(AM_V_CC)source='../common/dibautils.c' object='dibautils.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dibautils.obj `if test -f '../common/dibautils.c'; then $(CYGPATH_W) '../common/dibautils.c'; else $(CYGPATH_W) '$(srcdir)/../common/dibautils.c'; fi`
+
+bluepoint3.o: ../bluepoint/bluepoint3.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT bluepoint3.o -MD -MP -MF $(DEPDIR)/bluepoint3.Tpo -c -o bluepoint3.o `test -f '../bluepoint/bluepoint3.c' || echo '$(srcdir)/'`../bluepoint/bluepoint3.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/bluepoint3.Tpo $(DEPDIR)/bluepoint3.Po
+#	$(AM_V_CC)source='../bluepoint/bluepoint3.c' object='bluepoint3.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o bluepoint3.o `test -f '../bluepoint/bluepoint3.c' || echo '$(srcdir)/'`../bluepoint/bluepoint3.c
+
+bluepoint3.obj: ../bluepoint/bluepoint3.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT bluepoint3.obj -MD -MP -MF $(DEPDIR)/bluepoint3.Tpo -c -o bluepoint3.obj `if test -f '../bluepoint/bluepoint3.c'; then $(CYGPATH_W) '../bluepoint/bluepoint3.c'; else $(CYGPATH_W) '$(srcdir)/../bluepoint/bluepoint3.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/bluepoint3.Tpo $(DEPDIR)/bluepoint3.Po
+#	$(AM_V_CC)source='../bluepoint/bluepoint3.c' object='bluepoint3.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o bluepoint3.obj `if test -f '../bluepoint/bluepoint3.c'; then $(CYGPATH_W) '../bluepoint/bluepoint3.c'; else $(CYGPATH_W) '$(srcdir)/../bluepoint/bluepoint3.c'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique

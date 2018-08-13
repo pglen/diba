@@ -16,9 +16,6 @@
 
 # ------------------------------------------------------------------------
 
-# Macros used in all makefiles for DIBA. Adjust here if needed.
-# Test with 'make all'.
-
 
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
@@ -164,8 +161,7 @@ am__define_uniq_tagged_files = \
   done | $(am__uniquify_input)`
 ETAGS = etags
 CTAGS = ctags
-am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp \
-	$(top_srcdir)/diba.inc
+am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = ${SHELL} /home/peterglen/diba/missing aclocal-1.15
 AMTAR = $${TAR-tar}
@@ -174,9 +170,7 @@ AUTOCONF = ${SHELL} /home/peterglen/diba/missing autoconf
 AUTOHEADER = ${SHELL} /home/peterglen/diba/missing autoheader
 AUTOMAKE = ${SHELL} /home/peterglen/diba/missing automake-1.15
 AWK = gawk
-
-# GCC need to be told on Linux, W32 does it by default
-CC = gcc -std=c99
+CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
 CPP = gcc -E
@@ -197,7 +191,7 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LDFLAGS = 
 LIBOBJS = 
-LIBS = -l z -l gcrypt 
+LIBS = 
 LTLIBOBJS = 
 MAKEINFO = ${SHELL} /home/peterglen/diba/missing makeinfo
 MKDIR_P = /bin/mkdir -p
@@ -265,57 +259,13 @@ AM_CFLAGS = -std=c99 -O2 -I$(top_srcdir)/common \
 AM_LDFLAGS = -L$(top_srcdir)/common -L$(top_srcdir)/tools -l z -l gcrypt \
       -l gpg-error 
 
-
-# The version abd location of GCRYPT
-GDIR = ../../libgcrypt/libgcrypt-1.8.2
-#GDIR = ../../libgcrypt/libgcrypt-1.7.8
-
-# The version abd location of GCRYPT error routines
-GERR = ../../libgcrypt/libgpg-error-1.27
-
-# The version of zlib
-ZDIR = ../../zlib/zlib-1.2.11
-
-# ------------------------------------------------------------------------
-# USER ADJUSTABLE includes above, edit below with care
-INC4 = ../bluepoint
-INC6 = ../common
-INC7 = ../tools
-TOOLDIR = ../tools
-BLUEDIR = ../bluepoint
-COMMON = ../common
-
-#TOOLDIR=$(top_srcdir)/tools
-#BLUEDIR=$(top_srcdir)/bluepoint
-#COMMON=$(top_srcdir)/common
-TOOLS = $(TOOLDIR)/gcry.c $(TOOLDIR)/gsexp.c   \
-            $(TOOLDIR)/base64.c $(TOOLDIR)/getpass.c $(TOOLDIR)/zmalloc.c \
-                $(TOOLDIR)/cmdline.c $(TOOLDIR)/misc.c $(TOOLDIR)/zstr.c  \
-                        $(TOOLDIR)/dibafile.c \
-                            $(COMMON)/dibastr.c $(COMMON)/dibautils.c \
-                                $(BLUEDIR)/bluepoint3.c
-
-LIBS2 = -l gpg-error 
-OPT2 = -I $(INC4) -I $(INC6) -I $(INC7) 
-OPT3 = $(OPT2) 
-ALL_OPTS = $(OPT2) $(OPT3)
-ALL_LIBS = $(OPT_LIBS) $(LIBS) 
-SQLDIR = ../../sqlite/sqlite-amalgamation-3200100
-OPT4 = -I $(SQLDIR) -L $(SQLDIR) 
-SQLSRC = $(SQLDIR)/sqlite3.c
-SQLOBJ = $(SQLDIR)/sqlite3.o
-CRYPTER = $(BLUEDIR)/bluepoint3.c 
-
-#
-FILTER = sed s/0x[0-9A-F]*/0x00000000/g
-HELLO = "Hello World"
 test_zmalloc_SOURCES = test_zmalloc.c zmalloc.c
 test_base64_SOURCES = test_base64.c base64.c zmalloc.c
 all: all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .o .obj
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am $(top_srcdir)/diba.inc $(am__configure_deps)
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -335,7 +285,6 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe);; \
 	esac;
-$(top_srcdir)/diba.inc $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
@@ -627,8 +576,6 @@ uninstall-am: uninstall-binPROGRAMS
 
 .PRECIOUS: Makefile
 
-
-# EOF
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
