@@ -18,7 +18,30 @@ AC_PROG_MAKE_SET
 
 # Checks for libraries.
 
+AC_CHECK_LIB([z], compress, [],
+AC_MSG_ERROR([
+The library libz was not found. Please install the compression 
+library package
+]))
+
+AC_CHECK_LIB([gcrypt], gcry_control, [],
+AC_MSG_ERROR([
+The library gcrypt was not found. Please install the encryption 
+library package
+]))
+
 # Checks for header files.
+AC_CHECK_HEADERS([gcrypt.h], [],
+AC_MSG_ERROR([
+The header file gcrypt.h was not found. Please install the gcrypt
+package
+]))
+AC_CHECK_HEADERS([zlib.h], [],
+AC_MSG_ERROR([
+The header file zlib.h was not found. Please install the zlib
+package
+]))
+
 AC_CHECK_HEADERS([arpa/inet.h fcntl.h limits.h locale.h netdb.h netinet/in.h stddef.h stdint.h stdlib.h string.h sys/socket.h termios.h unistd.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -32,4 +55,6 @@ AC_FUNC_MALLOC
 AC_CHECK_FUNCS([atexit dup2 getcwd gethostbyname getpass inet_ntoa memset mkdir setlocale socket strchr strdup strerror strpbrk strrchr strstr strtol])
 
 AC_OUTPUT
+
+
 

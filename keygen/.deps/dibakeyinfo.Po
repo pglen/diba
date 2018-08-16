@@ -1,4 +1,4 @@
-dibakeygen.o: dibakeygen.c /usr/include/unistd.h \
+dibakeyinfo.o: dibakeyinfo.c /usr/include/unistd.h \
  /usr/include/sys/unistd.h /usr/include/_ansi.h /usr/include/newlib.h \
  /usr/include/_newlib_version.h /usr/include/sys/config.h \
  /usr/include/machine/ieeefp.h /usr/include/sys/features.h \
@@ -31,7 +31,8 @@ dibakeygen.o: dibakeygen.c /usr/include/unistd.h \
  /usr/include/sys/time.h /usr/include/sys/_timeval.h \
  /usr/include/machine/_time.h /usr/include/sys/select.h ../tools/gcry.h \
  ../tools/getpass.h ../tools/gsexp.h ../tools/base64.h ../tools/zmalloc.h \
- ../tools/cmdline.h ../common/dibastr.h ../tools/misc.h ../tools/zstr.h
+ ../tools/cmdline.h ../common/dibastr.h ../tools/misc.h ../tools/zstr.h \
+ ../common/dibautils.h
 
 /usr/include/unistd.h:
 
@@ -176,3 +177,5 @@ dibakeygen.o: dibakeygen.c /usr/include/unistd.h \
 ../tools/misc.h:
 
 ../tools/zstr.h:
+
+../common/dibautils.h:

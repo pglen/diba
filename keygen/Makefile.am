@@ -11,7 +11,7 @@ AM_LDFLAGS = -L../bluepoint -L../common -L../tools \
 
 # List the binaries to produce, 
 
-bin_PROGRAMS = dibakeygen #dibakeyinfo
+bin_PROGRAMS = dibakeygen dibakeyinfo
 
 dibakeygen_SOURCES = dibakeygen.c ../tools/zmalloc.c ../tools/gcry.c \
    ../tools/base64.c ../tools/cmdline.c ../tools/zstr.c ../tools/getpass.c \
@@ -26,5 +26,6 @@ dibakeyinfo_SOURCES = dibakeyinfo.c ../tools/zmalloc.c ../tools/gcry.c \
    ../bluepoint/bluepoint3.c
 
                                                   
+
 
 
