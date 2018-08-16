@@ -14,16 +14,29 @@ executable checks the whole toolchain.
   
   BUILD
   
+  The usual ./configure  make cycle should work. However if you checked 
+  the source out from github, some file timestamps may have been altered.
+  The autoconf system thinks it is time for a rebuild. The message looks
+  something like:
+  
+  WARNING: 'automake-1.15' is missing on your system.
+ 
+  One can avoid installing autoconf by issuing the following command(s):
+  
+  touch --date="`date`" aclocal.m4 Makefile.am configure Makefile.in
+  
+  or simply install autoconf (autotools)
+  
   The Makefile has the usual targets. Th command 'make' will build the 
-whole project, 'make tests' will check workings. The tests are producing 
-outputs that is matched to the expected output. The compare is done wit the 
-'diff' utility. It passes if the diffs remain silent. (no diferences)
+  whole project, 'make tests' will check workings. The tests are producing 
+  outputs that is matched to the expected output. The compare is done wit the 
+ 'diff' utility. It passes if the diffs remain silent. (no diferences)
 
   DEPENDENCIES
   
-  The following subsystems are used in DigiBank:
+  The following subsystems are used in DigiBank  (DIBA):
   
-  MinGW, MSYS, gcc
+  MinGW, MSYS, gcc, diffutils
   libgcrypt, libgcrypt-devel
   Win32
   Python
@@ -39,30 +52,36 @@ outputs that is matched to the expected output. The compare is done wit the
     pacman -S zlib zlib-devel
     (see: getdeps.sh)
     
+  On linux and family, use the appropriate package manager 
+  like 'yum' or 'apt'.
+    
   CHOICES
   
-   The choices on platforms ad utilities are a hybrid of POSIX and Win32
-and mostly open source.  We used the POSIX platform for its rich computing 
+   The choices we made on platforms and utilities are a hybrid of POSIX and Win32
+and heavy on open source.  We used the POSIX platform for its rich computing 
 capability, and the Win32 (Win64) for its rich user interface.
 
   STRUCTURE
   
    The project was broken up into sub modules, and has the following structure:
    
-   o transport   --  asymmetric encryption for client / server transport
-   o bluepoint   --  symmetric encryption for token encryption / decryption
-   o currency    --  Currency and currency transactions
+   o transport   --  Asymmetric encryption for client / server transport
+   o keygen      --  Key generation related routines
+   o bluepoint   --  Symmetric cypher for encryption / decryption tasks
+   o currency    --  Currency and currency related transactions
    o chest       --  Account related tools
-   o blockchain  --  blockchain related utilities
-   o audit       --  auditing related 
-   o gui         --  user interface to tie all parts together
-   o tools       --  various support tools, cmdline, base64, 
-   o common      --  coomon string and define for the DIBA project
-   o study       --  disregard, misc investigations 
+   o server      --  The transaction approval server
+   o blockchain  --  Blockchain related utilities
+   o audit       --  Auditing related 
+   o gui         --  User interface to tie all parts together
+   o tools       --  Various support tools, cmdline, base64, malloc etc ... 
+   o common      --  Common items and defines for the DIBA project
+   o voting      --  Voting related subsystem
+   o study       --  Disregard, misc investigations 
    
   DATA
   
-    Customer data is stored (for develoment) in the 
+    Customer data is stored (for development) in the 
                 ../data/customers subdirectory
     Currency data is stored in the 
                 ../data/currency subdirectory        
@@ -70,9 +89,12 @@ capability, and the Win32 (Win64) for its rich user interface.
                 ../data/transact subdirectory        
     Audit data is stored in the 
                 ../data/audit subdirectory        
+    Voting data is stored in the 
+                ../data/voting subdirectory        
   
   
   
+
 
 
 
