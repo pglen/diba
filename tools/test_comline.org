@@ -1,0 +1,24 @@
+
+Testing command line parsing.
+Help requested.
+Generate Public / Private keypair into a set of key files.
+Usage: dibakeygen [options] keyfile
+Where 'keyfile' is the basename for .key .pub files. [keyfile.pub, keyfile.key]
+Options can be:     
+               -k             --keylen      - key length in bits (default 2048)
+               -v             --verbose     - Verbosity on
+               -V             --version     - Print version numbers and exit
+               -u             --dump        - Dump key to terminal
+               -t             --test        - run self test before proceeding
+               -s             --sum         - print sha sum before proceeding
+               -f             --force       - force clobbering files
+               -w             --weak        - allow weak pass
+               -n             --nocrypt     - do not encrypt key (testing only)
+               -p val         --pass val    - pass in for key (@file reads pass from file)
+               -m name        --keyname nm  - user legible key name
+               -d desc        --desc  desc  - key description
+               -c name        --creator nm  - override creator name (def: logon name)
+
+               -?             --help        - displays this help
+               -h             --help        - displays this help
+Option with argument needs one option per command line item.

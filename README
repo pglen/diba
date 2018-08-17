@@ -1,8 +1,8 @@
  Digital Bank  (DIBA)
 
- Crypto currency. Unique as in all the currency is allocated at inception.
-Development is done on a 2048 bit  engine, the real thing will be 4096 bit.
-This is more numbers than atoms in the universe.
+ Crypto currency. And consent server. Unique as in all the currency is
+allocated at inception. Development is done on a 2048 bit  engine, the real 
+thing will be 4096 bit. This is more numbers than atoms in the universe.
  
 NOTE
 
@@ -71,6 +71,7 @@ voting                  Voting related files
 
     
        
+
 
 
 

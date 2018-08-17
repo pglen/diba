@@ -1,0 +1,19 @@
+len=36 type=1 (0x1) Key=False
+buf: 'Diba File. Version: 1 Subversion 1
+'
+len=7 type=132 (0x84) Key=True
+buf: 'key str'
+len=325 type=4 (0x4) Key=False
+buf: 'This is a test. This is a test. This is a test. This is a test. This is a test. 
+This is a test. This is a test. This is a test. This is a test. This is a test. 
+This is a test. This is a test. This is a test. This is a test. This is a test. 
+This is a test. This is a test. This is a test. This is a test. This is a test. 
+'
+len=9 type=132 (0x84) Key=True
+buf: 'key str2'
+len=12 type=4 (0x4) Key=False
+buf: 'another one'
+len=18 type=13 (0xd) Key=False
+buf: 'End of Diba File.
+'
+end err_str: 'End of file.'

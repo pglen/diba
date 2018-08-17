@@ -88,7 +88,11 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = test_base64$(EXEEXT) test_zmalloc$(EXEEXT)
+bin_PROGRAMS = test_base64$(EXEEXT) test_zmalloc$(EXEEXT) \
+	test_base64$(EXEEXT) test_base64a$(EXEEXT) \
+	test_base64b$(EXEEXT) test_comline$(EXEEXT) test_zstr$(EXEEXT) \
+	test_misc$(EXEEXT) test_chunk$(EXEEXT) test_keys$(EXEEXT) \
+	test_zip$(EXEEXT) test_getpass$(EXEEXT)
 subdir = tools
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -104,9 +108,52 @@ am_test_base64_OBJECTS = test_base64.$(OBJEXT) base64.$(OBJEXT) \
 	zmalloc.$(OBJEXT)
 test_base64_OBJECTS = $(am_test_base64_OBJECTS)
 test_base64_LDADD = $(LDADD)
+am_test_base64a_OBJECTS = test_base64a.$(OBJEXT) base64.$(OBJEXT) \
+	zmalloc.$(OBJEXT)
+test_base64a_OBJECTS = $(am_test_base64a_OBJECTS)
+test_base64a_LDADD = $(LDADD)
+am_test_base64b_OBJECTS = test_base64b.$(OBJEXT) base64.$(OBJEXT) \
+	zmalloc.$(OBJEXT)
+test_base64b_OBJECTS = $(am_test_base64b_OBJECTS)
+test_base64b_LDADD = $(LDADD)
+am_test_chunk_OBJECTS = test_chunk.$(OBJEXT) base64.$(OBJEXT) \
+	zmalloc.$(OBJEXT) misc.$(OBJEXT) cmdline.$(OBJEXT) \
+	zstr.$(OBJEXT) dibafile.$(OBJEXT)
+test_chunk_OBJECTS = $(am_test_chunk_OBJECTS)
+test_chunk_LDADD = $(LDADD)
+am_test_comline_OBJECTS = test_comline.$(OBJEXT) base64.$(OBJEXT) \
+	zmalloc.$(OBJEXT) misc.$(OBJEXT) cmdline.$(OBJEXT) \
+	zstr.$(OBJEXT)
+test_comline_OBJECTS = $(am_test_comline_OBJECTS)
+test_comline_LDADD = $(LDADD)
+am_test_getpass_OBJECTS = test_getpass.$(OBJEXT) base64.$(OBJEXT) \
+	zmalloc.$(OBJEXT) misc.$(OBJEXT) cmdline.$(OBJEXT) \
+	zstr.$(OBJEXT) getpass.$(OBJEXT)
+test_getpass_OBJECTS = $(am_test_getpass_OBJECTS)
+test_getpass_LDADD = $(LDADD)
+am_test_keys_OBJECTS = test_keys.$(OBJEXT) base64.$(OBJEXT) \
+	zmalloc.$(OBJEXT) misc.$(OBJEXT) cmdline.$(OBJEXT) \
+	zstr.$(OBJEXT) dibafile.$(OBJEXT)
+test_keys_OBJECTS = $(am_test_keys_OBJECTS)
+test_keys_LDADD = $(LDADD)
+am_test_misc_OBJECTS = test_misc.$(OBJEXT) base64.$(OBJEXT) \
+	zmalloc.$(OBJEXT) misc.$(OBJEXT) cmdline.$(OBJEXT) \
+	zstr.$(OBJEXT)
+test_misc_OBJECTS = $(am_test_misc_OBJECTS)
+test_misc_LDADD = $(LDADD)
+am_test_zip_OBJECTS = test_zip.$(OBJEXT) base64.$(OBJEXT) \
+	zmalloc.$(OBJEXT) misc.$(OBJEXT) cmdline.$(OBJEXT) \
+	zstr.$(OBJEXT) dibafile.$(OBJEXT)
+test_zip_OBJECTS = $(am_test_zip_OBJECTS)
+test_zip_LDADD = $(LDADD)
 am_test_zmalloc_OBJECTS = test_zmalloc.$(OBJEXT) zmalloc.$(OBJEXT)
 test_zmalloc_OBJECTS = $(am_test_zmalloc_OBJECTS)
 test_zmalloc_LDADD = $(LDADD)
+am_test_zstr_OBJECTS = test_zstr.$(OBJEXT) base64.$(OBJEXT) \
+	zmalloc.$(OBJEXT) misc.$(OBJEXT) cmdline.$(OBJEXT) \
+	zstr.$(OBJEXT)
+test_zstr_OBJECTS = $(am_test_zstr_OBJECTS)
+test_zstr_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -135,8 +182,16 @@ AM_V_CCLD = $(am__v_CCLD_$(V))
 am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(test_base64_SOURCES) $(test_zmalloc_SOURCES)
-DIST_SOURCES = $(test_base64_SOURCES) $(test_zmalloc_SOURCES)
+SOURCES = $(test_base64_SOURCES) $(test_base64a_SOURCES) \
+	$(test_base64b_SOURCES) $(test_chunk_SOURCES) \
+	$(test_comline_SOURCES) $(test_getpass_SOURCES) \
+	$(test_keys_SOURCES) $(test_misc_SOURCES) $(test_zip_SOURCES) \
+	$(test_zmalloc_SOURCES) $(test_zstr_SOURCES)
+DIST_SOURCES = $(test_base64_SOURCES) $(test_base64a_SOURCES) \
+	$(test_base64b_SOURCES) $(test_chunk_SOURCES) \
+	$(test_comline_SOURCES) $(test_getpass_SOURCES) \
+	$(test_keys_SOURCES) $(test_misc_SOURCES) $(test_zip_SOURCES) \
+	$(test_zmalloc_SOURCES) $(test_zstr_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -260,6 +315,15 @@ AM_LDFLAGS = -L$(top_srcdir)/common -L$(top_srcdir)/tools -l z -l gcrypt \
 
 test_zmalloc_SOURCES = test_zmalloc.c zmalloc.c
 test_base64_SOURCES = test_base64.c base64.c zmalloc.c
+test_base64a_SOURCES = test_base64a.c base64.c zmalloc.c
+test_base64b_SOURCES = test_base64b.c base64.c zmalloc.c
+test_comline_SOURCES = test_comline.c base64.c zmalloc.c misc.c cmdline.c zstr.c
+test_zstr_SOURCES = test_zstr.c base64.c zmalloc.c misc.c cmdline.c zstr.c
+test_misc_SOURCES = test_misc.c base64.c zmalloc.c misc.c cmdline.c zstr.c
+test_keys_SOURCES = test_keys.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibafile.c
+test_zip_SOURCES = test_zip.c base64.c zmalloc.c misc.c cmdline.c zstr.c  dibafile.c
+test_chunk_SOURCES = test_chunk.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibafile.c
+test_getpass_SOURCES = test_getpass.c base64.c zmalloc.c misc.c cmdline.c zstr.c getpass.c
 all: all-am
 
 .SUFFIXES:
@@ -340,9 +404,45 @@ test_base64$(EXEEXT): $(test_base64_OBJECTS) $(test_base64_DEPENDENCIES) $(EXTRA
 	@rm -f test_base64$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_base64_OBJECTS) $(test_base64_LDADD) $(LIBS)
 
+test_base64a$(EXEEXT): $(test_base64a_OBJECTS) $(test_base64a_DEPENDENCIES) $(EXTRA_test_base64a_DEPENDENCIES) 
+	@rm -f test_base64a$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_base64a_OBJECTS) $(test_base64a_LDADD) $(LIBS)
+
+test_base64b$(EXEEXT): $(test_base64b_OBJECTS) $(test_base64b_DEPENDENCIES) $(EXTRA_test_base64b_DEPENDENCIES) 
+	@rm -f test_base64b$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_base64b_OBJECTS) $(test_base64b_LDADD) $(LIBS)
+
+test_chunk$(EXEEXT): $(test_chunk_OBJECTS) $(test_chunk_DEPENDENCIES) $(EXTRA_test_chunk_DEPENDENCIES) 
+	@rm -f test_chunk$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_chunk_OBJECTS) $(test_chunk_LDADD) $(LIBS)
+
+test_comline$(EXEEXT): $(test_comline_OBJECTS) $(test_comline_DEPENDENCIES) $(EXTRA_test_comline_DEPENDENCIES) 
+	@rm -f test_comline$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_comline_OBJECTS) $(test_comline_LDADD) $(LIBS)
+
+test_getpass$(EXEEXT): $(test_getpass_OBJECTS) $(test_getpass_DEPENDENCIES) $(EXTRA_test_getpass_DEPENDENCIES) 
+	@rm -f test_getpass$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_getpass_OBJECTS) $(test_getpass_LDADD) $(LIBS)
+
+test_keys$(EXEEXT): $(test_keys_OBJECTS) $(test_keys_DEPENDENCIES) $(EXTRA_test_keys_DEPENDENCIES) 
+	@rm -f test_keys$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_keys_OBJECTS) $(test_keys_LDADD) $(LIBS)
+
+test_misc$(EXEEXT): $(test_misc_OBJECTS) $(test_misc_DEPENDENCIES) $(EXTRA_test_misc_DEPENDENCIES) 
+	@rm -f test_misc$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_misc_OBJECTS) $(test_misc_LDADD) $(LIBS)
+
+test_zip$(EXEEXT): $(test_zip_OBJECTS) $(test_zip_DEPENDENCIES) $(EXTRA_test_zip_DEPENDENCIES) 
+	@rm -f test_zip$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_zip_OBJECTS) $(test_zip_LDADD) $(LIBS)
+
 test_zmalloc$(EXEEXT): $(test_zmalloc_OBJECTS) $(test_zmalloc_DEPENDENCIES) $(EXTRA_test_zmalloc_DEPENDENCIES) 
 	@rm -f test_zmalloc$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_zmalloc_OBJECTS) $(test_zmalloc_LDADD) $(LIBS)
+
+test_zstr$(EXEEXT): $(test_zstr_OBJECTS) $(test_zstr_DEPENDENCIES) $(EXTRA_test_zstr_DEPENDENCIES) 
+	@rm -f test_zstr$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_zstr_OBJECTS) $(test_zstr_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -351,9 +451,23 @@ distclean-compile:
 	-rm -f *.tab.c
 
 include ./$(DEPDIR)/base64.Po
+include ./$(DEPDIR)/cmdline.Po
+include ./$(DEPDIR)/dibafile.Po
+include ./$(DEPDIR)/getpass.Po
+include ./$(DEPDIR)/misc.Po
 include ./$(DEPDIR)/test_base64.Po
+include ./$(DEPDIR)/test_base64a.Po
+include ./$(DEPDIR)/test_base64b.Po
+include ./$(DEPDIR)/test_chunk.Po
+include ./$(DEPDIR)/test_comline.Po
+include ./$(DEPDIR)/test_getpass.Po
+include ./$(DEPDIR)/test_keys.Po
+include ./$(DEPDIR)/test_misc.Po
+include ./$(DEPDIR)/test_zip.Po
 include ./$(DEPDIR)/test_zmalloc.Po
+include ./$(DEPDIR)/test_zstr.Po
 include ./$(DEPDIR)/zmalloc.Po
+include ./$(DEPDIR)/zstr.Po
 
 .c.o:
 	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -575,6 +689,32 @@ uninstall-am: uninstall-binPROGRAMS
 
 .PRECIOUS: Makefile
 
+
+test:
+	@echo Tests pass if diffs are silent.
+	@./test_one.sh ./test_base64.exe
+	@./test_one.sh ./test_base64a.exe
+	@./test_one.sh ./test_comline.exe
+	@./test_one.sh ./test_zstr.exe
+	@./test_one.sh ./test_keys.exe
+	@./test_one.sh ./test_chunk.exe
+	@./test_one.sh ./test_zip.exe
+	@./test_two.sh ./test_misc.exe "$(FILTER2)"  
+	@./test_two.sh ./test_zmalloc.exe "$(FILTER)"
+	@-rm -f test.tmp 
+
+prep_tests:  
+	@./test_prep2.sh ./test_zmalloc.exe "$(FILTER)"
+	@./test_prep2.sh ./test_misc.exe "$(FILTER2)"
+	@./test_prep.sh ./test_base64.exe
+	@./test_prep.sh ./test_base64a.exe
+	@./test_prep.sh ./test_comline.exe
+	@./test_prep.sh ./test_zstr.exe
+	@./test_prep.sh ./test_zip.exe
+	@./test_prep.sh ./test_chunk.exe
+	@./test_prep.sh ./test_keys.exe
+	@echo Please press ENTER key for getpass  ...
+	@./test_prep.sh ./test_getpass.exe       
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
