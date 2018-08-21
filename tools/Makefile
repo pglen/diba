@@ -716,6 +716,10 @@ prep_tests:
 	@echo Please press ENTER key for getpass  ...
 	@./test_prep.sh ./test_getpass.exe       
 
+check_PROGRAMS:  ./test_base64.exe
+
+check: test
+
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

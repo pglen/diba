@@ -17,7 +17,6 @@ bin_PROGRAMS = test_base64 test_zmalloc \
          test_comline test_zstr test_misc \
             test_chunk test_keys test_zip test_getpass
 
-
 test_zmalloc_SOURCES = test_zmalloc.c zmalloc.c
 test_base64_SOURCES = test_base64.c base64.c zmalloc.c
 test_base64a_SOURCES = test_base64a.c base64.c zmalloc.c
@@ -56,5 +55,6 @@ prep_tests:
 	@echo Please press ENTER key for getpass  ...
 	@./test_prep.sh ./test_getpass.exe       
 
+check_PROGRAMS:  ./test_base64.exe
 
-
+check: test

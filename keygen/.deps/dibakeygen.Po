@@ -4,7 +4,7 @@ dibakeygen.o: dibakeygen.c /usr/include/unistd.h \
  /usr/include/machine/ieeefp.h /usr/include/sys/features.h \
  /usr/include/cygwin/config.h /usr/include/sys/cdefs.h \
  /usr/include/machine/_default_types.h \
- /usr/lib/gcc/i686-pc-msys/7.3.0/include/stddef.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include/stddef.h \
  /usr/include/sys/types.h /usr/include/machine/_types.h \
  /usr/include/sys/_types.h /usr/include/sys/lock.h \
  /usr/include/sys/_stdint.h /usr/include/sys/_pthreadtypes.h \
@@ -20,10 +20,10 @@ dibakeygen.o: dibakeygen.c /usr/include/unistd.h \
  /usr/include/gcrypt.h /usr/include/stdlib.h \
  /usr/include/machine/stdlib.h /usr/include/cygwin/stdlib.h \
  /usr/include/cygwin/wait.h \
- /usr/lib/gcc/i686-pc-msys/7.3.0/include/stdarg.h /usr/include/string.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include/stdarg.h /usr/include/string.h \
  /usr/include/sys/string.h /usr/include/gpg-error.h /usr/include/stdio.h \
  /usr/include/sys/stdio.h \
- /usr/lib/gcc/i686-pc-msys/7.3.0/include/stdint.h /usr/include/stdint.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include/stdint.h /usr/include/stdint.h \
  /usr/include/sys/_intsup.h /usr/include/sys/socket.h \
  /usr/include/features.h /usr/include/cygwin/socket.h \
  /usr/include/asm/socket.h /usr/include/cygwin/if.h \
@@ -55,7 +55,7 @@ dibakeygen.o: dibakeygen.c /usr/include/unistd.h \
 
 /usr/include/machine/_default_types.h:
 
-/usr/lib/gcc/i686-pc-msys/7.3.0/include/stddef.h:
+/usr/lib/gcc/i686-pc-msys/6.4.0/include/stddef.h:
 
 /usr/include/sys/types.h:
 
@@ -119,7 +119,7 @@ dibakeygen.o: dibakeygen.c /usr/include/unistd.h \
 
 /usr/include/cygwin/wait.h:
 
-/usr/lib/gcc/i686-pc-msys/7.3.0/include/stdarg.h:
+/usr/lib/gcc/i686-pc-msys/6.4.0/include/stdarg.h:
 
 /usr/include/string.h:
 
@@ -131,7 +131,7 @@ dibakeygen.o: dibakeygen.c /usr/include/unistd.h \
 
 /usr/include/sys/stdio.h:
 
-/usr/lib/gcc/i686-pc-msys/7.3.0/include/stdint.h:
+/usr/lib/gcc/i686-pc-msys/6.4.0/include/stdint.h:
 
 /usr/include/stdint.h:
 
