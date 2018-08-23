@@ -337,9 +337,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign tools/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu tools/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign tools/Makefile
+	  $(AUTOMAKE) --gnu tools/Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
 	  *config.status*) \
@@ -703,7 +703,7 @@ test:
 	@./test_two.sh ./test_zmalloc.exe "$(FILTER)"
 	@-rm -f test.tmp 
 
-prep_tests:  
+prep_tests-local:  
 	@./test_prep2.sh ./test_zmalloc.exe "$(FILTER)"
 	@./test_prep2.sh ./test_misc.exe "$(FILTER2)"
 	@./test_prep.sh ./test_base64.exe
@@ -716,9 +716,7 @@ prep_tests:
 	@echo Please press ENTER key for getpass  ...
 	@./test_prep.sh ./test_getpass.exe       
 
-check_PROGRAMS:  ./test_base64.exe
-
-check: test
+test_PROGRAMS:  ./test_base64.exe
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

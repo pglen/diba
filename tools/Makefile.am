@@ -42,7 +42,7 @@ test:
 	@./test_two.sh ./test_zmalloc.exe "$(FILTER)"
 	@-rm -f test.tmp 
     
-prep_tests:  
+prep_tests-local:  
 	@./test_prep2.sh ./test_zmalloc.exe "$(FILTER)"
 	@./test_prep2.sh ./test_misc.exe "$(FILTER2)"
 	@./test_prep.sh ./test_base64.exe
@@ -55,6 +55,6 @@ prep_tests:
 	@echo Please press ENTER key for getpass  ...
 	@./test_prep.sh ./test_getpass.exe       
 
-check_PROGRAMS:  ./test_base64.exe
+test_PROGRAMS:  ./test_base64.exe
 
-check: test
+
