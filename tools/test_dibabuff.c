@@ -22,7 +22,7 @@
 #include "base64.h"
 #include "misc.h"
 #include "zstr.h"
-#include "dibafile.h"
+#include "DibaBuff.h"
 
 char hello[] = "\
 This is a test. This is a test. This is a test. This is a test. This is a test. \n\
@@ -42,22 +42,23 @@ int main(int argc, char** argv)
                  
     dibalog(0, "%s", "started test_chunk");
     
-    //SetDibaFileDebug(0);  
+    //SetDibaBuffDebug(0);  
     
     zline2(__LINE__, __FILE__);
     
-    FILE    *fp = CreateDibaFile(fname, &err_str);
+    FILE    *fp = CreateDibaBuff(fname, &err_str);
     
-    PutDibaSection(fp, "key str", 7, CHUNK_TEXT | CHUNK_KEY);
-    PutDibaSection(fp, hello, hlen, CHUNK_TEXT);
+    PutDibaBuffSection(fp, "key str", 7, CHUNK_TEXT | CHUNK_KEY);
+    PutDibaBuffSection(fp, hello, hlen, CHUNK_TEXT);
     
     PutDibaSection(fp, "key str2", 9, CHUNK_TEXT | CHUNK_KEY);
     PutDibaSection(fp, "another one", 12, CHUNK_TEXT);
     
-    CloseDibaFile(fp, 1); 
-    
-    FILE    *fp2 = OpenDibaFile(fname, &err_str);
-    if(!fp2)
+    CloseDibaBuff(fp, 1); 
+                                   
+    dibabuff db;
+    int ret  = OpenDibaBuff(&db, &err_str);
+    if(!ret)
         {
         printf("cannot open '%s'\n", err_str);
         exit(1);
@@ -89,7 +90,7 @@ int main(int argc, char** argv)
             zfree(buff);     
             }
         }      
-    CloseDibaFile(fp2, 0);
+    CloseDibaBuff(fp2, 0);
    
     zleak();  
 }

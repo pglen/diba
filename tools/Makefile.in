@@ -92,7 +92,7 @@ bin_PROGRAMS = test_base64$(EXEEXT) test_zmalloc$(EXEEXT) \
 	test_base64$(EXEEXT) test_base64a$(EXEEXT) \
 	test_base64b$(EXEEXT) test_comline$(EXEEXT) test_zstr$(EXEEXT) \
 	test_misc$(EXEEXT) test_chunk$(EXEEXT) test_keys$(EXEEXT) \
-	test_zip$(EXEEXT) test_getpass$(EXEEXT)
+	test_zip$(EXEEXT) test_getpass$(EXEEXT) test_dibabuff$(EXEEXT)
 subdir = tools
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -126,6 +126,11 @@ am_test_comline_OBJECTS = test_comline.$(OBJEXT) base64.$(OBJEXT) \
 	zstr.$(OBJEXT)
 test_comline_OBJECTS = $(am_test_comline_OBJECTS)
 test_comline_LDADD = $(LDADD)
+am_test_dibabuff_OBJECTS = test_dibabuff.$(OBJEXT) base64.$(OBJEXT) \
+	zmalloc.$(OBJEXT) misc.$(OBJEXT) cmdline.$(OBJEXT) \
+	zstr.$(OBJEXT) dibabuff.$(OBJEXT)
+test_dibabuff_OBJECTS = $(am_test_dibabuff_OBJECTS)
+test_dibabuff_LDADD = $(LDADD)
 am_test_getpass_OBJECTS = test_getpass.$(OBJEXT) base64.$(OBJEXT) \
 	zmalloc.$(OBJEXT) misc.$(OBJEXT) cmdline.$(OBJEXT) \
 	zstr.$(OBJEXT) getpass.$(OBJEXT)
@@ -184,13 +189,15 @@ am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(test_base64_SOURCES) $(test_base64a_SOURCES) \
 	$(test_base64b_SOURCES) $(test_chunk_SOURCES) \
-	$(test_comline_SOURCES) $(test_getpass_SOURCES) \
-	$(test_keys_SOURCES) $(test_misc_SOURCES) $(test_zip_SOURCES) \
+	$(test_comline_SOURCES) $(test_dibabuff_SOURCES) \
+	$(test_getpass_SOURCES) $(test_keys_SOURCES) \
+	$(test_misc_SOURCES) $(test_zip_SOURCES) \
 	$(test_zmalloc_SOURCES) $(test_zstr_SOURCES)
 DIST_SOURCES = $(test_base64_SOURCES) $(test_base64a_SOURCES) \
 	$(test_base64b_SOURCES) $(test_chunk_SOURCES) \
-	$(test_comline_SOURCES) $(test_getpass_SOURCES) \
-	$(test_keys_SOURCES) $(test_misc_SOURCES) $(test_zip_SOURCES) \
+	$(test_comline_SOURCES) $(test_dibabuff_SOURCES) \
+	$(test_getpass_SOURCES) $(test_keys_SOURCES) \
+	$(test_misc_SOURCES) $(test_zip_SOURCES) \
 	$(test_zmalloc_SOURCES) $(test_zstr_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
@@ -323,6 +330,7 @@ test_misc_SOURCES = test_misc.c base64.c zmalloc.c misc.c cmdline.c zstr.c
 test_keys_SOURCES = test_keys.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibafile.c
 test_zip_SOURCES = test_zip.c base64.c zmalloc.c misc.c cmdline.c zstr.c  dibafile.c
 test_chunk_SOURCES = test_chunk.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibafile.c
+test_dibabuff_SOURCES = test_dibabuff.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibabuff.c
 test_getpass_SOURCES = test_getpass.c base64.c zmalloc.c misc.c cmdline.c zstr.c getpass.c
 all: all-am
 
@@ -420,6 +428,10 @@ test_comline$(EXEEXT): $(test_comline_OBJECTS) $(test_comline_DEPENDENCIES) $(EX
 	@rm -f test_comline$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_comline_OBJECTS) $(test_comline_LDADD) $(LIBS)
 
+test_dibabuff$(EXEEXT): $(test_dibabuff_OBJECTS) $(test_dibabuff_DEPENDENCIES) $(EXTRA_test_dibabuff_DEPENDENCIES) 
+	@rm -f test_dibabuff$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_dibabuff_OBJECTS) $(test_dibabuff_LDADD) $(LIBS)
+
 test_getpass$(EXEEXT): $(test_getpass_OBJECTS) $(test_getpass_DEPENDENCIES) $(EXTRA_test_getpass_DEPENDENCIES) 
 	@rm -f test_getpass$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_getpass_OBJECTS) $(test_getpass_LDADD) $(LIBS)
@@ -452,6 +464,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/base64.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cmdline.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dibabuff.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dibafile.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/getpass.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/misc.Po@am__quote@
@@ -460,6 +473,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_base64b.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_chunk.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_comline.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_dibabuff.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_getpass.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_keys.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_misc.Po@am__quote@

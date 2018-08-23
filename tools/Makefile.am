@@ -15,7 +15,8 @@ AM_LDFLAGS = -L$(top_srcdir)/common -L$(top_srcdir)/tools -l z -l gcrypt \
 bin_PROGRAMS = test_base64 test_zmalloc \
  test_base64 test_base64a test_base64b \
          test_comline test_zstr test_misc \
-            test_chunk test_keys test_zip test_getpass
+            test_chunk test_keys test_zip test_getpass \
+                test_dibabuff
 
 test_zmalloc_SOURCES = test_zmalloc.c zmalloc.c
 test_base64_SOURCES = test_base64.c base64.c zmalloc.c
@@ -27,6 +28,7 @@ test_misc_SOURCES = test_misc.c base64.c zmalloc.c misc.c cmdline.c zstr.c
 test_keys_SOURCES = test_keys.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibafile.c
 test_zip_SOURCES = test_zip.c base64.c zmalloc.c misc.c cmdline.c zstr.c  dibafile.c
 test_chunk_SOURCES = test_chunk.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibafile.c
+test_dibabuff_SOURCES = test_dibabuff.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibabuff.c
 test_getpass_SOURCES = test_getpass.c base64.c zmalloc.c misc.c cmdline.c zstr.c getpass.c
 
 test:
@@ -56,5 +58,6 @@ prep_tests-local:
 	@./test_prep.sh ./test_getpass.exe       
 
 test_PROGRAMS:  ./test_base64.exe
+
 
 
