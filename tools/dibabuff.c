@@ -53,6 +53,17 @@ unsigned int calc_buffer_sum(const char *ptr, int len)
 
 static int debuglevel = 0;
 
+int    DumpDibabuff(dibabuff *pbuff)
+
+{
+   printf("Diba buffer %p len=%d mlen=%d\n",
+        pbuff->ptr, pbuff->clen, pbuff->mlen);
+          
+    dump_mem(pbuff->ptr, pbuff->clen);
+    
+    return 0;
+}
+
 static int    assure_len(dibabuff *pbuff, int tlen)
 
 {
@@ -82,6 +93,7 @@ static int     append_pbuff(dibabuff *pbuff, const char *ptr, int len)
         return -1;
     memcpy(pbuff->ptr + pbuff->pos, ptr, len);
     pbuff->pos += len;
+    pbuff->clen += len;
     return 0;
 }    
     
@@ -252,6 +264,13 @@ char*   GetNextDibaBuffChunk(dibabuff *pbuff,  int *len, int *type, char **err_s
         return(buff);
         }
     //int ret = fread(buff, 1, *len, Diba);
+    if(pbuff->clen - pbuff->pos <= *len)
+        {
+        *err_str = "End of data.";
+        return NULL;
+        }
+        
+    memcpy(buff, pbuff->ptr + pbuff->pos, *len);
     
     //if(debuglevel >= 3)
     //    printf("buffer read: '%s' len=%d\n", buff, ret);
@@ -435,6 +454,7 @@ int     PutDibaBuffSection(dibabuff *pbuff, const char *ptr, int len, int type)
 }
 
 /* EOF */
+
 
 
 

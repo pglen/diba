@@ -66,6 +66,8 @@ unsigned int calc_buffer_sum(const char *ptr, int len);
 void    SetDibaBuffDebug(int level);
 int     OpenDibaBuff(dibabuff *pbuff, char **err_str);
 
+int     DumpDibabuff(dibabuff *pbuff);
+
 char*   FindNextDibaBuffKey(dibabuff *pbuff, int *len, char **err_str);
 char*   GetNextDibaBuffChunk(dibabuff *pbuff,  int *len, int *type, char **err_str);
 void    RewindDibaBuff(dibabuff *pbuff);
@@ -78,6 +80,7 @@ int     GetDibaBuffKeyVal(dibabuff *pbuff, chunk_keypair *ptr, char **err_str);
 
 int     GetDibaBuffSection(dibabuff *pbuff, int *len, int *type, int *sum);
 int     PutDibaBuffSection(dibabuff *pbuff, const char *ptr, int len, int type);
+
 
 
 

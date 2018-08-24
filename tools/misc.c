@@ -414,7 +414,9 @@ void dump_memfp(const char *ptr, int len, FILE *fp)
             else
                 {
                 fprintf(fp, "  ");
-                if(loop < 15)
+                if((loop % 4) == 3)
+                    fprintf(fp, "  ");
+                else if(loop < 15)
                     fprintf(fp, " ");
                 }
             }
@@ -565,6 +567,7 @@ void    dibalog(int level, const char* msg, ...)
 }
 
 /* EOF */
+
 
 
 
