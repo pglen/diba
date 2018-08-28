@@ -40,7 +40,7 @@ int main(int argc, char** argv)
     int olen, ulen, flen;
     char *err_str;
                  
-    dibalog(0, "%s", "started test_chunk");
+    //dibalog(0, "%s", "started test_chunk");
     
     //SetDibaBuffDebug(0);  
     
@@ -55,7 +55,8 @@ int main(int argc, char** argv)
     PutDibaSection(fp, "another one", 12, CHUNK_TEXT);
     
     CloseDibaBuff(fp, 1); 
-                                   
+        
+                                                              
     dibabuff db;
     int ret  = OpenDibaBuff(&db, &err_str);
     if(!ret)
@@ -96,6 +97,7 @@ int main(int argc, char** argv)
 }
 
 // EO
+
 
 
 

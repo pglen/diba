@@ -37,20 +37,6 @@
     #endif    
 #endif            
 
-unsigned int calc_buffer_sum(const char *ptr, int len)
-
-{
-    unsigned int ret = 0;
-    //printf("calc_buffer_sum %p %d\n", ptr, len);
-    for(int loop = 0; loop < len; loop++)
-        {
-        ret += (unsigned char)ptr[loop];
-        ret = (ret << 3) | ret >> 21;
-        }
-    //printf("sum ret = %x\n", ret);
-    return ret;   
-}
-
 static int debuglevel = 0;
 
 int    DumpDibabuff(dibabuff *pbuff)
@@ -117,18 +103,34 @@ int     OpenDibaBuff(dibabuff *pbuff, char **err_str)
         *err_str = "Cannot open NULL"; 
         return 0;
         }
-    pbuff->mlen =  pbuff->clen =  pbuff->pos =  0;
-    pbuff->ptr = zalloc(BUFFSIZE);
-    if(pbuff->ptr == NULL)
-        return 0;
-    pbuff->mlen =  BUFFSIZE;
-    char header[MAX_PATH];
-    snprintf(header, MAX_PATH, FILE_HEADER_STR, 1, 1);
-    PutDibaBuffSection(pbuff, header, strlen(header) + 1, CHUNK_HEADER);
-
+        
+    //////////////////////////////////////////////////////////////////////
+            
+    if(pbuff->ptr == 0)
+        {    
+        pbuff->mlen =  pbuff->clen =  pbuff->pos =  0;
+        pbuff->ptr = zalloc(BUFFSIZE);
+        if(pbuff->ptr == NULL)
+            return 0;
+        pbuff->mlen =  BUFFSIZE;
+        char header[MAX_PATH];
+        snprintf(header, MAX_PATH, FILE_HEADER_STR, 1, 1);
+        PutDibaBuffSection(pbuff, header, strlen(header) + 1, CHUNK_HEADER);
+        }
     return 1;
 }
 
+//////////////////////////////////////////////////////////////////////////
+
+int     CompleteDibaBuff(dibabuff *pbuff, char **err_str)
+
+{
+    char footer[MAX_PATH];
+    snprintf(footer, MAX_PATH, "%s", "End of Diba File.\n");
+    int ret = PutDibaBuffSection(pbuff, footer, strlen(footer), CHUNK_FOOTER);
+    return ret;
+}        
+        
 //////////////////////////////////////////////////////////////////////////
 // Start reading Diba file from the beginning
 
@@ -271,9 +273,10 @@ char*   GetNextDibaBuffChunk(dibabuff *pbuff,  int *len, int *type, char **err_s
         }
         
     memcpy(buff, pbuff->ptr + pbuff->pos, *len);
+    pbuff->pos += *len;
     
-    //if(debuglevel >= 3)
-    //    printf("buffer read: '%s' len=%d\n", buff, ret);
+    if(debuglevel >= 3)
+        printf("buffer read: '%s' len=%d\n", buff, *len);
     
     buff[*len] = '\0';
      if(*type & CHUNK_ZIPPED)
@@ -454,6 +457,8 @@ int     PutDibaBuffSection(dibabuff *pbuff, const char *ptr, int len, int type)
 }
 
 /* EOF */
+
+
 
 
 

@@ -16,7 +16,7 @@ bin_PROGRAMS = test_base64 test_zmalloc \
  test_base64 test_base64a test_base64b \
          test_comline test_zstr test_misc \
             test_chunk test_keys test_zip test_getpass \
-                test_dibabuffa
+                test_dibabuffa test_dibafile
 
 test_zmalloc_SOURCES = test_zmalloc.c zmalloc.c
 test_base64_SOURCES = test_base64.c base64.c zmalloc.c
@@ -25,11 +25,13 @@ test_base64b_SOURCES = test_base64b.c base64.c zmalloc.c
 test_comline_SOURCES = test_comline.c base64.c zmalloc.c misc.c cmdline.c zstr.c
 test_zstr_SOURCES = test_zstr.c base64.c zmalloc.c misc.c cmdline.c zstr.c
 test_misc_SOURCES = test_misc.c base64.c zmalloc.c misc.c cmdline.c zstr.c
-test_keys_SOURCES = test_keys.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibafile.c
-test_zip_SOURCES = test_zip.c base64.c zmalloc.c misc.c cmdline.c zstr.c  dibafile.c
-test_chunk_SOURCES = test_chunk.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibafile.c
-test_dibabuffa_SOURCES = test_dibabuffa.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibabuff.c
 test_getpass_SOURCES = test_getpass.c base64.c zmalloc.c misc.c cmdline.c zstr.c getpass.c
+
+test_keys_SOURCES = test_keys.c base64.c dibafcom.c zmalloc.c misc.c cmdline.c zstr.c dibafile.c
+test_zip_SOURCES = test_zip.c base64.c dibafcom.c zmalloc.c misc.c cmdline.c zstr.c  dibafile.c
+test_chunk_SOURCES = test_chunk.c base64.c dibafcom.c zmalloc.c misc.c cmdline.c zstr.c dibafile.c
+test_dibabuffa_SOURCES = test_dibabuffa.c dibafcom.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibabuff.c
+test_dibafile_SOURCES = test_dibabuffa.c dibafcom.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibabuff.c
 
 test:
 	@echo Tests pass if diffs are silent.
@@ -39,6 +41,7 @@ test:
 	@./test_one.sh ./test_zstr.exe
 	@./test_one.sh ./test_keys.exe
 	@./test_one.sh ./test_chunk.exe
+	@./test_one.sh ./test_dibabuffa.exe
 	@./test_one.sh ./test_zip.exe
 	@./test_two.sh ./test_misc.exe "$(FILTER2)"  
 	@./test_two.sh ./test_zmalloc.exe "$(FILTER)"
@@ -51,6 +54,7 @@ prep_tests-local:
 	@./test_prep.sh ./test_base64a.exe
 	@./test_prep.sh ./test_comline.exe
 	@./test_prep.sh ./test_zstr.exe
+	@./test_prep.sh ./test_dibabuffa.exe
 	@./test_prep.sh ./test_zip.exe
 	@./test_prep.sh ./test_chunk.exe
 	@./test_prep.sh ./test_keys.exe
@@ -58,6 +62,8 @@ prep_tests-local:
 	@./test_prep.sh ./test_getpass.exe       
 
 test_PROGRAMS:  ./test_base64.exe
+
+
 
 
 

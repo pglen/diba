@@ -37,20 +37,6 @@
     #endif    
 #endif            
 
-unsigned int calc_buffer_sum(const char *ptr, int len)
-
-{
-    unsigned int ret = 0;
-    //printf("calc_buffer_sum %p %d\n", ptr, len);
-    for(int loop = 0; loop < len; loop++)
-        {
-        ret += (unsigned char)ptr[loop];
-        ret = (ret << 3) | ret >> 21;
-        }
-    //printf("sum ret = %x\n", ret);
-    return ret;   
-}
-
 static int debuglevel = 0;
 
 void   SetDibaFileDebug(int level)
@@ -418,6 +404,7 @@ int     PutDibaSection(FILE *ff, const char *ptr, int len, int type)
 }
 
 /* EOF */
+
 
 
 

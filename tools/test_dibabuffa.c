@@ -42,33 +42,37 @@ int main(int argc, char** argv)
                  
     dibalog(0, "%s", "started test_chunk");
     
-    SetDibaBuffDebug(10);  
-    
     zline2(__LINE__, __FILE__);
     
-    dibabuff db;
-    int ret  = OpenDibaBuff(&db, &err_str);
-    if(!ret)
+    dibabuff dbuff; memset(&dbuff, 0, sizeof(dbuff));
+    
+    int ret  = OpenDibaBuff(&dbuff, &err_str);
+    if(!ret)                           
         {
         printf("cannot open '%s'\n", err_str);
         exit(1);
         }
         
-    PutDibaBuffSection(&db, "key str", 7, CHUNK_TEXT | CHUNK_KEY);
-    PutDibaBuffSection(&db, "value 1", 7, CHUNK_TEXT);
+    PutDibaBuffSection(&dbuff, "key str", 7, CHUNK_TEXT | CHUNK_KEY);
+    //PutDibaBuffSection(&dbuff, "value 1", 7, CHUNK_TEXT);
     
-    PutDibaBuffSection(&db, "key str2", 9, CHUNK_TEXT | CHUNK_KEY);
-    PutDibaBuffSection(&db, "another one", 12, CHUNK_TEXT);
-        
-    //DumpDibabuff(&db);
+    //PutDibaBuffSection(&dbuff, "key str2", 9, CHUNK_TEXT | CHUNK_KEY);
+    //PutDibaBuffSection(&dbuff, "another one", 12, CHUNK_TEXT);
+    
+    CompleteDibaBuff(&dbuff, &err_str);
+                     
+    RewindDibaBuff(&dbuff);   
+    DumpDibabuff(&dbuff);  
+    
     //exit(0);
+    SetDibaBuffDebug(10);  
     
-    int len, type;
+    int len, type, iter = 2;
     char *ccc = "Bad check";
-    while(1)
+    while(iter--)
         {
         zline2(__LINE__, __FILE__);
-        char* buff = GetNextDibaBuffChunk(&db, &len, &type, &err_str);
+        char* buff = GetNextDibaBuffChunk(&dbuff, &len, &type, &err_str);
         if(!buff)
             {
             if(strncmp(ccc, err_str, strlen(ccc)-1) == 0)
@@ -90,12 +94,16 @@ int main(int argc, char** argv)
             zfree(buff);     
             }
         }      
-    CloseDibaBuff(&db);
+    CloseDibaBuff(&dbuff);
    
     zleak();  
 }
 
 // EO
+
+
+
+
 
 
 

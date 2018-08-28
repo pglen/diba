@@ -16,7 +16,7 @@ test_zip.o: test_zip.c /usr/include/stdio.h /usr/include/_ansi.h \
  /usr/include/stdlib.h /usr/include/machine/stdlib.h \
  /usr/include/cygwin/stdlib.h /usr/include/cygwin/wait.h \
  /usr/include/string.h /usr/include/sys/string.h cmdline.h zmalloc.h \
- base64.h misc.h zstr.h dibafile.h
+ base64.h misc.h zstr.h dibafile.h dibafcom.h
 
 /usr/include/stdio.h:
 
@@ -99,3 +99,5 @@ misc.h:
 zstr.h:
 
 dibafile.h:
+
+dibafcom.h:

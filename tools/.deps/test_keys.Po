@@ -18,7 +18,7 @@ test_keys.o: test_keys.c /usr/include/stdio.h /usr/include/_ansi.h \
  /usr/include/string.h /usr/include/sys/string.h /usr/include/signal.h \
  /usr/include/sys/signal.h /usr/include/sys/_sigset.h \
  /usr/include/cygwin/signal.h cmdline.h zmalloc.h base64.h misc.h zstr.h \
- dibafile.h
+ dibafile.h dibafcom.h
 
 /usr/include/stdio.h:
 
@@ -109,3 +109,5 @@ misc.h:
 zstr.h:
 
 dibafile.h:
+
+dibafcom.h:
