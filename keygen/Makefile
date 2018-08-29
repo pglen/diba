@@ -105,14 +105,14 @@ am_dibakeygen_OBJECTS = dibakeygen.$(OBJEXT) zmalloc.$(OBJEXT) \
 	gcry.$(OBJEXT) base64.$(OBJEXT) cmdline.$(OBJEXT) \
 	zstr.$(OBJEXT) getpass.$(OBJEXT) dibafile.$(OBJEXT) \
 	misc.$(OBJEXT) gsexp.$(OBJEXT) dibastr.$(OBJEXT) \
-	dibautils.$(OBJEXT) bluepoint3.$(OBJEXT)
+	dibautils.$(OBJEXT) bluepoint3.$(OBJEXT) dibafcom.$(OBJEXT)
 dibakeygen_OBJECTS = $(am_dibakeygen_OBJECTS)
 dibakeygen_LDADD = $(LDADD)
 am_dibakeyinfo_OBJECTS = dibakeyinfo.$(OBJEXT) zmalloc.$(OBJEXT) \
 	gcry.$(OBJEXT) base64.$(OBJEXT) cmdline.$(OBJEXT) \
 	zstr.$(OBJEXT) getpass.$(OBJEXT) dibafile.$(OBJEXT) \
 	misc.$(OBJEXT) gsexp.$(OBJEXT) dibastr.$(OBJEXT) \
-	dibautils.$(OBJEXT) bluepoint3.$(OBJEXT)
+	dibautils.$(OBJEXT) bluepoint3.$(OBJEXT) dibafcom.$(OBJEXT)
 dibakeyinfo_OBJECTS = $(am_dibakeyinfo_OBJECTS)
 dibakeyinfo_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -272,13 +272,13 @@ dibakeygen_SOURCES = dibakeygen.c ../tools/zmalloc.c ../tools/gcry.c \
    ../tools/base64.c ../tools/cmdline.c ../tools/zstr.c ../tools/getpass.c \
    ../tools/dibafile.c ../tools/misc.c ../tools/gsexp.c \
    ../common/dibastr.c ../common/dibautils.c \
-   ../bluepoint/bluepoint3.c
+   ../bluepoint/bluepoint3.c ../tools/dibafcom.c
 
 dibakeyinfo_SOURCES = dibakeyinfo.c ../tools/zmalloc.c ../tools/gcry.c \
    ../tools/base64.c ../tools/cmdline.c ../tools/zstr.c ../tools/getpass.c \
    ../tools/dibafile.c ../tools/misc.c ../tools/gsexp.c \
    ../common/dibastr.c ../common/dibautils.c \
-   ../bluepoint/bluepoint3.c
+   ../bluepoint/bluepoint3.c  ../tools/dibafcom.c
 
 all: all-am
 
@@ -373,6 +373,7 @@ distclean-compile:
 include ./$(DEPDIR)/base64.Po
 include ./$(DEPDIR)/bluepoint3.Po
 include ./$(DEPDIR)/cmdline.Po
+include ./$(DEPDIR)/dibafcom.Po
 include ./$(DEPDIR)/dibafile.Po
 include ./$(DEPDIR)/dibakeygen.Po
 include ./$(DEPDIR)/dibakeyinfo.Po
@@ -566,6 +567,20 @@ bluepoint3.obj: ../bluepoint/bluepoint3.c
 #	$(AM_V_CC)source='../bluepoint/bluepoint3.c' object='bluepoint3.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o bluepoint3.obj `if test -f '../bluepoint/bluepoint3.c'; then $(CYGPATH_W) '../bluepoint/bluepoint3.c'; else $(CYGPATH_W) '$(srcdir)/../bluepoint/bluepoint3.c'; fi`
+
+dibafcom.o: ../tools/dibafcom.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dibafcom.o -MD -MP -MF $(DEPDIR)/dibafcom.Tpo -c -o dibafcom.o `test -f '../tools/dibafcom.c' || echo '$(srcdir)/'`../tools/dibafcom.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/dibafcom.Tpo $(DEPDIR)/dibafcom.Po
+#	$(AM_V_CC)source='../tools/dibafcom.c' object='dibafcom.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dibafcom.o `test -f '../tools/dibafcom.c' || echo '$(srcdir)/'`../tools/dibafcom.c
+
+dibafcom.obj: ../tools/dibafcom.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT dibafcom.obj -MD -MP -MF $(DEPDIR)/dibafcom.Tpo -c -o dibafcom.obj `if test -f '../tools/dibafcom.c'; then $(CYGPATH_W) '../tools/dibafcom.c'; else $(CYGPATH_W) '$(srcdir)/../tools/dibafcom.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/dibafcom.Tpo $(DEPDIR)/dibafcom.Po
+#	$(AM_V_CC)source='../tools/dibafcom.c' object='dibafcom.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o dibafcom.obj `if test -f '../tools/dibafcom.c'; then $(CYGPATH_W) '../tools/dibafcom.c'; else $(CYGPATH_W) '$(srcdir)/../tools/dibafcom.c'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique

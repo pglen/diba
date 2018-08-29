@@ -17,15 +17,16 @@ dibakeygen_SOURCES = dibakeygen.c ../tools/zmalloc.c ../tools/gcry.c \
    ../tools/base64.c ../tools/cmdline.c ../tools/zstr.c ../tools/getpass.c \
    ../tools/dibafile.c ../tools/misc.c ../tools/gsexp.c \
    ../common/dibastr.c ../common/dibautils.c \
-   ../bluepoint/bluepoint3.c
+   ../bluepoint/bluepoint3.c ../tools/dibafcom.c
    
 dibakeyinfo_SOURCES = dibakeyinfo.c ../tools/zmalloc.c ../tools/gcry.c \
    ../tools/base64.c ../tools/cmdline.c ../tools/zstr.c ../tools/getpass.c \
    ../tools/dibafile.c ../tools/misc.c ../tools/gsexp.c \
    ../common/dibastr.c ../common/dibautils.c \
-   ../bluepoint/bluepoint3.c
+   ../bluepoint/bluepoint3.c  ../tools/dibafcom.c
 
                                                   
+
 
 
 

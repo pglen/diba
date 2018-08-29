@@ -58,7 +58,7 @@ static int    assure_len(dibabuff *pbuff, int tlen)
     if(pbuff->pos + tlen > pbuff->mlen)
         {
         if(debuglevel >= 2)
-        printf("assure_len() realloc from %d to %d\n", 
+           printf("assure_len() realloc from %d to %d\n", 
                         pbuff->mlen, pbuff->mlen + tlen + CHUNKSIZE); 
            
         char *nnn = malloc(pbuff->mlen + tlen + CHUNKSIZE);
@@ -90,22 +90,24 @@ void   SetDibaBuffDebug(int level)
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// Return TRUE if OK, fill in err_str if not
+// Return TRUE if OK, else -1 and fill in err_str if not
 
 int     OpenDibaBuff(dibabuff *pbuff, char **err_str)
 
 {
+    int ret = 1;
     if(debuglevel >= 1)
         printf("Opening Diba Buff: '%p'\n", pbuff);
         
     if(!pbuff)
         {
         *err_str = "Cannot open NULL"; 
-        return 0;
+        return -1;
         }
         
     //////////////////////////////////////////////////////////////////////
-            
+    char header[MAX_PATH];
+                  
     if(pbuff->ptr == 0)
         {    
         pbuff->mlen =  pbuff->clen =  pbuff->pos =  0;
@@ -113,11 +115,15 @@ int     OpenDibaBuff(dibabuff *pbuff, char **err_str)
         if(pbuff->ptr == NULL)
             return 0;
         pbuff->mlen =  BUFFSIZE;
-        char header[MAX_PATH];
         snprintf(header, MAX_PATH, FILE_HEADER_STR, 1, 1);
         PutDibaBuffSection(pbuff, header, strlen(header) + 1, CHUNK_HEADER);
         }
-    return 1;
+    else
+        {
+        // Read / verify header
+        }    
+        
+    return ret;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -251,7 +257,7 @@ char*   GetNextDibaBuffChunk(dibabuff *pbuff,  int *len, int *type, char **err_s
     if(GetDibaBuffSection(pbuff, len, type, &sum) < MINCHSIZE)
         {
         *err_str = "End of file.";
-        return(buff);
+        return(NULL);
         }
     if(*len < 0)
         {
@@ -265,13 +271,16 @@ char*   GetNextDibaBuffChunk(dibabuff *pbuff,  int *len, int *type, char **err_s
         *err_str = "Cannot allocate memory.";
         return(buff);
         }
-    //int ret = fread(buff, 1, *len, Diba);
+    
     if(pbuff->clen - pbuff->pos <= *len)
         {
-        *err_str = "End of data.";
-        return NULL;
+        //*err_str = "End of data.";
+        //zfree(buff);
+        //return NULL;
         }
         
+    //int ret = fread(buff, 1, *len, Diba);
+    
     memcpy(buff, pbuff->ptr + pbuff->pos, *len);
     pbuff->pos += *len;
     
@@ -363,12 +372,12 @@ int     GetDibaBuffSection(dibabuff *pbuff, int *len, int *type, int *sum)
     
     int ret = CHUNKSIZE;
     memcpy(buff, pbuff->ptr + pbuff->pos, CHUNKSIZE);
-    if(ret <= 0)
+    if(pbuff->clen - pbuff->pos < CHUNKSIZE)
         {
         if(debuglevel >= 2)
             printf("Stream ended before file end.\n");
             
-        return ret;
+        return 0;
         }
     if(ret > CHUNKSIZE)
         {
@@ -392,9 +401,9 @@ int     GetDibaBuffSection(dibabuff *pbuff, int *len, int *type, int *sum)
     char *end = strchr(buff + 1, '\n');
     if (end)
         {
-        // Go back to end of real input
-        int num = end - buff;     
-        pbuff->pos = pbuff->pos -(CHUNKSIZE - 1 - num);
+        // Go to end of first line
+        int eee = end - buff; 
+        pbuff->pos = pbuff->pos + eee + 1;
         }
         
     int ret2 = sscanf(buff, CHUNK_HEADER_STR, type, len, sum);
@@ -457,6 +466,7 @@ int     PutDibaBuffSection(dibabuff *pbuff, const char *ptr, int len, int type)
 }
 
 /* EOF */
+
 
 
 

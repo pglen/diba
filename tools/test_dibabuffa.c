@@ -54,20 +54,20 @@ int main(int argc, char** argv)
         }
         
     PutDibaBuffSection(&dbuff, "key str", 7, CHUNK_TEXT | CHUNK_KEY);
-    //PutDibaBuffSection(&dbuff, "value 1", 7, CHUNK_TEXT);
+    PutDibaBuffSection(&dbuff, "value 1", 7, CHUNK_TEXT);
     
-    //PutDibaBuffSection(&dbuff, "key str2", 9, CHUNK_TEXT | CHUNK_KEY);
-    //PutDibaBuffSection(&dbuff, "another one", 12, CHUNK_TEXT);
+    PutDibaBuffSection(&dbuff, "key str2", 9, CHUNK_TEXT | CHUNK_KEY);
+    PutDibaBuffSection(&dbuff, "another one", 12, CHUNK_TEXT);
     
     CompleteDibaBuff(&dbuff, &err_str);
                      
     RewindDibaBuff(&dbuff);   
-    DumpDibabuff(&dbuff);  
+    //DumpDibabuff(&dbuff);  
     
     //exit(0);
-    SetDibaBuffDebug(10);  
+    //SetDibaBuffDebug(3); 
     
-    int len, type, iter = 2;
+    int len, type, iter = 10;
     char *ccc = "Bad check";
     while(iter--)
         {
@@ -88,9 +88,9 @@ int main(int argc, char** argv)
             }
         else
             {
-            char *key = (type & 0x80) ? "True" : "False";
-            printf("len=%d type=%d (0x%x) Key=%s\n", len, type, type, key); 
-            printf("buf: '%s'\n", buff);
+            char *key = (type & 0x80) ? "Yes" : "No";
+            //printf("len=%d type=%d (0x%x) Key=%s\n", len, type, type, key); 
+            printf("Key: %s: '%s'\n", key, buff);
             zfree(buff);     
             }
         }      
@@ -99,7 +99,8 @@ int main(int argc, char** argv)
     zleak();  
 }
 
-// EO
+// EOF
+
 
 
 

@@ -731,7 +731,7 @@ test:
 	@./test_two.sh ./test_zmalloc.exe "$(FILTER)"
 	@-rm -f test.tmp 
 
-prep_tests-local:  
+prep_tests:  
 	@./test_prep2.sh ./test_zmalloc.exe "$(FILTER)"
 	@./test_prep2.sh ./test_misc.exe "$(FILTER2)"
 	@./test_prep.sh ./test_base64.exe
