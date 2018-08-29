@@ -6,4 +6,8 @@ test:
 	cd tools && make test && cd ..
 	cd keygen && make test && cd ..
 
+pub:
+	git add .
+	git commit -m "auto from mf"
+	gt push
 

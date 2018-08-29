@@ -319,6 +319,7 @@ char*   GetNextDibaBuffChunk(dibabuff *pbuff,  int *len, int *type, char **err_s
                 
             zfree(mem);
             }
+        }        
      // Check SUM      
     unsigned int org = calc_buffer_sum(buff, *len);
     if(debuglevel >= 3)
@@ -330,7 +331,6 @@ char*   GetNextDibaBuffChunk(dibabuff *pbuff,  int *len, int *type, char **err_s
         zfree(buff);
         return(NULL);
         }
-    }
    //printf("GetNextDibaChunk: '%s'\n", buff);
     return buff;
 }
@@ -372,6 +372,8 @@ int     GetDibaBuffSection(dibabuff *pbuff, int *len, int *type, int *sum)
     
     int ret = CHUNKSIZE;
     memcpy(buff, pbuff->ptr + pbuff->pos, CHUNKSIZE);
+    buff[ret] = '\0';
+    
     if(pbuff->clen - pbuff->pos < CHUNKSIZE)
         {
         if(debuglevel >= 2)
@@ -385,7 +387,6 @@ int     GetDibaBuffSection(dibabuff *pbuff, int *len, int *type, int *sum)
             printf("Unexpected read return value\n");
         return ret;
         }
-    buff[ret] = '\0';
     
     if(debuglevel >= 3)
         printf("Read buffer '%s' len=%d\n", buff, ret);
@@ -393,17 +394,24 @@ int     GetDibaBuffSection(dibabuff *pbuff, int *len, int *type, int *sum)
     if(buff[1] != 'D' || buff[2] != 'I')
         {
         // TODO Mark the buffer tainted ... 
-        //*err_str = ("Invalid Section. Skipping ....");
         if(debuglevel >= 1)
             printf("Invalid Section. Skipping ....");
+        ret = -2;
         }
     // Start from a position other then the first new line
     char *end = strchr(buff + 1, '\n');
     if (end)
         {
+        *(end+1) = '\0';
+    
         // Go to end of first line
         int eee = end - buff; 
         pbuff->pos = pbuff->pos + eee + 1;
+        ret = eee;
+        }
+    else
+        {
+        ret = -2;
         }
         
     int ret2 = sscanf(buff, CHUNK_HEADER_STR, type, len, sum);
@@ -466,6 +474,7 @@ int     PutDibaBuffSection(dibabuff *pbuff, const char *ptr, int len, int type)
 }
 
 /* EOF */
+
 
 
 

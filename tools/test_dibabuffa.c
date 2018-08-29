@@ -24,23 +24,13 @@
 #include "zstr.h"
 #include "DibaBuff.h"
 
-char hello[] = "\
-This is a test. This is a test. This is a test. This is a test. This is a test. \n\
-This is a test. This is a test. This is a test. This is a test. This is a test. \n\
-This is a test. This is a test. This is a test. This is a test. This is a test. \n\
-This is a test. This is a test. This is a test. This is a test. This is a test. \n\
-";
-
-char *fname = "test_chunk.diba";
-
 int main(int argc, char** argv)
                                         
 {
-    int hlen = sizeof(hello);
     int olen, ulen, flen;
     char *err_str;
                  
-    dibalog(0, "%s", "started test_chunk");
+    //dibalog(0, "%s", "started test_chunk");
     
     zline2(__LINE__, __FILE__);
     
@@ -53,19 +43,27 @@ int main(int argc, char** argv)
         exit(1);
         }
         
-    PutDibaBuffSection(&dbuff, "key str", 7, CHUNK_TEXT | CHUNK_KEY);
+    char *k1 =  "key str";
+    char *k2 =  "key str2";
+    
+    PutDibaBuffSection(&dbuff, k1, strlen(k1), CHUNK_TEXT | CHUNK_KEY);
     PutDibaBuffSection(&dbuff, "value 1", 7, CHUNK_TEXT);
     
-    PutDibaBuffSection(&dbuff, "key str2", 9, CHUNK_TEXT | CHUNK_KEY);
-    PutDibaBuffSection(&dbuff, "another one", 12, CHUNK_TEXT);
+    //PutDibaBuffSection(&dbuff, k2, strlen(k2), CHUNK_TEXT | CHUNK_KEY);
+    //PutDibaBuffSection(&dbuff, "a value 2", 9, CHUNK_TEXT);
     
     CompleteDibaBuff(&dbuff, &err_str);
-                     
+      
+    putfile("aa", dbuff.ptr, dbuff.clen, &err_str);
+                                                       
     RewindDibaBuff(&dbuff);   
-    //DumpDibabuff(&dbuff);  
+    DumpDibabuff(&dbuff);  
     
     //exit(0);
-    //SetDibaBuffDebug(3); 
+    //SetDibaBuffDebug(5); 
+    
+    // Damage it
+    //dbuff.ptr[6] = 0;
     
     int len, type, iter = 10;
     char *ccc = "Bad check";
@@ -100,6 +98,7 @@ int main(int argc, char** argv)
 }
 
 // EOF
+
 
 
 
