@@ -9,5 +9,5 @@ test:
 pub:
 	git add .
 	git commit -m "auto from mf"
-	gt push
+	git push
 
