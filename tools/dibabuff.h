@@ -1,5 +1,5 @@
 
-/* =====[ DibaBuff.h ]=========================================================
+/* =====[ DIB.h ]=========================================================
 
    Description:     
 
@@ -13,24 +13,24 @@
 
 #include "dibafcom.h"
 
-void    SetDibaBuffDebug(int level);
-int     OpenDibaBuff(dibabuff *pbuff, char **err_str);
+void    SetDIBDebug(int level);
+int     OpenDIB(dibabuff *pbuff, char **err_str);
 
-int     DumpDibabuff(dibabuff *pbuff);
+int     DumpDIB(dibabuff *pbuff);
 
-char*   FindNextDibaBuffKey(dibabuff *pbuff, int *len, char **err_str);
-char*   GetNextDibaBuffChunk(dibabuff *pbuff,  int *len, int *type, char **err_str);
-void    RewindDibaBuff(dibabuff *pbuff);
-int     CloseDibaBuff(dibabuff *pbuff);
-int     CompleteDibaBuff(dibabuff *pbuff, char **err_str);
+char*   FindNextDIBKey(dibabuff *pbuff, int *len, char **err_str);
+char*   GetNextDIBChunk(dibabuff *pbuff,  int *len, int *type, char **err_str);
+void    RewindDIB(dibabuff *pbuff);
+int     CloseDIB(dibabuff *pbuff);
+int     CompleteDIB(dibabuff *pbuff, char **err_str);
 
-int     PutDibaBuffKeyVal(dibabuff *pbuff,  chunk_keypair *ptr, char **err_str);
-int     GetDibaBuffKeyVal(dibabuff *pbuff, chunk_keypair *ptr, char **err_str);
+int     PutDIBKeyVal(dibabuff *pbuff,  chunk_keypair *ptr, char **err_str);
+int     GetDIBKeyVal(dibabuff *pbuff, chunk_keypair *ptr, char **err_str);
 
 // Lower level
 
-int     GetDibaBuffSection(dibabuff *pbuff, int *len, int *type, int *sum);
-int     PutDibaBuffSection(dibabuff *pbuff, const char *ptr, int len, int type);
+int     GetDIBSection(dibabuff *pbuff, int *len, int *type, int *sum);
+int     PutDIBSection(dibabuff *pbuff, const char *ptr, int len, int type);
   
 // EOF
 
@@ -39,4 +39,5 @@ int     PutDibaBuffSection(dibabuff *pbuff, const char *ptr, int len, int type);
                                      
                                
                          
+
 

@@ -22,7 +22,10 @@
 #include "base64.h"
 #include "misc.h"
 #include "zstr.h"
-#include "DibaBuff.h"
+#include "dibabuff.h"
+
+char hello[] =                                                                   
+"This is a test. This is a test. This is a test. This is a test. This is a test.";
 
 int main(int argc, char** argv)
                                         
@@ -36,7 +39,7 @@ int main(int argc, char** argv)
     
     dibabuff dbuff; memset(&dbuff, 0, sizeof(dbuff));
     
-    int ret  = OpenDibaBuff(&dbuff, &err_str);
+    int ret  = OpenDIB(&dbuff, &err_str);
     if(!ret)                           
         {
         printf("cannot open '%s'\n", err_str);
@@ -46,21 +49,24 @@ int main(int argc, char** argv)
     char *k1 =  "key str";
     char *k2 =  "key str2";
     
-    PutDibaBuffSection(&dbuff, k1, strlen(k1), CHUNK_TEXT | CHUNK_KEY);
-    PutDibaBuffSection(&dbuff, "value 1", 7, CHUNK_TEXT);
+    PutDIBSection(&dbuff, k1, strlen(k1), CHUNK_TEXT | CHUNK_KEY);
+    PutDIBSection(&dbuff, "value 1", 7, CHUNK_TEXT);
     
-    //PutDibaBuffSection(&dbuff, k2, strlen(k2), CHUNK_TEXT | CHUNK_KEY);
-    //PutDibaBuffSection(&dbuff, "a value 2", 9, CHUNK_TEXT);
+    zline2(__LINE__, __FILE__);
+    PutDIBSection(&dbuff, k2, strlen(k2), CHUNK_TEXT | CHUNK_KEY);
+    PutDIBSection(&dbuff, "value 2",  7, CHUNK_TEXT | CHUNK_ZIPPED);
     
-    CompleteDibaBuff(&dbuff, &err_str);
+    //PutDIBSection(&dbuff, hello,  strlen(hello), CHUNK_TEXT | CHUNK_ZIPPED);
+    
+    //printf("zipped %d %x\n",  CHUNK_ZIPPED, CHUNK_ZIPPED);
+    CompleteDIB(&dbuff, &err_str);
       
-    putfile("aa", dbuff.ptr, dbuff.clen, &err_str);
+    //putfile("aa", dbuff.ptr, dbuff.clen, &err_str);
                                                        
-    RewindDibaBuff(&dbuff);   
-    DumpDibabuff(&dbuff);  
-    
+    RewindDIB(&dbuff);   
+    //DumpDIB(&dbuff);  
+    //SetDIBDebug(0); 
     //exit(0);
-    //SetDibaBuffDebug(5); 
     
     // Damage it
     //dbuff.ptr[6] = 0;
@@ -70,7 +76,7 @@ int main(int argc, char** argv)
     while(iter--)
         {
         zline2(__LINE__, __FILE__);
-        char* buff = GetNextDibaBuffChunk(&dbuff, &len, &type, &err_str);
+        char* buff = GetNextDIBChunk(&dbuff, &len, &type, &err_str);
         if(!buff)
             {
             if(strncmp(ccc, err_str, strlen(ccc)-1) == 0)
@@ -92,12 +98,13 @@ int main(int argc, char** argv)
             zfree(buff);     
             }
         }      
-    CloseDibaBuff(&dbuff);
+    CloseDIB(&dbuff);
    
     zleak();  
 }
 
 // EOF
+
 
 
 

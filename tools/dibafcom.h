@@ -27,6 +27,8 @@
 #define	CHUNK_LABEL		12
 #define	CHUNK_FOOTER	13
 
+#define	CHUNK_CHUNK 	20
+
 // Flag to signify if it is a key
 #define	CHUNK_KEY	    0x80
 #define	CHUNK_ZIPPED    0x800
@@ -38,8 +40,9 @@
 // Do NOT change these lines, will cause read / identity failure
 
 #define	CHUNK_HEADER_STR   "\nDIBA %x %x %x\n"  	
-#define	FILE_HEADER_STR    "Diba File. Ver: %d Sub: %d\n"
-
+#define	FILE_HEADER_STR    "Begin Diba File. Ver: %d Sub: %d\n"
+#define	FILE_FOOTER_STR    "End Diba File.\n"
+ 
 typedef struct _chunk_keypair
 {
     char *key;
@@ -62,4 +65,5 @@ typedef struct _dibabuff
 unsigned int calc_buffer_sum(const char *ptr, int len);
 
 // EOF
+
 

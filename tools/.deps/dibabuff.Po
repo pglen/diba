@@ -21,7 +21,7 @@ dibabuff.o: dibabuff.c /usr/include/stdio.h /usr/include/_ansi.h \
  /usr/include/sys/_sigset.h /usr/include/cygwin/signal.h \
  /usr/include/string.h /usr/include/sys/string.h /usr/include/unistd.h \
  /usr/include/sys/unistd.h /usr/include/getopt.h misc.h zmalloc.h \
- getpass.h base64.h DibaBuff.h dibafcom.h /usr/include/zlib.h \
+ getpass.h base64.h dibabuff.h dibafcom.h /usr/include/zlib.h \
  /usr/include/zconf.h \
  /usr/lib/gcc/i686-pc-msys/6.4.0/include-fixed/limits.h \
  /usr/lib/gcc/i686-pc-msys/6.4.0/include-fixed/syslimits.h \
@@ -127,7 +127,7 @@ getpass.h:
 
 base64.h:
 
-DibaBuff.h:
+dibabuff.h:
 
 dibafcom.h:
 

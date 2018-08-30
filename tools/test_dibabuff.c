@@ -51,7 +51,7 @@ int main(int argc, char** argv)
     PutDibaBuffSection(fp, "key str", 7, CHUNK_TEXT | CHUNK_KEY);
     PutDibaBuffSection(fp, hello, hlen, CHUNK_TEXT);
     
-    PutDibaSection(fp, "key str2", 9, CHUNK_TEXT | CHUNK_KEY);
+    PutDibaSection(fp, "key str2", 9, CHUNK_TEXT | CHUNK_KEY);                  
     PutDibaSection(fp, "another one", 12, CHUNK_TEXT);
     
     CloseDibaBuff(fp, 1); 
@@ -97,6 +97,7 @@ int main(int argc, char** argv)
 }
 
 // EO
+
 
 
 
