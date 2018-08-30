@@ -20,7 +20,10 @@ BUILD                                                                     k
 
  All the files are built on Windows using MSYS2 and MinGW. The files should
 build on linux and variants with little modification. See INSTALL for more 
-infomation. New: now diba is autoconf capable.
+infomation. New: now diba is autoconf capable. If you checked the project out 
+from git, use the following command line to silence autoconf:
+
+  touch --date="`date`" aclocal.m4 Makefile.am configure Makefile.in
  
 PREP
 
