@@ -1,5 +1,5 @@
-len=36 type=1 (0x1) Key=False
-buf: 'Diba File. Version: 1 Subversion 1
+len=32 type=1 (0x1) Key=False
+buf: 'Begin Diba File. Ver: 1 Sub: 1
 '
 len=325 type=2052 (0x804) Key=False
 buf: 'This is a test. This is a test. This is a test. This is a test. This is a test. 

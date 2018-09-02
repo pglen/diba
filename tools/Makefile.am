@@ -36,33 +36,34 @@ test_buffkeys_SOURCES = test_buffkeys.c dibafcom.c base64.c zmalloc.c misc.c cmd
 
 test:
 	@echo Tests pass if diffs are silent.
-	@./test_one.sh ./test_base64.exe
-	@./test_one.sh ./test_base64a.exe
-	@./test_one.sh ./test_comline.exe
-	@./test_one.sh ./test_zstr.exe
-	@./test_one.sh ./test_keys.exe
-	@./test_one.sh ./test_chunk.exe
-	@./test_one.sh ./test_dibabuffa.exe
-	@./test_one.sh ./test_zip.exe
-	@./test_two.sh ./test_misc.exe "$(FILTER2)"  
-	@./test_two.sh ./test_zmalloc.exe "$(FILTER)"
+	@./test_one.sh ./test_base64$(EXEEXT)
+	@./test_one.sh ./test_base64a$(EXEEXT)
+	@./test_one.sh ./test_comline$(EXEEXT)
+	@./test_one.sh ./test_zstr$(EXEEXT)
+	@./test_one.sh ./test_keys$(EXEEXT)
+	@./test_one.sh ./test_chunk$(EXEEXT)
+	@./test_one.sh ./test_dibabuffa$(EXEEXT)
+	@./test_one.sh ./test_zip$(EXEEXT)
+	@./test_two.sh ./test_misc$(EXEEXT) "$(FILTER2)"  
+	@./test_two.sh ./test_zmalloc$(EXEEXT) "$(FILTER)"
 	@-rm -f test.tmp 
     
 prep_tests:  
-	@./test_prep2.sh ./test_zmalloc.exe "$(FILTER)"
-	@./test_prep2.sh ./test_misc.exe "$(FILTER2)"
-	@./test_prep.sh ./test_base64.exe
-	@./test_prep.sh ./test_base64a.exe
-	@./test_prep.sh ./test_comline.exe
-	@./test_prep.sh ./test_zstr.exe
-	@./test_prep.sh ./test_dibabuffa.exe
-	@./test_prep.sh ./test_zip.exe
-	@./test_prep.sh ./test_chunk.exe
-	@./test_prep.sh ./test_keys.exe
-	@echo Please press ENTER key for getpass  ...
-	@./test_prep.sh ./test_getpass.exe       
+	@./test_prep2.sh ./test_zmalloc$(EXEEXT) "$(FILTER)"
+	@./test_prep2.sh ./test_misc$(EXEEXT) "$(FILTER2)"
+	@./test_prep.sh ./test_base64$(EXE$(EXEEXT)
+	@./test_prep.sh ./test_base64a$(EXEEXT)
+	@./test_prep.sh ./test_comline$(EXEEXT)
+	@./test_prep.sh ./test_zstr$(EXEE$(EXEEXT)
+	@./test_prep.sh ./test_dibabuffa$(EXEEXT)
+	@./test_prep.sh ./test_zip$(EXEEXT)
+	@./test_prep.sh ./test_chunk$(EXEEXT)
+	@./test_prep.sh ./test_keys$(EXEEXT)
+	@echo Please press ENTER key for getpass  
+	@./test_prep.sh ./test_getpass$(EXEEXT)
 
-test_PROGRAMS:  ./test_base64.exe
+test_PROGRAMS:  ./test_base64$(EXEEXT)
+
 
 
 

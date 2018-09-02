@@ -1,30 +1,9 @@
-Opening Diba Buff: '0x63cc50'
-writing DIBA header '
-DIBA 1 24 22f5eda2
-' strlen=20
-writing DIBA header '
-DIBA 84 7 f33869f
-' strlen=19
-writing DIBA header '
-DIBA 4 7 10822398
-' strlen=19
-writing DIBA header '
-DIBA 84 9 cce1b7cc
-' strlen=20
-writing DIBA header '
-DIBA 4 c d689fbd6
-' strlen=19
-Diba buffer 0x2005b498 len=168 mlen=4096
-Begin: 0x2005b498 (len=168)
-   0   0a-44-49-42  41-20-31-20  32-34-20-32  32-66-35-65     .DIBA 1 24 22f5e
-  16   64-61-32-0a  44-69-62-61  20-46-69-6c  65-2e-20-56     da2.Diba File. V
-  32   65-72-73-69  6f-6e-3a-20  31-20-53-75  62-76-65-72     ersion: 1 Subver
-  48   73-69-6f-6e  20-31-0a-00  0a-44-49-42  41-20-38-34     sion 1...DIBA 84
-  64   20-37-20-66  33-33-38-36  39-66-0a-6b  65-79-20-73      7 f33869f.key s
-  80   74-72-0a-44  49-42-41-20  34-20-37-20  31-30-38-32     tr.DIBA 4 7 1082
-  96   32-33-39-38  0a-76-61-6c  75-65-20-31  0a-44-49-42     2398.value 1.DIB
- 112   41-20-38-34  20-39-20-63  63-65-31-62  37-63-63-0a     A 84 9 cce1b7cc.
- 128   6b-65-79-20  73-74-72-32  00-0a-44-49  42-41-20-34     key str2..DIBA 4
- 144   20-63-20-64  36-38-39-66  62-64-36-0a  61-6e-6f-74      c d689fbd6.anot
- 160   68-65-72-20  6f-6e-65-00                               her one.        
-End
+Key: No: 'Begin Diba File. Ver: 1 Sub: 1
+'
+Key: Yes: 'key str'
+Key: No: 'value 1'
+Key: Yes: 'key str2'
+Key: No: 'value 2'
+Key: No: 'End Diba File.
+'
+end err_str: 'End of file.'
