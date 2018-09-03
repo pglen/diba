@@ -1,80 +1,116 @@
-dibakeygen.o: dibakeygen.c /usr/include/stdc-predef.h \
- /usr/include/unistd.h /usr/include/features.h /usr/include/sys/cdefs.h \
- /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
- /usr/include/gnu/stubs-32.h /usr/include/bits/posix_opt.h \
- /usr/include/bits/types.h /usr/include/bits/typesizes.h \
- /usr/lib/gcc/i686-redhat-linux/4.8.5/include/stddef.h \
- /usr/include/bits/confname.h /usr/include/signal.h \
- /usr/include/bits/sigset.h /usr/include/bits/signum.h \
- /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
- /usr/include/wchar.h \
- /usr/lib/gcc/i686-redhat-linux/4.8.5/include/stdarg.h \
- /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
- /usr/include/bits/stdio.h /usr/include/time.h /usr/include/bits/time.h \
- ../common/diba.h /usr/include/gcrypt.h /usr/include/stdlib.h \
- /usr/include/bits/stdlib-float.h /usr/include/string.h \
- /usr/include/bits/string.h /usr/include/bits/string2.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
- /usr/include/gpg-error.h /usr/include/sys/types.h \
- /usr/include/sys/socket.h /usr/include/sys/uio.h /usr/include/bits/uio.h \
- /usr/include/bits/socket.h /usr/include/bits/socket_type.h \
- /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
- /usr/include/asm-generic/socket.h /usr/include/asm/sockios.h \
- /usr/include/asm-generic/sockios.h /usr/include/sys/time.h \
- /usr/include/sys/select.h /usr/include/bits/select.h \
- /usr/include/gcrypt-module.h ../tools/gcry.h ../tools/getpass.h \
- ../tools/gsexp.h ../tools/base64.h ../tools/zmalloc.h ../tools/cmdline.h \
- ../common/dibastr.h ../tools/misc.h ../tools/zstr.h
-
-/usr/include/stdc-predef.h:
+dibakeygen.o: dibakeygen.c /usr/include/unistd.h \
+ /usr/include/sys/unistd.h /usr/include/_ansi.h /usr/include/newlib.h \
+ /usr/include/_newlib_version.h /usr/include/sys/config.h \
+ /usr/include/machine/ieeefp.h /usr/include/sys/features.h \
+ /usr/include/cygwin/config.h /usr/include/sys/cdefs.h \
+ /usr/include/machine/_default_types.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include/stddef.h \
+ /usr/include/sys/types.h /usr/include/machine/_types.h \
+ /usr/include/sys/_types.h /usr/include/sys/lock.h \
+ /usr/include/sys/_stdint.h /usr/include/sys/_pthreadtypes.h \
+ /usr/include/machine/types.h /usr/include/endian.h \
+ /usr/include/machine/endian.h /usr/include/machine/_endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/wordsize.h \
+ /usr/include/sys/_timespec.h /usr/include/sys/sysmacros.h \
+ /usr/include/getopt.h /usr/include/signal.h /usr/include/_ansi.h \
+ /usr/include/sys/signal.h /usr/include/sys/_sigset.h \
+ /usr/include/cygwin/signal.h /usr/include/stdio.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include/stdarg.h \
+ /usr/include/sys/reent.h /usr/include/sys/stdio.h /usr/include/time.h \
+ /usr/include/machine/time.h /usr/include/sys/timespec.h \
+ /usr/include/cygwin/time.h ../common/diba.h /usr/include/gcrypt.h \
+ /usr/include/stdlib.h /usr/include/machine/stdlib.h \
+ /usr/include/cygwin/stdlib.h /usr/include/cygwin/wait.h \
+ /usr/include/string.h /usr/include/sys/string.h /usr/include/gpg-error.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include/stdint.h /usr/include/stdint.h \
+ /usr/include/sys/_intsup.h /usr/include/sys/socket.h \
+ /usr/include/features.h /usr/include/cygwin/socket.h \
+ /usr/include/asm/socket.h /usr/include/cygwin/if.h \
+ /usr/include/cygwin/sockios.h /usr/include/sys/uio.h \
+ /usr/include/sys/time.h /usr/include/sys/_timeval.h \
+ /usr/include/machine/_time.h /usr/include/sys/select.h ../tools/gcry.h \
+ ../tools/getpass.h ../tools/gsexp.h ../tools/base64.h ../tools/zmalloc.h \
+ ../tools/cmdline.h ../common/dibastr.h ../tools/misc.h ../tools/zstr.h
 
 /usr/include/unistd.h:
 
-/usr/include/features.h:
+/usr/include/sys/unistd.h:
+
+/usr/include/_ansi.h:
+
+/usr/include/newlib.h:
+
+/usr/include/_newlib_version.h:
+
+/usr/include/sys/config.h:
+
+/usr/include/machine/ieeefp.h:
+
+/usr/include/sys/features.h:
+
+/usr/include/cygwin/config.h:
 
 /usr/include/sys/cdefs.h:
 
+/usr/include/machine/_default_types.h:
+
+/usr/lib/gcc/i686-pc-msys/6.4.0/include/stddef.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/machine/_types.h:
+
+/usr/include/sys/_types.h:
+
+/usr/include/sys/lock.h:
+
+/usr/include/sys/_stdint.h:
+
+/usr/include/sys/_pthreadtypes.h:
+
+/usr/include/machine/types.h:
+
+/usr/include/endian.h:
+
+/usr/include/machine/endian.h:
+
+/usr/include/machine/_endian.h:
+
+/usr/include/bits/endian.h:
+
 /usr/include/bits/wordsize.h:
 
-/usr/include/gnu/stubs.h:
+/usr/include/sys/_timespec.h:
 
-/usr/include/gnu/stubs-32.h:
+/usr/include/sys/sysmacros.h:
 
-/usr/include/bits/posix_opt.h:
-
-/usr/include/bits/types.h:
-
-/usr/include/bits/typesizes.h:
-
-/usr/lib/gcc/i686-redhat-linux/4.8.5/include/stddef.h:
-
-/usr/include/bits/confname.h:
+/usr/include/getopt.h:
 
 /usr/include/signal.h:
 
-/usr/include/bits/sigset.h:
+/usr/include/_ansi.h:
 
-/usr/include/bits/signum.h:
+/usr/include/sys/signal.h:
+
+/usr/include/sys/_sigset.h:
+
+/usr/include/cygwin/signal.h:
 
 /usr/include/stdio.h:
 
-/usr/include/libio.h:
+/usr/lib/gcc/i686-pc-msys/6.4.0/include/stdarg.h:
 
-/usr/include/_G_config.h:
+/usr/include/sys/reent.h:
 
-/usr/include/wchar.h:
-
-/usr/lib/gcc/i686-redhat-linux/4.8.5/include/stdarg.h:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/include/bits/sys_errlist.h:
-
-/usr/include/bits/stdio.h:
+/usr/include/sys/stdio.h:
 
 /usr/include/time.h:
 
-/usr/include/bits/time.h:
+/usr/include/machine/time.h:
+
+/usr/include/sys/timespec.h:
+
+/usr/include/cygwin/time.h:
 
 ../common/diba.h:
 
@@ -82,49 +118,45 @@ dibakeygen.o: dibakeygen.c /usr/include/stdc-predef.h \
 
 /usr/include/stdlib.h:
 
-/usr/include/bits/stdlib-float.h:
+/usr/include/machine/stdlib.h:
+
+/usr/include/cygwin/stdlib.h:
+
+/usr/include/cygwin/wait.h:
 
 /usr/include/string.h:
 
-/usr/include/bits/string.h:
-
-/usr/include/bits/string2.h:
-
-/usr/include/endian.h:
-
-/usr/include/bits/endian.h:
+/usr/include/sys/string.h:
 
 /usr/include/gpg-error.h:
 
-/usr/include/sys/types.h:
+/usr/lib/gcc/i686-pc-msys/6.4.0/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/sys/_intsup.h:
 
 /usr/include/sys/socket.h:
 
-/usr/include/sys/uio.h:
+/usr/include/features.h:
 
-/usr/include/bits/uio.h:
-
-/usr/include/bits/socket.h:
-
-/usr/include/bits/socket_type.h:
-
-/usr/include/bits/sockaddr.h:
+/usr/include/cygwin/socket.h:
 
 /usr/include/asm/socket.h:
 
-/usr/include/asm-generic/socket.h:
+/usr/include/cygwin/if.h:
 
-/usr/include/asm/sockios.h:
+/usr/include/cygwin/sockios.h:
 
-/usr/include/asm-generic/sockios.h:
+/usr/include/sys/uio.h:
 
 /usr/include/sys/time.h:
 
+/usr/include/sys/_timeval.h:
+
+/usr/include/machine/_time.h:
+
 /usr/include/sys/select.h:
-
-/usr/include/bits/select.h:
-
-/usr/include/gcrypt-module.h:
 
 ../tools/gcry.h:
 

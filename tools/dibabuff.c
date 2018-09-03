@@ -120,9 +120,9 @@ int     OpenDIB(dibabuff *pbuff, char **err_str)
         }
     else
         {
-        // Read / verify header
+        // Read / verify header, reset position.
+        pbuff->pos = 0;
         }    
-        
     return ret;
 }
 
@@ -505,6 +505,7 @@ int     PutDIBSection(dibabuff *pbuff, const char *ptr, int len, int type)
 }
 
 /* EOF */
+
 
 
 

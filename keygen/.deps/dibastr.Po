@@ -1,6 +1,3 @@
-dibastr.o: ../common/dibastr.c /usr/include/stdc-predef.h \
- ../common/dibastr.h
-
-/usr/include/stdc-predef.h:
+dibastr.o: ../common/dibastr.c ../common/dibastr.h
 
 ../common/dibastr.h:

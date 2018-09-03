@@ -1,0 +1,26 @@
+
+Writing chunks:
+
+
+Get chunks:
+
+0x001 'Begin Diba File. Ver: 1 Sub: 1
+'
+0x084 'key str'
+0x004 'This is a test. This is a test. This is a test. This is a test.'
+0x084 'key str2'
+0x804 'This is a test2. This is a test2. This is a test2.'
+0x00d 'End Diba File.
+'
+
+Get keys:
+
+0x000 'key str'
+0x000 'key str2'
+
+Get Key / Val:
+
+len=7 Key='key str'
+len=63 Val='This is a test. This is a test. This is a test. This is a test.'
+len=8 Key='key str2'
+len=50 Val='This is a test2. This is a test2. This is a test2.'

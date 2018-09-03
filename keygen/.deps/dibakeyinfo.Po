@@ -1,1 +1,181 @@
-# dummy
+dibakeyinfo.o: dibakeyinfo.c /usr/include/unistd.h \
+ /usr/include/sys/unistd.h /usr/include/_ansi.h /usr/include/newlib.h \
+ /usr/include/_newlib_version.h /usr/include/sys/config.h \
+ /usr/include/machine/ieeefp.h /usr/include/sys/features.h \
+ /usr/include/cygwin/config.h /usr/include/sys/cdefs.h \
+ /usr/include/machine/_default_types.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include/stddef.h \
+ /usr/include/sys/types.h /usr/include/machine/_types.h \
+ /usr/include/sys/_types.h /usr/include/sys/lock.h \
+ /usr/include/sys/_stdint.h /usr/include/sys/_pthreadtypes.h \
+ /usr/include/machine/types.h /usr/include/endian.h \
+ /usr/include/machine/endian.h /usr/include/machine/_endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/wordsize.h \
+ /usr/include/sys/_timespec.h /usr/include/sys/sysmacros.h \
+ /usr/include/getopt.h /usr/include/signal.h /usr/include/_ansi.h \
+ /usr/include/sys/signal.h /usr/include/sys/_sigset.h \
+ /usr/include/cygwin/signal.h /usr/include/time.h \
+ /usr/include/sys/reent.h /usr/include/machine/time.h \
+ /usr/include/sys/timespec.h /usr/include/cygwin/time.h ../common/diba.h \
+ /usr/include/gcrypt.h /usr/include/stdlib.h \
+ /usr/include/machine/stdlib.h /usr/include/cygwin/stdlib.h \
+ /usr/include/cygwin/wait.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include/stdarg.h /usr/include/string.h \
+ /usr/include/sys/string.h /usr/include/gpg-error.h /usr/include/stdio.h \
+ /usr/include/sys/stdio.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include/stdint.h /usr/include/stdint.h \
+ /usr/include/sys/_intsup.h /usr/include/sys/socket.h \
+ /usr/include/features.h /usr/include/cygwin/socket.h \
+ /usr/include/asm/socket.h /usr/include/cygwin/if.h \
+ /usr/include/cygwin/sockios.h /usr/include/sys/uio.h \
+ /usr/include/sys/time.h /usr/include/sys/_timeval.h \
+ /usr/include/machine/_time.h /usr/include/sys/select.h ../tools/gcry.h \
+ ../tools/getpass.h ../tools/gsexp.h ../tools/base64.h ../tools/zmalloc.h \
+ ../tools/cmdline.h ../common/dibastr.h ../tools/misc.h ../tools/zstr.h \
+ ../common/dibautils.h
+
+/usr/include/unistd.h:
+
+/usr/include/sys/unistd.h:
+
+/usr/include/_ansi.h:
+
+/usr/include/newlib.h:
+
+/usr/include/_newlib_version.h:
+
+/usr/include/sys/config.h:
+
+/usr/include/machine/ieeefp.h:
+
+/usr/include/sys/features.h:
+
+/usr/include/cygwin/config.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/machine/_default_types.h:
+
+/usr/lib/gcc/i686-pc-msys/6.4.0/include/stddef.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/machine/_types.h:
+
+/usr/include/sys/_types.h:
+
+/usr/include/sys/lock.h:
+
+/usr/include/sys/_stdint.h:
+
+/usr/include/sys/_pthreadtypes.h:
+
+/usr/include/machine/types.h:
+
+/usr/include/endian.h:
+
+/usr/include/machine/endian.h:
+
+/usr/include/machine/_endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/sys/_timespec.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/getopt.h:
+
+/usr/include/signal.h:
+
+/usr/include/_ansi.h:
+
+/usr/include/sys/signal.h:
+
+/usr/include/sys/_sigset.h:
+
+/usr/include/cygwin/signal.h:
+
+/usr/include/time.h:
+
+/usr/include/sys/reent.h:
+
+/usr/include/machine/time.h:
+
+/usr/include/sys/timespec.h:
+
+/usr/include/cygwin/time.h:
+
+../common/diba.h:
+
+/usr/include/gcrypt.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/machine/stdlib.h:
+
+/usr/include/cygwin/stdlib.h:
+
+/usr/include/cygwin/wait.h:
+
+/usr/lib/gcc/i686-pc-msys/6.4.0/include/stdarg.h:
+
+/usr/include/string.h:
+
+/usr/include/sys/string.h:
+
+/usr/include/gpg-error.h:
+
+/usr/include/stdio.h:
+
+/usr/include/sys/stdio.h:
+
+/usr/lib/gcc/i686-pc-msys/6.4.0/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/sys/_intsup.h:
+
+/usr/include/sys/socket.h:
+
+/usr/include/features.h:
+
+/usr/include/cygwin/socket.h:
+
+/usr/include/asm/socket.h:
+
+/usr/include/cygwin/if.h:
+
+/usr/include/cygwin/sockios.h:
+
+/usr/include/sys/uio.h:
+
+/usr/include/sys/time.h:
+
+/usr/include/sys/_timeval.h:
+
+/usr/include/machine/_time.h:
+
+/usr/include/sys/select.h:
+
+../tools/gcry.h:
+
+../tools/getpass.h:
+
+../tools/gsexp.h:
+
+../tools/base64.h:
+
+../tools/zmalloc.h:
+
+../tools/cmdline.h:
+
+../common/dibastr.h:
+
+../tools/misc.h:
+
+../tools/zstr.h:
+
+../common/dibautils.h:

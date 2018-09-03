@@ -1,5 +1,5 @@
 
-/* =====[ test_zstr.c ]=========================================================
+/* =====[ test_zip.c ]=========================================================
 
    Description:     Encryption examples. Feasability study for diba
                     [Digital Bank].
@@ -86,6 +86,7 @@ int main(int argc, char** argv)
    
     zleak();  
 }
+
 
 
 

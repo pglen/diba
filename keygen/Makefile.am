@@ -25,7 +25,11 @@ dibakeyinfo_SOURCES = dibakeyinfo.c ../tools/zmalloc.c ../tools/gcry.c \
    ../common/dibastr.c ../common/dibautils.c \
    ../bluepoint/bluepoint3.c  ../tools/dibafcom.c
 
-                                                  
+test:
+	@echo Tests pass if diffs are silent.
+
+# EOF                                                 
+
 
 
 

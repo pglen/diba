@@ -1,61 +1,92 @@
-base64.o: ../tools/base64.c /usr/include/stdc-predef.h \
- /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
- /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
- /usr/include/gnu/stubs-32.h \
- /usr/lib/gcc/i686-redhat-linux/4.8.5/include/stddef.h \
- /usr/include/bits/types.h /usr/include/bits/typesizes.h \
- /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/i686-redhat-linux/4.8.5/include/stdarg.h \
- /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
- /usr/include/bits/stdio.h \
- /usr/lib/gcc/i686-redhat-linux/4.8.5/include/stdint.h \
- /usr/include/stdint.h /usr/include/bits/wchar.h \
- /usr/lib/gcc/i686-redhat-linux/4.8.5/include/limits.h \
- /usr/lib/gcc/i686-redhat-linux/4.8.5/include/syslimits.h \
- /usr/include/limits.h
-
-/usr/include/stdc-predef.h:
+base64.o: ../tools/base64.c /usr/include/stdio.h /usr/include/_ansi.h \
+ /usr/include/newlib.h /usr/include/_newlib_version.h \
+ /usr/include/sys/config.h /usr/include/machine/ieeefp.h \
+ /usr/include/sys/features.h /usr/include/cygwin/config.h \
+ /usr/include/sys/cdefs.h /usr/include/machine/_default_types.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include/stddef.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include/stdarg.h \
+ /usr/include/sys/reent.h /usr/include/_ansi.h /usr/include/sys/_types.h \
+ /usr/include/machine/_types.h /usr/include/sys/lock.h \
+ /usr/include/sys/types.h /usr/include/sys/_stdint.h \
+ /usr/include/sys/_pthreadtypes.h /usr/include/machine/types.h \
+ /usr/include/endian.h /usr/include/machine/endian.h \
+ /usr/include/machine/_endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/wordsize.h /usr/include/sys/_timespec.h \
+ /usr/include/sys/sysmacros.h /usr/include/sys/stdio.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include/stdint.h /usr/include/stdint.h \
+ /usr/include/sys/_intsup.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include-fixed/limits.h \
+ /usr/lib/gcc/i686-pc-msys/6.4.0/include-fixed/syslimits.h \
+ /usr/include/limits.h /usr/include/features.h
 
 /usr/include/stdio.h:
 
-/usr/include/features.h:
+/usr/include/_ansi.h:
+
+/usr/include/newlib.h:
+
+/usr/include/_newlib_version.h:
+
+/usr/include/sys/config.h:
+
+/usr/include/machine/ieeefp.h:
+
+/usr/include/sys/features.h:
+
+/usr/include/cygwin/config.h:
 
 /usr/include/sys/cdefs.h:
 
+/usr/include/machine/_default_types.h:
+
+/usr/lib/gcc/i686-pc-msys/6.4.0/include/stddef.h:
+
+/usr/lib/gcc/i686-pc-msys/6.4.0/include/stdarg.h:
+
+/usr/include/sys/reent.h:
+
+/usr/include/_ansi.h:
+
+/usr/include/sys/_types.h:
+
+/usr/include/machine/_types.h:
+
+/usr/include/sys/lock.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/sys/_stdint.h:
+
+/usr/include/sys/_pthreadtypes.h:
+
+/usr/include/machine/types.h:
+
+/usr/include/endian.h:
+
+/usr/include/machine/endian.h:
+
+/usr/include/machine/_endian.h:
+
+/usr/include/bits/endian.h:
+
 /usr/include/bits/wordsize.h:
 
-/usr/include/gnu/stubs.h:
+/usr/include/sys/_timespec.h:
 
-/usr/include/gnu/stubs-32.h:
+/usr/include/sys/sysmacros.h:
 
-/usr/lib/gcc/i686-redhat-linux/4.8.5/include/stddef.h:
+/usr/include/sys/stdio.h:
 
-/usr/include/bits/types.h:
-
-/usr/include/bits/typesizes.h:
-
-/usr/include/libio.h:
-
-/usr/include/_G_config.h:
-
-/usr/include/wchar.h:
-
-/usr/lib/gcc/i686-redhat-linux/4.8.5/include/stdarg.h:
-
-/usr/include/bits/stdio_lim.h:
-
-/usr/include/bits/sys_errlist.h:
-
-/usr/include/bits/stdio.h:
-
-/usr/lib/gcc/i686-redhat-linux/4.8.5/include/stdint.h:
+/usr/lib/gcc/i686-pc-msys/6.4.0/include/stdint.h:
 
 /usr/include/stdint.h:
 
-/usr/include/bits/wchar.h:
+/usr/include/sys/_intsup.h:
 
-/usr/lib/gcc/i686-redhat-linux/4.8.5/include/limits.h:
+/usr/lib/gcc/i686-pc-msys/6.4.0/include-fixed/limits.h:
 
-/usr/lib/gcc/i686-redhat-linux/4.8.5/include/syslimits.h:
+/usr/lib/gcc/i686-pc-msys/6.4.0/include-fixed/syslimits.h:
 
 /usr/include/limits.h:
+
+/usr/include/features.h:
