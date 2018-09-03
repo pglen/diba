@@ -20,7 +20,9 @@
 #include <stdarg.h>
 
 // This is a hack to get multi platform compile
+#ifndef linux
 int     nanosleep( const struct timespec *period, struct timespec *residual );
+#endif
 
 #include "dibautils.h"
 
@@ -626,6 +628,7 @@ void show_prepoc()
 }
         
 // EOF
+
 
 
 

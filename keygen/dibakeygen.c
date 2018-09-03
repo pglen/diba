@@ -16,6 +16,7 @@
 
 #include <unistd.h>
 #include <signal.h>
+#include <stdio.h>
 #include <time.h>
 
 #include "diba.h"
@@ -524,6 +525,7 @@ int main(int argc, char** argv)
 }
 
 /* EOF */
+
 
 
 

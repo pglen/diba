@@ -1,7 +1,7 @@
 
 /* =====[ gcry.c ]=========================================================
 
-   Description:     Encryption excamples. Feasability study for diba 
+   Description:     Encryption examples. Feasability study for diba 
                     [Digital Bank].
 
    Revisions:
@@ -15,6 +15,7 @@
    ======================================================================= */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 
@@ -97,7 +98,7 @@ void    gcrypt_init()
     /* ... If required, other initialization goes here.  */
 
     err |= gcry_control(GCRYCTL_DISABLE_SECMEM);
-    err |= gcry_control(GCRYCTL_DISABLE_LOCKED_SECMEM);
+    //err |= gcry_control(GCRYCTL_DISABLE_LOCKED_SECMEM);
         
     /* Tell Libgcrypt that initialization has completed. */
     err |= gcry_control (GCRYCTL_INITIALIZATION_FINISHED, 0);
@@ -541,6 +542,7 @@ char    *zrandstr_strong(int len)
 
                 
 /* EOF */
+
 
 
 
