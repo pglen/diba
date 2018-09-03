@@ -44,17 +44,28 @@ executable checks the whole toolchain.
   zlib zlib-devel
   (others, see Makefile for a technically accurate list)
   
-  On MSYS2, one can install the dependency with:
+On MSYS2, one can install the dependency with:
     pacman -S <depenency list>
     
-  Examples:
+MSYS2 examples:
     pacman -S libgcrypt libgcrypt-devel 
     pacman -S zlib zlib-devel
     (see: getdeps.sh)
     
   On linux and family, use the appropriate package manager 
   like 'yum' or 'apt'.
-    
+
+Linux examples (zlib):
+
+    32-bit Debian or Ubuntu : apt-get install zlib1g-dev
+    64-bit Debian or Ubuntu : apt-get install zlib1g:i386 (or lib32z1)
+    32/64-bit Fedora : dnf install zlib.i686.
+
+Linux examples (gcrypt):
+
+    sudo apt install libgcrypt20-dev
+
+
   CHOICES
   
    The choices we made on platforms and utilities are a hybrid of POSIX and Win32

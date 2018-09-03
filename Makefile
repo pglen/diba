@@ -203,7 +203,7 @@ AM_DEFAULT_VERBOSITY = 1
 AUTOCONF = ${SHELL} /home/peterglen/diba/missing autoconf
 AUTOHEADER = ${SHELL} /home/peterglen/diba/missing autoheader
 AUTOMAKE = ${SHELL} /home/peterglen/diba/missing automake-1.15
-AWK = gawk
+AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
