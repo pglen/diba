@@ -83,14 +83,14 @@ static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
     
     for(int loop = 0; loop < onelen; loop++)
         {
-        int len;
+        size_t len;
         const char *data = gcry_sexp_nth_data(list, loop, &len);
         if(data == NULL)
             {
             gcry_sexp_t element = gcry_sexp_nth(list, loop);
             if(element)
-                {
-                int len3;
+                {   
+                size_t len3;
                 const char *data3 = gcry_sexp_nth_data(element, 0, &len3);
                 //printf("element: '%.*s'\n", len3, data3);
                 char *memx = zalloc(len3 + 1);
@@ -109,7 +109,7 @@ static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
             {
             //printf("data: %d '%.*s'\n", loop, len, data);
 
-            int len2;
+            size_t  len2;
             if(strncmp(findstr, data, len) == 0 || findstr[0] == '\0' )
                 {
                 const char *data2 = gcry_sexp_nth_data(list, loop + 1, &len2);
@@ -130,7 +130,7 @@ static char *sexp_decode_one(gcry_sexp_t list, int *plen, const char *findstr)
                         }
                     else
                         {
-                        printf(" '%.*s'\n", len2, data2);
+                        printf(" '%.*s'\n", (int)len2, data2);
                         }
                     zline2(__LINE__, __FILE__);
                     ret =  zalloc(len2 + 1);
@@ -183,7 +183,7 @@ char    *sexp_nth_data(gcry_sexp_t  element, int num, int *plen)
 
 {
     char *ret;
-    const char *buff = gcry_sexp_nth_data(element, num, plen);
+    const char *buff = gcry_sexp_nth_data(element, num, (size_t *)plen);
     zline2(__LINE__, __FILE__);
     ret = zalloc(*plen + 1);
     if(ret != NULL)
@@ -259,7 +259,7 @@ char    *sexp_get_val(gcry_sexp_t sexp, const char *key, int *polen, char **err_
         {
         *err_str = "No key found."; return NULL;
         }
-    int olen;
+    size_t olen;
     const char *ddd2 =  gcry_sexp_nth_data(nhh, 1, &olen);
     if(!ddd2)
         {
@@ -273,6 +273,7 @@ char    *sexp_get_val(gcry_sexp_t sexp, const char *key, int *polen, char **err_
 }
 
 /* EOF */
+
 
 
 

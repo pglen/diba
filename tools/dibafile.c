@@ -67,7 +67,7 @@ FILE    *OpenDibaFile(const char *lpszPathName, char **err_str)
         {
         *err_str = "Cannot open Diba file.";
         if(debuglevel >= 1)
-            printf("Cannot open Diba file\n", lpszPathName);
+            printf("Cannot open Diba file '%s'\n", lpszPathName);
             
         return Diba;
         }
@@ -279,7 +279,7 @@ FILE    *CreateDibaFile(const char *fname, char **err_str)
         return myFile;
         }
     snprintf(header, MAX_PATH, FILE_HEADER_STR, 1, 1);
-    PutDibaSection(myFile, header, strlen(header) + 1, CHUNK_HEADER);
+    PutDibaSection(myFile, header, (int)strlen(header) + 1, CHUNK_HEADER);
     
     return myFile;
 }
@@ -293,12 +293,12 @@ int     CloseDibaFile(FILE *fp, int writefinal)
         {
         char footer[MAX_PATH];
         snprintf(footer, MAX_PATH, "%s", "End of Diba File.\n");
-        PutDibaSection(fp, footer, strlen(footer), CHUNK_FOOTER);
+        PutDibaSection(fp, footer, (int)strlen(footer), CHUNK_FOOTER);
         }
     fclose(fp);
     
     if(debuglevel >= 1)
-            printf("Closed DIBA file.\n");
+            printf("%s", "Closed DIBA file.\n");
         
     return 1;
 }
@@ -320,14 +320,14 @@ int     GetDibaSection(FILE *ff, int *len, int *type, int *sum)
     if(ret <= 0)
         {
         if(debuglevel >= 2)
-            printf("Stream ended before file end.\n");
+            printf("%s", "Stream ended before file end.\n");
             
         return ret;
         }
     if(ret >  CHUNKSIZE)
         {
         if(debuglevel >= 1)
-            printf("Unexpected read return value\n");
+            printf("%s", "Unexpected read return value.\n");
         return ret;
         }
     buff[ret] = '\0';
@@ -391,7 +391,7 @@ int     PutDibaSection(FILE *ff, const char *ptr, int len, int type)
     snprintf(tmp, MAX_PATH, CHUNK_HEADER_STR, type, len, sum);
     
     if(debuglevel >= 2)
-        printf("writing DIBA header '%s' strlen=%d\n", tmp, strlen(tmp));
+        printf("writing DIBA header '%s' strlen=%d\n", tmp, (int)strlen(tmp));
         
     ret = fwrite(tmp, 1, strlen(tmp), ff);
     if(ret < 0) return ret;
@@ -404,6 +404,7 @@ int     PutDibaSection(FILE *ff, const char *ptr, int len, int type)
 }
 
 /* EOF */
+
 
 
 

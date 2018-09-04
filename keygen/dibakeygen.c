@@ -124,9 +124,9 @@ opts opts_data[] = {
 void my_progress_handler (void *cb_data, const char *what,
                             int printchar, int current, int total)
 {
-    printf("."); fflush(stdout);
+    printf("%s", "."); fflush(stdout);
     //printf("%c", printchar);
-}
+}              
 
 static void myfunc(int sig)
 {
@@ -181,7 +181,7 @@ int main(int argc, char** argv)
     
     if (err_str)
         {
-        printf(err_str);
+        printf("%s", err_str);
         usage(usestr, descstr, opts_data); exit(2);
         }
     if(errout[0] != '\0')
@@ -258,7 +258,7 @@ int main(int argc, char** argv)
     /* Generate a new RSA key pair. */
     printf("\nRSA key generation (of %d bits) may take a few minutes. \nYour computer "
            "needs to gather random entropy.\n\n", keysize);
-    printf("Please wait ");
+    printf("%s", "Please wait ");
 
     gcry_set_progress_handler(my_progress_handler, NULL);
 
@@ -525,6 +525,7 @@ int main(int argc, char** argv)
 }
 
 /* EOF */
+
 
 
 

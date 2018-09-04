@@ -2,13 +2,13 @@
 
   Definitions:
   
+ Consent Server A Cryptograpically connected set of servers.
  DCU            Digital Bank Currency Unit.
  Block Chain    A Cryptograpically Linked Set of Blocks
  
-
-   The operational theory of the initial currency allocation:
+ The operational theory of the initial currency allocation:
    
-   The sum of projected global wealth is allocated into 100 trillion 
+ The sum of projected global wealth is allocated into 100 trillion 
 DCU (diba currency unit) in hashes. 
 The 100 trillion DCU will each have 1000 child items in the billion section 
 and the billon DCU will have 1000 child items in the million section ... 
@@ -38,7 +38,7 @@ For example, the first 10 DCU-s would be:
 domain, limited to that directory domain.
     
  The global supply may be distributed on different servers, each responsible
-on maintaining a different part of the tree.
+for maintaining a different part of the tree.
       
   DCU Currency value: The mean value calculated on the basis of survival
 related items. Here is an example short list, but detailed discussion
@@ -50,14 +50,14 @@ can be found in a separate document.
    The operational theory of the transaction is ...
    
   The currency is transferred from address to address. The initial 
-currency owner is NONE, which is a fictitious user created during development.
-Currency itself is acquired from the global pool, and ownership of that 
+currency owner is NONE, which is a fictitious unit, user created during development.
+The currency itself is acquired from the global pool, and ownership of that 
 currency is assigned to the address. The currency pool item is marked with 
 the owner's address.
   
    The operational theory of the DIBA block chain:
   
-    o The originator node broadcasts the new block to all known (pier) nodes.
+    o The originator node broadcasts the new block to all known (peer) nodes.
     o Each node checks the block for validity and proof of work.
     o Each node checks the block for transaction integrity. 
     o Each node then responds with a vote.
@@ -65,19 +65,18 @@ the owner's address.
     o The node collects N number of votes. (Initially xxx)
     o The originator accepts the block if the votes converge on OK. (2/3 or 66%)
     o Node expresses its acceptance of the block. 
-    o Node creates hashes it, and adds it to its own chain.
-
+    o Node creates hashes of it, and adds it to its own chain.
+    o Node broadcasts the acceptance of the block.
 
    The operational theory of the DIBA data exchange:
 
-
    The operational theory of currency transfer:
-   
    
    The operational theory of account creation:
    
    
    
    
+
 
 

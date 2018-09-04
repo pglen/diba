@@ -1,14 +1,15 @@
 
-/* =====[ DIB.c ]=========================================================
+/* =====[ dibabuff.c ]=========================================================
 
    Description:     Encryption excamples. Feasability study for diba
-                    [Digital Bank]. File format code.
+                    [Digital Bank]. Buffer format code.
 
    Revisions:
 
       REV   DATE            BY              DESCRIPTION
       ----  -----------     ----------      ------------------------------
      0.00  nov.05.2017     Peter Glen      Initial version.
+     0.00  sep.03.2018     Peter Glen      Buffer ported
  
    ======================================================================= */
 
@@ -319,7 +320,7 @@ char*   GetNextDIBChunk(dibabuff *pbuff,  int *len, int *type, char **err_str)
         if(err == Z_OK)
             {
             if(debuglevel >= 3)
-                printf("un ratio %d %d %f\n", ucomprLen, *len, 
+                printf("un ratio %d %d %f\n", (int)ucomprLen, *len, 
                                         (float)(ucomprLen)/(*len));
             *len = ucomprLen; 
             zfree(buff);
@@ -468,7 +469,7 @@ int     PutDIBSection(dibabuff *pbuff, const char *ptr, int len, int type)
                 printf("Zipped ... \n '%s'\n", mem);
                 
             if(debuglevel >= 2)
-                printf("ratio %d %d %f\n", comprLen, len, (float)(comprLen)/len);
+                printf("ratio %d %d %f\n", (int)comprLen, len, (float)(comprLen)/len);
                 
             len = comprLen; ptr = mem;
             }
@@ -486,7 +487,7 @@ int     PutDIBSection(dibabuff *pbuff, const char *ptr, int len, int type)
     snprintf(tmp, MAX_PATH, CHUNK_HEADER_STR, type, len, sum);
     
     if(debuglevel >= 2)
-        printf("writing DIBA header '%s' strlen=%d\n", tmp, strlen(tmp));
+        printf("writing DIBA header '%s' strlen=%d\n", tmp, (int)strlen(tmp));
         
     //fwrite(tmp, 1, strlen(tmp), ff);
     int tlen = strlen(tmp);
@@ -505,6 +506,7 @@ int     PutDIBSection(dibabuff *pbuff, const char *ptr, int len, int type)
 }
 
 /* EOF */
+
 
 
 

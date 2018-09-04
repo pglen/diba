@@ -344,8 +344,8 @@ void    print_cypher_details(const char *str)
     int cy = gcry_cipher_map_name(str);
     printf("Cypher:       %d\n", cy);
     printf("Cypher name:  '%s'\n", gcry_cipher_algo_name(cy));
-    printf("Blocklen:     %d\n", gcry_cipher_get_algo_blklen(cy));
-    printf("Keylen:       %d\n", gcry_cipher_get_algo_keylen(cy));
+    printf("Blocklen:     %d\n", (int)gcry_cipher_get_algo_blklen(cy));
+    printf("Keylen:       %d\n", (int)gcry_cipher_get_algo_keylen(cy));
     printf("\n");
 }    
 
@@ -435,7 +435,7 @@ int     write_mod_exp(gcry_sexp_t *rsa_keypair, const char *fname2)
         }
     //sexp_print(nnn);
     
-    unsigned int pklen = 0;
+    size_t pklen = 0;
     const char *pkptr = gcry_sexp_nth_data(nnn, 1, &pklen);
     //dump_mem(ptr, pklen);
     
@@ -446,7 +446,7 @@ int     write_mod_exp(gcry_sexp_t *rsa_keypair, const char *fname2)
         return -1;
         }
     //sexp_print(eee);
-    unsigned int elen = 0;
+    size_t elen = 0;
     const char *eptr = gcry_sexp_nth_data(eee, 1, &elen);
          
     FILE* fp2 = fopen(fname2, "wb");
@@ -542,6 +542,7 @@ char    *zrandstr_strong(int len)
 
                 
 /* EOF */
+
 
 
 

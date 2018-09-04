@@ -260,8 +260,8 @@ void zautofree(void)
             aline = zlinearr[loop];
             afname = zfnamearr[loop];
             if(zmalloc_verbose_on)
-                printf("zmalloc: auto free (0x%x)in file %s at line %d\n", 
-                        ptr, afname, aline);
+                printf("zmalloc: auto free (0x%p)in file %s at line %d\n", 
+                        ptr, afname, (int)aline);
             zfree2(ptr, aline);
             }
         }
@@ -385,6 +385,7 @@ int     zleakfp(FILE *fp)
 }
 
 // EOF
+
 
 
 

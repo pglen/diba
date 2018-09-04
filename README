@@ -1,8 +1,13 @@
- Digital Bank  (DIBA)
+ Digital Bank (DIBA)
 
- Crypto currency. And consent server. Unique as in all the currency is
+ Crypto currency and consent server. Unique as in all the currency is
 allocated at inception. Development is done on a 2048 bit  engine, the real 
 thing will be 4096 bit. This is more numbers than atoms in the universe.
+See the file THEORY for operational differences to traditional crypto 
+currencies.
+
+  If you acquired the code from a git repository, execute the noauto.sh
+command to avoid autconf from running. (unless you intended to run it)
  
 NOTE
 
@@ -74,6 +79,7 @@ voting                  Voting related files
 
     
        
+
 
 
 

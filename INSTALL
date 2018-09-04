@@ -25,7 +25,9 @@ executable checks the whole toolchain.
   
   touch --date="`date`" aclocal.m4 Makefile.am configure Makefile.in
   
-  or simply install autoconf (autotools)
+  or execute the ./noauto.sh shell script   ...
+  
+  or simply install autoconf (autotools).
   
   The Makefile has the usual targets. Th command 'make' will build the 
   whole project, 'make tests' will check workings. The tests are producing 
@@ -35,13 +37,10 @@ executable checks the whole toolchain.
   DEPENDENCIES
   
   The following subsystems are used in DigiBank  (DIBA):
-  
-  MinGW, MSYS, gcc, diffutils
-  libgcrypt, libgcrypt-devel
-  Win32
-  Python
-  PyGTK, PyGobject
-  zlib zlib-devel
+                       
+  MinGW, MSYS2, (in Win32/Win64) gcc, diffutils
+  libgcrypt, libgcrypt-devel Python,
+  PyGTK, PyGobject, zlib zlib-devel
   (others, see Makefile for a technically accurate list)
   
 On MSYS2, one can install the dependency with:
@@ -63,8 +62,7 @@ Linux examples (zlib):
 
 Linux examples (gcrypt):
 
-    sudo apt install libgcrypt20-dev
-
+    Debian or Ubuntu: sudo apt install libgcrypt20-dev
 
   CHOICES
   
@@ -88,7 +86,7 @@ capability, and the Win32 (Win64) for its rich user interface.
    o tools       --  Various support tools, cmdline, base64, malloc etc ... 
    o common      --  Common items and defines for the DIBA project
    o voting      --  Voting related subsystem
-   o study       --  Disregard, misc investigations 
+   o study       --  Disregard, contains misc. investigations 
    
   DATA
   
@@ -104,7 +102,8 @@ capability, and the Win32 (Win64) for its rich user interface.
                 ../data/voting subdirectory        
   
   
-  
+# EOF
+
 
 
 

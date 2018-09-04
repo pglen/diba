@@ -398,7 +398,7 @@ int     get_privkey(get_priv_key_struct *pks)
         *pks->err_str = "No key found in private composite key.";
         return -1;
         }
-    unsigned int plen3;
+    size_t plen3;
     char *buff3 = gcry_sexp_nth_buffer(privkid, 1, &plen3);
     
     if(!pks->nocrypt)
@@ -628,6 +628,7 @@ void show_prepoc()
 }
         
 // EOF
+
 
 
 
