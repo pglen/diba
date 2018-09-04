@@ -12,6 +12,9 @@
 *.map
 *.exp
 
+# Executabled from MSYS
+*.exe
+
 # Precompiled Headers
 *.gch
 *.pch
@@ -50,3 +53,4 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+

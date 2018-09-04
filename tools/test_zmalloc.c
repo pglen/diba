@@ -13,6 +13,7 @@
    ======================================================================= */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "zmalloc.h"
@@ -80,12 +81,14 @@ int main(int argc, char** argv)
 
     printf("\nTesting zmalloc, multiple alloc, some freed\n");
     char *memarr[10];
-    int iter = sizeof(memarr) / sizeof(int);
+    int iter = sizeof(memarr) / sizeof(char*);
     zline2(__LINE__, __FILE__);
     for(int loop = 0; loop < iter; loop++)
         memarr[loop] = zalloc(20);
+        
     for(int loop = 0; loop < iter - 1; loop++)
         zfree(memarr[loop]);
+        
     zleak();
     // Free it so further reports will not show it:
     zfree(memarr[iter-1]);  
@@ -109,20 +112,25 @@ int main(int argc, char** argv)
     zautofree();
     zleak();
     
+    
     printf("\nTest corrupted memory\n");
     extern void *zmalloc_zarr[];
     zline2(__LINE__, __FILE__);
     char *memc0 = zalloc(1000);
+    
     zmalloc_zarr[0] = (void*)100;
     zcheck(memc0, __LINE__);             
     zline(__LINE__);
     zfree(memc0);
     zmalloc_zarr[0] = (void*)0;
-        
     
-    printf("\nFinal report: (should be blank)\n");
+    printf("%s", "\nFinal report: (should be blank)\n");
     zleak();  
+    
+    exit(0);
 }
+
+
 
 
 

@@ -13,6 +13,8 @@ test_zmalloc.o: test_zmalloc.c /usr/include/stdio.h /usr/include/_ansi.h \
  /usr/include/machine/_endian.h /usr/include/bits/endian.h \
  /usr/include/bits/wordsize.h /usr/include/sys/_timespec.h \
  /usr/include/sys/sysmacros.h /usr/include/sys/stdio.h \
+ /usr/include/stdlib.h /usr/include/machine/stdlib.h \
+ /usr/include/cygwin/stdlib.h /usr/include/cygwin/wait.h \
  /usr/include/string.h /usr/include/sys/string.h zmalloc.h base64.h
 
 /usr/include/stdio.h:
@@ -72,6 +74,14 @@ test_zmalloc.o: test_zmalloc.c /usr/include/stdio.h /usr/include/_ansi.h \
 /usr/include/sys/sysmacros.h:
 
 /usr/include/sys/stdio.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/machine/stdlib.h:
+
+/usr/include/cygwin/stdlib.h:
+
+/usr/include/cygwin/wait.h:
 
 /usr/include/string.h:
 

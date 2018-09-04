@@ -136,21 +136,21 @@ int main(int argc, char** argv)
     int nn = parse_commad_line(argv2, opts_data, &err_str);
     if (err_str)
         {
-        printf(err_str);
+        printf("%s", err_str);
         usage(usestr, descstr, opts_data); 
         }
             
     nn = parse_commad_line(argv3, opts_data, &err_str);
     if (err_str)
         {
-        printf(err_str);
+        printf("%s", err_str);
         usage(usestr, descstr, opts_data);
         }
     
     nn = parse_commad_line(argv4, opts_data, &err_str);
     if (err_str)
         {
-        printf(err_str);
+        printf("%s", err_str);
         usage(usestr, descstr, opts_data);
         }
     
@@ -161,6 +161,7 @@ int main(int argc, char** argv)
       
     zleak();  
 }
+
 
 
 

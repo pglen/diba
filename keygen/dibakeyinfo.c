@@ -121,7 +121,7 @@ opts opts_data[] = {
 void my_progress_handler (void *cb_data, const char *what,
                             int printchar, int current, int total)
 {
-    printf(".");
+    printf("%s", ".");
     //printf("%c", printchar);
 }
 
@@ -155,7 +155,7 @@ int main(int argc, char** argv)
     int nn = parse_commad_line(argv, opts_data, &err_str);
     if (err_str)
         {
-        printf(err_str);
+        printf("%s", err_str);
         usage(usestr, descstr, opts_data); 
         printf("All private keys are printed enrypted.\n");
         exit(2);
@@ -197,12 +197,12 @@ int main(int argc, char** argv)
         err = gcry_control(GCRYCTL_SELFTEST);
         if(err)
             {
-            printf("fail.\n");
+            printf("%s", "fail.\n");
             exit(3);
             }
         else
             {
-            printf("pass.\n");
+            printf("%s", "pass.\n");
             }
         }
         
@@ -307,7 +307,7 @@ int    operate_pubkey(const char *fname, const char *basename)
     gcry_sexp_t keyid = gcry_sexp_find_token(pubkey, "Key ID", 0);
     if(keyid != NULL)
         {
-        unsigned int plen;
+        size_t plen;
         char *buff = gcry_sexp_nth_buffer(keyid, 1, &plen);
         
         zline2(__LINE__, __FILE__);
@@ -360,7 +360,7 @@ int    operate_pubkey(const char *fname, const char *basename)
                 {
                 printf("Public key hashes match OK.\n");
                 }
-            else
+            else 
                 {
                 printf("Error: Public Key Hashes DO NOT match.\n");
                 ret = 3;
@@ -408,7 +408,7 @@ int    operate_pubkey(const char *fname, const char *basename)
             }
         zfree(buff2); zfree(hash_str);
             
-        printf("");
+        printf("%s", "\n");
         }  
     gcry_sexp_release(pubkey);    
     
@@ -484,7 +484,7 @@ int    operate_privkey(const char *fname, const char *basename)
         printf("%s ", "About to show private key. Are you sure? [y/N]");
         fflush(stdout);
         char aa[12] = {};
-        fgets(aa, sizeof(aa)-1, stdin);
+        char *bb = fgets(aa, sizeof(aa)-1, stdin);
         //printf("got: '%s'\n", aa);
         if(aa[0] != 'y' && aa[0] != 'Y')
             {
@@ -499,7 +499,7 @@ int    operate_privkey(const char *fname, const char *basename)
     if(keyid != NULL)
         {
         //sexp_print(keyid);
-        unsigned int plen;
+        size_t plen;
         char *buff = gcry_sexp_nth_buffer(keyid, 1, &plen);
         
         zline2(__LINE__, __FILE__);
@@ -647,6 +647,7 @@ static int get_pass()
 }
 
 // EOF
+
 
 
 
