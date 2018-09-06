@@ -1,5 +1,5 @@
 
-/* =====[ DIB.h ]=========================================================
+/* =====[ dibabuff.h ]=========================================================
 
    Description:     
 
@@ -8,6 +8,7 @@
       REV   DATE            BY              DESCRIPTION
       ----  -----------     ----------      ------------------------------
       0.00  aug.26.2018     Peter Glen      Initial version.
+      0.00  sep.03.2018     Peter Glen      Updated with container
       
    ======================================================================= */
 
@@ -15,6 +16,7 @@
 
 void    SetDIBDebug(int level);
 int     OpenDIB(dibabuff *pbuff, char **err_str);
+int     CreateDIB(dibabuff *pbuff, const char *ppp, int len, char **err_str);
 
 int     DumpDIB(dibabuff *pbuff);
 
@@ -39,5 +41,7 @@ int     PutDIBSection(dibabuff *pbuff, const char *ptr, int len, int type);
                                      
                                
                          
+
+
 
 

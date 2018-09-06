@@ -127,6 +127,21 @@ int     OpenDIB(dibabuff *pbuff, char **err_str)
     return ret;
 }
 
+int     CreateDIB(dibabuff *pbuff, const char *ppp, int len, char **err_str)
+
+{
+    pbuff->mlen = len + BUFFSIZE;
+    pbuff->ptr = zalloc(pbuff->mlen + 1);
+    if(pbuff->ptr == NULL)
+        {
+        *err_str = "No Memory";
+        return -1;
+        }
+    pbuff->pos = 0;   pbuff->clen = len;
+    memcpy(pbuff->ptr, ppp, pbuff->clen);
+    return 0;
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 int     CompleteDIB(dibabuff *pbuff, char **err_str)
@@ -506,6 +521,9 @@ int     PutDIBSection(dibabuff *pbuff, const char *ptr, int len, int type)
 }
 
 /* EOF */
+
+
+
 
 
 

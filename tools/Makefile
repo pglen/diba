@@ -95,7 +95,7 @@ bin_PROGRAMS = test_base64$(EXEEXT) test_zmalloc$(EXEEXT) \
 	test_misc$(EXEEXT) test_chunk$(EXEEXT) test_keys$(EXEEXT) \
 	test_zip$(EXEEXT) test_getpass$(EXEEXT) \
 	test_dibabuffa$(EXEEXT) test_dibafile$(EXEEXT) \
-	test_buffkeys$(EXEEXT)
+	test_buffkeys$(EXEEXT) test_buffbuff$(EXEEXT)
 subdir = tools
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -119,6 +119,11 @@ am_test_base64b_OBJECTS = test_base64b.$(OBJEXT) base64.$(OBJEXT) \
 	zmalloc.$(OBJEXT)
 test_base64b_OBJECTS = $(am_test_base64b_OBJECTS)
 test_base64b_LDADD = $(LDADD)
+am_test_buffbuff_OBJECTS = test_buffbuff.$(OBJEXT) dibafcom.$(OBJEXT) \
+	base64.$(OBJEXT) zmalloc.$(OBJEXT) misc.$(OBJEXT) \
+	cmdline.$(OBJEXT) zstr.$(OBJEXT) dibabuff.$(OBJEXT)
+test_buffbuff_OBJECTS = $(am_test_buffbuff_OBJECTS)
+test_buffbuff_LDADD = $(LDADD)
 am_test_buffkeys_OBJECTS = test_buffkeys.$(OBJEXT) dibafcom.$(OBJEXT) \
 	base64.$(OBJEXT) zmalloc.$(OBJEXT) misc.$(OBJEXT) \
 	cmdline.$(OBJEXT) zstr.$(OBJEXT) dibabuff.$(OBJEXT)
@@ -202,18 +207,18 @@ am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(test_base64_SOURCES) $(test_base64a_SOURCES) \
-	$(test_base64b_SOURCES) $(test_buffkeys_SOURCES) \
-	$(test_chunk_SOURCES) $(test_comline_SOURCES) \
-	$(test_dibabuffa_SOURCES) $(test_dibafile_SOURCES) \
-	$(test_getpass_SOURCES) $(test_keys_SOURCES) \
-	$(test_misc_SOURCES) $(test_zip_SOURCES) \
+	$(test_base64b_SOURCES) $(test_buffbuff_SOURCES) \
+	$(test_buffkeys_SOURCES) $(test_chunk_SOURCES) \
+	$(test_comline_SOURCES) $(test_dibabuffa_SOURCES) \
+	$(test_dibafile_SOURCES) $(test_getpass_SOURCES) \
+	$(test_keys_SOURCES) $(test_misc_SOURCES) $(test_zip_SOURCES) \
 	$(test_zmalloc_SOURCES) $(test_zstr_SOURCES)
 DIST_SOURCES = $(test_base64_SOURCES) $(test_base64a_SOURCES) \
-	$(test_base64b_SOURCES) $(test_buffkeys_SOURCES) \
-	$(test_chunk_SOURCES) $(test_comline_SOURCES) \
-	$(test_dibabuffa_SOURCES) $(test_dibafile_SOURCES) \
-	$(test_getpass_SOURCES) $(test_keys_SOURCES) \
-	$(test_misc_SOURCES) $(test_zip_SOURCES) \
+	$(test_base64b_SOURCES) $(test_buffbuff_SOURCES) \
+	$(test_buffkeys_SOURCES) $(test_chunk_SOURCES) \
+	$(test_comline_SOURCES) $(test_dibabuffa_SOURCES) \
+	$(test_dibafile_SOURCES) $(test_getpass_SOURCES) \
+	$(test_keys_SOURCES) $(test_misc_SOURCES) $(test_zip_SOURCES) \
 	$(test_zmalloc_SOURCES) $(test_zstr_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
@@ -350,6 +355,7 @@ test_chunk_SOURCES = test_chunk.c base64.c dibafcom.c zmalloc.c misc.c cmdline.c
 test_dibabuffa_SOURCES = test_dibabuffa.c dibafcom.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibabuff.c
 test_dibafile_SOURCES = test_dibabuffa.c dibafcom.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibabuff.c
 test_buffkeys_SOURCES = test_buffkeys.c dibafcom.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibabuff.c
+test_buffbuff_SOURCES = test_buffbuff.c dibafcom.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibabuff.c
 all: all-am
 
 .SUFFIXES:
@@ -438,6 +444,10 @@ test_base64b$(EXEEXT): $(test_base64b_OBJECTS) $(test_base64b_DEPENDENCIES) $(EX
 	@rm -f test_base64b$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_base64b_OBJECTS) $(test_base64b_LDADD) $(LIBS)
 
+test_buffbuff$(EXEEXT): $(test_buffbuff_OBJECTS) $(test_buffbuff_DEPENDENCIES) $(EXTRA_test_buffbuff_DEPENDENCIES) 
+	@rm -f test_buffbuff$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_buffbuff_OBJECTS) $(test_buffbuff_LDADD) $(LIBS)
+
 test_buffkeys$(EXEEXT): $(test_buffkeys_OBJECTS) $(test_buffkeys_DEPENDENCIES) $(EXTRA_test_buffkeys_DEPENDENCIES) 
 	@rm -f test_buffkeys$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_buffkeys_OBJECTS) $(test_buffkeys_LDADD) $(LIBS)
@@ -498,6 +508,7 @@ include ./$(DEPDIR)/misc.Po
 include ./$(DEPDIR)/test_base64.Po
 include ./$(DEPDIR)/test_base64a.Po
 include ./$(DEPDIR)/test_base64b.Po
+include ./$(DEPDIR)/test_buffbuff.Po
 include ./$(DEPDIR)/test_buffkeys.Po
 include ./$(DEPDIR)/test_chunk.Po
 include ./$(DEPDIR)/test_comline.Po

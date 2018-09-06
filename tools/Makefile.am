@@ -17,7 +17,8 @@ bin_PROGRAMS = test_base64 test_zmalloc \
  test_base64 test_base64a test_base64b \
          test_comline test_zstr test_misc \
             test_chunk test_keys test_zip test_getpass \
-                test_dibabuffa test_dibafile test_buffkeys
+                test_dibabuffa test_dibafile test_buffkeys \
+                 test_buffbuff
 
 test_zmalloc_SOURCES = test_zmalloc.c zmalloc.c
 test_base64_SOURCES = test_base64.c base64.c zmalloc.c
@@ -34,6 +35,7 @@ test_chunk_SOURCES = test_chunk.c base64.c dibafcom.c zmalloc.c misc.c cmdline.c
 test_dibabuffa_SOURCES = test_dibabuffa.c dibafcom.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibabuff.c
 test_dibafile_SOURCES = test_dibabuffa.c dibafcom.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibabuff.c
 test_buffkeys_SOURCES = test_buffkeys.c dibafcom.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibabuff.c
+test_buffbuff_SOURCES = test_buffbuff.c dibafcom.c base64.c zmalloc.c misc.c cmdline.c zstr.c dibabuff.c
 
 test:
 	@echo Tests pass if diffs are silent.
@@ -64,6 +66,7 @@ prep_tests:
 	@./test_prep.sh ./test_getpass$(EXEEXT)
 
 test_PROGRAMS:  ./test_base64$(EXEEXT)
+
 
 
 

@@ -94,8 +94,13 @@ int main(int argc, char** argv)
             {
             char *key = (type & 0x80) ? "Yes" : "No";
             //printf("len=%d type=%d (0x%x) Key=%s\n", len, type, type, key); 
-            printf("Key: %s: '%s'\n", key, buff);
-            zfree(buff);     
+            printf("%s: '%s'\n", key, buff);
+            zfree(buff);  
+            
+             if(type == CHUNK_FOOTER)
+                {
+                break;
+                }      
             }
         }      
     CloseDIB(&dbuff);
@@ -104,6 +109,7 @@ int main(int argc, char** argv)
 }
 
 // EOF
+
 
 
 

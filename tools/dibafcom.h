@@ -33,7 +33,7 @@
 #define	CHUNK_KEY	    0x80
 #define	CHUNK_ZIPPED    0x800
 
-#define BUFFSIZE	    4096      // Common cluster size
+#define BUFFSIZE	    1024      // Common alloc size
 #define CHUNKSIZE	    30        // Add header str len together
 #define MINCHSIZE       12        // Smallest chunk header
 
@@ -65,5 +65,6 @@ typedef struct _dibabuff
 unsigned int calc_buffer_sum(const char *ptr, int len);
 
 // EOF
+
 
 
