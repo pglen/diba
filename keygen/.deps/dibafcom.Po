@@ -3,8 +3,8 @@ dibafcom.o: ../tools/dibafcom.c /usr/include/stdio.h /usr/include/_ansi.h \
  /usr/include/sys/config.h /usr/include/machine/ieeefp.h \
  /usr/include/sys/features.h /usr/include/cygwin/config.h \
  /usr/include/sys/cdefs.h /usr/include/machine/_default_types.h \
- /usr/lib/gcc/i686-pc-msys/6.4.0/include/stddef.h \
- /usr/lib/gcc/i686-pc-msys/6.4.0/include/stdarg.h \
+ /usr/lib/gcc/i686-pc-msys/7.3.0/include/stddef.h \
+ /usr/lib/gcc/i686-pc-msys/7.3.0/include/stdarg.h \
  /usr/include/sys/reent.h /usr/include/_ansi.h /usr/include/sys/_types.h \
  /usr/include/machine/_types.h /usr/include/sys/lock.h \
  /usr/include/sys/types.h /usr/include/sys/_stdint.h \
@@ -24,8 +24,8 @@ dibafcom.o: ../tools/dibafcom.c /usr/include/stdio.h /usr/include/_ansi.h \
  ../tools/zmalloc.h ../tools/getpass.h ../tools/base64.h \
  ../tools/dibafile.h ../tools/dibafcom.h /usr/include/zlib.h \
  /usr/include/zconf.h \
- /usr/lib/gcc/i686-pc-msys/6.4.0/include-fixed/limits.h \
- /usr/lib/gcc/i686-pc-msys/6.4.0/include-fixed/syslimits.h \
+ /usr/lib/gcc/i686-pc-msys/7.3.0/include-fixed/limits.h \
+ /usr/lib/gcc/i686-pc-msys/7.3.0/include-fixed/syslimits.h \
  /usr/include/limits.h /usr/include/features.h
 
 /usr/include/stdio.h:
@@ -48,9 +48,9 @@ dibafcom.o: ../tools/dibafcom.c /usr/include/stdio.h /usr/include/_ansi.h \
 
 /usr/include/machine/_default_types.h:
 
-/usr/lib/gcc/i686-pc-msys/6.4.0/include/stddef.h:
+/usr/lib/gcc/i686-pc-msys/7.3.0/include/stddef.h:
 
-/usr/lib/gcc/i686-pc-msys/6.4.0/include/stdarg.h:
+/usr/lib/gcc/i686-pc-msys/7.3.0/include/stdarg.h:
 
 /usr/include/sys/reent.h:
 
@@ -136,9 +136,9 @@ dibafcom.o: ../tools/dibafcom.c /usr/include/stdio.h /usr/include/_ansi.h \
 
 /usr/include/zconf.h:
 
-/usr/lib/gcc/i686-pc-msys/6.4.0/include-fixed/limits.h:
+/usr/lib/gcc/i686-pc-msys/7.3.0/include-fixed/limits.h:
 
-/usr/lib/gcc/i686-pc-msys/6.4.0/include-fixed/syslimits.h:
+/usr/lib/gcc/i686-pc-msys/7.3.0/include-fixed/syslimits.h:
 
 /usr/include/limits.h:
 
