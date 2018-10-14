@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 
-import os, sys, getopt, signal, gtk
+import os, sys, getopt, signal
+#, gtk
+
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GObject
+from gi.repository import GLib
 
 class   TreeHand():
 
@@ -8,9 +16,9 @@ class   TreeHand():
         self.treestore = None
         self.tree = self.create_tree(self)
         self.tree.set_headers_visible(False)
-        self.tree.get_selection().set_mode(gtk.SELECTION_MULTIPLE)
+        self.tree.get_selection().set_mode(Gtk.SelectionMode.MULTIPLE)
         
-        self.stree =  gtk.ScrolledWindow()
+        self.stree =  Gtk.ScrolledWindow()
         self.stree.add(self.tree)
         self.tree.connect("cursor-changed",  tree_sel_row)
 
@@ -18,7 +26,7 @@ class   TreeHand():
     def start_tree(self):
     
         if not self.treestore:
-            self.treestore = gtk.TreeStore(str)
+            self.treestore = Gtk.TreeStore(str)
         
         # Delete previous contents
         try:      
@@ -36,10 +44,10 @@ class   TreeHand():
     def create_tree(self,  match, text = None):
         
         self.start_tree()
-        tv = gtk.TreeView(self.treestore)
+        tv = Gtk.TreeView(self.treestore)
         tv.set_enable_search(True)
-        cell = gtk.CellRendererText()
-        tvcolumn = gtk.TreeViewColumn()
+        cell = Gtk.CellRendererText()
+        tvcolumn = Gtk.TreeViewColumn()
         tvcolumn.pack_start(cell, True)
         tvcolumn.add_attribute(cell, 'text', 0)
         tv.append_column(tvcolumn)
@@ -83,5 +91,6 @@ class   TreeHand():
     def append_treestore(self, text):
         piter = self.treestore.append(None, [text])
                 
+
 
 

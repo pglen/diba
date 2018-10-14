@@ -1,7 +1,14 @@
 #!/usr/bin/env python
 
 import os, sys, getopt, signal, random, time, warnings
-import gobject, gtk, pango
+#import gobject, gtk, pango
+
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GObject
+from gi.repository import GLib
 
 import pysql, sutil
  
@@ -37,7 +44,7 @@ xxx = 0; yyy = 50
 # ------------------------------------------------------------------------
 # The surface of the yellow sticky
 
-class stickDoc(gtk.DrawingArea):
+class stickDoc(Gtk.DrawingArea):
 
     def __init__(self, par, head, text):
 
@@ -48,19 +55,19 @@ class stickDoc(gtk.DrawingArea):
         self.gap    = GAP
 
         # Parent widget
-        gtk.DrawingArea.__init__(self)
-        #self.set_flags(gtk.CAN_FOCUS | gtk.CAN_DEFAULT| gtk.SENSITIVE | gtk.PARENT_SENSITIVE)
-        #self.set_flags(gtk.CAN_FOCUS | gtk.SENSITIVE)
-        self.set_flags(gtk.SENSITIVE)
+        GObject.GObject.__init__(self)
+        #self.set_flags(Gtk.CAN_FOCUS | Gtk.CAN_DEFAULT| Gtk.SENSITIVE | Gtk.PARENT_SENSITIVE)
+        #self.set_flags(Gtk.CAN_FOCUS | Gtk.SENSITIVE)
+        self.set_flags(Gtk.SENSITIVE)
 
-        self.set_events(gtk.gdk.ALL_EVENTS_MASK )
+        self.set_events(Gdk.EventMask.ALL_EVENTS_MASK )
 
-        self.colormap = gtk.widget_get_default_colormap()
+        self.colormap = Gtk.widget_get_default_colormap()
         self.fgcolor  = self.colormap.alloc_color(FGCOLOR)
         self.bgcolor  = self.colormap.alloc_color(BGCOLOR)
         self.frcolor  = self.colormap.alloc_color(FRCOLOR)
 
-        self.modify_bg(gtk.STATE_NORMAL, self.bgcolor)
+        self.modify_bg(Gtk.StateType.NORMAL, self.bgcolor)
         self.pangolayout = self.create_pango_layout("a")
 
         self.connect("motion-notify-event", self.area_motion)
@@ -71,17 +78,17 @@ class stickDoc(gtk.DrawingArea):
 
     def area_button(self, area, event):
         #print "yellow butt"
-        if  event.type == gtk.gdk.BUTTON_PRESS:
+        if  event.type == Gdk.EventType.BUTTON_PRESS:
             self.ex = event.x; self.ey = event.y
-        elif  event.type == gtk.gdk._2BUTTON_PRESS:
+        elif  event.type == Gdk._2BUTTON_PRESS:
             #se = sticked.StickEd(self.par.window, 
             #    self.par.me.mainwin.done_dlg, self.head, self.text)
             pass
         return False
 
     def area_motion(self, area, event):
-        #print "motion event", event.state, event.x, event.y
-        if event.state & gtk.gdk.BUTTON1_MASK:
+        #print "motion event", event.get_state(), event.x, event.y
+        if event.get_state() & Gdk.ModifierType.BUTTON1_MASK:
             #print "dragx", self.ex, event.x, "dragy", self.ey, event.y
             #par = self.get_parent_window()
             x, y = self.parwin.get_position()
@@ -96,16 +103,16 @@ class stickDoc(gtk.DrawingArea):
 
     def key_press_event(self, text_view, event):
         print "widget keypress"
-        #if event.state & gtk.gdk.MOD1_MASK:
-        #    if event.keyval == gtk.keysyms.x or event.keyval == gtk.keysyms.X:
+        #if event.get_state() & Gdk.ModifierType.MOD1_MASK:
+        #    if event.keyval == Gdk.KEY_x or event.keyval == Gdk.KEY_X:
         #        sys.exit(0)
         #return False
         return True 
 
     def setfont(self, fam, size):
-        fd = pango.FontDescription()
+        fd = Pango.FontDescription()
         fd.set_family(fam)
-        fd.set_size(size * pango.SCALE);
+        fd.set_size(size * Pango.SCALE);
         self.pangolayout.set_font_description(fd)
 
         warnings.simplefilter("ignore")
@@ -114,21 +121,21 @@ class stickDoc(gtk.DrawingArea):
         warnings.simplefilter("default")
 
         # Get Pango tabs
-        '''self.tabarr = pango.TabArray(80, False)
+        '''self.tabarr = Pango.TabArray(80, False)
         for aa in range(self.tabarr.get_size()):
-            self.tabarr.set_tab(aa, pango.TAB_LEFT, aa * TABSTOP * self.cxx * pango.SCALE)
+            self.tabarr.set_tab(aa, Pango.TabAlign.LEFT, aa * TABSTOP * self.cxx * Pango.SCALE)
         self.pangolayout.set_tabs(self.tabarr)
         ts = self.pangolayout.get_tabs()
         if ts != None:
             al, self.tabstop = ts.get_tab(1)
-        self.tabstop /= self.cxx * pango.SCALE'''
+        self.tabstop /= self.cxx * Pango.SCALE'''
 
     def area_expose_cb(self, area, event):
 
         style = self.get_style()
-        self.gc = style.fg_gc[gtk.STATE_NORMAL]
+        self.gc = style.fg_gc[Gtk.StateType.NORMAL]
 
-        gcx = gtk.gdk.GC(self.window); gcx.copy(self.gc)
+        gcx = Gdk.GC(self.window); gcx.copy(self.gc)
         gcx.set_foreground(self.fgcolor)
 
         self.setfont("system", 14)
@@ -155,7 +162,7 @@ class stickDoc(gtk.DrawingArea):
             self.set_size_request(2 * rqx, 2 * rqy)
 
         win = self.get_window()
-        ww, hh = gtk.gdk.Window.get_size(win)
+        ww, hh = Gdk.Window.get_size(win)
 
         #print "ww,hh", ww, hh
         ww -= 1; hh -= 1
@@ -166,15 +173,15 @@ class stickDoc(gtk.DrawingArea):
         llx = ww -  12;  lly = 12
         lrx = ww -   2;  lry = 12
 
-        gcx.set_line_attributes(1, gtk.gdk.LINE_SOLID,
-                        gtk.gdk.CAP_NOT_LAST, gtk.gdk.JOIN_MITER)
+        gcx.set_line_attributes(1, Gdk.LINE_SOLID,
+                        Gdk.CAP_NOT_LAST, Gdk.JOIN_MITER)
 
         win.draw_line(gcx, ulx, uly, lrx, lry)
         win.draw_line(gcx, llx, lly, urx, ury)
 
         # Draw frame
-        gcx.set_line_attributes(2, gtk.gdk.LINE_SOLID,
-            gtk.gdk.CAP_BUTT, gtk.gdk.JOIN_MITER)
+        gcx.set_line_attributes(2, Gdk.LINE_SOLID,
+            Gdk.CAP_BUTT, Gdk.JOIN_MITER)
         gcx.set_foreground(self.frcolor)
         win.draw_line(gcx, 0, 0, ww, 0)
         win.draw_line(gcx, ww, 0, ww, hh)
@@ -193,10 +200,10 @@ class stickWin():
         self.me = me
         self.text = text
 
-        www = gtk.gdk.screen_width(); hhh = gtk.gdk.screen_height();
+        www = Gdk.Screen.width(); hhh = Gdk.Screen.height();
 
-        self.window = window = gtk.Window(gtk.WINDOW_TOPLEVEL)
-        #self.window = window = gtk.Window(gtk.WINDOW_POPUP)
+        self.window = window = Gtk.Window(Gtk.WindowType.TOPLEVEL)
+        #self.window = window = Gtk.Window(Gtk.WindowType.POPUP)
 
         window.set_default_size(50, 50)
         window.set_decorated(False)
@@ -207,19 +214,19 @@ class stickWin():
             pass
 
         # That wat the window manager will not list it
-        window.set_type_hint(gtk.gdk.WINDOW_TYPE_HINT_UTILITY)
-        #window.set_type_hint(gtk.gdk.WINDOW_TYPE_HINT_DIALOG)
-        #window.set_type_hint(gtk.gdk.WINDOW_TYPE_HINT_TOOLBAR)
+        window.set_type_hint(Gdk.WindowTypeHint.UTILITY)
+        #window.set_type_hint(Gdk.WindowTypeHint.DIALOG)
+        #window.set_type_hint(Gdk.WindowTypeHint.TOOLBAR)
 
-        window.set_events(gtk.gdk.ALL_EVENTS_MASK )
+        window.set_events(Gdk.EventMask.ALL_EVENTS_MASK )
 
-        '''window.set_events(  gtk.gdk.POINTER_MOTION_MASK |
-                    gtk.gdk.POINTER_MOTION_HINT_MASK |
-                    gtk.gdk.BUTTON_PRESS_MASK |
-                    gtk.gdk.BUTTON_RELEASE_MASK |
-                    gtk.gdk.KEY_PRESS_MASK |
-                    gtk.gdk.KEY_RELEASE_MASK |
-                    gtk.gdk.FOCUS_CHANGE_MASK )'''
+        '''window.set_events(  Gdk.EventMask.POINTER_MOTION_MASK |
+                    Gdk.EventMask.POINTER_MOTION_HINT_MASK |
+                    Gdk.EventMask.BUTTON_PRESS_MASK |
+                    Gdk.EventMask.BUTTON_RELEASE_MASK |
+                    Gdk.EventMask.KEY_PRESS_MASK |
+                    Gdk.EventMask.KEY_RELEASE_MASK |
+                    Gdk.EventMask.FOCUS_CHANGE_MASK )'''
 
         window.set_accept_focus(False)
         window.connect("key-press-event", self.key_press_event)
@@ -229,9 +236,9 @@ class stickWin():
         #window.connect("destroy", self.OnExit)
         #window.connect("event", self.OnExit)
 
-        window.set_flags(gtk.SENSITIVE)
-        #window.set_flags(gtk.CAN_FOCUS | gtk.SENSITIVE)
-        #window.set_flags(gtk.CAN_FOCUS | gtk.CAN_DEFAULT| gtk.SENSITIVE | gtk.PARENT_SENSITIVE)
+        window.set_flags(Gtk.SENSITIVE)
+        #window.set_flags(Gtk.CAN_FOCUS | Gtk.SENSITIVE)
+        #window.set_flags(Gtk.CAN_FOCUS | Gtk.CAN_DEFAULT| Gtk.SENSITIVE | Gtk.PARENT_SENSITIVE)
         window.set_destroy_with_parent(True )
         window.set_transient_for(me)
 
@@ -240,20 +247,20 @@ class stickWin():
         window.show_all()
         sutil.usleep(1)           # Present window
         
-        #gtk.gdk.Window.set_skip_pager_hint(window.get_window(), True )
-        #gtk.gdk.Window.set_skip_taskbar_hint(window.get_window(), True )
+        #Gdk.Window.set_skip_pager_hint(window.get_window(), True )
+        #Gdk.Window.set_skip_taskbar_hint(window.get_window(), True )
         #window.set_keep_above(False)
-        #gtk.gdk.Window.set_decorations(window.get_window(), gtk.gdk.DECOR_BORDER)
+        #Gdk.Window.set_decorations(window.get_window(), Gdk.DECOR_BORDER)
         
-        if gtk.gdk.Display.supports_composite(gtk.gdk.display_get_default()):
-            gtk.gdk.Window.set_composited(window.get_window(), True )
-            gtk.gdk.Window.set_opacity(window.get_window(), .5)
+        if Gdk.Display.supports_composite(Gdk.Display.get_default()):
+            Gdk.Window.set_composited(window.get_window(), True )
+            Gdk.Window.set_opacity(window.get_window(), .5)
 
         # Arrange it in peace
         '''yyy = TOPSTOP; xxx = www / 2
         for ww in slist.data:
-            xx, yy = gtk.gdk.Window.get_position(ww.window.get_window())
-            ww, hh = gtk.gdk.Window.get_size(ww.window.get_window())
+            xx, yy = Gdk.Window.get_position(ww.window.get_window())
+            ww, hh = Gdk.Window.get_size(ww.window.get_window())
             print "setting position", xx, yy, "size", ww, hh
             if yyy + hh >= hhh - 2 * BUTSTOP:
                 xxx += 200
@@ -274,7 +281,7 @@ class stickWin():
     def area_button(self, area, event):
         #print "win butt", event
         win = self.window.get_window()
-        ww, hh = gtk.gdk.Window.get_size(win)
+        ww, hh = Gdk.Window.get_size(win)
 
         ulx = ww -  12;  uly = 2
         urx = ww -   2;  ury = 2
@@ -289,12 +296,12 @@ class stickWin():
 
     def key_press_event(self, text_view, event):
         print "window keypress", self.head
-        #if event.state & gtk.gdk.MOD1_MASK:
-        #    if event.keyval == gtk.keysyms.x or event.keyval == gtk.keysyms.X:
+        #if event.get_state() & Gdk.ModifierType.MOD1_MASK:
+        #    if event.keyval == Gdk.KEY_x or event.keyval == Gdk.KEY_X:
         #        sys.exit(0)
         #return False
         
-        if event.keyval == gtk.keysyms.Tab:
+        if event.keyval == Gdk.KEY_Tab:
             #self.me.mainwin.next(self)
             pass
         return False 
@@ -302,14 +309,14 @@ class stickWin():
     def invalidate(self, rect = None):                        
         if rect == None:
             ww, hh = self.window.window.get_size()
-            rect = gtk.gdk.Rectangle(0,0, ww, hh)
+            rect = (0,0, ww, hh)
         #print "Invalidate:", rect
         self.window.window.invalidate_rect(rect, False)
 
     def OnExit(self, aa, bb = ""):
         print "onexit", bb
-        #while gtk.main_level():
-        #    gtk.main_quit()
+        #while Gtk.main_level():
+        #    Gtk.main_quit()
         
         xx, yy = self.window.window.get_position()
 
@@ -322,6 +329,7 @@ class stickWin():
         #//pedconfig.conf.sql.put("hh", hh)
         
         #print "remember sticky", xx, yy, ww, hh
+
 
 
 

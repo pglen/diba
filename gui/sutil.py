@@ -1,8 +1,16 @@
 #!/usr/bin/env python
 
-import gtk, sys, traceback, os, time
+import sys, traceback, os, time
 
-disp = gtk.gdk.display_get_default()
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GObject
+from gi.repository import GLib
+
+
+disp = Gdk.Display.get_default()
 scr = disp.get_default_screen()
 
 #print "num_mon",  scr.get_n_monitors()    
@@ -20,8 +28,8 @@ def get_screen_wh():
     geo = scr.get_monitor_geometry(mon)
     www = geo.width; hhh = geo.height
     if www == 0 or hhh == 0:
-        www = gtk.gdk.get_screen_width();
-        hhh = gtk.gdk.get_screen_height();
+        www = Gdk.get_screen_width();
+        hhh = Gdk.get_screen_height();
     return www, hhh    
 
 # ------------------------------------------------------------------------
@@ -57,10 +65,10 @@ def print_exception(xstr):
 # ------------------------------------------------------------------------
 # Show a regular message:
 
-def message(strx, parent = None, title = None, icon = gtk.MESSAGE_INFO):
+def message(strx, parent = None, title = None, icon = Gtk.MessageType.INFO):
 
-    dialog = gtk.MessageDialog(parent, gtk.DIALOG_DESTROY_WITH_PARENT,
-        icon, gtk.BUTTONS_CLOSE, strx)
+    dialog = Gtk.MessageDialog(parent, Gtk.DialogFlags.DESTROY_WITH_PARENT,
+        icon, Gtk.ButtonsType.CLOSE, strx)
     
     dialog.set_modal(True)   
     
@@ -83,7 +91,7 @@ def  usleep(msec):
     while True:
         if time.clock() > got_clock:
             break
-        gtk.main_iteration_do(False)        
+        Gtk.main_iteration_do(False)        
 
 # ------------------------------------------------------------------------
 # Create temporary file, return name. Empty string ("") if error.
@@ -105,5 +113,6 @@ def tmpname(indir, template):
         if cnt > 10000:
             break
     return fname
+
 
 

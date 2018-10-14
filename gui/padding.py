@@ -1,12 +1,19 @@
 #!/usr/bin/env python
 
 import os, sys, getopt, signal
-import gobject, gtk, pango
-from gtk import gdk
+#import gobject, gtk, pango
 
-if gtk.pygtk_version < (2, 8):
-    print "PyGtk 2.8 or later required for this example"
-    raise SystemExit
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GObject
+from gi.repository import GLib
+
+
+#if Gtk.pygtk_version < (2, 8):
+#    print "PyGtk 2.8 or later required for this example"
+#    raise SystemExit
 
 try:
     import cairo
@@ -16,47 +23,47 @@ except ImportError:
 TEXT = 'A GtkWidget implemented in PyGTK'
 BORDER_WIDTH = 10
 
-class Padding(gtk.Widget):
+class Padding(Gtk.Widget):
 
     def __init__(self, text = None):
-        gtk.Widget.__init__(self)
+        GObject.GObject.__init__(self)
         if text == None:
             text = "Hello"
         self._layout = self.create_pango_layout(text)
-        self._layout.set_font_description(pango.FontDescription("Sans Serif 16"))
+        self._layout.set_font_description(Pango.FontDescription("Sans Serif 16"))
 
     # GtkWidget
 
     def do_realize(self):
         # The do_realize method is responsible for creating GDK (windowing system)
-        # resources. In this example we will create a new gdk.Window which we
+        # resources. In this example we will create a new Gdk.Window which we
         # then draw on
 
         # First set an internal flag telling that we're realized
-        self.set_flags(gtk.REALIZED)
+        self.set_flags(Gtk.REALIZED)
 
-        # Create a new gdk.Window which we can draw on.
+        # Create a new Gdk.Window which we can draw on.
         # Also say that we want to receive exposure events by setting
         # the event_mask
-        self.window = gdk.Window(
+        self.window = Gdk.Window(
             self.get_parent_window(),
             width=self.allocation.width,
             height=self.allocation.height,
-            window_type=gdk.WINDOW_CHILD,
-            wclass=gdk.INPUT_OUTPUT,
-            event_mask=self.get_events() | gdk.EXPOSURE_MASK)
+            window_type=Gdk.WINDOW_CHILD,
+            wclass=Gdk.INPUT_OUTPUT,
+            event_mask=self.get_events() | Gdk.EventMask.EXPOSURE_MASK)
 
-        # Associate the gdk.Window with ourselves, Gtk+ needs a reference
+        # Associate the Gdk.Window with ourselves, Gtk+ needs a reference
         # between the widget and the gdk window
         self.window.set_user_data(self)
 
-        # Attach the style to the gdk.Window, a style contains colors and
+        # Attach the style to the Gdk.Window, a style contains colors and
         # GC contextes used for drawing
         self.style.attach(self.window)
 
         # The default color of the background should be what
         # the style (theme engine) tells us.
-        self.style.set_background(self.window, gtk.STATE_NORMAL)
+        self.style.set_background(self.window, Gtk.StateType.NORMAL)
         self.window.move_resize(*self.allocation)
 
     def do_unrealize(self):
@@ -73,8 +80,8 @@ class Padding(gtk.Widget):
         # In this case, we say that we want to be as big as the
         # text is, plus a little border around it.
         width, height = self._layout.get_size()
-        requisition.width = width  #// pango.SCALE + BORDER_WIDTH*4
-        requisition.height = height # // pango.SCALE + BORDER_WIDTH*4
+        requisition.width = width  #// Pango.SCALE + BORDER_WIDTH*4
+        requisition.height = height # // Pango.SCALE + BORDER_WIDTH*4
 
     def do_size_allocate(self, allocation):
         # The do_size_allocate is called by when the actual size is known
@@ -85,7 +92,7 @@ class Padding(gtk.Widget):
 
         # If we're realized, move and resize the window to the
         # requested coordinates/positions
-        if self.flags() & gtk.REALIZED:
+        if self.get_realized():
             self.window.move_resize(*allocation)
 
     def do_expose_event(self, event):
@@ -111,6 +118,7 @@ class Padding(gtk.Widget):
         #cr.update_layout(self._layout)
         #cr.show_layout(self._layout)
 
-gobject.type_register(Padding)
+GObject.type_register(Padding)
+
 
 

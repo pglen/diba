@@ -1,19 +1,27 @@
 #!/usr/bin/env python
 
 import os, sys, getopt, signal
-import gobject, gtk, pango
+#import gobject, gtk, pango
+
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GObject
+from gi.repository import GLib
+
 
 import random, time
 import treehand, sutil, padding
 
-class NewCust(gtk.Window):
+class NewCust(Gtk.Window):
     
     def __init__(self, par, cback, uuid_name, datax = None):
     
         self.cback = cback
         self.ok = False
         self.arr = []
-        gtk.Window.__init__(self)
+        GObject.GObject.__init__(self)
         self.set_transient_for(par)
         self.set_modal(True)
         
@@ -22,25 +30,25 @@ class NewCust(gtk.Window):
         else:
             self.set_title("Edit DIBA customer.")
             
-        self.set_position(gtk.WIN_POS_CENTER)
+        self.set_position(Gtk.WindowPosition.CENTER)
         
-        #ic = gtk.Image(); ic.set_from_stock(gtk.STOCK_DIALOG_INFO, gtk.ICON_SIZE_BUTTON)
+        #ic = Gtk.Image(); ic.set_from_stock(Gtk.STOCK_DIALOG_INFO, Gtk.IconSize.BUTTON)
         #window.set_icon(ic.get_pixbuf())
-        #www = gtk.gdk.screen_width(); hhh = gtk.gdk.screen_height();
+        #www = Gdk.Screen.width(); hhh = Gdk.Screen.height();
         
         www, hhh = sutil.get_screen_wh()
         
         self.set_default_size(3*www/4, 3*hhh/4)
         
-        self.set_flags(gtk.CAN_FOCUS | gtk.SENSITIVE)
+        self.set_flags(Gtk.CAN_FOCUS | Gtk.SENSITIVE)
          
-        self.set_events(  gtk.gdk.POINTER_MOTION_MASK |
-                            gtk.gdk.POINTER_MOTION_HINT_MASK |
-                            gtk.gdk.BUTTON_PRESS_MASK |
-                            gtk.gdk.BUTTON_RELEASE_MASK |
-                            gtk.gdk.KEY_PRESS_MASK |
-                            gtk.gdk.KEY_RELEASE_MASK |
-                            gtk.gdk.FOCUS_CHANGE_MASK )
+        self.set_events(  Gdk.EventMask.POINTER_MOTION_MASK |
+                            Gdk.EventMask.POINTER_MOTION_HINT_MASK |
+                            Gdk.EventMask.BUTTON_PRESS_MASK |
+                            Gdk.EventMask.BUTTON_RELEASE_MASK |
+                            Gdk.EventMask.KEY_PRESS_MASK |
+                            Gdk.EventMask.KEY_RELEASE_MASK |
+                            Gdk.EventMask.FOCUS_CHANGE_MASK )
          
         self.connect("key-press-event", self.key_press_event)        
         self.connect("button-press-event", self.area_button)        
@@ -53,12 +61,12 @@ class NewCust(gtk.Window):
         self.arr.append(("custid", str(uuid_name)))
         
         # We use gobj instead of SIGALRM, so it is more multi platform
-        #gobject.timeout_add(1000, self.handler_tick)
+        #GObject.timeout_add(1000, self.handler_tick)
         
-        vbox = gtk.VBox()
-        vbox2 = gtk.VBox();
+        vbox = Gtk.VBox()
+        vbox2 = Gtk.VBox();
       
-        sg = gtk.SizeGroup(gtk.SIZE_GROUP_HORIZONTAL)
+        sg = Gtk.SizeGroup(Gtk.SizeGroupMode.HORIZONTAL)
           
         tp1 =("Full Name: ", "cname", "Enter full name (TAB to advance)", None)
         tp2 = ("Date of birth: ", "dob", "Date of birth, YYYY/MM/DD", None) 
@@ -98,7 +106,7 @@ class NewCust(gtk.Window):
         self.vspacer(vbox)
         vbox.pack_start(vbox2, False)
         
-        vbox3 = gtk.VBox();
+        vbox3 = Gtk.VBox();
         
         lab1a = self.textviewpair(vbox3, "Comments: ", "comments", \
                 "Enter comments. This field could contain additiona data. "
@@ -117,30 +125,30 @@ class NewCust(gtk.Window):
         self.vspacer(vbox, expand = True)
         
         # Draw buttons
-        hbox = gtk.HBox()
+        hbox = Gtk.HBox()
         
-        #lab00 = gtk.Label("        ")
+        #lab00 = Gtk.Label(label="        ")
         #hbox.pack_start(lab00, False)
         
-        lab0 = gtk.Label("               " \
+        lab0 = Gtk.Label(label="               " \
                 "Customer ID:  '" + str(uuid_name) + "'")
         hbox.pack_start(lab0, False)
         
-        lableft = gtk.Label("     ")
+        lableft = Gtk.Label(label="     ")
         hbox.pack_start(lableft, True)
         
-        lab1 = gtk.Label("Alt-X or ESC or Alt-C to Exit, Alt-O to OK, TAB or Ctrl-TAB to advance")
+        lab1 = Gtk.Label("Alt-X or ESC or Alt-C to Exit, Alt-O to OK, TAB or Ctrl-TAB to advance")
         hbox.pack_start(lab1, False)
         
-        lab2 = gtk.Label("     ")
+        lab2 = Gtk.Label(label="     ")
         hbox.pack_start(lab2, False)
         
-        butt1 = gtk.Button("     _OK      ")
+        butt1 = Gtk.Button("     _OK      ")
         butt1.connect("clicked", self.click_ok, self)
         hbox.pack_start(butt1, False)
         self.spacer(hbox)
         
-        butt2 = gtk.Button("    _Cancel    ")
+        butt2 = Gtk.Button("    _Cancel    ")
         butt2.connect("clicked", self.click_can, self)
         hbox.pack_start(butt2, False)
         self.spacer(hbox)
@@ -154,25 +162,25 @@ class NewCust(gtk.Window):
     def run(self):
         self.show_all()
         while True:
-            ev = gtk.gdk.event_peek()
+            ev = Gdk.event_peek()
             #print ev
             if ev:
-                if ev.type == gtk.gdk.DELETE:
+                if ev.type == Gdk.DELETE:
                     break
-                if ev.type == gtk.gdk.UNMAP:
+                if ev.type == Gdk.UNMAP:
                     break
-            gtk.main_iteration_do()
+            Gtk.main_iteration_do()
             
         return self.ok
         
     # --------------------------------------------------------------------
     
     def spacer(self, hbox, xstr = "    ", expand = False):
-        lab = gtk.Label(xstr)
+        lab = Gtk.Label(label=xstr)
         hbox.pack_start(lab, expand)
        
     def vspacer(self, vbox, xstr = "     ", expand = False):
-        lab = gtk.Label(xstr)
+        lab = Gtk.Label(label=xstr)
         vbox.pack_start(lab, expand )
         
     def click_ok(self, butt, xx):
@@ -189,28 +197,28 @@ class NewCust(gtk.Window):
         pass
     
     def key_press_event(self, win, event):
-        if event.keyval == gtk.keysyms.Escape:
+        if event.keyval == Gdk.KEY_Escape:
             self.destroy()
-        #print "keystate", event.state
-        if event.keyval == gtk.keysyms.x and event.state & gtk.gdk.MOD1_MASK:
+        #print "keystate", event.get_state()
+        if event.keyval == Gdk.KEY_x and event.get_state() & Gdk.ModifierType.MOD1_MASK:
             self.destroy()
     
     def  area_button(self, butt):
         pass
     
     def scrolledtext(self, name, body = None):
-        textx = gtk.TextView();
+        textx = Gtk.TextView();
         textx.set_border_width(4)
         self.arr.append((name, textx))
         if body != None: 
             self.text.grab_focus()
-            buff = gtk.TextBuffer(); buff.set_text(body)
+            buff = Gtk.TextBuffer(); buff.set_text(body)
             self.text.set_buffer(buff)
 
-        sw = gtk.ScrolledWindow()
+        sw = Gtk.ScrolledWindow()
         sw.add(textx)
-        sw.set_shadow_type(gtk.SHADOW_ETCHED_IN)
-        sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+        sw.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
+        sw.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         return sw
     
     # Expects two tuples of stuff
@@ -218,59 +226,59 @@ class NewCust(gtk.Window):
     
     def entryquad(self, vbox, entry1, entry2):
     
-        hbox2 = gtk.HBox()
+        hbox2 = Gtk.HBox()
         
-        lab1a = gtk.Label("      ")
+        lab1a = Gtk.Label(label="      ")
         hbox2.pack_start(lab1a, False)
-        lab1 = gtk.Label(entry1[0]) ; lab1.set_alignment(1, 0)
+        lab1 = Gtk.Label(label=entry1[0]) ; lab1.set_alignment(1, 0)
         lab1.set_tooltip_text(entry1[2])
         hbox2.pack_start(lab1, False)
-        lab1a = gtk.Label("      ")
+        lab1a = Gtk.Label(label="      ")
         hbox2.pack_start(lab1a, False)
-        headx = gtk.Entry();
+        headx = Gtk.Entry();
         if entry1[3] != None: 
             headx.set_text(entry1[3])
         hbox2.pack_start(headx, True)
-        lab3 = gtk.Label("        ")
+        lab3 = Gtk.Label(label="        ")
         hbox2.pack_start(lab3, False)
         self.arr.append((entry1[1], headx))
         
-        lab1b = gtk.Label("      ")
+        lab1b = Gtk.Label(label="      ")
         hbox2.pack_start(lab1b, False)
-        lab2 = gtk.Label(entry2[0])  ; lab2.set_alignment(1, 0)
+        lab2 = Gtk.Label(label=entry2[0])  ; lab2.set_alignment(1, 0)
         lab2.set_tooltip_text(entry2[2])
         hbox2.pack_start(lab2, False)
-        lab1b = gtk.Label("      ")
+        lab1b = Gtk.Label(label="      ")
         hbox2.pack_start(lab1b, False)
-        headx2 = gtk.Entry();
+        headx2 = Gtk.Entry();
         if entry2[3] != None: 
             headx2.set_text(entry2[3])
         hbox2.pack_start(headx2, True)
-        lab3b = gtk.Label("        ")
+        lab3b = Gtk.Label(label="        ")
         hbox2.pack_start(lab3b, False)
         self.arr.append((entry2[1], headx2))
         self.vspacer(vbox)
-        vbox.pack_start(hbox2)
+        vbox.pack_start(hbox2, True, True, 0)
         return lab1, lab2  
     
     # Create a label entry pair    
     def entrypair(self, vbox, labtext, labname, tip, defval = None): 
         
-        hbox2 = gtk.HBox()
-        lab1b = gtk.Label("      ")
+        hbox2 = Gtk.HBox()
+        lab1b = Gtk.Label(label="      ")
         hbox2.pack_start(lab1b, False)
         
-        lab1 = gtk.Label(labtext) ; lab1.set_alignment(1, 0)
+        lab1 = Gtk.Label(label=labtext) ; lab1.set_alignment(1, 0)
         hbox2.pack_start(lab1, False)
         
-        lab1a = gtk.Label("      ")
+        lab1a = Gtk.Label(label="      ")
         hbox2.pack_start(lab1a, False)
         
-        headx = gtk.Entry();
+        headx = Gtk.Entry();
         if defval != None: 
             headx.set_text(defval)
         hbox2.pack_start(headx, True)
-        lab3 = gtk.Label("        ")
+        lab3 = Gtk.Label(label="        ")
         hbox2.pack_start(lab3, False)
         self.arr.append((labname, headx))
         
@@ -282,43 +290,44 @@ class NewCust(gtk.Window):
 
     def textviewpair(self, vbox, labtext, labname, tip, defval = None): 
             
-        hbox2 = gtk.HBox(); 
+        hbox2 = Gtk.HBox(); 
         self.spacer(hbox2)
         
-        lab2a = gtk.Label("     ")
+        lab2a = Gtk.Label(label="     ")
         hbox2.pack_start(lab2a, False )
         
-        lab2 = gtk.Label(labtext); lab2.set_alignment(1, 0)
+        lab2 = Gtk.Label(label=labtext); lab2.set_alignment(1, 0)
         lab2.set_tooltip_text(tip)
         hbox2.pack_start(lab2, False )
         sw = self.scrolledtext(labname)
         self.spacer(hbox2)
-        hbox2.pack_start(sw)
+        hbox2.pack_start(sw, True, True, 0)
         self.spacer(hbox2)
         self.vspacer(vbox)
         
-        lab2b = gtk.Label("     ")
+        lab2b = Gtk.Label(label="     ")
         hbox2.pack_start(lab2b, False )
-        vbox.pack_start(hbox2)
+        vbox.pack_start(hbox2, True, True, 0)
         return lab2    
         
     def handler_tick(self):
-        gobject.timeout_add(1000, self.handler_tick)
+        GObject.timeout_add(1000, self.handler_tick)
             
     '''wid = padding.Padding()
     wid.set_size_request(lenx, 30)
-    cm = gtk.gdk.colormap_get_system() 
+    cm = Gdk.colormap_get_system() 
     col = cm.alloc_color(10, 100, 100)
-    wid.modify_fg(gtk.STATE_NORMAL, col)
-    wid.modify_bg(gtk.STATE_NORMAL, col)
-    wid.modify_fg(gtk.STATE_ACTIVE, col)
-    wid.modify_bg(gtk.STATE_ACTIVE, col)
-    wid.modify_fg(gtk.STATE_INSENSITIVE, col)
-    wid.modify_bg(gtk.STATE_INSENSITIVE, col)
-    wid.modify_fg(gtk.STATE_SELECTED, col)
-    wid.modify_bg(gtk.STATE_SELECTED, col)
+    wid.modify_fg(Gtk.StateType.NORMAL, col)
+    wid.modify_bg(Gtk.StateType.NORMAL, col)
+    wid.modify_fg(Gtk.StateType.ACTIVE, col)
+    wid.modify_bg(Gtk.StateType.ACTIVE, col)
+    wid.modify_fg(Gtk.StateType.INSENSITIVE, col)
+    wid.modify_bg(Gtk.StateType.INSENSITIVE, col)
+    wid.modify_fg(Gtk.StateType.SELECTED, col)
+    wid.modify_bg(Gtk.StateType.SELECTED, col)
     #hbox2.pack_start(wid, False)'''
     
+
 
 
 

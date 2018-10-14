@@ -7,9 +7,16 @@ later on by a GtkTreeView to display it. This demo builds a
 simple GtkListStore and displays it. See the Stock Browser
 demo for a more advanced example.'''
 
-import pygtk
-pygtk.require('2.0')
-import gobject, gtk, sutil
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
+from gi.repository import Gdk
+from gi.repository import GObject
+from gi.repository import GLib
+
+#import gi
+#gi.require_version('Gtk', '3.0')
+#import gobject, gtk, sutil
 
 (
     COLUMN_FIXED,
@@ -35,23 +42,23 @@ import gobject, gtk, sutil
  (False, 6112,  'Enhancement', 'netscape-like collapsable toolbars'),
  (False, 1,     'Normal', 'First bug :=)'))'''
 
-class ListCust(gtk.Window):
+class ListCust(Gtk.Window):
 
     def __init__(self, parent, data):
     
         # Create window, etc
         self.data = data
-        gtk.Window.__init__(self)
+        GObject.GObject.__init__(self)
         try:
             self.set_screen(parent.get_screen())
         except AttributeError:
-            self.connect('destroy', lambda *w: gtk.main_quit())
+            self.connect('destroy', lambda *w: Gtk.main_quit())
         
         self.set_title("Diba Customer List")
         
         self.set_transient_for(parent)
         self.set_modal(True)
-        self.set_position(gtk.WIN_POS_CENTER)
+        self.set_position(Gtk.WindowPosition.CENTER)
         self.ok = False
         
         #self.set_border_width(8)
@@ -59,36 +66,36 @@ class ListCust(gtk.Window):
         self.set_default_size(2*www/4, 2*hhh/4)
         #self.set_default_size(400, 300)
 
-        vbox = gtk.VBox(False, 8)
+        vbox = Gtk.VBox(False, 8)
         #vbox = self.get_content_area()
         #print vbox
         #self.add_content_widget(vbox, 1)
         self.add(vbox)
 
-        label = gtk.Label('Select DIBA Customer')
+        label = Gtk.Label(label='Select DIBA Customer')
         vbox.pack_start(label, False, False)
 
         self.connect("key-press-event", self.key_press_event)        
         
-        hbox = gtk.HBox()
+        hbox = Gtk.HBox()
         vbox.pack_start(hbox, False)
-        hbox.pack_start(gtk.Label("    "), False)
+        hbox.pack_start(Gtk.Label("    ", True, True, 0), False)
         
         for aa in range(ord("Z") - ord("A") + 1):
-            hbox.pack_start(gtk.Button(" " + str(chr(ord("A") + aa)+ " " )), True)
+            hbox.pack_start(Gtk.Button(" " + str(chr(ord("A", True, True, 0) + aa)+ " " )), True)
             
-        hbox.pack_start(gtk.Label("    "), False)
+        hbox.pack_start(Gtk.Label("    ", True, True, 0), False)
         
-        sw = gtk.ScrolledWindow()
-        sw.set_shadow_type(gtk.SHADOW_ETCHED_IN)
-        sw.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
-        vbox.pack_start(sw)
+        sw = Gtk.ScrolledWindow()
+        sw.set_shadow_type(Gtk.ShadowType.ETCHED_IN)
+        sw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        vbox.pack_start(sw, True, True, 0)
 
         # create tree model
         model = self.__create_model()
 
         # create tree view
-        treeview = gtk.TreeView(model)
+        treeview = Gtk.TreeView(model)
         treeview.set_rules_hint(True)
         treeview.set_search_column(COLUMN_DESCRIPTION)
 
@@ -99,13 +106,13 @@ class ListCust(gtk.Window):
         self.show_all()
         
     def __create_model(self):
-        lstore = gtk.ListStore(
-            #gobject.TYPE_BOOLEAN,
-            #gobject.TYPE_UINT,
-            gobject.TYPE_STRING,
-            gobject.TYPE_STRING,
-            gobject.TYPE_STRING,
-            gobject.TYPE_STRING)
+        lstore = Gtk.ListStore(
+            #GObject.TYPE_BOOLEAN,
+            #GObject.TYPE_UINT,
+            GObject.TYPE_STRING,
+            GObject.TYPE_STRING,
+            GObject.TYPE_STRING,
+            GObject.TYPE_STRING)
 
         for item in self.data:
             iter = lstore.append()
@@ -131,63 +138,64 @@ class ListCust(gtk.Window):
         model = treeview.get_model()
 
         # column for fixed toggles
-        #renderer = gtk.CellRendererToggle()
+        #renderer = Gtk.CellRendererToggle()
         #renderer.connect('toggled', self.fixed_toggled, model)
-        #column = gtk.TreeViewColumn('Primary', renderer, active=COLUMN_FIXED)
-        column = gtk.TreeViewColumn('Primary', gtk.CellRendererText(), text=COLUMN_FIXED)
+        #column = Gtk.TreeViewColumn('Primary', renderer, active=COLUMN_FIXED)
+        column = Gtk.TreeViewColumn('Primary', Gtk.CellRendererText(), text=COLUMN_FIXED)
 
         # set this column to a fixed sizing(of 50 pixels)
-        #column.set_sizing(gtk.TREE_VIEW_COLUMN_FIXED)
+        #column.set_sizing(Gtk.TreeViewColumnSizing.FIXED)
         #column.set_fixed_width(50)
 
         treeview.append_column(column)
 
         # column for bug numbers
-        column = gtk.TreeViewColumn('Customer Name', gtk.CellRendererText(),
+        column = Gtk.TreeViewColumn('Customer Name', Gtk.CellRendererText(),
                                     text=COLUMN_NUMBER)
         column.set_sort_column_id(COLUMN_NUMBER)
         treeview.append_column(column)
 
         # columns for severities
-        column = gtk.TreeViewColumn('Customer ID', gtk.CellRendererText(),
+        column = Gtk.TreeViewColumn('Customer ID', Gtk.CellRendererText(),
                                     text=COLUMN_SEVERITY)
         column.set_sort_column_id(COLUMN_SEVERITY)
         treeview.append_column(column)
 
         # column for description
-        column = gtk.TreeViewColumn('Description', gtk.CellRendererText(),
+        column = Gtk.TreeViewColumn('Description', Gtk.CellRendererText(),
                                      text=COLUMN_DESCRIPTION)
         column.set_sort_column_id(COLUMN_DESCRIPTION)
         treeview.append_column(column)
 
     def key_press_event(self, win, event):
-        if event.keyval == gtk.keysyms.Escape:
+        if event.keyval == Gdk.KEY_Escape:
             self.destroy()
-        #print "keystate", event.state
-        if event.keyval == gtk.keysyms.x and event.state & gtk.gdk.MOD1_MASK:
+        #print "keystate", event.get_state()
+        if event.keyval == Gdk.KEY_x and event.get_state() & Gdk.ModifierType.MOD1_MASK:
             self.destroy()
     
     # Run as modal dialog until destroyed
     def run(self):
         self.show_all()
         while True:
-            ev = gtk.gdk.event_peek()
+            ev = Gdk.event_peek()
             #print ev
             if ev:
-                if ev.type == gtk.gdk.DELETE:
+                if ev.type == Gdk.DELETE:
                     break
-                if ev.type == gtk.gdk.UNMAP:
+                if ev.type == Gdk.UNMAP:
                     break
-            gtk.main_iteration_do()
+            Gtk.main_iteration_do()
         self.destroy()
         return self.ok
     
 def main():
     ListCust()
-    gtk.main()
+    Gtk.main()
 
 if __name__ == '__main__':
     main()
+
 
 
 

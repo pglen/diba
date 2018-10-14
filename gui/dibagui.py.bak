@@ -1,15 +1,7 @@
 #!/usr/bin/env python
 
-import os, sys, getopt, signal, uuid, subprocess
-#import gobject, gtk, pango, 
-
-import gi
-gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
-from gi.repository import Gdk
-from gi.repository import GObject
-from gi.repository import GLib
-from gi.repository import Pango
+import os, sys, getopt, signal, uuid
+import gobject, gtk, pango, subprocess
 
 import random, time
 import newcust, pysql, sutil, treehand, yellow
@@ -58,7 +50,7 @@ class MainWin():
         #print "xx / yy", sutil.get_screen_xy()
             
         window.set_default_size(13*www/16, 13*hhh/16)
-        #window.set_flags(Gtk.CAN_FOCUS | Gtk.SENSITIVE)
+        window.set_flags(Gtk.CAN_FOCUS | Gtk.SENSITIVE)
          
         window.set_events(Gdk.EventMask.ALL_EVENTS_MASK )
 
@@ -104,62 +96,62 @@ class MainWin():
         vbox.pack_start(hbox2, True, True, 0)
         
         #lab1 = Gtk.Label(label="");  hbox.pack_start(lab1, True, True, 0)
-        lab2 = Gtk.Label(label="");  hbox.pack_start(lab2, True, 0, 0)
+        lab2 = Gtk.Label(label="");  hbox.pack_start(lab2, True)
         
         ib2 = self.imgbutt("images/person.png", " _New Account ", self.new_account, window)
-        hbox.pack_start(ib2, False, 0, 0)
+        hbox.pack_start(ib2, False)
         
         ib2 = self.imgbutt("images/select.png", " Selec_t Account ", self.sel_account, window)
-        hbox.pack_start(ib2, False, 0, 0)
+        hbox.pack_start(ib2, False)
         
         ib2 = self.imgbutt("images/search.png", " _Search ", self.search, window)
-        hbox.pack_start(ib2, False, 0, 0)
+        hbox.pack_start(ib2, False)
         
         ib2 = self.imgbutt("images/icon.png", " Show _Balance ", self.show_one, window)
-        hbox.pack_start(ib2, False, 0, 0)
+        hbox.pack_start(ib2, False)
         
         ib2 = self.imgbutt("images/transact.png", " _Show Transactions ", self.transact, window)
-        hbox.pack_start(ib2, False, 0, 0)
+        hbox.pack_start(ib2, False)
         
-        lab2e = Gtk.Label(label="");  hbox.pack_start(lab2e, True, 0, 0)
+        lab2e = Gtk.Label(label="");  hbox.pack_start(lab2e, True)
         
         
         hbox3 = Gtk.HBox()
-        lab3 = Gtk.Label(label="");  hbox3.pack_start(lab3, True, 0, 0)
+        lab3 = Gtk.Label(label="");  hbox3.pack_start(lab3, True)
         
         ib2 = self.imgbutt("images/icon.png", "  _Hide All  ", self.hide_all, window)
-        hbox3.pack_start(ib2, False, 0, 0)
+        hbox3.pack_start(ib2, False)
         
         ib2 = self.imgbutt("images/icon.png", "  H_ide One  ", self.hide_one, window)
-        hbox3.pack_start(ib2, False, 0, 0)
+        hbox3.pack_start(ib2, False)
         
         ib2 = self.imgbutt("images/icon.png", "  _Delete One   ", self.del_one, window)
-        hbox3.pack_start(ib2, False, 0, 0)
+        hbox3.pack_start(ib2, False)
         
         ib2 = self.imgbutt("images/icon.png", "  Hide _Main  ", self.hide_main, window)
-        hbox3.pack_start(ib2, False, 0, 0)
+        hbox3.pack_start(ib2, False)
         
         ib2 = self.imgbutt("images/icon.png", "   E_xit  ", self.exit_all, window)
-        hbox3.pack_start(ib2, False, 0, 0)
+        hbox3.pack_start(ib2, False)
         
-        lab4 = Gtk.Label(label="");  hbox3.pack_start(lab4, True, 0, 0)
+        lab4 = Gtk.Label(label="");  hbox3.pack_start(lab4, True)
         self.account = Gtk.Label(label="DigiBank: No account selected");
         attr = Pango.AttrList()
-        #attr.insert(Pango.AttrSize(30000, 0, -1))
-        #attr.insert(Pango.AttrForeground(0, 0, 65535, 0, -1))
-        #self.account.set_attributes(attr)
+        attr.insert(Pango.AttrSize(30000, 0, -1))
+        attr.insert(Pango.AttrForeground(0, 0, 65535, 0, -1))
+        self.account.set_attributes(attr)
                                   
         self.activity = Gtk.Label(label="Current activity: Idle ");
-        #attr2 = Pango.AttrList()
-        #attr2.insert(Pango.AttrSize(20000, 0, -1))
-        #self.activity.set_attributes(attr2)
+        attr2 = Pango.AttrList()
+        attr2.insert(Pango.AttrSize(20000, 0, -1))
+        self.activity.set_attributes(attr2)
         
-        vbox2.pack_start(Gtk.Label(" "), True, True, 0)
-        vbox2.pack_start(self.account, False, 0, 0)
-        vbox2.pack_start(hbox, False, 0, 0)
-        vbox2.pack_start(hbox3, False, 0, 0)
-        vbox2.pack_start(self.activity, False, 0, 0)
-        vbox2.pack_start(Gtk.Label(" "), True, True, 0)
+        vbox2.pack_start(Gtk.Label(" ", True, True, 0), True)
+        vbox2.pack_start(self.account, False)
+        vbox2.pack_start(hbox, False)
+        vbox2.pack_start(hbox3, False)
+        vbox2.pack_start(self.activity, False)
+        vbox2.pack_start(Gtk.Label(" ", True, True, 0), True)
         
         self.progress("DIBA: Done init")
             
@@ -175,20 +167,19 @@ class MainWin():
         ic = Gtk.Image(); 
         ic.set_from_file(imgfile)
         pb = ic.get_pixbuf();
-        #pb2 = pb.scale_simple(150, 150, GdkPixbuf.InterpType.BILINEAR)
-        pb2 = pb.scale_simple(150, 150, 0)
-        ic2 = Gtk.Image.new_from_pixbuf(pb2)
+        pb2 = pb.scale_simple(150, 150, GdkPixbuf.InterpType.BILINEAR)
+        ic2 = Gtk.image_new_from_pixbuf(pb2)
         butt1d = Gtk.Button(txt)
         butt1d.connect("clicked", func, win)
-        vbb.pack_start(Gtk.Label(" "), True, True, 0)
-        vbb.pack_start(ic2, False, 0, 0)
-        vbb.pack_start(Gtk.Label(" "), True, True, 0)
-        vbb.pack_start(butt1d, False, 0, 0)
-        vbb.pack_start(Gtk.Label(" "), True, True, 0)
+        vbb.pack_start(Gtk.Label(" ", True, True, 0))
+        vbb.pack_start(ic2, False)
+        vbb.pack_start(Gtk.Label(" ", True, True, 0))
+        vbb.pack_start(butt1d, False)
+        vbb.pack_start(Gtk.Label(" ", True, True, 0))
         
-        hbb.pack_start(Gtk.Label("  "), True, True, 0)
+        hbb.pack_start(Gtk.Label("  ", True, True, 0))
         hbb.pack_start(vbb, True, True, 0)
-        hbb.pack_start(Gtk.Label("  "), True, True, 0)
+        hbb.pack_start(Gtk.Label("  ", True, True, 0))
         
         return hbb
         
@@ -546,5 +537,4 @@ if __name__ == '__main__':
     mainwin = MainWin()
     mainwin.window.show_all()    
     Gtk.main()
-
 
