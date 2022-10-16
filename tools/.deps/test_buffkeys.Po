@@ -1,114 +1,81 @@
-test_buffkeys.o: test_buffkeys.c /usr/include/stdio.h \
- /usr/include/_ansi.h /usr/include/newlib.h \
- /usr/include/_newlib_version.h /usr/include/sys/config.h \
- /usr/include/machine/ieeefp.h /usr/include/sys/features.h \
- /usr/include/cygwin/config.h /usr/include/sys/cdefs.h \
- /usr/include/machine/_default_types.h \
- /usr/lib/gcc/i686-pc-msys/6.4.0/include/stddef.h \
- /usr/lib/gcc/i686-pc-msys/6.4.0/include/stdarg.h \
- /usr/include/sys/reent.h /usr/include/_ansi.h /usr/include/sys/_types.h \
- /usr/include/machine/_types.h /usr/include/sys/lock.h \
- /usr/include/sys/types.h /usr/include/sys/_stdint.h \
- /usr/include/sys/_pthreadtypes.h /usr/include/machine/types.h \
- /usr/include/endian.h /usr/include/machine/endian.h \
- /usr/include/machine/_endian.h /usr/include/bits/endian.h \
- /usr/include/bits/wordsize.h /usr/include/sys/_timespec.h \
- /usr/include/sys/sysmacros.h /usr/include/sys/stdio.h \
- /usr/include/stdlib.h /usr/include/machine/stdlib.h \
- /usr/include/cygwin/stdlib.h /usr/include/cygwin/wait.h \
- /usr/include/string.h /usr/include/sys/string.h /usr/include/signal.h \
- /usr/include/sys/signal.h /usr/include/sys/_sigset.h \
- /usr/include/cygwin/signal.h cmdline.h zmalloc.h base64.h misc.h zstr.h \
- dibabuff.h dibafcom.h
-
+test_buffkeys.o: test_buffkeys.c /usr/include/stdc-predef.h \
+ /usr/include/stdio.h \
+ /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
+ /usr/include/features.h /usr/include/features-time64.h \
+ /usr/include/x86_64-linux-gnu/bits/wordsize.h \
+ /usr/include/x86_64-linux-gnu/bits/timesize.h \
+ /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+ /usr/include/x86_64-linux-gnu/bits/long-double.h \
+ /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+ /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
+ /usr/include/x86_64-linux-gnu/bits/types.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+ /usr/include/x86_64-linux-gnu/bits/time64.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/floatn.h \
+ /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib.h /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
+ /usr/include/signal.h \
+ /usr/include/x86_64-linux-gnu/bits/signum-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/signum-arch.h \
+ /usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h \
+ /usr/include/x86_64-linux-gnu/bits/signal_ext.h cmdline.h zmalloc.h \
+ base64.h misc.h zstr.h dibabuff.h dibafcom.h
+/usr/include/stdc-predef.h:
 /usr/include/stdio.h:
-
-/usr/include/_ansi.h:
-
-/usr/include/newlib.h:
-
-/usr/include/_newlib_version.h:
-
-/usr/include/sys/config.h:
-
-/usr/include/machine/ieeefp.h:
-
-/usr/include/sys/features.h:
-
-/usr/include/cygwin/config.h:
-
-/usr/include/sys/cdefs.h:
-
-/usr/include/machine/_default_types.h:
-
-/usr/lib/gcc/i686-pc-msys/6.4.0/include/stddef.h:
-
-/usr/lib/gcc/i686-pc-msys/6.4.0/include/stdarg.h:
-
-/usr/include/sys/reent.h:
-
-/usr/include/_ansi.h:
-
-/usr/include/sys/_types.h:
-
-/usr/include/machine/_types.h:
-
-/usr/include/sys/lock.h:
-
-/usr/include/sys/types.h:
-
-/usr/include/sys/_stdint.h:
-
-/usr/include/sys/_pthreadtypes.h:
-
-/usr/include/machine/types.h:
-
-/usr/include/endian.h:
-
-/usr/include/machine/endian.h:
-
-/usr/include/machine/_endian.h:
-
-/usr/include/bits/endian.h:
-
-/usr/include/bits/wordsize.h:
-
-/usr/include/sys/_timespec.h:
-
-/usr/include/sys/sysmacros.h:
-
-/usr/include/sys/stdio.h:
-
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
+/usr/include/features.h:
+/usr/include/features-time64.h:
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:
+/usr/include/x86_64-linux-gnu/bits/long-double.h:
+/usr/include/x86_64-linux-gnu/gnu/stubs.h:
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
+/usr/include/x86_64-linux-gnu/bits/types.h:
+/usr/include/x86_64-linux-gnu/bits/typesizes.h:
+/usr/include/x86_64-linux-gnu/bits/time64.h:
+/usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
+/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+/usr/include/x86_64-linux-gnu/bits/floatn.h:
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+/usr/include/x86_64-linux-gnu/bits/stdio.h:
+/usr/include/x86_64-linux-gnu/bits/stdio2.h:
 /usr/include/stdlib.h:
-
-/usr/include/machine/stdlib.h:
-
-/usr/include/cygwin/stdlib.h:
-
-/usr/include/cygwin/wait.h:
-
+/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
+/usr/include/x86_64-linux-gnu/bits/stdlib.h:
 /usr/include/string.h:
-
-/usr/include/sys/string.h:
-
+/usr/include/x86_64-linux-gnu/bits/string_fortified.h:
 /usr/include/signal.h:
-
-/usr/include/sys/signal.h:
-
-/usr/include/sys/_sigset.h:
-
-/usr/include/cygwin/signal.h:
-
+/usr/include/x86_64-linux-gnu/bits/signum-generic.h:
+/usr/include/x86_64-linux-gnu/bits/signum-arch.h:
+/usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h:
+/usr/include/x86_64-linux-gnu/bits/signal_ext.h:
 cmdline.h:
-
 zmalloc.h:
-
 base64.h:
-
 misc.h:
-
 zstr.h:
-
 dibabuff.h:
-
 dibafcom.h:
